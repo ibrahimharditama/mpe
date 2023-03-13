@@ -166,6 +166,7 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-7">
+						<div id="alert-pembayaran"></div>
 						<table class="table table-sm table-bordered table-striped">
 							<thead>
 								<tr>
@@ -459,12 +460,8 @@ $(document).on('submit', 'form#frm-pembayaran', function (event) {
 		contentType: false,
 		processData: false,
 		success: function (data) {
-			$('.is-invalid').removeClass('is-invalid');
-			if (data.fail) {
-				alert("fail");
-			} else {
-				ajaxLoadPembayaran(site_url+'pembelian/penerimaan/ajax-load-pembayaran',$("#id_beli").val());
-			}
+			showAlert({message: data.message, class:data.type});
+			ajaxLoadPembayaran(site_url+'pembelian/penerimaan/ajax-load-pembayaran',$("#id_beli").val());
 		},
 		error: function (xhr, textStatus, errorThrown) {
 			alert("Error: " + errorThrown);
@@ -489,13 +486,12 @@ function ajaxLoadPembayaran(url,id) {
 }
 
 function add_row_bayar(data){
-	console.log(data);
 	$no = $("#list-pembayaran tr").length;
 	$row='<tr>'+
-			'<td><input id="id_byr" type="hidden" value="'+data.id+'"/>'+($no+1)+'</td>'+
-			'<td>'+data.no_transaksi+'</td>'+
-			'<td>'+data.tgl+'</td>'+
-			'<td>'+data.rek_pembayaran+'</td>'+
+			'<td><input id="id_byr" type="hidden" value="'+data.id+'"/><input id="nominal_byr" type="hidden" value="'+data.nominal+'"/>'+($no+1)+'</td>'+
+			'<td><span id="no_byr">'+data.no_transaksi+'</span></td>'+
+			'<td><span id="tgl_byr">'+data.tgl+'</span></td>'+
+			'<td><span id="rek_byr">'+data.rek_pembayaran+'</span></td>'+
 			'<td align="right">Rp<span class="control-number">'+data.nominal+'</span></td>'+
 			'<td width="5px"><img onclick="delTr(this)" src="<?php echo base_url(); ?>assets/img/del.png"></td><td width="5px"><img  onclick="editTr(this)" src="<?php echo base_url(); ?>assets/img/edit.png"></td>'+
 		'</tr>';
@@ -515,22 +511,37 @@ function validasi(komponen){
 			$err = false;
 		}
 	});	
-	console.log($err);
 	return $err
 }
 
 function delTr(obj){
-	$(obj).parent().parent().remove();
+	$row = $(obj).parent().parent();
+	$id = $row.find('input[id="id_byr"]').val();
+	$.get (
+			site_url+'pembelian/penerimaan/hapus-pembayaran'
+			, { id: $id }
+			, function(response) {
+				showAlert({message: 'Pembayaran berhasil di hapus!', class:"danger"});
+				$row.remove();
+			}
+		);
 }
 
 function editTr(obj){
 	$row = $(obj).parent().parent();
-	$("#id_pembayaran").val($row.find('input[name="id_pembayaran[]"]').val());
-	$("#no_pembayaran").val($row.find('input[name="no_pembayaran[]"]').val());
-	$("#tgl_pembayaran").val($row.find('input[name="tgl_pembayaran[]"]').val());
-	$("#rek_pembayaran").val($row.find('input[name="rek_pembayaran[]"]').val());
-	$("#nominal_pembayaran").val($row.find('input[name="nominal_pembayaran[]"]').val());
-	$row.remove();
+	$("#id_pembayaran").val($row.find('input[id="id_byr"]').val());
+	$("#no_pembayaran").val($row.find('span[id="no_byr"]').text());
+	$("#tgl_pembayaran").val($row.find('span[id="tgl_byr"]').text());
+	$("#rek_pembayaran").select2("val",$row.find('span[id="rek_byr"]').text());
+	$("#nominal_pembayaran").val($row.find('input[id="nominal_byr"]').val());
+}
+
+function showAlert(obj){
+    var html = '<div class="alert alert-' + obj.class + ' alert-dismissible" role="alert">'+
+        '   <strong>' + obj.message + '</strong>'+
+        '      <img class="float-right" data-dismiss="alert" aria-label="Close" src="<?php echo base_url(); ?>assets/img/del.png">'+
+        '   </div>';
+    $('#alert-pembayaran').append(html);
 }
 
 </script>

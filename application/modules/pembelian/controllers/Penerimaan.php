@@ -387,7 +387,7 @@ class Penerimaan extends MX_Controller {
 	
 	public function pembayaran()
 	{
-		$id_penerimaan = $this->input->post('id_pembayaran');
+		$id_pembayaran = $this->input->post('id_pembayaran');
 		
 		$id_pembelian = $this->input->post('id_beli');
 		$tgl_pembayaran = $this->input->post('tgl_pembayaran');
@@ -398,18 +398,24 @@ class Penerimaan extends MX_Controller {
 		$data['id_pembelian'] = $id_pembelian;
 		$data['tgl'] = $tgl_pembayaran;
 		$data['rek_pembayaran'] = $rek_pembayaran;
-		$data['nominal'] = $nominal_pembayaran;
+		$data['nominal'] =  str_replace('.', '', $nominal_pembayaran);
 		$data['created_by'] = user_session('id');
 		$res = [];
-		if($id_penerimaan !== ""){
-			echo "ss";
+		if($id_pembayaran !== ""){
+			$result = $this->db->update('pembayaran_beli', $data, array('id' => $id_pembayaran));
+			if($result){
+				$res = [
+					"type" => "warning",
+					"message" => "Data berhasil di ubah"
+				];
+			}
 		}
 		else{
 			$result = $this->db->insert('pembayaran_beli', $data);
 			if($result){
 				$res = [
-					"fail" => false,
-					"message" => "data berhasil di tambahkan"
+					"type" => "success",
+					"message" => "Data berhasil di tambahkan"
 				];
 			}
 		}
@@ -429,6 +435,15 @@ class Penerimaan extends MX_Controller {
 		
 		header('Content-Type: application/json');
 		echo json_encode($src->result());
+	}
+
+	public function hapus_pembayaran()
+	{
+		$id = $this->input->get('id');
+		$data['row_status'] = 0;
+		$result = $this->db->update('pembayaran_beli', $data, array('id' => $id));
+		header('Content-Type: application/json');
+		echo json_encode($result);
 	}
 
 }
