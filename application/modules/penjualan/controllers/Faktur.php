@@ -382,4 +382,72 @@ class Faktur extends MX_Controller {
 		
 		redirect(site_url('penjualan/faktur'));
 	}
+	
+		public function pembayaran()
+	{
+		$id_pembayaran = $this->input->post('id_pembayaran');
+		$id_faktur = $this->input->post('id_faktur');
+		//---membuat no pembayaran
+		$data_pembelian = $this->db->from('faktur')->where('id', $id_faktur)->get()->row();
+		$no_transaksi=$data_pembelian->no_transaksi;
+		$jml_pembayaran = $this->db->from('pembayaran_faktur')->where('id_faktur', $id_faktur)->get()->num_rows();
+		$no_selanjutnya = $jml_pembayaran+1;
+		$no_pembayaran = "P-".$no_transaksi."-".$no_selanjutnya;
+		//--------------------------
+		$tgl_pembayaran = $this->input->post('tgl_pembayaran');
+		$rek_pembayaran = $this->input->post('rek_pembayaran');
+		$nominal_pembayaran = $this->input->post('nominal_pembayaran');
+		
+		$data['no_transaksi'] = $no_pembayaran;
+		$data['id_faktur'] = $id_faktur;
+		$data['tgl'] = $tgl_pembayaran;
+		$data['rek_pembayaran'] = $rek_pembayaran;
+		$data['nominal'] =  str_replace('.', '', $nominal_pembayaran);
+		$data['created_by'] = user_session('id');
+		$res = [];
+		if($id_pembayaran !== ""){
+			$result = $this->db->update('pembayaran_faktur', $data, array('id' => $id_pembayaran));
+			if($result){
+				$res = [
+					"type" => "warning",
+					"message" => "Data berhasil di ubah"
+				];
+			}
+		}
+		else{
+			$result = $this->db->insert('pembayaran_faktur', $data);
+			if($result){
+				$res = [
+					"type" => "success",
+					"message" => "Data berhasil di tambahkan"
+				];
+			}
+		}
+		header('Content-Type: application/json');
+		echo json_encode($res);
+	}
+	
+	public function ajax_load_pembayaran()
+	{
+		$id_faktur = $this->input->get('id');
+		$src = $this->db
+					->from('pembayaran_faktur')
+					->where('row_status', 1)
+					->where('id_faktur', $id_faktur)
+					->order_by('id')
+					->get();
+		
+		header('Content-Type: application/json');
+		echo json_encode($src->result());
+	}
+
+	public function hapus_pembayaran()
+	{
+		$id = $this->input->get('id');
+		$data['row_status'] = 0;
+		$result = $this->db->update('pembayaran_faktur', $data, array('id' => $id));
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+
 }
