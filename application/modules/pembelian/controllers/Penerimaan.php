@@ -388,13 +388,19 @@ class Penerimaan extends MX_Controller {
 	public function pembayaran()
 	{
 		$id_pembayaran = $this->input->post('id_pembayaran');
-		
 		$id_pembelian = $this->input->post('id_beli');
+		//---membuat no pembayaran
+		$data_pembelian = $this->db->from('penerimaan')->where('id', $id_pembelian)->get()->row();
+		$no_transaksi=$data_pembelian->no_transaksi;
+		$jml_pembayaran = $this->db->from('pembayaran_beli')->where('id_pembelian', $id_pembelian)->get()->num_rows();
+		$no_selanjutnya = $jml_pembayaran+1;
+		$no_pembayaran = "P-".$no_transaksi."-".$no_selanjutnya;
+		//--------------------------
 		$tgl_pembayaran = $this->input->post('tgl_pembayaran');
 		$rek_pembayaran = $this->input->post('rek_pembayaran');
 		$nominal_pembayaran = $this->input->post('nominal_pembayaran');
 		
-		$data['no_transaksi'] = new_number('pembayaran_pembelian');
+		$data['no_transaksi'] = $no_pembayaran;
 		$data['id_pembelian'] = $id_pembelian;
 		$data['tgl'] = $tgl_pembayaran;
 		$data['rek_pembayaran'] = $rek_pembayaran;

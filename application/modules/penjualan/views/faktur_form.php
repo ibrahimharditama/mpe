@@ -53,6 +53,15 @@
 						<textarea class="form-control" name="keterangan"><?php echo $data == null ? '' : $data['keterangan']; ?></textarea>
 					</div>
 				</div>
+				<div class="form-group row">
+					<label class="col-sm-3 col-form-label pr-0"></label>
+					<div class="col-sm-9">
+						<a class="btn btn-outline-info" id="do-bayar" style="display:none" href="#" data-toggle="modal" data-target="#exampleModal">
+							<i class="ti ti-wallet"></i>
+							Pembayaran
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -144,6 +153,69 @@
 </div>
 
 </form>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog mw-100 w-75" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-7">
+						<div id="alert-pembayaran"></div>
+						<table class="table table-sm table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>No. Transaksi</th>
+									<th>Tgl. Bayar</th>
+									<th>Rek. Bayar</th>
+									<th>Nominal</th>
+									<th colspan="2" align="center">Aksi</th>
+								</tr>
+							</thead>
+							<tbody id="list-pembayaran">
+							</tbody>
+						</table>
+					</div>
+					<div class="col-4">
+						<form method="post" id="frm-pembayaran" action="<?php echo site_url("pembelian/penerimaan/pembayaran"); ?>">
+							<div class="form-group">
+								<label>No. Transaksi</label>
+								<input type="hidden" name="id_pembayaran" id="id_pembayaran" value="">
+								<input type="hidden" name="id_beli" id="id_beli" value="<?php if ($data != null) echo $data['id']; ?>">
+								<input type="text" class="form-control" placeholder="Dibuat otomatis" id="no_pembayaran" value="" readonly>
+							</div>
+							<div class="form-group">
+								<label>Tgl. Pembayaran</label>
+								<input type="text" class="form-control input-bayar" name="tgl_pembayaran" id="tgl_pembayaran" value="<?=date("Y-m-d");?>" readonly>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-12"><label>Rek. Pembayaran</label></div>
+								<div class="col-sm-12">
+									<select name="rek_pembayaran" class="input-bayar" data-placeholder="Pilih Rekening" id="rek_pembayaran">
+										<option value="">- Pilih Rekening -</option>
+										<?php echo modules::run('options/rekening', ''); ?>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Nominal</label>
+								<input type="text" class="form-control input-bayar control-number" name="nominal_pembayaran" id="nominal_pembayaran">
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block">Simpan Pembayaran</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script src="<?php echo site_url('penjualan/faktur/js-detail/'.($data == null ? '0' : $data['id'])); ?>"></script>
 <script>
@@ -253,6 +325,10 @@ function load_pesanan()
 	
 	var id_pelanggan = $('[name=id_pelanggan]').val();
 	
+	if(id_penjualan != 0){
+		$("#do-bayar").css("display","inline");
+	}
+
 	$.post (
 		site_url+'penjualan/faktur/ajax-open-pesanan'
 		, { id_pelanggan: id_pelanggan, id_penjualan: id_penjualan }
@@ -361,5 +437,12 @@ $().ready(function() {
 	$(document).on('keyup', '.input-count', function(e) {
 		count_total();
 	});
+	
+	$("#exampleModal").on('show.bs.modal', function () {
+		$('#rek_pembayaran').select2({
+			 width: '100%'
+		});
+	});
+
 });
 </script>
