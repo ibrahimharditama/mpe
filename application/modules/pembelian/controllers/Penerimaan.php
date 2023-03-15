@@ -197,7 +197,7 @@ class Penerimaan extends MX_Controller {
 		}
 		
 		if (count($detail) > 0) {
-			$key = array('tgl', 'id_supplier', 'id_pembelian', 'keterangan', 'diskon_faktur|number', 'biaya_lain|number');
+			$key = array('tgl', 'id_supplier', 'id_pembelian', 'keterangan', 'diskon_faktur|number', 'biaya_lain|number', 'uang_muka|number', 'rek_pembayaran_dp|number');
 			$data = post_data($key);
 			
 			$data['no_transaksi'] = new_number('tagihan');
@@ -205,10 +205,28 @@ class Penerimaan extends MX_Controller {
 			$data['qty_terima'] = $qty_terima;
 			$data['total'] = $total;
 			$data['grand_total'] = $total - $data['diskon_faktur'] + $data['biaya_lain'];
-			
+			$uang_muka = str_replace('.', '', $data['uang_muka']);
+			$data['sisa_tagihan'] = $data['grand_total']-$uang_muka;
+
 			$this->db->insert('penerimaan', $data);
 			$id_penerimaan = $this->db->insert_id();
 			
+			//---membuat no pembayaran
+			$data_pembelian = $this->db->from('penerimaan')->where('id', $id_penerimaan)->get()->row();
+			$no_transaksi=$data_pembelian->no_transaksi;
+			$jml_pembayaran = $this->db->from('pembayaran_beli')->where('id_pembelian', $id_penerimaan)->get()->num_rows();
+			$no_selanjutnya = $jml_pembayaran+1;
+			$no_pembayaran = "P-".$no_transaksi."-".$no_selanjutnya;
+
+			$dataDp['no_transaksi'] = $no_pembayaran;
+			$dataDp['id_pembelian'] = $id_penerimaan;
+			$dataDp['tgl'] = date("Y-m-d");
+			$dataDp['rek_pembayaran'] = $data['rek_pembayaran_dp'];
+			$dataDp['nominal'] =  $uang_muka;
+			$dataDp['created_by'] = user_session('id');
+			 $this->db->insert('pembayaran_beli', $dataDp);
+
+			//--------------------------
 			foreach ($detail as $i => $d) {
 				$detail[$i]['id_penerimaan'] = $id_penerimaan;
 			}
@@ -388,13 +406,19 @@ class Penerimaan extends MX_Controller {
 	public function pembayaran()
 	{
 		$id_pembayaran = $this->input->post('id_pembayaran');
-		
 		$id_pembelian = $this->input->post('id_beli');
+		//---membuat no pembayaran
+		$data_pembelian = $this->db->from('penerimaan')->where('id', $id_pembelian)->get()->row();
+		$no_transaksi=$data_pembelian->no_transaksi;
+		$jml_pembayaran = $this->db->from('pembayaran_beli')->where('id_pembelian', $id_pembelian)->get()->num_rows();
+		$no_selanjutnya = $jml_pembayaran+1;
+		$no_pembayaran = "P-".$no_transaksi."-".$no_selanjutnya;
+		//--------------------------
 		$tgl_pembayaran = $this->input->post('tgl_pembayaran');
 		$rek_pembayaran = $this->input->post('rek_pembayaran');
 		$nominal_pembayaran = $this->input->post('nominal_pembayaran');
 		
-		$data['no_transaksi'] = new_number('pembayaran_pembelian');
+		$data['no_transaksi'] = $no_pembayaran;
 		$data['id_pembelian'] = $id_pembelian;
 		$data['tgl'] = $tgl_pembayaran;
 		$data['rek_pembayaran'] = $rek_pembayaran;
@@ -428,9 +452,10 @@ class Penerimaan extends MX_Controller {
 		$id_pembelian = $this->input->get('id');
 		$src = $this->db
 					->from('pembayaran_beli')
-					->where('row_status', 1)
+					->join('rekening', 'rekening.id = pembayaran_beli.rek_pembayaran')
+					->where('pembayaran_beli.row_status', 1)
 					->where('id_pembelian', $id_pembelian)
-					->order_by('id')
+					->order_by('pembayaran_beli.id')
 					->get();
 		
 		header('Content-Type: application/json');
@@ -444,6 +469,19 @@ class Penerimaan extends MX_Controller {
 		$result = $this->db->update('pembayaran_beli', $data, array('id' => $id));
 		header('Content-Type: application/json');
 		echo json_encode($result);
+	}
+
+	public function ajax_open_penerimaan()
+	{
+		$id = $this->input->post('id_penerimaan');		
+		$src = $this->db
+					->select('*')
+					->from('penerimaan')
+					->where('id', $id)
+					->get();
+		
+		header('Content-Type: application/json');
+		echo json_encode($src->row());
 	}
 
 }

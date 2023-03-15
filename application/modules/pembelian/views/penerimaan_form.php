@@ -122,19 +122,29 @@
 				<tr>
 					<td colspan="3" class="border-bottom-none border-left-none"></td>
 					<td colspan="3" class="pr-2 semi-bold" align="right">GRAND TOTAL</td>
-					<td><input type="text" class="input-box control-number input-grand-total" value="0" style="width:110px" readonly></td>
+					<td><input type="text" id="gtt" class="input-box control-number input-grand-total" value="0" style="width:110px" readonly></td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
 					<td colspan="3" class="border-bottom-none border-left-none"></td>
 					<td colspan="3" class="pr-2" align="right">Uang Muka</td>
-					<td><input type="text" name="biaya_lain" class="input-box control-number input-count input-biaya-lain" value="0" style="width:110px"></td>
+					<td><input type="text" name="uang_muka" class="input-box control-number input-count input-biaya-lain" value="0" style="width:110px"></td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
 					<td colspan="3" class="border-bottom-none border-left-none"></td>
+					<td colspan="3" class="pr-2" align="right">Rek. Pembayaran DP</td>
+					<td colspan="4">
+						<select name="rek_pembayaran_dp" data-placeholder="Pilih Rekening" class="select2 w-100 select-item">
+							<option value="">- Pilih Rekening -</option>
+							<?php echo modules::run('options/rekening', ''); ?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" class="border-bottom-none border-left-none"></td>
 					<td colspan="3" class="pr-2" align="right">Sisa Pembayaran</td>
-					<td><input type="text" name="biaya_lain" class="input-box control-number input-count input-biaya-lain" value="0" style="width:110px" readonly></td>
+					<td><input type="text" id="sisa_tagihan" class="input-box control-number input-count input-biaya-lain" value="0" style="width:110px" readonly></td>
 					<td colspan="2"></td>
 				</tr>
 			</tfoot>
@@ -349,12 +359,25 @@ function load_pesanan()
 	);
 }
 
+function load_penerimaan(){
+	var id_penerimaan = '<?php echo $data == null ? '0' : $data['id']; ?>';
+	$.post (
+		site_url+'pembelian/penerimaan/ajax-open-penerimaan'
+		, { id_penerimaan: id_penerimaan }
+		, function(response) {
+			$('[name=uang_muka]').val(response.uang_muka);
+			$('[name=rek_pembayaran_dp]').val(response.rek_pembayaran_dp).trigger('change');
+			$('[id=sisa_tagihan]').val(response.sisa_tagihan);
+		}
+	);
+}
+
 
 $().ready(function() {
 	
 	init_details();
 	load_pesanan();
-	
+	load_penerimaan();
 	$('.datepicker').Zebra_DatePicker({
 		offset: [-203, 280]
 	});
@@ -362,11 +385,9 @@ $().ready(function() {
 	$(document).on('change', '[name=id_supplier]', function() {
 		load_pesanan();
 	});
-	
 	$(document).on('change', '[name=id_pembelian]', function() {
 		var id_pembelian = $(this).val();
 		var $body = $('.table-item tbody');
-		
 		if (id_pembelian != '' && first_load == 0) {
 			$('[name=diskon_faktur]').val(_obj[parseInt(id_pembelian)].diskon_faktur);
 			$('[name=biaya_lain]').val(_obj[parseInt(id_pembelian)].biaya_lain);
@@ -491,7 +512,7 @@ function add_row_bayar(data){
 			'<td><input id="id_byr" type="hidden" value="'+data.id+'"/><input id="nominal_byr" type="hidden" value="'+data.nominal+'"/>'+($no+1)+'</td>'+
 			'<td><span id="no_byr">'+data.no_transaksi+'</span></td>'+
 			'<td><span id="tgl_byr">'+data.tgl+'</span></td>'+
-			'<td><span id="rek_byr">'+data.rek_pembayaran+'</span></td>'+
+			'<td><input id="rek_byr" type="hidden" value="'+data.rek_pembayaran+'"/><span id="">'+data.no_rekening+" - "+data.bank+'</span></td>'+
 			'<td align="right">Rp<span class="control-number">'+data.nominal+'</span></td>'+
 			'<td width="5px"><img onclick="delTr(this)" src="<?php echo base_url(); ?>assets/img/del.png"></td><td width="5px"><img  onclick="editTr(this)" src="<?php echo base_url(); ?>assets/img/edit.png"></td>'+
 		'</tr>';
@@ -532,7 +553,7 @@ function editTr(obj){
 	$("#id_pembayaran").val($row.find('input[id="id_byr"]').val());
 	$("#no_pembayaran").val($row.find('span[id="no_byr"]').text());
 	$("#tgl_pembayaran").val($row.find('span[id="tgl_byr"]').text());
-	$("#rek_pembayaran").select2("val",$row.find('span[id="rek_byr"]').text());
+	$("#rek_pembayaran").select2("val",$row.find('input[id="rek_byr"]').val());
 	$("#nominal_pembayaran").val($row.find('input[id="nominal_byr"]').val());
 }
 

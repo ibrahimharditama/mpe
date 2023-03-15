@@ -195,7 +195,7 @@ class Faktur extends MX_Controller {
 		}
 		
 		if (count($detail) > 0) {
-			$key = array('tgl', 'id_pelanggan', 'id_penjualan', 'keterangan', 'diskon_faktur|number', 'biaya_lain|number');
+			$key = array('tgl', 'id_pelanggan', 'id_penjualan', 'keterangan', 'diskon_faktur|number', 'biaya_lain|number', 'uang_muka|number', 'rek_pembayaran_dp|number');
 			$data = post_data($key);
 			
 			$data['no_transaksi'] = new_number('faktur');
@@ -203,10 +203,28 @@ class Faktur extends MX_Controller {
 			$data['qty_kirim'] = $qty_kirim;
 			$data['total'] = $total;
 			$data['grand_total'] = $total - $data['diskon_faktur'] + $data['biaya_lain'];
+			$uang_muka = str_replace('.', '', $data['uang_muka']);
+			$data['sisa_tagihan'] = $data['grand_total']-$uang_muka;
 			
 			$this->db->insert('faktur', $data);
 			$id_faktur = $this->db->insert_id();
+			//---membuat no pembayaran
+			$data_pembelian = $this->db->from('faktur')->where('id', $id_faktur)->get()->row();
+			$no_transaksi=$data_pembelian->no_transaksi;
+			$jml_pembayaran = $this->db->from('pembayaran_faktur')->where('id_faktur', $id_faktur)->get()->num_rows();
+			$no_selanjutnya = $jml_pembayaran+1;
+			$no_pembayaran = "P-".$no_transaksi."-".$no_selanjutnya;
 			
+			$dataDp['no_transaksi'] = $no_pembayaran;
+			$dataDp['id_faktur'] = $id_faktur;
+			$dataDp['tgl'] = date("Y-m-d");
+			$dataDp['rek_pembayaran'] = $data['rek_pembayaran_dp'];
+			$dataDp['nominal'] =  $uang_muka;
+			$dataDp['created_by'] = user_session('id');
+			$this->db->insert('pembayaran_faktur', $dataDp);
+
+			//--------------------------
+
 			foreach ($detail as $i => $d) {
 				$detail[$i]['id_faktur'] = $id_faktur;
 			}
@@ -382,4 +400,85 @@ class Faktur extends MX_Controller {
 		
 		redirect(site_url('penjualan/faktur'));
 	}
+	
+		public function pembayaran()
+	{
+		$id_pembayaran = $this->input->post('id_pembayaran');
+		$id_faktur = $this->input->post('id_faktur');
+		//---membuat no pembayaran
+		$data_pembelian = $this->db->from('faktur')->where('id', $id_faktur)->get()->row();
+		$no_transaksi=$data_pembelian->no_transaksi;
+		$jml_pembayaran = $this->db->from('pembayaran_faktur')->where('id_faktur', $id_faktur)->get()->num_rows();
+		$no_selanjutnya = $jml_pembayaran+1;
+		$no_pembayaran = "P-".$no_transaksi."-".$no_selanjutnya;
+		//--------------------------
+		$tgl_pembayaran = $this->input->post('tgl_pembayaran');
+		$rek_pembayaran = $this->input->post('rek_pembayaran');
+		$nominal_pembayaran = $this->input->post('nominal_pembayaran');
+		
+		$data['no_transaksi'] = $no_pembayaran;
+		$data['id_faktur'] = $id_faktur;
+		$data['tgl'] = $tgl_pembayaran;
+		$data['rek_pembayaran'] = $rek_pembayaran;
+		$data['nominal'] =  str_replace('.', '', $nominal_pembayaran);
+		$data['created_by'] = user_session('id');
+		$res = [];
+		if($id_pembayaran !== ""){
+			$result = $this->db->update('pembayaran_faktur', $data, array('id' => $id_pembayaran));
+			if($result){
+				$res = [
+					"type" => "warning",
+					"message" => "Data berhasil di ubah"
+				];
+			}
+		}
+		else{
+			$result = $this->db->insert('pembayaran_faktur', $data);
+			if($result){
+				$res = [
+					"type" => "success",
+					"message" => "Data berhasil di tambahkan"
+				];
+			}
+		}
+		header('Content-Type: application/json');
+		echo json_encode($res);
+	}
+	
+	public function ajax_load_pembayaran()
+	{
+		$id_faktur = $this->input->get('id');
+		$src = $this->db
+					->from('pembayaran_faktur')
+					->join('rekening', 'rekening.id = pembayaran_faktur.rek_pembayaran')
+					->where('pembayaran_faktur.row_status', 1)
+					->where('id_faktur', $id_faktur)
+					->order_by('pembayaran_faktur.id')
+					->get();
+		
+		header('Content-Type: application/json');
+		echo json_encode($src->result());
+	}
+
+	public function hapus_pembayaran()
+	{
+		$id = $this->input->get('id');
+		$data['row_status'] = 0;
+		$result = $this->db->update('pembayaran_faktur', $data, array('id' => $id));
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	public function ajax_open_faktur()
+	{
+		$id = $this->input->post('id_faktur');		
+		$src = $this->db
+					->select('*')
+					->from('faktur')
+					->where('id', $id)
+					->get();
+		
+		header('Content-Type: application/json');
+		echo json_encode($src->row());
+	}
+
 }

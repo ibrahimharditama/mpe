@@ -53,6 +53,15 @@
 						<textarea class="form-control" name="keterangan"><?php echo $data == null ? '' : $data['keterangan']; ?></textarea>
 					</div>
 				</div>
+				<div class="form-group row">
+					<label class="col-sm-3 col-form-label pr-0"></label>
+					<div class="col-sm-9">
+						<a class="btn btn-outline-info" id="do-bayar" style="display:none" href="#" data-toggle="modal" data-target="#exampleModal">
+							<i class="ti ti-wallet"></i>
+							Pembayaran
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -119,13 +128,23 @@
 				<tr>
 					<td colspan="3" class="border-bottom-none border-left-none"></td>
 					<td colspan="3" class="pr-2" align="right">Uang Muka</td>
-					<td><input type="text" name="biaya_lain" class="input-box control-number input-count input-biaya-lain" value="0" style="width:110px"></td>
+					<td><input type="text" name="uang_muka" class="input-box control-number input-count input-biaya-lain" value="0" style="width:110px"></td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
 					<td colspan="3" class="border-bottom-none border-left-none"></td>
+					<td colspan="3" class="pr-2" align="right">Rek. Pembayaran DP</td>
+					<td colspan="4">
+						<select name="rek_pembayaran_dp" data-placeholder="Pilih Rekening" class="select2 w-100 select-item">
+							<option value="">- Pilih Rekening -</option>
+							<?php echo modules::run('options/rekening', ''); ?>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3" class="border-bottom-none border-left-none"></td>
 					<td colspan="3" class="pr-2" align="right">Sisa Pembayaran</td>
-					<td><input type="text" name="biaya_lain" class="input-box control-number input-count input-biaya-lain" value="0" style="width:110px" readonly></td>
+					<td><input type="text" id="sisa_tagihan" class="input-box control-number input-count input-biaya-lain" value="0" style="width:110px" readonly></td>
 					<td colspan="2"></td>
 				</tr>
 			</tfoot>
@@ -144,6 +163,69 @@
 </div>
 
 </form>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog mw-100 w-75" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Pembayaran</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-7">
+						<div id="alert-pembayaran"></div>
+						<table class="table table-sm table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>No. Transaksi</th>
+									<th>Tgl. Bayar</th>
+									<th>Rek. Bayar</th>
+									<th>Nominal</th>
+									<th colspan="2" align="center">Aksi</th>
+								</tr>
+							</thead>
+							<tbody id="list-pembayaran">
+							</tbody>
+						</table>
+					</div>
+					<div class="col-4">
+						<form method="post" id="frm-pembayaran" action="<?php echo site_url("penjualan/faktur/pembayaran"); ?>">
+							<div class="form-group">
+								<label>No. Transaksi</label>
+								<input type="hidden" name="id_pembayaran" id="id_pembayaran" value="">
+								<input type="hidden" name="id_faktur" id="id_faktur" value="<?php if ($data != null) echo $data['id']; ?>">
+								<input type="text" class="form-control" placeholder="Dibuat otomatis" id="no_pembayaran" value="" readonly>
+							</div>
+							<div class="form-group">
+								<label>Tgl. Pembayaran</label>
+								<input type="text" class="form-control input-bayar" name="tgl_pembayaran" id="tgl_pembayaran" value="<?=date("Y-m-d");?>" readonly>
+							</div>
+							<div class="form-group row">
+								<div class="col-sm-12"><label>Rek. Pembayaran</label></div>
+								<div class="col-sm-12">
+									<select name="rek_pembayaran" class="input-bayar" data-placeholder="Pilih Rekening" id="rek_pembayaran">
+										<option value="">- Pilih Rekening -</option>
+										<?php echo modules::run('options/rekening', ''); ?>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Nominal</label>
+								<input type="text" class="form-control input-bayar control-number" name="nominal_pembayaran" id="nominal_pembayaran">
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block">Simpan Pembayaran</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script src="<?php echo site_url('penjualan/faktur/js-detail/'.($data == null ? '0' : $data['id'])); ?>"></script>
 <script>
@@ -253,6 +335,10 @@ function load_pesanan()
 	
 	var id_pelanggan = $('[name=id_pelanggan]').val();
 	
+	if(id_penjualan != 0){
+		$("#do-bayar").css("display","inline");
+	}
+
 	$.post (
 		site_url+'penjualan/faktur/ajax-open-pesanan'
 		, { id_pelanggan: id_pelanggan, id_penjualan: id_penjualan }
@@ -273,12 +359,24 @@ function load_pesanan()
 	);
 }
 
+function load_faktur(){
+	var id_faktur = '<?php echo $data == null ? '0' : $data['id']; ?>';
+	$.post (
+		site_url+'penjualan/faktur/ajax-open-faktur'
+		, { id_faktur: id_faktur }
+		, function(response) {
+			$('[name=uang_muka]').val(response.uang_muka);
+			$('[name=rek_pembayaran_dp]').val(response.rek_pembayaran_dp).trigger('change');
+			$('[id=sisa_tagihan]').val(response.sisa_tagihan);
+		}
+	);
+}
 
 $().ready(function() {
 	
 	init_details();
 	load_pesanan();
-	
+	load_faktur();
 	$('.datepicker').Zebra_DatePicker({
 		offset: [-203, 280]
 	});
@@ -361,5 +459,109 @@ $().ready(function() {
 	$(document).on('keyup', '.input-count', function(e) {
 		count_total();
 	});
+	
+	$("#exampleModal").on('show.bs.modal', function () {
+		$('#rek_pembayaran').select2({
+			 width: '100%'
+		});
+		ajaxLoadPembayaran(site_url+'penjualan/faktur/ajax-load-pembayaran',$("#id_faktur").val());		
+	});
 });
+
+$(document).on('submit', 'form#frm-pembayaran', function (event) {
+	event.preventDefault();
+	var form = $(this);
+	var data = new FormData($(this)[0]);
+	var url = form.attr("action");
+	$.ajax({
+		type: form.attr('method'),
+		url: url,
+		data: data,
+		cache: false,
+		contentType: false,
+		processData: false,
+		success: function (data) {
+			showAlert({message: data.message, class:data.type});
+			ajaxLoadPembayaran(site_url+'penjualan/faktur/ajax-load-pembayaran',$("#id_faktur").val());
+		},
+		error: function (xhr, textStatus, errorThrown) {
+			alert("Error: " + errorThrown);
+		}
+	});
+	return false;
+});
+function ajaxLoadPembayaran(url,id) {
+	$.get (
+			url
+			, { id: id }
+			, function(response) {
+				if (response.length > 0){
+					$("#list-pembayaran").empty();
+					$.each (response, function(i, o) {
+						add_row_bayar(o);
+					});
+				}
+			}
+		);
+}
+
+function add_row_bayar(data){
+	$no = $("#list-pembayaran tr").length;
+	$row='<tr>'+
+			'<td><input id="id_byr" type="hidden" value="'+data.id+'"/><input id="nominal_byr" type="hidden" value="'+data.nominal+'"/>'+($no+1)+'</td>'+
+			'<td><span id="no_byr">'+data.no_transaksi+'</span></td>'+
+			'<td><span id="tgl_byr">'+data.tgl+'</span></td>'+
+			'<td><input id="rek_byr" type="hidden" value="'+data.rek_pembayaran+'"/><span id="">'+data.no_rekening+" - "+data.bank+'</span></td>'+
+			'<td align="right">Rp<span class="control-number">'+data.nominal+'</span></td>'+
+			'<td width="5px"><img onclick="delTr(this)" src="<?php echo base_url(); ?>assets/img/del.png"></td><td width="5px"><img  onclick="editTr(this)" src="<?php echo base_url(); ?>assets/img/edit.png"></td>'+
+		'</tr>';
+	$("#list-pembayaran").append($row);
+	$('span.control-number').number(true, 0, ',', '.');
+}
+
+function validasi(komponen){
+	$err = false;
+	komponen.each(function(){
+		if($(this).val() == ""){
+			$(this).addClass("is-invalid");
+			$err = true;
+		}
+		else{
+			$(this).removeClass("is-invalid");
+			$err = false;
+		}
+	});	
+	return $err
+}
+
+function delTr(obj){
+	$row = $(obj).parent().parent();
+	$id = $row.find('input[id="id_byr"]').val();
+	$.get (
+			site_url+'penjualan/faktur/hapus-pembayaran'
+			, { id: $id }
+			, function(response) {
+				showAlert({message: 'Pembayaran berhasil di hapus!', class:"danger"});
+				$row.remove();
+			}
+		);
+}
+
+function editTr(obj){
+	$row = $(obj).parent().parent();
+	$("#id_pembayaran").val($row.find('input[id="id_byr"]').val());
+	$("#no_pembayaran").val($row.find('span[id="no_byr"]').text());
+	$("#tgl_pembayaran").val($row.find('span[id="tgl_byr"]').text());
+	$("#rek_pembayaran").select2("val",$row.find('input[id="rek_byr"]').val());
+	$("#nominal_pembayaran").val($row.find('input[id="nominal_byr"]').val());
+}
+
+function showAlert(obj){
+    var html = '<div class="alert alert-' + obj.class + ' alert-dismissible" role="alert">'+
+        '   <strong>' + obj.message + '</strong>'+
+        '      <img class="float-right" data-dismiss="alert" aria-label="Close" src="<?php echo base_url(); ?>assets/img/del.png">'+
+        '   </div>';
+    $('#alert-pembayaran').append(html);
+}
+
 </script>
