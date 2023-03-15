@@ -29,6 +29,22 @@ function set_user_session($key, $new_value)
 	$ci->session->set_userdata('pengguna', $pengguna);
 }
 
+function db_insert($table, $data)
+{
+	$ci =& get_instance();
+	$data['row_status'] = 1;
+	$data['created_by'] = user_session('id');
+	$ci->db->insert($table, $data);
+	return $ci->db->insert_id();
+}
+
+function db_update($table, $data, $where)
+{
+	$ci =& get_instance();
+	$data['updated_by'] = user_session('id');
+	return $ci->db->update($table, $data, $where);
+}
+
 function menu($id_pengguna_grup)
 {
 	$ci =& get_instance();
@@ -269,4 +285,34 @@ function new_number($kode)
 	$replace = array(date('Y'), date('y'), date('m'), $serial_str);
 	
 	return str_replace($wildcard, $replace, $nomor->format);
+}
+
+function showRestResponse($data = null, $code = 200, $message = "Data berhasil Disimpan."){
+
+	$response = array(
+		"code" => $code,
+		"message" => $message,
+		"data" => $data,
+	);
+
+	return $response;
+}
+
+function option_periode($selected = ''){   
+	$options =
+		'<option value="MINGGU" '. ($selected == 'MINGGU' ? 'selected' : '') . '>MINGGU</option>'.
+		'<option value="BULAN" '. ($selected == 'BULAN' ? 'selected' : '') . '>BULAN</option>';
+	
+	return $options;
+}
+
+function umur_bulan($tgl)
+{
+	$d1 = new DateTime(date('Y-m-d')); 
+	$d2 = new DateTime($tgl);                                  
+	$Months = $d2->diff($d1); 
+	$diffMonth = (($Months->y) * 12) + ($Months->m);
+	$txt = $diffMonth .' bulan';
+
+	return $txt;
 }

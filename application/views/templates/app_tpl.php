@@ -52,6 +52,9 @@
 	
 	<!-- TABLE-CELL.JS -->
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/table-cell.js"></script>
+
+	<!-- MOMENT.JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">

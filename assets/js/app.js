@@ -5,6 +5,13 @@ function bool_icon(val)
 	return val == 1 ? ya : tidak;
 }
 
+function monthDiff(date) {
+	var today = moment(new Date());
+	var tgl   = moment(new Date(date));
+
+	return today.diff(tgl, 'months');
+}
+
 
 $().ready(function() {
 	$('input').attr('autocomplete', 'off');
@@ -13,6 +20,9 @@ $().ready(function() {
 	$('.select2').select2({ allowClear: true });
 	$('.select2-no-clear').select2({ allowClear: false });
 	$('.select2-tags').select2({ tags: true });
+	$('.select2-modal').select2({ allowClear: true, dropdownParent: $('.modal') });
+    $('.select2-modal-noclear').select2({ allowClear: false, dropdownParent: $('.modal') });
+
 	
 	$('.custom-file-input').on('change', function() {
 		var file_name = $(this).val().split("\\").pop();
@@ -22,4 +32,16 @@ $().ready(function() {
 	$('#datatable').on('click', '.btn-delete', function(e) {
 		return confirm('Apakah Anda yakin menghapus data ini?');
 	});
+
+	$(".alert").fadeTo(3000, 300).slideUp(300, function(){
+		$(".alert").slideUp(300);
+	});
+
+	$('.modal').on('shown.bs.modal', function () {
+		$('.datepicker').Zebra_DatePicker({
+			offset: [-203, 280]
+		});
+	})
 });
+
+

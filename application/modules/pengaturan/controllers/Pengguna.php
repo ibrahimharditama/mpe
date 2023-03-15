@@ -73,7 +73,7 @@ class Pengguna extends MX_Controller {
 		echo json_encode($response);
 	}
 	
-	private function _form($aksi = 'insert', $data = null)
+	private function _form($aksi = 'insert', $data = null, $asset = null)
 	{
 		if ($this->session->flashdata('data')) {
 			$data = $this->session->flashdata('data');
@@ -83,6 +83,8 @@ class Pengguna extends MX_Controller {
 			'content' => 'pengguna_form',
 			'action_url' => site_url("pengaturan/pengguna/{$aksi}"),
 			'data' => $data,
+			'asset' => $asset,
+			'aksi' => $aksi,
 		));
 	}
 	
@@ -106,8 +108,20 @@ class Pengguna extends MX_Controller {
 		if ($src->num_rows() == 0) {
 			show_404();
 		}
+
+		$src_asset = $this->db->query("SELECT a.*, IFNULL(x.tgl_maintenance, '-') AS tgl_maintenance
+									FROM asset a 
+									LEFT JOIN (
+											SELECT id_asset, MAX(tgl_maintenance) AS tgl_maintenance 
+											FROM asset_maintenance 
+											WHERE row_status = 1
+											GROUP BY id_asset
+										) x ON x.id_asset = a.id
+									WHERE a.id_pegawai = $id
+										AND a.row_status = 1 
+									ORDER BY a.id");
 		
-		$this->_form('update', $src->row_array());
+		$this->_form('update', $src->row_array(), $src_asset->result_array());
 	}
 	
 	public function check_email($email)
@@ -152,11 +166,16 @@ class Pengguna extends MX_Controller {
 			array (
 				'field' => 'username',
 				'label' => 'Username',
-				'rules' => 'callback_check_username',
+				'rules' => 'required|callback_check_username',
 			),
 			array (
 				'field' => 'id_pengguna_grup',
 				'label' => 'Grup Pengguna',
+				'rules' => 'required',
+			),
+			array (
+				'field' => 'id_jabatan',
+				'label' => 'Jabatan',
 				'rules' => 'required',
 			),
 		);
@@ -173,7 +192,7 @@ class Pengguna extends MX_Controller {
 		
 		if ($this->form_validation->run()) {
 			
-			$key = array('nama', 'email', 'username', 'password', 'id_pengguna_grup');
+			$key = array('nama', 'email', 'username', 'password', 'id_pengguna_grup', 'id_jabatan');
 			$data = post_data($key);
 			
 			if ($data['username'] == '') {
@@ -187,7 +206,7 @@ class Pengguna extends MX_Controller {
 				unset($data['password']);
 			}
 			
-			return $data;
+			return showRestResponse($data);
 		}
 		else {
 			
@@ -195,42 +214,122 @@ class Pengguna extends MX_Controller {
 				$errors[$r['field']] = form_error($r['field']);
 			}
 			
-			$this->session->set_flashdata('post_status', 'err');
-			$this->session->set_flashdata('errors', $errors);
-			$this->session->set_flashdata('data', $this->input->post());
-			
-			return null;
+			return showRestResponse($errors, 400, 'Validation Error');;
 		}
 	}
 	
 	public function insert()
 	{
-		$data = $this->_form_data();
+		$response = $this->_form_data();
+		$response['url'] = '';
 		
-		if ($data != null) {
-			$data['created_by'] = user_session('id');
-			$this->db->insert('pengguna', $data);
-			$this->session->set_flashdata('post_status', 'inserted');
-			redirect(site_url('pengaturan/pengguna'));
+		if ($response['code'] == 200) {
+			$data = $response['data'];
+			$id = db_insert('pengguna', $data);
+			$response['url'] = base_url().'pengaturan/pengguna/ubah/'.$id;
+			$this->session->set_flashdata('post_status', 'ok');
+			
 		}
-		else {
-			redirect(site_url('pengaturan/pengguna/tambah'));
-		}	
+
+		echo json_encode($response);
 	}
 	
 	public function update()
 	{
-		$data = $this->_form_data();
-		$id = $this->input->post('id');
+		$response = $this->_form_data();
+		$response['url'] = '';
 		
-		if ($data != null) {
-			$data['updated_by'] = user_session('id');
-			$this->db->update('pengguna', $data, array('id' => $id));
-			$this->session->set_flashdata('post_status', 'updated');
-			redirect(site_url('pengaturan/pengguna'));
+		if ($response['code'] == 200) {
+			$data = $response['data'];
+			$id = $this->input->post('id');
+			db_update('pengguna', $data, array('id' => $id));
+			$response['url'] = base_url().'pengaturan/pengguna/ubah/'.$id;
+			$this->session->set_flashdata('post_status', 'ok');
+			
+		}
+
+		echo json_encode($response);
+	}
+
+	private function _form_data_asset()
+	{
+		$rules = array (
+			array (
+				'field' => 'nama',
+				'label' => 'Nama Unit',
+				'rules' => 'required',
+			),
+			array (
+				'field' => 'model',
+				'label' => 'Model',
+				'rules' => 'required',
+			),
+			array (
+				'field' => 'tgl_pembelian',
+				'label' => 'Tgl. Perolehan',
+				'rules' => 'required',
+			),
+			array (
+				'field' => 'waktu_maintenance',
+				'label' => 'Periode Maintenance',
+				'rules' => 'required|is_natural_no_zero',
+			),
+			array (
+				'field' => 'tgl_maintenance',
+				'label' => 'Tgl. Terakhir Perawatan',
+				'rules' => 'required',
+			),
+		);
+		
+		$this->form_validation->set_rules($rules);
+		
+		if ($this->form_validation->run()) {
+			
+			$key = array('nama', 'model', 'tgl_pembelian', 'waktu_maintenance', 'periode_maintenance', 'id_pegawai');
+			$data = post_data($key);
+			
+			
+			return showRestResponse($data);
 		}
 		else {
-			redirect(site_url('pengaturan/pengguna/ubah/'.$id));
+			
+			foreach ($rules as $r) {
+				$errors[$r['field']] = form_error($r['field']);
+			}
+			
+			return showRestResponse($errors, 400, 'Validation Error');;
 		}
+	}
+
+	public function insert_asset()
+	{
+		$response = $this->_form_data_asset();
+		
+		if ($response['code'] == 200) {
+			$data = $response['data'];
+			$tgl_maintenance = $this->input->post('tgl_maintenance');
+			$id = db_insert('asset', $data);
+
+			if($tgl_maintenance != null && $tgl_maintenance != '') {
+				$data_maintenance = array(
+					'id_asset' => $id,
+					'tgl_maintenance' => $tgl_maintenance,
+				); 
+				db_insert('asset_maintenance', $data_maintenance);
+			}
+
+			$response['data'] = array(
+				'id' => $id,
+				'nama' => $data['nama'],
+				'model' => $data['model'],
+				'tgl_pembelian' => $data['tgl_pembelian'],
+				'usia' => umur_bulan($data['tgl_pembelian']),
+				'periode_maintenance' => $data['waktu_maintenance'].' '.strtolower($data['periode_maintenance']),
+				'tgl_maintenance' => $tgl_maintenance != null && $tgl_maintenance != '' ?  $tgl_maintenance : '-',
+			);
+			
+		}
+
+		echo json_encode($response);
 	}
 }
