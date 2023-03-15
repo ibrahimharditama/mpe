@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 13 Mar 2023 pada 16.36
+-- Waktu pembuatan: 15 Mar 2023 pada 15.55
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.3.14
 
@@ -40,6 +40,8 @@ CREATE TABLE `faktur` (
   `diskon_faktur` int(11) NOT NULL,
   `biaya_lain` int(11) NOT NULL,
   `grand_total` int(11) NOT NULL,
+  `uang_muka` int(11) DEFAULT NULL,
+  `rek_pembayaran_dp` int(11) DEFAULT NULL,
   `dp` int(11) NOT NULL,
   `sisa_tagihan` int(11) NOT NULL,
   `row_status` tinyint(4) NOT NULL DEFAULT 1,
@@ -53,13 +55,15 @@ CREATE TABLE `faktur` (
 -- Dumping data untuk tabel `faktur`
 --
 
-INSERT INTO `faktur` (`id`, `no_transaksi`, `tgl`, `id_pelanggan`, `id_penjualan`, `keterangan`, `qty_kirim`, `total`, `diskon_faktur`, `biaya_lain`, `grand_total`, `dp`, `sisa_tagihan`, `row_status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
-(6, 'A-23001', '2023-02-16', 3, '4', NULL, 0, 2250000, 100000, 200000, 2350000, 0, 0, 1, '2023-02-16 12:23:21', 1, NULL, NULL),
-(7, 'A2302-011', '2023-02-28', 1, '2', '', 3, 2560000, 0, 0, 2560000, 0, 0, 1, '2023-02-28 14:45:59', 1, NULL, NULL),
-(8, 'A2302-012', '2023-02-28', 2, '8', '', 1, 3500000, 0, 0, 3500000, 0, 0, 1, '2023-02-28 14:48:37', 1, NULL, NULL),
-(9, 'A2302-013', '2023-02-28', 3, '4', '', 2, 2280000, 0, 0, 2280000, 0, 0, 1, '2023-02-28 14:53:15', 1, NULL, NULL),
-(10, 'A2302-014', '2023-02-28', 4, '9', '', 27, 1485000, 0, 0, 1485000, 0, 0, 1, '2023-02-28 15:10:41', 1, '2023-02-28 15:11:07', 1),
-(11, 'A2303-001', '2023-03-13', 10, '10', '', 10, 20000, 0, 0, 20000, 0, 0, 1, '2023-03-13 15:13:32', 1, NULL, NULL);
+INSERT INTO `faktur` (`id`, `no_transaksi`, `tgl`, `id_pelanggan`, `id_penjualan`, `keterangan`, `qty_kirim`, `total`, `diskon_faktur`, `biaya_lain`, `grand_total`, `uang_muka`, `rek_pembayaran_dp`, `dp`, `sisa_tagihan`, `row_status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(6, 'A-23001', '2023-02-16', 3, '4', NULL, 0, 2250000, 100000, 200000, 2350000, NULL, NULL, 0, 0, 1, '2023-02-16 12:23:21', 1, NULL, NULL),
+(7, 'A2302-011', '2023-02-28', 1, '2', '', 3, 2560000, 0, 0, 2560000, NULL, NULL, 0, 0, 1, '2023-02-28 14:45:59', 1, NULL, NULL),
+(8, 'A2302-012', '2023-02-28', 2, '8', '', 1, 3500000, 0, 0, 3500000, NULL, NULL, 0, 0, 1, '2023-02-28 14:48:37', 1, NULL, NULL),
+(9, 'A2302-013', '2023-02-28', 3, '4', '', 2, 2280000, 0, 0, 2280000, NULL, NULL, 0, 0, 1, '2023-02-28 14:53:15', 1, NULL, NULL),
+(10, 'A2302-014', '2023-02-28', 4, '9', '', 27, 1485000, 0, 0, 1485000, NULL, NULL, 0, 0, 1, '2023-02-28 15:10:41', 1, '2023-02-28 15:11:07', 1),
+(11, 'A2303-001', '2023-03-13', 10, '10', '', 10, 20000, 0, 0, 20000, NULL, NULL, 0, 0, 1, '2023-03-13 15:13:32', 1, '2023-03-14 14:33:36', 1),
+(12, 'A2303-003', '2023-03-15', 3, '4', '', 2, 2280000, 0, 0, 2280000, 80000, 1, 0, 0, 1, '2023-03-15 14:25:22', 1, NULL, NULL),
+(13, 'A2303-004', '2023-03-15', 2, '5', '', 4, 3725000, 0, 0, 3725000, 725000, 1, 0, 3000000, 1, '2023-03-15 14:34:40', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -96,7 +100,11 @@ INSERT INTO `faktur_detail` (`id`, `id_faktur`, `id_produk`, `uraian`, `id_satua
 (10, 9, 12, 'Tes Produk 001', 9, '', 1, 2000000, 0, 2000000, 1, '2023-02-28 14:53:15', NULL, NULL, NULL),
 (11, 9, 13, 'Inventory x Jasa 001', 9, '', 1, 280000, 0, 280000, 1, '2023-02-28 14:53:15', NULL, NULL, NULL),
 (13, 10, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 27, 55000, 0, 1485000, 1, '2023-02-28 15:11:07', NULL, NULL, NULL),
-(14, 11, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 10, 2000, 0, 20000, 1, '2023-03-13 15:13:33', NULL, NULL, NULL);
+(15, 11, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 10, 2000, 0, 20000, 1, '2023-03-14 14:33:37', NULL, NULL, NULL),
+(16, 12, 12, 'Tes Produk 001', 9, '', 1, 2000000, 0, 2000000, 1, '2023-03-15 14:25:23', NULL, NULL, NULL),
+(17, 12, 13, 'Inventory x Jasa 001', 9, '', 1, 280000, 0, 280000, 1, '2023-03-15 14:25:23', NULL, NULL, NULL),
+(18, 13, 0, 'AC SPLIT DAIKIN 2PK', 16, '', 1, 3500000, 0, 3500000, 1, '2023-03-15 14:34:40', NULL, NULL, NULL),
+(19, 13, 2, 'PIPA FREON 2.5-3PK', 1, '', 3, 75000, 0, 225000, 1, '2023-03-15 14:34:40', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -143,7 +151,17 @@ INSERT INTO `jstok` (`id`, `no_referensi`, `tgl`, `jenis_trx`, `id_produk`, `qty
 (28, 'BILL2303-002', '2023-03-11', 'pembelian', 2, 10, 11, 37, 1, '2023-03-11 13:17:57', 1, NULL, NULL),
 (29, 'BILL2303-004', '2023-03-12', 'pembelian', 225, 10, 12, 38, 1, '2023-03-12 07:10:19', 1, NULL, NULL),
 (30, 'BILL2303-004', '2023-03-12', 'pembelian', 227, 10, 12, 39, 1, '2023-03-12 07:10:19', 1, NULL, NULL),
-(31, 'A2303-001', '2023-03-13', 'penjualan', 2, -10, 11, 14, 1, '2023-03-13 15:13:33', 1, NULL, NULL);
+(32, 'A2303-001', '2023-03-13', 'penjualan', 2, -10, 11, 15, 1, '2023-03-14 14:33:37', 1, NULL, NULL),
+(33, 'BILL2303-005', '2023-03-14', 'pembelian', 227, 100, 13, 40, 1, '2023-03-14 14:34:49', 1, NULL, NULL),
+(34, 'BILL2303-007', '2023-03-15', 'pembelian', 225, 10, 14, 41, 1, '2023-03-15 13:30:11', 1, NULL, NULL),
+(35, 'BILL2303-009', '2023-03-15', 'pembelian', 225, 100, 16, 42, 1, '2023-03-15 13:34:24', 1, NULL, NULL),
+(36, 'BILL2303-009', '2023-03-15', 'pembelian', 221, 100, 16, 43, 1, '2023-03-15 13:34:24', 1, NULL, NULL),
+(37, 'BILL2303-010', '2023-03-15', 'pembelian', 222, 10, 17, 44, 1, '2023-03-15 13:56:14', 1, NULL, NULL),
+(38, 'A2303-003', '2023-03-15', 'penjualan', 12, -1, 12, 16, 1, '2023-03-15 14:25:23', 1, NULL, NULL),
+(39, 'A2303-003', '2023-03-15', 'penjualan', 13, -1, 12, 17, 1, '2023-03-15 14:25:23', 1, NULL, NULL),
+(40, 'A2303-004', '2023-03-15', 'penjualan', 0, -1, 13, 18, 1, '2023-03-15 14:34:40', 1, NULL, NULL),
+(41, 'A2303-004', '2023-03-15', 'penjualan', 2, -3, 13, 19, 1, '2023-03-15 14:34:40', 1, NULL, NULL),
+(42, 'BILL2303-011', '2023-03-15', 'pembelian', 2, 1, 18, 45, 1, '2023-03-15 14:37:34', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -230,10 +248,10 @@ INSERT INTO `no_transaksi` (`id`, `kode`, `nama`, `format`, `digit_serial`, `is_
 (1, 'supplier', 'Supplier', 'S#SERIAL#', 4, 0, 'tahunan', '2023', '03', 15, 1, '2022-12-27 13:17:17', NULL, '2023-03-12 05:36:44', 1),
 (2, 'pelanggan', 'Pelanggan', 'P#SERIAL#', 4, 0, 'tahunan', '2023', '02', 4, 1, '2022-12-28 01:03:12', NULL, '2023-02-12 17:26:44', NULL),
 (3, 'produk', 'Item', 'ITM#SERIAL#', 4, 0, 'tahunan', '2023', '02', 3, 1, '2022-12-28 01:04:00', NULL, '2023-02-15 02:38:30', NULL),
-(4, 'penjualan', 'Pesanan Penjualan', 'SO#Y2##SERIAL#', 4, 1, 'tahunan', '2023', '03', 10, 1, '2022-12-28 01:17:51', NULL, '2023-03-13 15:03:09', NULL),
-(5, 'pembelian', 'Pesanan Pembelian', 'PO#Y2##M#-#SERIAL#', 3, 1, 'bulanan', '2023', '03', 5, 1, '2023-01-25 03:04:21', NULL, '2023-03-12 07:59:13', NULL),
-(6, 'tagihan', 'Tagihan Pembelian', 'BILL#Y2##M#-#SERIAL#', 3, 1, 'bulanan', '2023', '03', 5, 1, '2023-02-21 14:52:58', NULL, '2023-03-12 07:10:19', NULL),
-(7, 'faktur', 'Nota Penjualan', 'A#Y2##M#-#SERIAL#', 3, 1, 'bulanan', '2023', '03', 2, 1, '2023-02-28 14:43:25', NULL, '2023-03-13 15:13:32', NULL),
+(4, 'penjualan', 'Pesanan Penjualan', 'SO#Y2##SERIAL#', 4, 1, 'tahunan', '2023', '03', 11, 1, '2022-12-28 01:17:51', NULL, '2023-03-15 14:16:15', NULL),
+(5, 'pembelian', 'Pesanan Pembelian', 'PO#Y2##M#-#SERIAL#', 3, 1, 'bulanan', '2023', '03', 10, 1, '2023-01-25 03:04:21', NULL, '2023-03-15 14:36:48', NULL),
+(6, 'tagihan', 'Tagihan Pembelian', 'BILL#Y2##M#-#SERIAL#', 3, 1, 'bulanan', '2023', '03', 12, 1, '2023-02-21 14:52:58', NULL, '2023-03-15 14:37:34', NULL),
+(7, 'faktur', 'Nota Penjualan', 'A#Y2##M#-#SERIAL#', 3, 1, 'bulanan', '2023', '03', 5, 1, '2023-02-28 14:43:25', NULL, '2023-03-15 14:34:40', NULL),
 (8, 'pembayaran_pembelian', 'Pembayaran Pembelian', 'P-BILL#Y2##M#-#SERIAL#', 3, 1, 'bulanan', '2023', '03', 25, 1, '2023-02-21 14:52:58', NULL, '2023-03-13 14:04:11', NULL);
 
 -- --------------------------------------------------------
@@ -332,7 +350,38 @@ CREATE TABLE `pembayaran_beli` (
 --
 
 INSERT INTO `pembayaran_beli` (`id`, `id_pembelian`, `no_transaksi`, `tgl`, `rek_pembayaran`, `nominal`, `row_status`, `created_by`) VALUES
-(12, 12, 'P-BILL2303-024', '2023-03-13', '2', 7000, 0, 1);
+(18, 16, 'P-BILL2303-009-1', '2023-03-15', '1', 400000, 1, 1),
+(19, 17, 'P-BILL2303-010-1', '2023-03-15', '1', 50000, 1, 1),
+(20, 17, 'P-BILL2303-010-2', '2023-03-15', '2', 9000, 1, 1),
+(21, 18, 'P-BILL2303-011-1', '2023-03-15', '1', 1000, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pembayaran_faktur`
+--
+
+CREATE TABLE `pembayaran_faktur` (
+  `id` int(11) NOT NULL,
+  `id_faktur` int(11) NOT NULL,
+  `no_transaksi` varchar(50) NOT NULL,
+  `tgl` date NOT NULL,
+  `rek_pembayaran` varchar(30) DEFAULT NULL,
+  `nominal` int(11) DEFAULT NULL,
+  `row_status` tinyint(11) NOT NULL DEFAULT 1,
+  `created_by` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `pembayaran_faktur`
+--
+
+INSERT INTO `pembayaran_faktur` (`id`, `id_faktur`, `no_transaksi`, `tgl`, `rek_pembayaran`, `nominal`, `row_status`, `created_by`) VALUES
+(3, 11, 'P-A2303-001-1', '2023-03-14', '2', 566, 1, 1),
+(4, 11, 'P-A2303-001-2', '2023-03-14', '2', 56677, 0, 1),
+(5, 11, 'P-A2303-001-4', '2023-03-14', '2', 6777, 1, 1),
+(6, 12, 'P-A2303-003-1', '2023-03-15', '1', 80000, 1, 1),
+(7, 13, 'P-A2303-004-1', '2023-03-15', '1', 725000, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -371,8 +420,13 @@ INSERT INTO `pembelian` (`id`, `no_transaksi`, `tgl`, `tgl_kirim`, `id_supplier`
 (4, 'PO2302-005', '2023-02-28', '2023-02-28', 8, '', 30, 25, 2250000, 0, 0, 2250000, 1, '2023-02-28 12:58:42', 1, '2023-02-28 13:05:12', NULL),
 (5, 'PO2303-001', '2023-03-11', '2023-03-11', 2, '', 10, 10, 500000, 0, 40000, 540000, 1, '2023-03-11 13:07:56', 1, '2023-03-11 13:17:58', NULL),
 (6, 'PO2303-002', '2023-03-12', '2023-03-12', 7, 'tes', 20, 20, 260000, 0, 40000, 300000, 1, '2023-03-12 02:01:10', 1, '2023-03-12 07:10:20', NULL),
-(7, 'PO2303-003', '2023-03-12', '2023-03-12', 9, '', 200, 0, 1400000, 0, 0, 1400000, 1, '2023-03-12 05:37:37', 1, NULL, NULL),
-(8, 'PO2303-004', '2023-03-12', '2023-03-12', 0, '', 445, 0, 2521370, 0, 0, 2521370, 1, '2023-03-12 07:59:13', 1, NULL, NULL);
+(7, 'PO2303-003', '2023-03-12', '2023-03-12', 9, '', 200, 200, 1400000, 0, 0, 1400000, 1, '2023-03-12 05:37:37', 1, '2023-03-15 13:34:25', NULL),
+(8, 'PO2303-004', '2023-03-12', '2023-03-12', 0, '', 445, 0, 2521370, 0, 0, 2521370, 1, '2023-03-12 07:59:13', 1, NULL, NULL),
+(9, 'PO2303-005', '2023-03-14', '2023-03-14', 5, '', 100, 100, 2500000, 0, 0, 2500000, 1, '2023-03-14 14:34:21', 1, '2023-03-14 14:34:49', NULL),
+(10, 'PO2303-006', '2023-03-15', '2023-03-15', 9, '', 10, 10, 60000, 0, 0, 60000, 1, '2023-03-15 13:06:07', 1, '2023-03-15 13:30:11', NULL),
+(11, 'PO2303-007', '2023-03-15', '2023-03-15', 9, '', 1, 0, 2000, 0, 0, 2000, 1, '2023-03-15 13:31:58', 1, NULL, NULL),
+(12, 'PO2303-008', '2023-03-15', '2023-03-15', 6, '', 10, 10, 100000, 0, 0, 100000, 1, '2023-03-15 13:35:19', 1, '2023-03-15 13:56:14', NULL),
+(13, 'PO2303-009', '2023-03-15', '2023-03-15', 2, '', 1, 1, 200000, 0, 0, 200000, 1, '2023-03-15 14:36:48', 1, '2023-03-15 14:37:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -416,7 +470,12 @@ INSERT INTO `pembelian_detail` (`id`, `id_pembelian`, `id_produk`, `uraian`, `id
 (11, 6, 227, 'Knee WH', 2, 'pcs', 10, 25000, 0, 250000, 1, '2023-03-12 02:01:10', NULL, NULL, NULL),
 (12, 7, 225, 'KABEL HITAM', 17, 'roll', 100, 10000, 0, 1000000, 1, '2023-03-12 05:37:37', NULL, NULL, NULL),
 (13, 7, 221, 'DUCTTAPE', 17, 'roll', 100, 4000, 0, 400000, 1, '2023-03-12 05:37:37', NULL, NULL, NULL),
-(14, 8, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 445, 5666, 0, 2521370, 1, '2023-03-12 07:59:13', NULL, NULL, NULL);
+(14, 8, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 445, 5666, 0, 2521370, 1, '2023-03-12 07:59:13', NULL, NULL, NULL),
+(15, 9, 227, 'Knee WH', 2, 'pcs', 100, 25000, 0, 2500000, 1, '2023-03-14 14:34:21', NULL, NULL, NULL),
+(16, 10, 225, 'KABEL HITAM', 17, 'roll', 10, 6000, 0, 60000, 1, '2023-03-15 13:06:07', NULL, NULL, NULL),
+(17, 11, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 1, 2000, 0, 2000, 1, '2023-03-15 13:31:58', NULL, NULL, NULL),
+(18, 12, 222, 'Duct Tape Lem', 17, 'roll', 10, 10000, 0, 100000, 1, '2023-03-15 13:35:19', NULL, NULL, NULL),
+(19, 13, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 1, 200000, 0, 200000, 1, '2023-03-15 14:36:48', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -436,6 +495,9 @@ CREATE TABLE `penerimaan` (
   `diskon_faktur` int(11) NOT NULL,
   `biaya_lain` int(11) NOT NULL,
   `grand_total` int(11) NOT NULL,
+  `uang_muka` int(11) DEFAULT NULL,
+  `rek_pembayaran_dp` int(11) DEFAULT NULL,
+  `sisa_tagihan` int(11) DEFAULT NULL,
   `row_status` tinyint(4) NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `created_by` int(11) DEFAULT NULL,
@@ -447,18 +509,23 @@ CREATE TABLE `penerimaan` (
 -- Dumping data untuk tabel `penerimaan`
 --
 
-INSERT INTO `penerimaan` (`id`, `no_transaksi`, `tgl`, `id_supplier`, `id_pembelian`, `keterangan`, `qty_terima`, `total`, `diskon_faktur`, `biaya_lain`, `grand_total`, `row_status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
-(1, 'BILL2302-005', '2023-02-21', 2, '1', NULL, 120, 6400080, 100, 0, 6399980, 1, '2023-02-21 15:56:48', 1, NULL, NULL),
-(3, 'BILL2302-007', '2023-02-21', 2, '1', NULL, 30, 1600020, 0, 0, 1600020, 1, '2023-02-21 16:01:47', 1, NULL, NULL),
-(4, 'BILL2302-008', '2023-02-21', 3, '', '', 300, 20025150, 150, 0, 20025000, 1, '2023-02-21 16:06:47', 1, NULL, NULL),
-(5, 'BILL2302-009', '2023-02-28', 2, '2', '', 40, 1288000, 0, 0, 1288000, 1, '2023-02-28 12:34:14', 1, NULL, NULL),
-(6, 'BILL2302-010', '2023-02-28', 5, '', '', 40, 384000, 0, 0, 384000, 1, '2023-02-28 12:35:34', 1, NULL, NULL),
-(7, 'BILL2302-011', '2023-02-28', 6, '', '', 60, 576000, 0, 0, 576000, 1, '2023-02-28 12:48:35', 1, NULL, NULL),
-(8, 'BILL2302-012', '2023-02-28', 6, '', '', 60, 576000, 0, 0, 576000, 1, '2023-02-28 12:49:49', 1, NULL, NULL),
-(9, 'BILL2302-013', '2023-02-28', 8, '4', '', 25, 1875000, 0, 0, 1875000, 1, '2023-02-28 12:59:10', 1, '2023-02-28 13:05:12', 1),
-(10, 'BILL2303-001', '2023-03-11', 7, '', '', 20, 500000, 0, 0, 500000, 1, '2023-03-11 04:26:31', 1, '2023-03-11 04:27:30', 1),
-(11, 'BILL2303-002', '2023-03-11', 2, '5', '', 10, 500000, 0, 40000, 540000, 1, '2023-03-11 13:17:57', 1, NULL, NULL),
-(12, 'BILL2303-004', '2023-03-12', 7, '6', '', 20, 260000, 0, 40000, 300000, 1, '2023-03-12 07:10:19', 1, NULL, NULL);
+INSERT INTO `penerimaan` (`id`, `no_transaksi`, `tgl`, `id_supplier`, `id_pembelian`, `keterangan`, `qty_terima`, `total`, `diskon_faktur`, `biaya_lain`, `grand_total`, `uang_muka`, `rek_pembayaran_dp`, `sisa_tagihan`, `row_status`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(1, 'BILL2302-005', '2023-02-21', 2, '1', NULL, 120, 6400080, 100, 0, 6399980, NULL, NULL, NULL, 1, '2023-02-21 15:56:48', 1, NULL, NULL),
+(3, 'BILL2302-007', '2023-02-21', 2, '1', NULL, 30, 1600020, 0, 0, 1600020, NULL, NULL, NULL, 1, '2023-02-21 16:01:47', 1, NULL, NULL),
+(4, 'BILL2302-008', '2023-02-21', 3, '', '', 300, 20025150, 150, 0, 20025000, NULL, NULL, NULL, 1, '2023-02-21 16:06:47', 1, NULL, NULL),
+(5, 'BILL2302-009', '2023-02-28', 2, '2', '', 40, 1288000, 0, 0, 1288000, NULL, NULL, NULL, 1, '2023-02-28 12:34:14', 1, NULL, NULL),
+(6, 'BILL2302-010', '2023-02-28', 5, '', '', 40, 384000, 0, 0, 384000, NULL, NULL, NULL, 1, '2023-02-28 12:35:34', 1, NULL, NULL),
+(7, 'BILL2302-011', '2023-02-28', 6, '', '', 60, 576000, 0, 0, 576000, NULL, NULL, NULL, 1, '2023-02-28 12:48:35', 1, NULL, NULL),
+(8, 'BILL2302-012', '2023-02-28', 6, '', '', 60, 576000, 0, 0, 576000, NULL, NULL, NULL, 1, '2023-02-28 12:49:49', 1, NULL, NULL),
+(9, 'BILL2302-013', '2023-02-28', 8, '4', '', 25, 1875000, 0, 0, 1875000, NULL, NULL, NULL, 1, '2023-02-28 12:59:10', 1, '2023-02-28 13:05:12', 1),
+(10, 'BILL2303-001', '2023-03-11', 7, '', '', 20, 500000, 0, 0, 500000, NULL, NULL, NULL, 1, '2023-03-11 04:26:31', 1, '2023-03-11 04:27:30', 1),
+(11, 'BILL2303-002', '2023-03-11', 2, '5', '', 10, 500000, 0, 40000, 540000, NULL, NULL, NULL, 1, '2023-03-11 13:17:57', 1, NULL, NULL),
+(12, 'BILL2303-004', '2023-03-12', 7, '6', '', 20, 260000, 0, 40000, 300000, NULL, NULL, NULL, 1, '2023-03-12 07:10:19', 1, NULL, NULL),
+(13, 'BILL2303-005', '2023-03-14', 5, '9', '', 100, 2500000, 0, 0, 2500000, NULL, NULL, NULL, 1, '2023-03-14 14:34:49', 1, NULL, NULL),
+(15, 'BILL2303-008', '2023-03-15', 9, '7', '', 200, 1400000, 0, 0, 1400000, 400000, 1, NULL, 1, '2023-03-15 13:33:55', 1, NULL, NULL),
+(16, 'BILL2303-009', '2023-03-15', 9, '7', '', 200, 1400000, 0, 0, 1400000, 400000, 1, NULL, 1, '2023-03-15 13:34:24', 1, NULL, NULL),
+(17, 'BILL2303-010', '2023-03-15', 6, '12', '', 10, 100000, 0, 0, 100000, 50000, 1, NULL, 1, '2023-03-15 13:56:13', 1, NULL, NULL),
+(18, 'BILL2303-011', '2023-03-15', 2, '13', '', 1, 200000, 0, 0, 200000, 1000, 1, 199000, 1, '2023-03-15 14:37:34', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -518,7 +585,12 @@ INSERT INTO `penerimaan_detail` (`id`, `id_penerimaan`, `id_produk`, `uraian`, `
 (36, 10, 225, 'KABEL HITAM', 17, 'roll', 10, 10000, 0, 100000, 1, '2023-03-11 04:27:30', NULL, NULL, NULL),
 (37, 11, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 10, 50000, 0, 500000, 1, '2023-03-11 13:17:57', NULL, NULL, NULL),
 (38, 12, 225, 'KABEL HITAM', 17, 'roll', 10, 1000, 0, 10000, 1, '2023-03-12 07:10:19', NULL, NULL, NULL),
-(39, 12, 227, 'Knee WH', 2, 'pcs', 10, 25000, 0, 250000, 1, '2023-03-12 07:10:19', NULL, NULL, NULL);
+(39, 12, 227, 'Knee WH', 2, 'pcs', 10, 25000, 0, 250000, 1, '2023-03-12 07:10:19', NULL, NULL, NULL),
+(40, 13, 227, 'Knee WH', 2, 'pcs', 100, 25000, 0, 2500000, 1, '2023-03-14 14:34:49', NULL, NULL, NULL),
+(42, 16, 225, 'KABEL HITAM', 17, 'roll', 100, 10000, 0, 1000000, 1, '2023-03-15 13:34:24', NULL, NULL, NULL),
+(43, 16, 221, 'DUCTTAPE', 17, 'roll', 100, 4000, 0, 400000, 1, '2023-03-15 13:34:24', NULL, NULL, NULL),
+(44, 17, 222, 'Duct Tape Lem', 17, 'roll', 10, 10000, 0, 100000, 1, '2023-03-15 13:56:14', NULL, NULL, NULL),
+(45, 18, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 1, 200000, 0, 200000, 1, '2023-03-15 14:37:34', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -691,13 +763,14 @@ INSERT INTO `penjualan` (`id`, `no_transaksi`, `tgl`, `tgl_kirim`, `id_pelanggan
 (1, 'SO230001', '2023-02-01', '2023-02-01', 1, NULL, 2, 1, 15000000, 0, 0, 15000000, 1, '2023-02-08 14:53:07', 1, '2023-02-16 14:06:26', NULL),
 (2, 'SO230002', '2023-02-15', '2023-02-15', 1, 'Tes Pesanan Penjualan 001', 0, 3, 0, 0, 0, 0, 1, '2023-02-15 15:17:11', NULL, '2023-02-28 14:46:00', NULL),
 (3, 'SO230003', '2023-02-15', '2023-02-15', 1, 'Tes penjualan 003', 2, 0, 2170000, 170000, 150000, 2150000, 1, '2023-02-15 15:53:09', 1, '2023-02-16 14:06:30', NULL),
-(4, 'SO230004', '2023-02-15', '2023-02-15', 3, 'Tes penjualan 004', 2, 2, 2250000, 100000, 200000, 2350000, 1, '2023-02-15 15:56:20', 1, '2023-02-28 14:53:15', NULL),
-(5, 'SO230004', '2023-02-28', '2023-02-28', 2, 'KUSMO 001', 4, 0, 3725000, 0, 0, 3725000, 1, '2023-02-28 13:58:56', 1, NULL, NULL),
+(4, 'SO230004', '2023-02-15', '2023-02-15', 3, 'Tes penjualan 004', 2, 4, 2250000, 100000, 200000, 2350000, 1, '2023-02-15 15:56:20', 1, '2023-03-15 14:25:23', NULL),
+(5, 'SO230004', '2023-02-28', '2023-02-28', 2, 'KUSMO 001', 4, 4, 3725000, 0, 0, 3725000, 1, '2023-02-28 13:58:56', 1, '2023-03-15 14:34:40', NULL),
 (6, 'SO230005', '2023-02-28', '2023-02-28', 7, 'Morita', 3, 0, 1050000, 0, 0, 1050000, 1, '2023-02-28 14:02:15', 1, NULL, NULL),
 (7, 'SO230006', '2023-02-28', '2023-02-28', 1, 'Salimun', 5, 0, 275000, 0, 0, 275000, 1, '2023-02-28 14:04:06', 1, '2023-02-28 14:16:18', 1),
 (8, 'SO230007', '2023-02-28', '2023-02-28', 2, '', 1, 1, 3500000, 0, 0, 3500000, 1, '2023-02-28 14:48:11', 1, '2023-02-28 14:48:37', NULL),
 (9, 'SO230008', '2023-02-28', '2023-02-28', 4, '', 35, 27, 1925000, 0, 0, 1925000, 1, '2023-02-28 15:07:38', 1, '2023-02-28 15:11:07', NULL),
-(10, 'SO230009', '2023-03-13', '2023-03-13', 10, '', 10, 10, 20000, 0, 0, 20000, 1, '2023-03-13 15:03:09', 1, '2023-03-13 15:13:33', NULL);
+(10, 'SO230009', '2023-03-13', '2023-03-13', 10, '', 10, 10, 20000, 0, 0, 20000, 1, '2023-03-13 15:03:09', 1, '2023-03-13 15:13:33', NULL),
+(11, 'SO230010', '2023-03-15', '2023-03-15', 12, '', 200, 0, 1000000, 0, 0, 1000000, 1, '2023-03-15 14:16:15', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -740,7 +813,8 @@ INSERT INTO `penjualan_detail` (`id`, `id_penjualan`, `id_produk`, `uraian`, `id
 (13, 7, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 5, 55000, 0, 275000, 1, '2023-02-28 14:16:19', NULL, NULL, NULL),
 (14, 8, 1, 'AC SPLIT DAIKIN 2PK', 16, 'unit', 1, 3500000, 0, 3500000, 1, '2023-02-28 14:48:11', NULL, NULL, NULL),
 (15, 9, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 35, 55000, 0, 1925000, 1, '2023-02-28 15:07:38', NULL, NULL, NULL),
-(16, 10, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 10, 2000, 0, 20000, 1, '2023-03-13 15:03:09', NULL, NULL, NULL);
+(16, 10, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 10, 2000, 0, 20000, 1, '2023-03-13 15:03:09', NULL, NULL, NULL),
+(17, 11, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 200, 5000, 0, 1000000, 1, '2023-03-15 14:16:15', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1218,6 +1292,12 @@ ALTER TABLE `pembayaran_beli`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `pembayaran_faktur`
+--
+ALTER TABLE `pembayaran_faktur`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `pembelian`
 --
 ALTER TABLE `pembelian`
@@ -1319,19 +1399,19 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT untuk tabel `faktur`
 --
 ALTER TABLE `faktur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `faktur_detail`
 --
 ALTER TABLE `faktur_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `jstok`
 --
 ALTER TABLE `jstok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT untuk tabel `menu`
@@ -1361,31 +1441,37 @@ ALTER TABLE `pelanggan`
 -- AUTO_INCREMENT untuk tabel `pembayaran_beli`
 --
 ALTER TABLE `pembayaran_beli`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT untuk tabel `pembayaran_faktur`
+--
+ALTER TABLE `pembayaran_faktur`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembelian_detail`
 --
 ALTER TABLE `pembelian_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `penerimaan`
 --
 ALTER TABLE `penerimaan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `penerimaan_detail`
 --
 ALTER TABLE `penerimaan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengguna`
@@ -1415,13 +1501,13 @@ ALTER TABLE `pengguna_grup_menu`
 -- AUTO_INCREMENT untuk tabel `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `penjualan_detail`
 --
 ALTER TABLE `penjualan_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT untuk tabel `profil`
