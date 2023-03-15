@@ -12,6 +12,17 @@ function monthDiff(date) {
 	return today.diff(tgl, 'months');
 }
 
+function waktuMaintenance(totalhari, tanggal) {
+	var hari = parseInt(totalhari);
+	var stringText = `<font color="Green">`+ tanggal + ` (` + totalhari + ` hari)</font>`;
+
+	if(hari < 0) {
+		stringText = `<font color="Crimson">`+ tanggal + ` (` + totalhari + ` hari)</font>`;
+	}
+
+	return stringText;
+}
+
 
 $().ready(function() {
 	$('input').attr('autocomplete', 'off');

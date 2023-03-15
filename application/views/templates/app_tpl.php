@@ -55,6 +55,8 @@
 
 	<!-- MOMENT.JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+	<script> var base_url = "<?= base_url(); ?>"; </script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
