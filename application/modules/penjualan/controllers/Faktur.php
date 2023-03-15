@@ -195,7 +195,7 @@ class Faktur extends MX_Controller {
 		}
 		
 		if (count($detail) > 0) {
-			$key = array('tgl', 'id_pelanggan', 'id_penjualan', 'keterangan', 'diskon_faktur|number', 'biaya_lain|number');
+			$key = array('tgl', 'id_pelanggan', 'id_penjualan', 'keterangan', 'diskon_faktur|number', 'biaya_lain|number', 'uang_muka|number', 'rek_pembayaran_dp|number');
 			$data = post_data($key);
 			
 			$data['no_transaksi'] = new_number('faktur');
@@ -203,10 +203,28 @@ class Faktur extends MX_Controller {
 			$data['qty_kirim'] = $qty_kirim;
 			$data['total'] = $total;
 			$data['grand_total'] = $total - $data['diskon_faktur'] + $data['biaya_lain'];
+			$uang_muka = str_replace('.', '', $data['uang_muka']);
+			$data['sisa_tagihan'] = $data['grand_total']-$uang_muka;
 			
 			$this->db->insert('faktur', $data);
 			$id_faktur = $this->db->insert_id();
+			//---membuat no pembayaran
+			$data_pembelian = $this->db->from('faktur')->where('id', $id_faktur)->get()->row();
+			$no_transaksi=$data_pembelian->no_transaksi;
+			$jml_pembayaran = $this->db->from('pembayaran_faktur')->where('id_faktur', $id_faktur)->get()->num_rows();
+			$no_selanjutnya = $jml_pembayaran+1;
+			$no_pembayaran = "P-".$no_transaksi."-".$no_selanjutnya;
 			
+			$dataDp['no_transaksi'] = $no_pembayaran;
+			$dataDp['id_faktur'] = $id_faktur;
+			$dataDp['tgl'] = date("Y-m-d");
+			$dataDp['rek_pembayaran'] = $data['rek_pembayaran_dp'];
+			$dataDp['nominal'] =  $uang_muka;
+			$dataDp['created_by'] = user_session('id');
+			$this->db->insert('pembayaran_faktur', $dataDp);
+
+			//--------------------------
+
 			foreach ($detail as $i => $d) {
 				$detail[$i]['id_faktur'] = $id_faktur;
 			}
@@ -432,9 +450,10 @@ class Faktur extends MX_Controller {
 		$id_faktur = $this->input->get('id');
 		$src = $this->db
 					->from('pembayaran_faktur')
-					->where('row_status', 1)
+					->join('rekening', 'rekening.id = pembayaran_faktur.rek_pembayaran')
+					->where('pembayaran_faktur.row_status', 1)
 					->where('id_faktur', $id_faktur)
-					->order_by('id')
+					->order_by('pembayaran_faktur.id')
 					->get();
 		
 		header('Content-Type: application/json');
@@ -448,6 +467,18 @@ class Faktur extends MX_Controller {
 		$result = $this->db->update('pembayaran_faktur', $data, array('id' => $id));
 		header('Content-Type: application/json');
 		echo json_encode($result);
+	}
+	public function ajax_open_faktur()
+	{
+		$id = $this->input->post('id_faktur');		
+		$src = $this->db
+					->select('*')
+					->from('faktur')
+					->where('id', $id)
+					->get();
+		
+		header('Content-Type: application/json');
+		echo json_encode($src->row());
 	}
 
 }
