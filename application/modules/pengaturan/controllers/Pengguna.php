@@ -109,10 +109,10 @@ class Pengguna extends MX_Controller {
 			show_404();
 		}
 
-		$src_asset = $this->db->query("SELECT a.*, IFNULL(x.tgl_maintenance, '-') AS tgl_maintenance
+		$src_asset = $this->db->query("SELECT a.*, IFNULL(x.tgl_maintenance, '-') AS tgl_maintenance, x.total_record
 									FROM asset a 
 									LEFT JOIN (
-											SELECT id_asset, MAX(tgl_maintenance) AS tgl_maintenance 
+											SELECT id_asset, MAX(tgl_maintenance) AS tgl_maintenance, COUNT(id) AS total_record 
 											FROM asset_maintenance 
 											WHERE row_status = 1
 											GROUP BY id_asset
@@ -274,12 +274,16 @@ class Pengguna extends MX_Controller {
 				'label' => 'Periode Maintenance',
 				'rules' => 'required|is_natural_no_zero',
 			),
-			array (
+			
+		);
+
+		if ($this->input->post('total_record') <= 1) {
+			$rules[] = array (
 				'field' => 'tgl_maintenance',
 				'label' => 'Tgl. Terakhir Perawatan',
 				'rules' => 'required',
-			),
-		);
+			);
+		}
 		
 		$this->form_validation->set_rules($rules);
 		
@@ -304,32 +308,63 @@ class Pengguna extends MX_Controller {
 	public function insert_asset()
 	{
 		$response = $this->_form_data_asset();
+		$response['url'] = '';
 		
 		if ($response['code'] == 200) {
 			$data = $response['data'];
-			$tgl_maintenance = $this->input->post('tgl_maintenance');
+			$tgl_maintenance = $this->input->post('tgl_maintenance');			
 			$id = db_insert('asset', $data);
 
-			if($tgl_maintenance != null && $tgl_maintenance != '') {
-				$data_maintenance = array(
-					'id_asset' => $id,
-					'tgl_maintenance' => $tgl_maintenance,
-				); 
-				db_insert('asset_maintenance', $data_maintenance);
-			}
+			$data_maintenance = array(
+				'id_asset' => $id,
+				'tgl_maintenance' => $tgl_maintenance,
+			); 
+			db_insert('asset_maintenance', $data_maintenance);
+			
 
-			$response['data'] = array(
-				'id' => $id,
-				'nama' => $data['nama'],
-				'model' => $data['model'],
-				'tgl_pembelian' => $data['tgl_pembelian'],
-				'usia' => umur_bulan($data['tgl_pembelian']),
-				'periode_maintenance' => $data['waktu_maintenance'].' '.strtolower($data['periode_maintenance']),
-				'tgl_maintenance' => $tgl_maintenance != null && $tgl_maintenance != '' ?  $tgl_maintenance : '-',
-			);
+			$response['url'] = base_url().'pengaturan/pengguna/ubah/'.$data['id_pegawai'];
 			
 		}
 
 		echo json_encode($response);
+	}
+
+	public function update_asset()
+	{
+		$response = $this->_form_data_asset();
+		$response['url'] = '';
+		
+		if ($response['code'] == 200) {
+
+			$data = $response['data'];
+			$id_asset = $this->input->post('id_asset');
+			$tgl_maintenance = $this->input->post('tgl_maintenance');
+			db_update('asset', $data, ['id' => $id_asset]);
+
+			if($this->input->post('total_record') <= 1) {
+				
+				$data_maintenance = array(
+					'tgl_maintenance' => $tgl_maintenance,
+				); 
+
+				db_update('asset_maintenance', $data_maintenance, ['id_asset' => $id_asset]);
+			}
+
+			$response['url'] = base_url().'pengaturan/pengguna/ubah/'.$data['id_pegawai'];
+			
+		}
+
+		echo json_encode($response);
+	}
+
+	public function delete_asset($id)
+	{
+		if ( ! $this->agent->referrer()) {
+			show_404();
+		}
+
+		db_delete('asset', ['id' => $id]);
+		db_delete('asset_maintenance', ['id_asset' => $id]);
+		redirect($this->agent->referrer());
 	}
 }

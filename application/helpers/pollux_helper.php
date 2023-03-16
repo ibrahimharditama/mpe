@@ -45,6 +45,14 @@ function db_update($table, $data, $where)
 	return $ci->db->update($table, $data, $where);
 }
 
+function db_delete($table, $where)
+{
+	$ci =& get_instance();
+	$data['row_status'] = 0;
+	$data['updated_by'] = user_session('id');
+	return $ci->db->update($table, $data, $where);
+}
+
 function menu($id_pengguna_grup)
 {
 	$ci =& get_instance();
