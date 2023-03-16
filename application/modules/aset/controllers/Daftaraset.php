@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Aset extends MX_Controller {
+class Daftaraset extends MX_Controller {
 
 	public function __construct()
 	{
@@ -13,7 +13,7 @@ class Aset extends MX_Controller {
 	public function index()
 	{
 		$this->load->view('templates/app_tpl', array (
-			'content' => 'aset_index',
+			'content' => 'daftar_aset_index',
 		));
 	}
 

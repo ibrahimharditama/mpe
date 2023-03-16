@@ -71,6 +71,7 @@
 					<table class="table table-sm table-bordered table-striped" id="table-asset">
 						<thead>
 							<tr>
+								<th></th>
 								<th>Nama Unit</th>
 								<th>Model</th>
 								<th>Tgl. Perolehan</th>
@@ -82,7 +83,26 @@
 						<tbody>
 							<?php foreach ($asset as $a): ?>
 								<tr>
-									<td><?= $a['nama']; ?></td>
+									<td>
+										<a href="<?= base_url('pengaturan/pengguna/delete_asset/' . $a['id']); ?>">
+											<img src="<?= base_url('assets/img/del.png'); ?>">
+										</a>
+									</td>
+									<td>
+										<a href="javascript:void(0)" 
+											data-id="<?= $a['id']; ?>" 
+											data-nama="<?= $a['nama']; ?>" 
+											data-model="<?= $a['model']; ?>" 
+											data-tglpembelian="<?= $a['tgl_pembelian']; ?>" 
+											data-usia="<?= umur_bulan($a['tgl_pembelian']); ?>" 
+											data-waktumaintenance="<?= $a['waktu_maintenance']; ?>" 
+											data-periodemaintenance="<?= $a['periode_maintenance']; ?>" 
+											data-tglmaintenance="<?= $a['tgl_maintenance']; ?>" 
+											data-totalrecord="<?= $a['total_record']; ?>" 
+											onclick="editAsset(this)">
+											<?= $a['nama']; ?>
+										</a>
+									</td>
 									<td><?= $a['model']; ?></td>
 									<td><?= $a['tgl_pembelian']; ?></td>
 									<td><?= umur_bulan($a['tgl_pembelian']); ?></td>
@@ -134,21 +154,21 @@
 					<label class="col-sm-4 col-form-label pr-0">Nama Unit</label>
 					<div class="col-sm-7">
 						<input type="text" class="form-control" name="nama">
-						<span class="err_asset_nama"></span>
+						<span class="err_modal err_asset_nama"></span>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-sm-4 col-form-label pr-0">Model</label>
 					<div class="col-sm-7">
 						<input type="text" class="form-control" name="model">
-						<span class="err_asset_model"></span>
+						<span class="err_modal err_asset_model"></span>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label class="col-sm-4 col-form-label pr-0">Tgl. Perolehan</label>
 					<div class="col-sm-7">
 						<input type="text" class="form-control tgl_pembelian" name="tgl_pembelian" value="<?=date('Y-m-d'); ?>" readonly>
-						<span class="err_asset_tgl_pembelian"></span>
+						<span class="err_modal err_asset_tgl_pembelian"></span>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -165,25 +185,26 @@
 								<input type="text" class="form-control" name="waktu_maintenance">
 							</div>
 							<div class="col-sm-8">
-								<select class="select2-no-clear w-100" name="periode_maintenance" style="width: 100%;">
+								<select class="select2-no-clear w-100 periode_maintenance" name="periode_maintenance" style="width: 100%;">
 									<?= option_periode(); ?>
 								</select>
 							</div>
 						</div>
-						<span class="err_asset_waktu_maintenance"></span>
+						<span class="err_modal err_asset_waktu_maintenance"></span>
 						
 					</div>
 				</div>
-				<div class="form-group row">
+				<div class="form-group row div-tgl-terakhir-perawatan">
 					<label class="col-sm-4 col-form-label pr-0">Tgl. Terakhir Perawatan</label>
 					<div class="col-sm-7">
 						<input type="text" class="form-control datepicker" name="tgl_maintenance" value="<?=date('Y-m-d'); ?>" readonly>
-						<span class="err_asset_tgl_maintenance"></span>
+						<span class="err_modal err_asset_tgl_maintenance"></span>
 					</div>
 				</div>
 
 				<input type="hidden" name="id_pegawai" value="<?php if ($data != null) echo $data['id']; ?>">
 				<input type="hidden" name="id_asset" value="">
+				<input type="hidden" name="total_record" value="0">
 
 			</div>
 			<div class="modal-footer">
@@ -197,9 +218,7 @@
 
 <script>
 
-	$().ready(function() {
-		
-	});
+	var modalAsset = $("#modalAsset");
 
 	$("#form").submit(function(e) {
         e.preventDefault();
@@ -239,7 +258,7 @@
     })
 
 	$(".buttonAddAsset").on('click', function () {
-		$('#modalAsset').modal('show');
+		modalAsset.modal('show');
 	})
 
 	$("#form-asset").submit(function(e) {
@@ -259,29 +278,17 @@
 			success: function(response) {
 				console.log(response);
 				if(response['code'] == 200) {
-					var asset = response['data'];
-
-					var htmlAsset = `<tr>
-										<td>`+ asset['nama'] +`</td>
-										<td>`+ asset['model'] +`</td>
-										<td>`+ asset['tgl_pembelian'] +`</td>
-										<td>`+ asset['usia'] +`</td>
-										<td>`+ asset['periode_maintenance'] +`</td>
-										<td>`+ asset['tgl_maintenance'] +`</td>
-									</tr>`;
-
-					$('#table-asset tbody').append(htmlAsset);
-					$('#modalAsset').modal('hide');
+					window.location.href = response['url'];
 				}
 
 				if(response['code'] == 400) { 
 					var error = response['data'];
 
-					$('#modalAsset').find(".err_asset_nama").html(error['nama']);
-					$('#modalAsset').find(".err_asset_model").html(error['model']);
-					$('#modalAsset').find(".err_asset_tgl_pembelian").html(error['tgl_pembelian']);
-					$('#modalAsset').find(".err_asset_waktu_maintenance").html(error['waktu_maintenance']);
-					$('#modalAsset').find(".err_asset_tgl_maintenance").html(error['tgl_maintenance']);
+					modalAsset.find(".err_asset_nama").html(error['nama']);
+					modalAsset.find(".err_asset_model").html(error['model']);
+					modalAsset.find(".err_asset_tgl_pembelian").html(error['tgl_pembelian']);
+					modalAsset.find(".err_asset_waktu_maintenance").html(error['waktu_maintenance']);
+					modalAsset.find(".err_asset_tgl_maintenance").html(error['tgl_maintenance']);
 				}
 
 				$('button[type=submit]').attr('disabled', false);
@@ -295,21 +302,55 @@
 			offset: [-203, 280],
 			onSelect: function() {
 				console.log(monthDiff($(this).val()));
-				$('#modalAsset').find('.usia_asset').val(monthDiff($(this).val()) + ' bulan');
+				modalAsset.find('.usia_asset').val(monthDiff($(this).val()) + ' bulan');
 
 			}
 		});
 	})
 
 	$('#modalAsset').on('hidden.bs.modal', function () {
-		console.log('hidden')
-		$("#modalAsset").find("input[name=nama]").val('');
-        $("#modalAsset").find("input[name=model]").val('');
-        $("#modalAsset").find("input[name=tgl_pembelian]").val(moment().format("YYYY-MM-DD"));
-        $("#modalAsset").find(".usia_asset").val('0 bulan');
-		$("#modalAsset").find("input[name=waktu_maintenance]").val('');
-		$("#modalAsset").find("input[name=tgl_maintenance]").val(moment().format("YYYY-MM-DD"));
+		modalAsset.find(".err_modal").html('');
+		modalAsset.find("input[name=id_asset]").val('');
+		modalAsset.find("input[name=nama]").val('');
+        modalAsset.find("input[name=model]").val('');
+        modalAsset.find("input[name=tgl_pembelian]").val(moment().format("YYYY-MM-DD"));
+        modalAsset.find(".usia_asset").val('0 bulan');
+		modalAsset.find("input[name=waktu_maintenance]").val('');
+		modalAsset.find("input[name=tgl_maintenance]").val(moment().format("YYYY-MM-DD"));
+		modalAsset.find("input[name=total_record]").val(0);
+		modalAsset.find('.div-tgl-terakhir-perawatan').show();
+		modalAsset.find("#form-asset").attr("action", site_url + "pengaturan/pengguna/insert_asset");
 	})
+
+	function editAsset(ini) {
+	    var id = $(ini).data('id'); 
+		var nama = $(ini).data('nama'); 
+		var model = $(ini).data('model'); 
+		var tglpembelian = $(ini).data('tglpembelian'); 
+		var usia = $(ini).data('usia'); 
+		var waktumaintenance = $(ini).data('waktumaintenance'); 
+		var periodemaintenance = $(ini).data('periodemaintenance'); 
+		var tglmaintenance = $(ini).data('tglmaintenance'); 
+		var totalrecord = parseInt($(ini).data('totalrecord')); 
+
+		if(totalrecord > 1) {
+			modalAsset.find('.div-tgl-terakhir-perawatan').hide();
+		}
+
+		modalAsset.find("input[name=id_asset]").val(id);
+		modalAsset.find("input[name=nama]").val(nama);
+        modalAsset.find("input[name=model]").val(model);
+        modalAsset.find("input[name=tgl_pembelian]").val(tglpembelian);
+        modalAsset.find(".usia_asset").val(usia);
+		modalAsset.find("input[name=waktu_maintenance]").val(waktumaintenance);
+		modalAsset.find(".periode_maintenance").val(periodemaintenance).trigger('change');
+		modalAsset.find("input[name=tgl_maintenance]").val(tglmaintenance);
+		modalAsset.find("input[name=total_record]").val(totalrecord);	
+
+		modalAsset.find("#form-asset").attr("action", site_url + "pengaturan/pengguna/update_asset");
+
+		modalAsset.modal('show');
+	}
 
 
 </script>

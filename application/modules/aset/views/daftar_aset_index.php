@@ -31,7 +31,7 @@
 
     $('#datatable').DataTable({
         ajax: {
-            url: base_url + 'master/aset/datatable',
+            url: site_url + 'aset/daftaraset/datatable',
             dataSrc: 'datatable.data',
             data: function(d) {
             }
