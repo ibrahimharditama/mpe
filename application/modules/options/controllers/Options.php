@@ -130,4 +130,16 @@ class Options extends MX_Controller {
 		
 		return $options;
 	}
+
+	public function aset($selected = '')
+	{
+		$src = $this->db
+			->select("id, CONCAT(nama, ' - ', model ) AS nama")
+			->from('asset')
+			->where('row_status', 1)
+			->order_by('nama')
+			->get();
+		
+		return options($src, 'id', $selected, 'nama');
+	}
 }
