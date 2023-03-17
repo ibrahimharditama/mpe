@@ -426,6 +426,8 @@ class Penerimaan extends MX_Controller {
 		$data['created_by'] = user_session('id');
 		$res = [];
 		if($id_pembayaran !== ""){
+			var_dump($id_pembayaran);
+			exit();
 			$result = $this->db->update('pembayaran_beli', $data, array('id' => $id_pembayaran));
 			if($result){
 				$res = [
@@ -451,6 +453,7 @@ class Penerimaan extends MX_Controller {
 	{
 		$id_pembelian = $this->input->get('id');
 		$src = $this->db
+		->select('`pembayaran_beli`.*, `rekening`.`no_rekening`, `rekening`.`bank`')
 					->from('pembayaran_beli')
 					->join('rekening', 'rekening.id = pembayaran_beli.rek_pembayaran')
 					->where('pembayaran_beli.row_status', 1)

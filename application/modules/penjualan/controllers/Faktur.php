@@ -449,6 +449,7 @@ class Faktur extends MX_Controller {
 	{
 		$id_faktur = $this->input->get('id');
 		$src = $this->db
+					->select('`pembayaran_faktur`.*, `rekening`.`no_rekening`, `rekening`.`bank`')
 					->from('pembayaran_faktur')
 					->join('rekening', 'rekening.id = pembayaran_faktur.rek_pembayaran')
 					->where('pembayaran_faktur.row_status', 1)
