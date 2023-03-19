@@ -324,3 +324,8 @@ function umur_bulan($tgl)
 
 	return $txt;
 }
+
+function buttonDelete($url)
+{
+	return '<a href="'.$url.'"><img src="'. base_url('assets/img/del.png') .'"></a>';
+}
