@@ -482,4 +482,14 @@ class Faktur extends MX_Controller {
 		echo json_encode($src->row());
 	}
 
+	public function tes()
+	{
+		// $this->load->view('templates/print_tpl', array (
+		// 	'content' => 'nota',
+		// ));
+		$this->load->library('pdf');
+		$this->pdf->load_view('nota')->setPaper('a5', 'landscape');
+		$this->pdf->render();
+		$this->pdf->stream("welcome.pdf");
+	}
 }
