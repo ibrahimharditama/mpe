@@ -295,6 +295,19 @@ function new_number($kode)
 	return str_replace($wildcard, $replace, $nomor->format);
 }
 
+function new_number_pengiriman($id_faktur)
+{
+	$ci =& get_instance();
+
+	$faktur = $ci->db->where("id",$id_faktur)->get("faktur")->row();
+	$count_pengiriman = $ci->db->where("id_faktur",$id_faktur)->select("count(*) x")->get("pengiriman")->row()->x;
+
+	$counter = substr("000".($count_pengiriman + 1), -3);
+
+	return  "P-".$faktur->no_transaksi."-".$counter;
+
+}
+
 function showRestResponse($data = null, $code = 200, $message = "Data berhasil Disimpan."){
 
 	$response = array(
