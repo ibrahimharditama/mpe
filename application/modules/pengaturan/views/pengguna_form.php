@@ -84,9 +84,7 @@
 							<?php foreach ($asset as $a): ?>
 								<tr>
 									<td>
-										<a href="<?= base_url('pengaturan/pengguna/delete_asset/' . $a['id']); ?>">
-											<img src="<?= base_url('assets/img/del.png'); ?>">
-										</a>
+										<?= buttonDelete(base_url('pengaturan/pengguna/delete_asset/' . $a['id'])); ?>
 									</td>
 									<td>
 										<a href="javascript:void(0)" 

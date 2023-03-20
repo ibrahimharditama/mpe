@@ -5,6 +5,7 @@
 		<table class="cell-border stripe order-column hover" id="datatable">
 			<thead>	
 				<tr>
+					<th></th>
 					<th width="5px">No.</th>
 					<th>Nama Pengguna</th>
 					<th>Email</th>
@@ -33,9 +34,17 @@ function init_datatable()
 		'serverMethod': 'post',
 		'ajax': '<?php echo site_url('/pengaturan/pengguna/datatable'); ?>',
 		'stateSave': true,
-		'order': [[ 1, 'asc' ]],
+		'order': [[ 2, 'asc' ]],
 		'fixedHeader': true,
 		'columns': [
+			{
+                data: "id",
+                sortable: false, 
+                searchable: false,
+                render: function (data, type, row, meta) {
+                    return buttonDelete(site_url + 'pengaturan/pengguna/delete/' + data);
+                }
+            },
 			{ data: 'nomor', orderable: false },
 			{
 				data: 'nama',
