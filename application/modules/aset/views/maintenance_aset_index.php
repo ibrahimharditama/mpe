@@ -95,9 +95,7 @@
                 "sortable": false, 
                 "searchable": false,
                 "render": function (data, type, row, meta) {
-                    return `<a href="` + site_url + `aset/maintenanceaset/delete/` + data +`">
-                                <img src="` + site_url + `assets/img/del.png">
-                            </a>`;
+                    return buttonDelete(site_url + 'aset/maintenanceaset/delete/' + data);
                 }
             },
             {
