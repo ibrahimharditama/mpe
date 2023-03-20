@@ -294,7 +294,7 @@ class Pengembalian_pipa extends MX_Controller {
 
 				$insert[] = array(
 					'no_referensi' => $data->no_transaksi,
-					'tgl' => date('Y-m-d'),
+					'tgl' => $data->tgl,
 					'jenis_trx' => 'pengembalian_pipa',
 					'id_produk' => $row->id_produk,
 					'qty' => $row->qty_kembali,
