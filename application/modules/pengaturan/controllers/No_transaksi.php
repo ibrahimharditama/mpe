@@ -154,7 +154,16 @@ class No_transaksi extends MX_Controller {
 		$id = $this->input->post('id');
 		
 		if ($data != null) {
+
+			$is_reset = $this->input->post('is_reset_serial');
+			
+			$data['is_reset_serial'] = 0;
 			$data['updated_by'] = user_session('id');
+
+			if(isset($is_reset)) {
+				$data['is_reset_serial'] = 1;
+			}
+
 			$this->db->update('no_transaksi', $data, array('id' => $id));
 			$this->session->set_flashdata('post_status', 'updated');
 			redirect(site_url('pengaturan/no-transaksi/'));

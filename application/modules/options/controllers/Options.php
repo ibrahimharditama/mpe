@@ -169,4 +169,17 @@ class Options extends MX_Controller {
 		
 		return options($src, 'id', $selected, 'nama');
 	}
+
+	public function pengiriman_penjualan($selected = '')
+	{
+		$src = $this->db
+			->select("p.id, CONCAT(p.no_transaksi, ' &middot; ', pl.nama) AS kode")
+			->from('pengiriman AS p')
+			->join('pelanggan AS pl', 'pl.id = p.id_pelanggan') 
+			->where('p.row_status', 1)
+			->order_by('p.id')
+			->get();
+		
+		return options($src, 'id', $selected, 'kode');
+	}
 }

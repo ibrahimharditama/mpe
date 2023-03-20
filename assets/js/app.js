@@ -23,6 +23,10 @@ function waktuMaintenance(totalhari, tanggal) {
 	return stringText;
 }
 
+function buttonDelete(url) {
+	return `<a href="` + url + `"><img src="` + site_url + `assets/img/del.png"></a>`;
+}
+
 
 $().ready(function() {
 	$('input').attr('autocomplete', 'off');
@@ -44,8 +48,8 @@ $().ready(function() {
 		return confirm('Apakah Anda yakin menghapus data ini?');
 	});
 
-	$(".alert").fadeTo(3000, 300).slideUp(300, function(){
-		$(".alert").slideUp(300);
+	$(".alert").fadeTo(3000, 500).slideUp(500, function(){
+		$(".alert").slideUp(500);
 	});
 
 	$('.modal').on('shown.bs.modal', function () {

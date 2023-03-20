@@ -251,6 +251,16 @@ class Pengguna extends MX_Controller {
 		echo json_encode($response);
 	}
 
+	public function delete($id)
+	{
+		if ( ! $this->agent->referrer()) {
+			show_404();
+		}
+
+		db_delete('pengguna', ['id' => $id]);
+		redirect($this->agent->referrer());
+	}
+
 	private function _form_data_asset()
 	{
 		$rules = array (
