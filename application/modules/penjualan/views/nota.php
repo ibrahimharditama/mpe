@@ -4,297 +4,186 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>file_1679235759180</title>
     <style type="text/css">
-        * {
-            margin: 0;
-            padding: 0;
-            text-indent: 0;
-        }
+    @page {
+        margin: 0px;
+    }
 
-        h2 {
-            color: black;
-            font-family: Verdana, sans-serif;
-            font-style: normal;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 15.5pt;
-        }
+    body {
+        margin: 0px;
+    }
 
-        .s1 {
-            color: black;
-            font-family: "Trebuchet MS", sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: none;
-            font-size: 8.5pt;
-        }
+    p {
+        padding: 0px;
+        margin-bottom: 0rem;
+        margin-top: 0rem;
+        font-size: 12px
+    }
 
-        h1 {
-            color: black;
-            font-family: Arial, sans-serif;
-            font-style: normal;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 16pt;
-        }
+    h1 {
+        font-size: 20px;
+        font-weight: normal;
+        margin-top: 0rem;
+        margin-bottom: 0rem;
+    }
 
-        h3 {
-            color: black;
-            font-family: Arial, sans-serif;
-            font-style: normal;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 12pt;
-        }
+    h2 {
+        font-size: 18px;
+        margin-top: 0rem;
+        margin-bottom: 0rem;
+        font-weight: bold;
+    }
 
-        .s2 {
-            color: black;
-            font-family: Arial, sans-serif;
-            font-style: normal;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 10pt;
-        }
-
-        .p,
-        p {
-            color: black;
-            font-family: Verdana, sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: none;
-            font-size: 9pt;
-            margin: 0pt;
-        }
-
-        .s3 {
-            color: black;
-            font-family: Arial, sans-serif;
-            font-style: normal;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 9pt;
-        }
-
-        .s4 {
-            color: black;
-            font-family: Verdana, sans-serif;
-            font-style: normal;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 9pt;
-        }
-
-        .s5 {
-            color: black;
-            font-family: Verdana, sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: none;
-            font-size: 9pt;
-        }
-
-        h4 {
-            color: black;
-            font-family: Verdana, sans-serif;
-            font-style: normal;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 10pt;
-        }
-
-        .s6 {
-            color: black;
-            font-family: Verdana, sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: none;
-            font-size: 10pt;
-        }
-
-        .s7 {
-            color: black;
-            font-family: Arial, sans-serif;
-            font-style: normal;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 10pt;
-        }
-
-        .s8 {
-            color: black;
-            font-family: Verdana, sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: none;
-            font-size: 8pt;
-        }
-
-        .s9 {
-            color: black;
-            font-family: Arial, sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: none;
-            font-size: 9pt;
-        }
-
-        .s10 {
-            color: black;
-            font-family: "Times New Roman", serif;
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: none;
-            font-size: 9pt;
-        }
-
-        .s11 {
-            color: black;
-            font-family: Verdana, sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: none;
-            font-size: 1pt;
-        }
-
-        .s12 {
-            color: black;
-            font-family: Arial, sans-serif;
-            font-style: normal;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 1pt;
-        }
-
-        .s13 {
-            color: black;
-            font-family: Arial, sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: none;
-            font-size: 1pt;
-        }
-
-        .s14 {
-            color: black;
-            font-family: Verdana, sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: none;
-            font-size: 9pt;
-            vertical-align: -8pt;
-        }
-
-        .s15 {
-            color: black;
-            font-family: Arial, sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: none;
-            font-size: 9pt;
-            vertical-align: -7pt;
-        }
-
-        .s16 {
-            color: black;
-            font-family: Arial, sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: none;
-            font-size: 9pt;
-            vertical-align: -8pt;
-        }
-
-        table,
-        tbody {
-            vertical-align: top;
-            overflow: visible;
-        }
+    h3 {
+        display: block;
+        font-size: 16px;
+        margin-top: 0rem;
+        margin-bottom: 0rem;
+        font-weight: bold;
+    }
     </style>
 </head>
 
 <body style="padding:10px">
-  
-    <p class="s3" style="padding-top: 3pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Kepada Yth:</p>
-    <p style="padding-top: 3pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">PL00322-Petropack Agro Industries
-        Semarang PT</p>
-    <p style="padding-left: 325pt;text-indent: 0pt;text-align: left;">Jl. Raya Narogong KM 15.9 Desa Limus Nunggal
-        Cileungsi.</p>
-    <p style="padding-top: 1pt;padding-left: 324pt;text-indent: 0pt;text-align: left;">0817.8565.61 + 0816.9379.14 +
-        0815.1433.7611</p>
-    <p style="text-indent: 0pt;text-align: left;">
-        <br />
-    </p>
-    <table>
+    <table style="width:100%">
         <tr>
             <td>
-                <h2 style="padding-top: 8pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">Makmur Permai</h2>
-                <p class="s1" style="padding-left: 5pt;text-indent: 0pt;text-align: left;">Boulevard Timur Blok NE1 No. 40</p>
-                <p class="s1" style="padding-left: 5pt;text-indent: 0pt;text-align: left;">Telp:453.0095 4584.2138 4584.2139</p>
-                <p class="s1" style="padding-left: 5pt;text-indent: 0pt;text-align: left;">Fax: 453.0093</p>
+                <h2>Makmur Permai</h2>
+                <p>Boulevard Timur Blok NE1 No. 40</p>
+                <p>Telp:453.0095 4584.2138 4584.2139</p>
+                <p>Fax: 453.0093</p>
             </td>
+            <td align="center">
+                <h1>FAKTUR PENJUALAN</h1>
+                <h3>Nota : <?=$header->no_transaksi?></h3>
+            </td>
+            <td valign="bottom">
+                <p>Jakarta, 10/03/2023 12:47:20</p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
             <td>
-                <h1 style="padding-top: 3pt;padding-left: 5pt;text-indent: 0pt;text-align: left;">FAKTUR PENJUALAN</h1>
-                <h3 style="padding-top: 1pt;padding-left: 43pt;text-indent: 0pt;line-height: 13pt;text-align: left;">Nota :
-                    A2303-051 <span class="s2">Jakarta, </span>
-                    <span class="p">10/03/2023 12:47:20</span>
-                </h3>
+                <p>Kepada Yth:</p>
+                <p><?=$header->nama?></p>
+                <p><?=$header->alamat?></p>
+                <p><?=$header->no_telp?></p>
             </td>
-        </td>
+        </tr>
     </table>
-    <table style="border-collapse:collapse;margin-left:6.69pt" cellspacing="0" style="width:100%">
+    <table style="border-collapse:collapse;width:100%;margin-top:10px" cellspacing="0">
         <tr style="height:16pt">
-            <td
-                style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p class="s4" style="padding-top: 2pt;padding-left: 2pt;text-indent: 0pt;text-align: left;">No.</p>
+            <td style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
+                <p>No.</p>
             </td>
-            <td
-                style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p class="s4" style="padding-top: 2pt;padding-left: 4pt;text-indent: 0pt;text-align: left;">Nama Item
+            <td style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
+                <p>Nama Item
                 </p>
             </td>
-            <td
+            <td align="center"
                 style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p class="s4" style="padding-top: 2pt;padding-left: 55pt;text-indent: 0pt;text-align: left;">Jml Satuan
+                <p>Jml Satuan
                 </p>
             </td>
-            <td
+            <td align="center"
                 style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p class="s4" style="padding-top: 2pt;padding-right: 8pt;text-indent: 0pt;text-align: right;">Harga</p>
+                <p>Harga</p>
             </td>
-            <td
+            <td align="center"
                 style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p class="s4" style="padding-top: 2pt;padding-right: 25pt;text-indent: 0pt;text-align: right;">Pot</p>
+                <p>Pot</p>
             </td>
-            <td
+            <td align="center"
                 style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p class="s4" style="padding-top: 2pt;padding-left: 38pt;text-indent: 0pt;text-align: left;">Total</p>
+                <p>Total</p>
+            </td>
+        </tr>
+        <?php $no=1;foreach($detail as $dtDetail):?>
+        <tr style="height:12pt">
+            <td width="5%">
+                <p><?= $no++;?></p>
+            </td>
+            <td width="35%">
+                <p><?=$dtDetail->nama?></p>
+            </td>
+            <td align="center" width="10%">
+                <p><?=$dtDetail->qty?> <?=$dtDetail->satuan?></p>
+            </td>
+            <td align="right" width="10%">
+                <p><?=number_format($dtDetail->harga_satuan)?></p>
+            </td>
+            <td align="right" width="10%">
+                <p><?=$dtDetail->diskon?></p>
+            </td>
+            <td align="right" width="10%">
+                <p><?=number_format($dtDetail->qty*$dtDetail->harga_satuan)?></p>
+            </td>
+        </tr>
+        <?php endforeach;?>
+        <tr style="height:12pt">
+            <td colspan="3" valign="top">
+                <p>Jatuh Tempo : 10/03/2023</p>
+            </td>
+            <td width="10%" valign="top">
+                <p>Biaya Lain :</p>
+            </td>
+            <td align="right" valign="top">
+                <p>Sub Total : </p>
+            </td>
+            <td align="right" valign="top">
+                <p><?=number_format($header->total)?></p>
             </td>
         </tr>
         <tr style="height:12pt">
-            <td>
-                <p class="s5" style="text-indent: 0pt;line-height: 10pt;text-align: left;">2</p>
+            <td colspan="4" valign="top">
+                <p>tujuh belas juta tujuh ratus ribu rupiah</p>
             </td>
-            <td>
-                <p class="s5" style="padding-left: 2pt;text-indent: 0pt;line-height: 10pt;text-align: left;">Ac Split
-                    Sharp 1 PK THAILAND</p>
+            <td align="right" valign="top">
+                <p>Potongan : </p>
             </td>
-            <td>
-                <p class="s5" style="padding-left: 66pt;text-indent: 0pt;line-height: 10pt;text-align: left;">2 Unit</p>
+            <td align="right" valign="top">
+                <p><?=number_format($header->diskon_faktur)?></p>
             </td>
-            <td>
-                <p class="s5" style="padding-right: 10pt;text-indent: 0pt;line-height: 10pt;text-align: right;">
-                    3.025.000</p>
+        </tr>
+        <tr style="height:12pt">
+            <td colspan="4" valign="top">
             </td>
-            <td>
-                <p class="s5" style="padding-right: 27pt;text-indent: 0pt;line-height: 10pt;text-align: right;">0</p>
+            <td align="right" valign="top">
+                <p>Total Akhir : </p>
             </td>
-            <td >
-                <p class="s5" style="padding-right: 6pt;text-indent: 0pt;line-height: 10pt;text-align: right;">6.050.000
-                </p>
+            <td align="right" valign="top">
+                <p><?=number_format($header->grand_total)?></p>
+            </td>
+        </tr>
+        <tr style="height:12pt">
+            <td colspan="4" valign="top">
+            </td>
+            <td align="right" valign="top">
+                <p>DP : </p>
+            </td>
+            <td align="right" valign="top">
+                <p><?=number_format($header->uang_muka)?></p>
+            </td>
+        </tr>
+        <tr style="height:12pt">
+            <td colspan="4" valign="top">
+            </td>
+            <td align="right" valign="top">
+                <p>Tunai : </p>
+            </td>
+            <td align="right" valign="top">
+            </td>
+        </tr>
+        <tr style="height:12pt">
+            <td colspan="4" valign="top">
+            </td>
+            <td align="right" valign="top">
+                <p>Kredit : </p>
+            </td>
+            <td align="right" valign="top">
             </td>
         </tr>
     </table>
 </body>
+
 </html>

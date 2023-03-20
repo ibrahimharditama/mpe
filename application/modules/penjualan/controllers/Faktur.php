@@ -482,14 +482,21 @@ class Faktur extends MX_Controller {
 		echo json_encode($src->row());
 	}
 
-	public function tes()
+	public function cetak($id)
 	{
-		// $this->load->view('templates/print_tpl', array (
-		// 	'content' => 'nota',
-		// ));
 		$this->load->library('pdf');
-		$this->pdf->load_view('nota')->setPaper('a5', 'landscape');
+		$header = $this->db->query(
+			"SELECT a.*,b.* FROM faktur a JOIN pelanggan b ON a.id_pelanggan = b.id WHERE a.id = $id"
+		)->row();
+		$details = $this->db->query(
+			"SELECT a.*,b.* FROM faktur_detail a JOIN ref_produk b ON a.id_produk = b.id WHERE a.id_faktur = $id"
+		)->result();
+		$data = [
+			"header" => $header,
+			"detail" => $details
+		];
+		$this->pdf->load_view('nota',$data,"a5","landscape");
 		$this->pdf->render();
-		$this->pdf->stream("welcome.pdf");
+		$this->pdf->stream();
 	}
 }

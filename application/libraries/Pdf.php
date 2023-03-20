@@ -28,16 +28,11 @@ class Pdf extends Dompdf{
      * @param    array    $data The view data
      * @return    void
      */
-    public function load_view($view, $data = array()){
-        $this->set_paper("a4", 'landscape');
+    public function load_view($view, $data = array(),$ukuran,$orientasi){
+        $this->set_paper($ukuran, $orientasi);
         $html = $this->ci()->load->view($view, $data, TRUE);
-        // $html = $this->ci()->load->view('templates/print_tpl', array (
-		// 	'content' => $view,
-		// ));
         $this->load_html($html);
-        // Render the PDF
         $this->render();
-        // Output the generated PDF to Browser
         $this->stream($this->filename, array("Attachment" => false));
     }
 }
