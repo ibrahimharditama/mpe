@@ -73,7 +73,46 @@
                 </div>
             </div>
         </div>
+		
+		<div class="col-12 mt-3">
+			<h1 class="my-header">Produk Nota</h1>
+            <table class="table-cell table-item-nota">
+                <thead>
+                    <tr>
+                        <th width="320px">Produk</th>
+                        <th>Uraian</th>
+                        <th>Satuan</th>
+                        <th>Qty</th>
+                        <th colspan="2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <select class="select2 w-100 select-item-nota" name="nota[0][id]" data-placeholder="">
+                                <option value=""></option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="nota[0][uraian]" class="input-box input-nama"
+                                style="width:320px"></td>
+                        <td>
+                            <input type="hidden" name="nota[0][id_satuan]" class="input-id-satuan">
+                            <input type="text" name="nota[0][satuan]" class="input-box input-satuan"
+                                style="width:100px">
+                        </td>
+                        <td><input type="text" name="nota[0][qty]"
+                                class="input-box control-number input-count input-qty" style="width:50px"
+                                value="0"></td>
+                        <td align="center"><a href="#" class="btn btn-info btn-ico btn-row-add-nota">+</a></td>
+                        <td align="center"><a href="#" class="btn btn-danger btn-ico btn-row-del-nota"
+                                tabindex="-1">x</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
         <div class="col-12 mt-3">
+			<h1 class="my-header">Produk Pipa</h1>
             <table class="table-cell table-item">
                 <thead>
                     <tr>
@@ -128,6 +167,8 @@
     var i = 0;
     var first_load = 1;
     var _obj = [];
+	let produk_nota_list = [];
+	let is_ready = false;
 
     function add_row(el, data) {
         i++;
@@ -163,6 +204,48 @@
             $new_row.find('.input-qty').val(data.qty);
         } else {
             $new_row.find('.input-qty').val(1);
+        }
+    }
+
+	function add_row_nota(el, data) {
+        i++;
+
+        var $row = $(el).closest('tr');
+
+        $row.find('select.select2').select2('destroy');
+
+        var $new_row = $row.clone().insertAfter($row);
+
+        $('.select2').select2({
+            allowClear: true
+        });
+        $('input.control-number').number(true, 0, ',', '.');
+
+        // $new_row.find('.select2').val('').trigger('change');
+        $new_row.find('input[type=text]').val('');
+
+        $new_row.find('.select-item-nota').attr('name', 'nota[' + i + '][id]');
+        $new_row.find('.input-nama').attr('name', 'nota[' + i + '][uraian]');
+        $new_row.find('.input-id-satuan').attr('name', 'nota[' + i + '][id_satuan]');
+        $new_row.find('.input-satuan').attr('name', 'nota[' + i + '][satuan]');
+        $new_row.find('.input-harga-jual').attr('name', 'nota[' + i + '][harga_jual]');
+        $new_row.find('.input-qty').attr('name', 'nota[' + i + '][qty]');
+        $new_row.find('.input-diskon').attr('name', 'nota[' + i + '][diskon]');
+
+        if (data != null) {
+			console.log($new_row);
+			console.log($new_row.find('.select-item-nota').find('option')[0]);
+            $new_row.find('.select-item-nota').val(data.id_produk)//.trigger('change');
+            $new_row.find('.input-nama').val(data.uraian);
+            $new_row.find('.input-id-satuan').val(data.id_satuan);
+            $new_row.find('.input-satuan').val(data.satuan);
+            $new_row.find('.input-harga-jual').val(data.harga_satuan);
+            $new_row.find('.input-qty').val(data.qty);
+
+			$row.find('select.select2').select2('destroy');
+			$('.select2').select2({
+				allowClear: true
+			});
         }
     }
 
@@ -220,7 +303,16 @@
             $body.children().first().remove();
         }
 
-        count_total();
+		const nota = $('.table-item-nota tbody');
+		$.each(details_nota, function(i, o) {
+			console.log(o);
+            let last = nota.children().last();
+            add_row_nota(last, o);
+        });
+
+        if (details_nota.length > 0) {
+            nota.children().first().remove();
+        }
     }
 
     function load_pesanan() {
@@ -251,7 +343,10 @@
                 // $('[name=id_faktur]').data('placeholder', 'Pilih Pesanan').select2({ allowClear: true });
 
                 $('[name=id_faktur]').val(id_faktur).trigger('change');
-                id_faktur = '0';
+				is_ready = true;
+				load_produk_nota(id_faktur,init_details);
+
+				id_faktur = '0';
                 first_load = 0;
             }
         );
@@ -271,14 +366,73 @@
         );
     }
 
-    $().ready(function() {
+	async function load_produk_nota(id_nota,callback) {
+		try {
+			const targetUrl = site_url + "options/produk_nota/"+id_nota+"/1";
+			const result = await fetch(targetUrl, {
+				method: 'GET'
+			});
 
-        init_details();
-        load_pesanan();
+			result.json()
+				.then(
+					(result) => {
+						console.log(result);
+						produk_nota_list = result;
+						let options = [{
+							text:"",
+							id:""
+						}];
+						for (let index = 0; index < result.length; index++) {
+							const element = result[index];
+							
+							options.push({
+								text: element.nama,
+								id: element.id,
+							});
+						}
+
+						$(".select-item-nota").empty().select2({
+							data: options
+						});
+
+						console.log("before");
+						callback();
+						console.log("after");
+					},
+					(error) => {
+						console.log(error);
+						alert(error);
+					}
+				)
+
+		} catch(e) {
+			alert("Error on fetch :" + e);
+			console.log("error",e);
+		}
+	}
+
+    $().ready(function() {
         // load_faktur();
         $('.datepicker').Zebra_DatePicker({
             offset: [-203, 280]
         });
+
+		$("[name='id_faktur']").change(function(){
+			if(is_ready){
+				const val = $(this).val();
+
+				const body = $('.table-item-nota tbody');
+				body.children().not(':first').remove();
+
+				const first = body.children().first();
+				first.find('.select2').empty();
+				first.find('.select2').val('').trigger('change');
+				first.find('input[type=text]').val('');
+
+				if(val == "") return;
+				load_produk_nota(val);
+			}
+		});
 
         $(document).on('change', '[name=id_pelanggan]', function() {
             console.log("a");
@@ -290,14 +444,38 @@
             add_row(this, null);
         });
 
+		$(document).on('click', '.btn-row-add-nota', function(e) {
+            e.preventDefault();
+            add_row_nota(this, null);
+        });
+
         $(document).on('click', '.btn-row-del', function(e) {
             e.preventDefault();
 
-            var num_rows = $('.table-cell > tbody').find('tr').length;
+            var num_rows = $('.table-item > tbody').find('tr').length;
 
             var $row = $(this).closest('tr');
 
             if (num_rows == 1) {
+                $row.find('.select2').val('').trigger('change');
+                $row.find('input[type=text]').val('');
+            } else {
+                $row.remove();
+            }
+
+            count_total();
+        });
+
+		$(document).on('click', '.btn-row-del-nota', function(e) {
+            e.preventDefault();
+
+            var num_rows = $('.table-item-nota > tbody').find('tr').length;
+
+			console.log(num_rows);
+
+            var $row = $(this).closest('tr');
+
+            if (num_rows <= 1) {
                 $row.find('.select2').val('').trigger('change');
                 $row.find('input[type=text]').val('');
             } else {
@@ -321,6 +499,30 @@
             $row.find('.input-harga-jual').val(harga_jual);
         });
 
+		$(document).on('change', '.select-item-nota', function(e) {
+			const t = $(this);
+
+			let detail;
+			for (let index = 0; index < produk_nota_list.length; index++) {
+				const element = produk_nota_list[index];
+				
+				if(element.id == t.val()){
+					detail = element
+					break;
+				}
+			}
+
+			if(detail){
+				var $row = $(this).closest('tr');
+
+				$row.find('.input-nama').val(detail.nama);
+				$row.find('.input-id-satuan').val(detail.id_satuan);
+				$row.find('.input-satuan').val(detail.satuan);
+				$row.find('.input-harga-jual').val(detail.harga_jual);
+				$row.find('.input-qty').val(detail.qty);
+			}
+		});
+
         $(document).on('keyup', '.input-count', function(e) {
             count_total();
         });
@@ -332,6 +534,8 @@
             ajaxLoadPembayaran(site_url + 'penjualan/faktur/ajax-load-pembayaran', $("#id_faktur")
             .val());
         });
+
+		load_pesanan();
     });
 
     $(document).on('submit', 'form#frm-pembayaran', function(event) {

@@ -121,16 +121,29 @@ class Pengiriman extends MX_Controller {
 			->where('id_pengiriman', $id)
 			->get();
 		
+		$src_nota = $this->db
+			->from('pengiriman_detail_nota')
+			->where('row_status', 1)
+			->where('id_pengiriman', $id)
+			->get();
+		
 		header('Content-Type: text/javascript');
+		echo 'var details_nota = '.json_encode($src_nota->result()).';';
 		echo 'var details = '.json_encode($src->result()).';';
 	}
 	
 	public function insert()
 	{
+		$input = $this->input->post();
+		// echo '<pre>'; print_r($input);die(); // TODO debug
+
 		$list_produk = $this->input->post('produk');
+		$list_produk_nota = $this->input->post('nota');
 		
 		$detail = array();
+		$detail_nota = array();
 		$qty_pesan = 0;
+		$qty_nota = 0;
 		
 		foreach ($list_produk as $i => $produk) {
 			
@@ -150,7 +163,23 @@ class Pengiriman extends MX_Controller {
 			}
 		}
 
-		// echo '<pre>'; print_r($detail);die(); // TODO debug
+		foreach ($list_produk_nota as $i => $produk) {
+			
+			if ($produk['qty'] > 0) {
+				
+				$qty = $produk['qty'];
+				
+				$detail_nota[] = array (
+					'id_produk' => $produk['id'],
+					'uraian' => $produk['uraian'],
+					'id_satuan' => $produk['id_satuan'],
+					'satuan' => $produk['satuan'],
+					'qty' => $qty,
+				);
+				
+				$qty_nota += $qty;
+			}
+		}
 		
 		if (count($detail) > 0) {
 			$key = array('tgl', 'id_pelanggan','id_faktur','alamat', 'keterangan');
@@ -159,6 +188,7 @@ class Pengiriman extends MX_Controller {
 			$data['no_transaksi'] = new_number_pengiriman($data['id_faktur']);
 			$data['created_by'] = user_session('id');
 			$data['qty_pesan'] = $qty_pesan;
+			$data['qty_nota'] = $qty_nota;
 			
 			$this->db->insert('pengiriman', $data);
 			$id_pengiriman = $this->db->insert_id();
@@ -166,8 +196,13 @@ class Pengiriman extends MX_Controller {
 			foreach ($detail as $i => $d) {
 				$detail[$i]['id_pengiriman'] = $id_pengiriman;
 			}
+
+			foreach ($detail_nota as $i => $d) {
+				$detail_nota[$i]['id_pengiriman'] = $id_pengiriman;
+			}
 			
 			$this->db->insert_batch('pengiriman_detail', $detail);
+			$this->db->insert_batch('pengiriman_detail_nota', $detail_nota);
 		}
 		
 		redirect(site_url('penjualan/pengiriman'));
@@ -177,9 +212,12 @@ class Pengiriman extends MX_Controller {
 	{
 		$id_pengiriman = $this->input->post('id');
 		$list_produk = $this->input->post('produk');
+		$list_produk_nota = $this->input->post('nota');
 		
 		$detail = array();
+		$detail_nota = array();
 		$qty_pesan = 0;
+		$qty_nota = 0;
 		
 		foreach ($list_produk as $i => $produk) {
 			
@@ -199,6 +237,25 @@ class Pengiriman extends MX_Controller {
 				$qty_pesan += $qty;
 			}
 		}
+
+		foreach ($list_produk_nota as $i => $produk) {
+			
+			if ($produk['qty'] > 0) {
+				
+				$qty = $produk['qty'];
+				
+				$detail_nota[] = array (
+					'id_pengiriman' => $id_pengiriman,
+					'id_produk' => $produk['id'],
+					'uraian' => $produk['uraian'],
+					'id_satuan' => $produk['id_satuan'],
+					'satuan' => $produk['satuan'],
+					'qty' => $qty,
+				);
+				
+				$qty_nota += $qty;
+			}
+		}
 		
 		if (count($detail) > 0) {
 			$key = array('tgl', 'id_pelanggan','id_faktur','alamat', 'keterangan');
@@ -206,11 +263,15 @@ class Pengiriman extends MX_Controller {
 			
 			$data['updated_by'] = user_session('id');
 			$data['qty_pesan'] = $qty_pesan;
+			$data['qty_nota'] = $qty_nota;
 			
 			$this->db->update('pengiriman', $data, array('id' => $id_pengiriman));
 			
 			$this->db->delete('pengiriman_detail', array('id_pengiriman' => $id_pengiriman));
+			$this->db->delete('pengiriman_detail_nota', array('id_pengiriman' => $id_pengiriman));
 			$this->db->insert_batch('pengiriman_detail', $detail);
+			$this->db->insert_batch('pengiriman_detail_nota', $detail_nota);
+			
 		}
 		
 		redirect(site_url('penjualan/pengiriman'));
