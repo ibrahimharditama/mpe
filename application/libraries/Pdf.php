@@ -28,11 +28,11 @@ class Pdf extends Dompdf{
      * @param    array    $data The view data
      * @return    void
      */
-    public function load_view($view, $data = array(),$ukuran,$orientasi){
+    public function load_view($view, $data = array(),$ukuran,$orientasi,$filename){
         $this->set_paper($ukuran, $orientasi);
         $html = $this->ci()->load->view($view, $data, TRUE);
         $this->load_html($html);
         $this->render();
-        $this->stream($this->filename, array("Attachment" => false));
+        $this->stream($filename, array("Attachment" => false));
     }
 }
