@@ -1,7 +1,7 @@
 <h1 class="my-header">Pengembalian Pipa</h1>
 
 <div class="row m-0">
-	<div class="col-9">
+	<div class="col-12">
         <?php if ($this->session->flashdata('post_status') == 'ok'): ?>
             <div class="alert alert-success">Data berhasil disimpan.</div>
         <?php endif; ?>
