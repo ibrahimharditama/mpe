@@ -491,12 +491,15 @@ class Faktur extends MX_Controller {
 		$details = $this->db->query(
 			"SELECT a.*,b.* FROM faktur_detail a JOIN ref_produk b ON a.id_produk = b.id WHERE a.id_faktur = $id"
 		)->result();
+		$bank = $this->db->query(
+			"SELECT a.* FROM rekening a WHERE a.is_use = '1'"
+		)->row();
+
 		$data = [
 			"header" => $header,
-			"detail" => $details
+			"detail" => $details,
+			"bank" => $bank
 		];
-		$this->pdf->load_view('nota',$data,"a5","landscape");
-		$this->pdf->render();
-		$this->pdf->stream();
+		$this->pdf->load_view('nota',$data,"a5","landscape",$header->no_transaksi.".pdf");
 	}
 }

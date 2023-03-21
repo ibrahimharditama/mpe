@@ -1,188 +1,200 @@
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ms" lang="ms">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style type="text/css">
-    @page {
-        margin: 0px;
-    }
+        @page {
+            margin: 0px;
+        }
+        body {
+            font-family: Verdana, Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 
+            margin: 0px;
+            padding-top: 0.18cm;
+            padding-right: 0.88cm;
+            padding-bottom: 0.49cm;
+            padding-left: 0.46cm;
+        }
 
-    body {
-        margin: 0px;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    p {
-        padding: 0px;
-        margin-bottom: 0rem;
-        margin-top: 0rem;
-        font-size: 12px
-    }
+        .t-left {
+            text-align: left;
+        }
 
-    h1 {
-        font-size: 20px;
-        font-weight: normal;
-        margin-top: 0rem;
-        margin-bottom: 0rem;
-    }
+        .t-center {
+            text-align: center;
+        }
 
-    h2 {
-        font-size: 18px;
-        margin-top: 0rem;
-        margin-bottom: 0rem;
-        font-weight: bold;
-    }
+        .t-right {
+            text-align: right;
+        }
 
-    h3 {
-        display: block;
-        font-size: 16px;
-        margin-top: 0rem;
-        margin-bottom: 0rem;
-        font-weight: bold;
-    }
+        .fw-bold {
+            font-weight: bold;
+        }
+
+        .fw-400 {
+            font-weight: 400;
+        }
+
+        .f-size-16 {
+            font-size: 16pt;
+        }
+
+        .f-size-15-s {
+            font-size: 15.5pt;
+        }
+
+        .f-size-12 {
+            font-size: 12pt;
+        }
+
+        .f-size-10 {
+            font-size: 10pt;
+        }
+
+        .f-size-9 {
+            font-size: 9pt;
+        }
+
+        .f-size-8-s {
+            font-size: 8.5pt;
+        }
+
+        .f-size-8 {
+            font-size: 8pt;
+        }
+
+        table>tbody>tr.table-header>td {
+            border-bottom: 4px double black;
+            border-top: 1px solid black;
+            font-size: 9pt;
+            font-weight: bold;
+        }
+
+        .table-body>td {
+            font-size: 9pt;
+            font-weight: 400;
+        }
+
     </style>
 </head>
 
-<body style="padding:10px">
-    <table style="width:100%">
-        <tr>
-            <td>
-                <h2>Makmur Permai</h2>
-                <p>Boulevard Timur Blok NE1 No. 40</p>
-                <p>Telp:453.0095 4584.2138 4584.2139</p>
-                <p>Fax: 453.0093</p>
-            </td>
-            <td align="center">
-                <h1>FAKTUR PENJUALAN</h1>
-                <h3>Nota : <?=$header->no_transaksi?></h3>
-            </td>
-            <td valign="bottom">
-                <p>Jakarta, 10/03/2023 12:47:20</p>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2"></td>
-            <td>
-                <p>Kepada Yth:</p>
-                <p><?=$header->nama?></p>
-                <p><?=$header->alamat?></p>
-                <p><?=$header->no_telp?></p>
-            </td>
-        </tr>
-    </table>
-    <table style="border-collapse:collapse;width:100%;margin-top:10px" cellspacing="0">
-        <tr style="height:16pt">
-            <td style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p>No.</p>
-            </td>
-            <td style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p>Nama Item
-                </p>
-            </td>
-            <td align="center"
-                style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p>Jml Satuan
-                </p>
-            </td>
-            <td align="center"
-                style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p>Harga</p>
-            </td>
-            <td align="center"
-                style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p>Pot</p>
-            </td>
-            <td align="center"
-                style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p>Total</p>
-            </td>
-        </tr>
-        <?php $no=1;foreach($detail as $dtDetail):?>
-        <tr style="height:12pt">
-            <td width="5%">
-                <p><?= $no++;?></p>
-            </td>
-            <td width="35%">
-                <p><?=$dtDetail->nama?></p>
-            </td>
-            <td align="center" width="10%">
-                <p><?=$dtDetail->qty?> <?=$dtDetail->satuan?></p>
-            </td>
-            <td align="right" width="10%">
-                <p><?=number_format($dtDetail->harga_satuan)?></p>
-            </td>
-            <td align="right" width="10%">
-                <p><?=$dtDetail->diskon?></p>
-            </td>
-            <td align="right" width="10%">
-                <p><?=number_format($dtDetail->qty*$dtDetail->harga_satuan)?></p>
-            </td>
-        </tr>
-        <?php endforeach;?>
-        <tr style="height:12pt">
-            <td colspan="3" valign="top">
-                <p>Jatuh Tempo : 10/03/2023</p>
-            </td>
-            <td width="10%" valign="top">
-                <p>Biaya Lain :</p>
-            </td>
-            <td align="right" valign="top">
-                <p>Sub Total : </p>
-            </td>
-            <td align="right" valign="top">
-                <p><?=number_format($header->total)?></p>
-            </td>
-        </tr>
-        <tr style="height:12pt">
-            <td colspan="4" valign="top">
-                <p>tujuh belas juta tujuh ratus ribu rupiah</p>
-            </td>
-            <td align="right" valign="top">
-                <p>Potongan : </p>
-            </td>
-            <td align="right" valign="top">
-                <p><?=number_format($header->diskon_faktur)?></p>
-            </td>
-        </tr>
-        <tr style="height:12pt">
-            <td colspan="4" valign="top">
-            </td>
-            <td align="right" valign="top">
-                <p>Total Akhir : </p>
-            </td>
-            <td align="right" valign="top">
-                <p><?=number_format($header->grand_total)?></p>
-            </td>
-        </tr>
-        <tr style="height:12pt">
-            <td colspan="4" valign="top">
-            </td>
-            <td align="right" valign="top">
-                <p>DP : </p>
-            </td>
-            <td align="right" valign="top">
-                <p><?=number_format($header->uang_muka)?></p>
-            </td>
-        </tr>
-        <tr style="height:12pt">
-            <td colspan="4" valign="top">
-            </td>
-            <td align="right" valign="top">
-                <p>Tunai : </p>
-            </td>
-            <td align="right" valign="top">
-            </td>
-        </tr>
-        <tr style="height:12pt">
-            <td colspan="4" valign="top">
-            </td>
-            <td align="right" valign="top">
-                <p>Kredit : </p>
-            </td>
-            <td align="right" valign="top">
-            </td>
-        </tr>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th class="t-left" colspan="2" rowspan="2">
+                    <br><span class="fw-bold f-size-15-s">Makmur Permai</span>
+                    <br><span class="fw-400 f-trebuchet f-size-8-s">Boulevard Timur Blok NE1 No. 40
+                    <br>Telp:453.0095 4584.2138 4584.2139
+                    <br>Fax: 453.0093
+                </th>
+                <th colspan="2">
+                    <span class="fw-bold f-arial f-size-16">Faktur Penjualan</span>
+                    <br><span class="fw-bold f-arial f-size-12">Nota: <?=$header->no_transaksi?></span>
+                </th>
+                <th class="t-right" colspan="4">
+                    <br><span class="fw-bold f-arial f-size-10">Jakarta,</span> <span class="fw-400 f-size-9"><?=date("d-m-Y",strtotime($header->tgl))?></span>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="6"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="3"></td>
+                <td class="fw-bold f-arial f-size-9" colspan="5">
+                    <span class="fw-bold f-arial f-size-9">Kepada YTH: <span class="fw-400 f-size-9"><?=$header->nama?></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td class="fw-400 f-size-9" colspan="5">J<?=$header->alamat?> <br> <?=$header->no_telp?></td>
+            </tr>
+            <tr>
+                <td colspan="8"></td>
+            </tr>
+            <tr class="table-header">
+                <td width="30px">No.</td>
+                <td colspan="2" width="550px">Nama Item</td>
+                <td class="t-center">Jml Satuan</td>
+                <td class="t-right">Harga</td>
+                <td class="t-right">Pot</td>
+                <td class="t-center" colspan="2">Total</td>
+            </tr>
+            <?php $no=1;foreach($detail as $dtDetail):?>
+            <tr class="table-body">
+                <td><?= $no++;?></td>
+                <td colspan="2"><?=$dtDetail->nama?></td>
+                <td class="t-center"><?=$dtDetail->qty?> <?=$dtDetail->satuan?></td>
+                <td class="t-right"><?=number_format($dtDetail->harga_satuan)?></td>
+                <td class="t-right"><?=$dtDetail->diskon?></td>
+                <td class="t-right" colspan="2"><?=number_format($dtDetail->qty*$dtDetail->harga_satuan)?></td>
+            </tr>
+            <?php endforeach;?>
+            <tr style="border-bottom: 1px solid black;">
+                <td colspan="8"><br><br><br></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <span class="f-size-10 fw-bold">Jatuh Tempo :</span> <span class="f-size-10 fw-bold f-arial"><?=date("d-m-Y",strtotime($header->tgl))?></span>
+                </td>
+                <td class="t-right f-size-9 fw-400">Biaya Lain :</td>
+                <td class="t-right f-size-9 fw-400" style="padding-right: 10px;">0</td>
+                <td class="f-size-9 fw-400">Sub Total </td>
+                <td class="f-size-9 fw-400">:</td>
+                <td class="t-right f-size-9 fw-400"><?=number_format($header->total)?></td>
+            </tr>
+            <tr>
+                <td class="f-size-8 fw-400" colspan="5"><?=terbilang($header->grand_total)?></td>
+                <td class="f-size-9 fw-400">Potongan</td>
+                <td class="f-size-9 fw-400">:</td>
+                <td class="t-right f-size-9 fw-400"><?=number_format($header->diskon_faktur)?></td>
+            </tr>
+            <tr>
+                <td colspan="5"></td>
+                <td class="f-size-9 fw-400">Total Akhir</td>
+                <td class="f-size-9 fw-400">:</td>
+                <td class="t-right f-size-9 fw-400"><?=number_format($header->grand_total)?></td>
+            </tr>
+            <tr>
+                <td colspan="5"></td>
+                <td class="f-size-9 fw-400">DP</td>
+                <td class="f-size-9 fw-400">:</td>
+                <td class="t-right f-size-9 fw-400"><?=number_format($header->uang_muka)?></td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td class="t-center f-size-10 fw-400" rowspan="2" style="border: 1px solid black;">NO REK BCA: <?=$bank->bank?><br>ATN: <?=$bank->nama?></td>
+                <td colspan="2"></td>
+                <td class="f-size-9 fw-400">Tunai</td>
+                <td class="f-size-9 fw-400">:</td>
+                <td class="t-right f-size-9 fw-400">0</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="t-center fw-bold f-size-9">Penerima</td>
+                <td class="t-center fw-bold f-size-9">Hormat Kami</td>
+                <td></td>
+                <td class="f-size-9 fw-400">Kredit</td>
+                <td class="f-size-9 fw-400">:</td>
+                <td class="t-right f-size-9 fw-400">0</td>
+            </tr>
+            <tr>
+                <td class="tg-0pky" colspan="8"><br></td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+                <td class="t-center f-size-8 fw-400"  style="border: 1px solid black !important;">Barang telah diterima dengan baik.<br>Barang yang sudah dibeli tidak bisa<br>ditukar atau dikembalikan.</td>
+                <td colspan="5"></td>
+            </tr>
+        </tbody>
     </table>
 </body>
 
