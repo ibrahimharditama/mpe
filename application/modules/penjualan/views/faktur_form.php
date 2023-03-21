@@ -214,10 +214,11 @@
 							</div>
 							<div class="form-group">
 								<label>Nominal</label>
-								<input type="text" class="form-control input-bayar control-number" name="nominal_pembayaran" id="nominal_pembayaran">
+								<input type="text" class="form-control input-bayar control-number" name="nominal_pembayaran" id="nominal_pembayaran" value="0">
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn btn-primary btn-block">Simpan Pembayaran</button>
+								<button type="button" class="btn btn-outline-secondary btn-block btn-cancel-upd-pay" style="display: none;" onclick="resetModalPayment()">Batalkan Perubahan</button>
 							</div>
 						</form>
 					</div>
@@ -232,6 +233,20 @@
 var i = 0;
 var first_load = 1;
 var _obj = [];
+var modalPayment = $("#exampleModal");
+
+$("#exampleModal").on('hidden.bs.modal', function () {
+	resetModalPayment()
+})
+
+function resetModalPayment() {
+	modalPayment.find('#id_pembayaran').val('');
+	modalPayment.find('#no_pembayaran').val('');
+	modalPayment.find('#tgl_pembayaran').val(moment().format("YYYY-MM-DD"));
+	modalPayment.find('#rek_pembayaran').val('').trigger('change');
+	modalPayment.find('#nominal_pembayaran').val('');
+	modalPayment.find('.btn-cancel-upd-pay').hide();
+}
 
 function add_row(el, data)
 {
@@ -483,6 +498,7 @@ $(document).on('submit', 'form#frm-pembayaran', function (event) {
 		success: function (data) {
 			showAlert({message: data.message, class:data.type});
 			ajaxLoadPembayaran(site_url+'penjualan/faktur/ajax-load-pembayaran',$("#id_faktur").val());
+			resetModalPayment();
 		},
 		error: function (xhr, textStatus, errorThrown) {
 			alert("Error: " + errorThrown);
@@ -554,6 +570,7 @@ function editTr(obj){
 	$("#tgl_pembayaran").val($row.find('span[id="tgl_byr"]').text());
 	$("#rek_pembayaran").select2("val",$row.find('input[id="rek_byr"]').val());
 	$("#nominal_pembayaran").val($row.find('input[id="nominal_byr"]').val());
+	modalPayment.find('.btn-cancel-upd-pay').show();
 }
 
 function showAlert(obj){
@@ -561,7 +578,10 @@ function showAlert(obj){
         '   <strong>' + obj.message + '</strong>'+
         '      <img class="float-right" data-dismiss="alert" aria-label="Close" src="<?php echo base_url(); ?>assets/img/del.png">'+
         '   </div>';
-    $('#alert-pembayaran').append(html);
+	$('#alert-pembayaran').html(html);
+	$("#alert-pembayaran").fadeTo(3000, 300).slideUp(300, function(){
+		$("#alert-pembayaran").slideUp(300);
+	});
 }
 
 </script>

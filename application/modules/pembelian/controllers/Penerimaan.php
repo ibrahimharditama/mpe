@@ -426,8 +426,8 @@ class Penerimaan extends MX_Controller {
 		$data['created_by'] = user_session('id');
 		$res = [];
 		if($id_pembayaran !== ""){
-			var_dump($id_pembayaran);
-			exit();
+			// var_dump($id_pembayaran);
+			// exit();
 			$result = $this->db->update('pembayaran_beli', $data, array('id' => $id_pembayaran));
 			if($result){
 				$res = [
