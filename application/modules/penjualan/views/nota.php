@@ -8,98 +8,97 @@
     @page {
         margin: 0px;
     }
-
-    body {
-        margin: 0px;
-    }
+	
+	body{
+		margin: 0px;
+		font-family: Verdana, Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 
+        font-size: 12px		
+	}
 
     p {
         padding: 0px;
         margin-bottom: 0rem;
         margin-top: 0rem;
-        font-size: 12px
     }
 
     h1 {
-        font-size: 20px;
-        font-weight: normal;
+        font-size: 24px;
         margin-top: 0rem;
         margin-bottom: 0rem;
     }
 
     h2 {
-        font-size: 18px;
+        font-size: 20px;
         margin-top: 0rem;
         margin-bottom: 0rem;
-        font-weight: bold;
     }
 
     h3 {
-        display: block;
         font-size: 16px;
         margin-top: 0rem;
         margin-bottom: 0rem;
-        font-weight: bold;
     }
+	
+	.bold{
+        font-weight: bold;
+	}
     </style>
 </head>
 
 <body style="padding:10px">
     <table style="width:100%">
         <tr>
-            <td>
+            <td valign="top" width="30%">
                 <h2>Makmur Permai</h2>
                 <p>Boulevard Timur Blok NE1 No. 40</p>
                 <p>Telp:453.0095 4584.2138 4584.2139</p>
                 <p>Fax: 453.0093</p>
             </td>
-            <td align="center">
+            <td  valign="top" align="center" width="40%">
                 <h1>FAKTUR PENJUALAN</h1>
                 <h3>Nota : <?=$header->no_transaksi?></h3>
             </td>
-            <td valign="bottom">
-                <p>Jakarta, 10/03/2023 12:47:20</p>
+            <td valign="bottom"  width="30%">
+                <span class="bold">Jakarta, </span><span><?=date("d-m-Y",strtotime($header->tgl))?></span>
             </td>
         </tr>
         <tr>
             <td colspan="2"></td>
             <td>
-                <p>Kepada Yth:</p>
+                <p class="bold">Kepada Yth:</p>
                 <p><?=$header->nama?></p>
                 <p><?=$header->alamat?></p>
                 <p><?=$header->no_telp?></p>
             </td>
         </tr>
     </table>
-    <table style="border-collapse:collapse;width:100%;margin-top:10px" cellspacing="0">
-        <tr style="height:16pt">
+    <table style="border-collapse:collapse;width:100%;margin-top:10px;" cellspacing="0">
+        <tr>
             <td style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p>No.</p>
+                <p class="bold">No.</p>
             </td>
             <td style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p>Nama Item
-                </p>
+                <p class="bold">Nama Item</p>
             </td>
             <td align="center"
                 style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p>Jml Satuan
-                </p>
+                <p class="bold">Jml Satuan</p>
             </td>
             <td align="center"
                 style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p>Harga</p>
+                <p class="bold">Harga</p>
             </td>
             <td align="center"
                 style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p>Pot</p>
+                <p class="bold">Pot</p>
             </td>
             <td align="center"
                 style="border-top-style:solid;border-top-width:1pt;border-bottom-style:solid;border-bottom-width:1pt">
-                <p>Total</p>
+                <p class="bold">Total</p>
             </td>
         </tr>
         <?php $no=1;foreach($detail as $dtDetail):?>
-        <tr style="height:12pt">
+        <tr>
             <td width="5%">
                 <p><?= $no++;?></p>
             </td>
@@ -119,10 +118,13 @@
                 <p><?=number_format($dtDetail->qty*$dtDetail->harga_satuan)?></p>
             </td>
         </tr>
+		<tr>
+		<td style="height:20pt" colspan="6"></td>
+		</tr>
         <?php endforeach;?>
         <tr style="height:12pt">
             <td colspan="3" valign="top">
-                <p>Jatuh Tempo : 10/03/2023</p>
+                <p class="bold">Jatuh Tempo : </p>
             </td>
             <td width="10%" valign="top">
                 <p>Biaya Lain :</p>
