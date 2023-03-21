@@ -109,20 +109,23 @@
         <tbody>
             <tr>
                 <td colspan="3"></td>
-                <td class="fw-bold f-arial f-size-9" colspan="5">
-                    <span class="fw-bold f-arial f-size-9">Kepada YTH: <span class="fw-400 f-size-9"><?=$header->nama?></span>
+                <td class="fw-bold f-arial f-size-9" style="vertical-align: top;">Kepada YTH :</td>
+                <td class="fw-400 f-verdana f-size-9" colspan="3">
+                    <span class="fw-400 f-verdana f-size-9"><?=$header->nama?>
                 </td>
+                <td></td>
             </tr>
             <tr>
                 <td colspan="3"></td>
-                <td class="fw-400 f-size-9" colspan="5">J<?=$header->alamat?> <br> <?=$header->no_telp?></td>
+                <td class="fw-400 f-verdana f-size-9" colspan="4"><?=$header->alamat?> <br> <?=$header->no_telp?></td>
+                <td></td>
             </tr>
             <tr>
                 <td colspan="8"></td>
             </tr>
             <tr class="table-header">
                 <td width="30px">No.</td>
-                <td colspan="2" width="550px">Nama Item</td>
+                <td colspan="2" width="390px">Nama Item</td>
                 <td class="t-center">Jml Satuan</td>
                 <td class="t-right">Harga</td>
                 <td class="t-right">Pot</td>
@@ -139,7 +142,14 @@
             </tr>
             <?php endforeach;?>
             <tr style="border-bottom: 1px solid black;">
-                <td colspan="8"><br><br><br></td>
+                <td colspan="8">
+                    <?php 
+                        $totalData = count($detail); 
+                        if($totalData < 5) echo '<br>';
+                        if($totalData <= 3) echo '<br>';
+                        if($totalData <= 1) echo '<br>';
+                    ?>
+                </td>
             </tr>
             <tr>
                 <td colspan="3">
@@ -179,12 +189,11 @@
             </tr>
             <tr>
                 <td></td>
-                <td class="t-center fw-bold f-size-9">Penerima</td>
-                <td class="t-center fw-bold f-size-9">Hormat Kami</td>
-                <td></td>
-                <td class="f-size-9 fw-400">Kredit</td>
-                <td class="f-size-9 fw-400">:</td>
-                <td class="t-right f-size-9 fw-400">0</td>
+                <td class="t-center fw-bold f-verdana f-size-10" >Penerima</td>
+                <td class="t-center fw-bold f-verdana f-size-10" colspan="2">Hormat Kami</td>
+                <td class="f-size-9 fw-400 f-verdana">Kredit</td>
+                <td class="f-size-9 fw-400 f-verdana">:</td>
+                <td class="t-right f-size-9 fw-400 f-verdana">0</td>
             </tr>
             <tr>
                 <td class="tg-0pky" colspan="8"><br></td>
