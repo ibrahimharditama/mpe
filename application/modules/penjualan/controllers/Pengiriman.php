@@ -292,4 +292,25 @@ class Pengiriman extends MX_Controller {
 		header('Content-Type: application/json');
 		echo json_encode($src->result());
 	}
+
+	public function cetak($id)
+	{
+		$this->load->library('pdf');
+		$header = $this->db->query(
+			"SELECT a.*,b.* FROM pengiriman a JOIN pelanggan b ON a.id_pelanggan = b.id WHERE a.id = $id"
+		)->row();
+		$details = $this->db->query(
+			"SELECT a.*,b.* FROM pengiriman_detail a JOIN ref_produk b ON a.id_produk = b.id WHERE a.id_pengiriman = $id"
+		)->result();
+		$details_nota = $this->db->query(
+			"SELECT a.*,b.* FROM pengiriman_detail_nota a JOIN ref_produk b ON a.id_produk = b.id WHERE a.id_pengiriman = $id"
+		)->result();
+		$data = [
+			"header" => $header,
+			"detail" => array_merge($details,$details_nota)
+		];
+		$this->pdf->load_view('pengiriman',$data,"a5","landscape");
+		$this->pdf->render();
+		$this->pdf->stream();
+	}
 }

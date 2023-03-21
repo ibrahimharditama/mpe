@@ -6,6 +6,7 @@
 			<thead>	
 				<tr>
 					<th width="5px">No.</th>
+					<th width="5px"></th>
 					<th>No. Transaksi</th>
 					<th>Tgl.</th>
 					<th>Pelanggan</th>
@@ -39,6 +40,14 @@ function init_datatable()
 		'fixedHeader': true,
 		'columns': [
 			{ data: 'nomor', orderable: false },
+			
+			{
+                orderable: false,
+                render: function(data, type, row, meta) {
+                    return '<a href="' + site_url + 'penjualan/pengiriman/cetak/' + row.id +
+                        '"><img src="<?php echo base_url(); ?>assets/img/printer.png"></a>';
+                }
+            },
 			{
 				data: 'no_transaksi',
 				render: function (data, type, row, meta) {
