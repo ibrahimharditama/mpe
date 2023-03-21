@@ -183,4 +183,11 @@ class Rekening extends MX_Controller {
 		redirect(site_url('master/rekening'));
 	}
 
+	public function is_rekening_faktur($id)
+	{
+		$this->db->update('rekening', ['is_use' => 0], ['is_use' => 1]);
+		db_update('rekening', ['is_use' => 1], ['id' => $id]);
+		redirect(site_url('master/rekening'));
+	}
+
 }

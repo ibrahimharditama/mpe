@@ -1,14 +1,27 @@
+<style>
+    .btn-circle {
+        width: 16px;
+        height: 16px;
+        padding: 1px 0px;
+        border-radius: 15px;
+        font-size: 10px;
+        text-align: center;
+    }
+</style>
+
 <h1 class="my-header">Daftar Rekening</h1>
 
 <div class="row m-0">
-    <div class="col-12">
+    <div class="col-8">
         <table class="cell-border stripe order-column hover" id="datatable">
             <thead>
                 <tr>
                     <th width="5px">No.</th>
-                    <th width="5px"></th>
+                    <th width="40px"></th>
                     <th>Bank</th>
-                    <th>No Rekening</th>
+                    <th>No Rekening</th> 
+                    <th>Atas Nama</th>
+                    <th>Rekening Faktur?</th>
                     <th>Yg Buat</th>
                     <th>Yg Ubah</th>
                 </tr>
@@ -45,7 +58,9 @@ function init_datatable() {
                 orderable: false,
                 render: function(data, type, row, meta) {
                     return '<a href="' + site_url + 'master/rekening/hapus/' + row.id +
-                        '"><img src="<?php echo base_url(); ?>assets/img/del.png"></a>';
+                        '"><img src="<?php echo base_url(); ?>assets/img/del.png"></a>&nbsp;'+
+                        '<a href="' + site_url + 'master/rekening/is_rekening_faktur/' + row.id +
+                        '" class="btn btn-primary btn-circle btn-circle"><i class="ti-thumb-up"></i></a>';
                 }
             },
             {
@@ -56,6 +71,16 @@ function init_datatable() {
                 render: function(data, type, row, meta) {
                     return '<a href="' + site_url + 'master/rekening/ubah/' + row.id + '">' + data +
                         '</a>';
+                }
+            },
+            {
+                data: 'nama'
+            },
+            {
+                data: 'is_use',
+                "class": 'dt-body-center',
+                render: function(data, type, row, meta) {
+                    return data == 1 ? '<i class="ti-check"></i>' : '';
                 }
             },
             {
