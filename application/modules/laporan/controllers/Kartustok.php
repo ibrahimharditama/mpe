@@ -96,8 +96,8 @@ class Kartustok extends MX_Controller {
                 'tgl' => $row->tgl,
                 'dept' => $row->dept,
                 'keterangan' => ucwords(str_replace('_', ' ', $row->keterangan)),
-                'masuk' => number_format((int)$row->masuk, 0, "," ,"."),
-                'keluar' => number_format((int)$row->keluar, 0, "," ,"."),
+                'masuk' => $row->keterangan != 'Saldo Awal' ? number_format((int)$row->masuk, 0, "," ,".") : '',
+                'keluar' => $row->keterangan != 'Saldo Awal' ? number_format((int)$row->keluar, 0, "," ,".") : '',
                 'saldo' => number_format((int)$total, 0, "," ,"."),
             );
         }
