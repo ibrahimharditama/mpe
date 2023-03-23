@@ -309,7 +309,7 @@ class Pengiriman extends MX_Controller {
 			"header" => $header,
 			"detail" => array_merge($details,$details_nota)
 		];
-		$this->pdf->load_view('pengiriman',$data,"a5","landscape");
+		$this->pdf->load_view('pengiriman',$data,"a5","landscape",$header->no_transaksi.".pdf");
 		$this->pdf->render();
 		$this->pdf->stream();
 	}
