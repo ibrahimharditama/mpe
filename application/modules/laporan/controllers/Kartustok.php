@@ -65,7 +65,8 @@ class Kartustok extends MX_Controller {
                                     WHERE p.row_status = 1 
                                     ORDER BY p.id_tipe, p.nama
                                 ) a 
-                                WHERE stokawal != 0 OR stokin != 0 OR stokout != 0 OR stokakhir != 0")->result_array();
+                                WHERE stokawal != 0 OR stokin != 0 OR stokout != 0 OR stokakhir != 0 
+                                ORDER BY nama")->result_array();
 
         
 

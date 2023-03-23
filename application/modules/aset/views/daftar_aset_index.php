@@ -6,12 +6,12 @@
 			<thead>	
 				<tr>
 					<th width="5px">No.</th>
-					<th>Nama Pegawai</th>
 					<th>Nama Unit</th>
 					<th>Model</th>
 					<th>Tgl. Perolehan</th>
                     <th>Usia Aset</th>
                     <th>Periode Maintenance</th>
+                    <th>Nama Pegawai</th>
                     <th>Tgl. Perawatan Terakhir</th>
                     <th>Waktu Maintenance</th>
 				</tr>
@@ -51,10 +51,7 @@
                 "render": function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
                 }
-            },
-            {
-                "data": "pegawai"
-            },
+            },            
             {
                 "data": "nama"
             },
@@ -74,6 +71,9 @@
             },
             {
                 "data": "periode_maintenance"
+            },
+            {
+                "data": "pegawai"
             },
             {
                 "data": "tgl_maintenance"

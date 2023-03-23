@@ -1,7 +1,7 @@
 <h1 class="my-header">Maintenance Asset</h1>
 
 <div class="row m-0">
-	<div class="col-6">
+	<div class="col-8">
 		<table class="cell-border stripe order-column hover" id="datatable">
 			<thead>	
 				<tr>
@@ -9,6 +9,7 @@
 					<th width="5px">No.</th>
 					<th>Nama Unit</th>
 					<th>Model</th>
+                    <th>Pegawai</th>
                     <th>Tgl. Perawatan</th>
                     <th>Keterangan</th>
 				</tr>
@@ -83,7 +84,7 @@
             }
         },
         serverSide: true,
-        order: [4, 'desc'],
+        order: [5, 'desc'],
         language: {
             searchPlaceholder: 'Search...',
             sSearch: '',
@@ -121,6 +122,9 @@
             },
             {
                 "data": "model"
+            },
+            {
+                "data": "pegawai"
             },
             {
                 "data": "tgl_maintenance"

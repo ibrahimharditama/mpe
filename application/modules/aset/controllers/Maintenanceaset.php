@@ -19,11 +19,12 @@ class Maintenanceaset extends MX_Controller {
 
     public function datatable()
 	{
-		$this->datatables->select("id, id_asset, nama, model, tgl_maintenance, keterangan")
-                    ->from("(SELECT am.id, am.id_asset, a.nama, a.model, am.tgl_maintenance, am.keterangan
+		$this->datatables->select("id, id_asset, nama, model, tgl_maintenance, keterangan, pegawai")
+                    ->from("(SELECT am.id, am.id_asset, a.nama, a.model, am.tgl_maintenance, am.keterangan, p.nama AS pegawai
                             FROM asset_maintenance am 
                             JOIN asset a ON a.id = am.id_asset AND a.row_status = 1 
-                            WHERE am.row_status = 1 ) a");
+							JOIN pengguna p ON p.id = a.id_pegawai
+                            WHERE am.row_status = 1 ) x");
 
         $result = json_decode($this->datatables->generate());
 

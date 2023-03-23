@@ -23,6 +23,7 @@ class Hutang extends MX_Controller {
                                     f.id_pelanggan, 
                                     plg.kode AS kode_pelanggan, 
                                     plg.nama AS pelanggan,
+                                    plg.alamat AS alamat_plg,
                                     f.no_transaksi, 
                                     f.grand_total AS total,
                                     IFNULL(x.total_bayar, 0) AS bayar, 
@@ -35,7 +36,8 @@ class Hutang extends MX_Controller {
                                     WHERE row_status = 1
                                     GROUP BY id_faktur
                                 ) x ON x.id_faktur = f.id
-                                WHERE f.row_status = 1 ")->result_array();
+                                WHERE f.row_status = 1 
+                                ORDER BY plg.nama")->result_array();
 
         $data = array();
         
@@ -46,7 +48,7 @@ class Hutang extends MX_Controller {
             $data[$row['kode_pelanggan']][] = array(
                 'id' => $row['id'],
                 'no_transaksi' => $row['no_transaksi'],
-                'pelanggan' => $row['kode_pelanggan'] .'  &middot; '. $row['pelanggan'],
+                'pelanggan' => $row['pelanggan'] .'  &middot; '.$row['kode_pelanggan'] .'<br>'. $row['alamat_plg'],
                 'total' => $row['total'],
                 'bayar' => $row['bayar'],
                 'sisa' => $row['sisa'],
