@@ -200,9 +200,27 @@ class Pengiriman extends MX_Controller {
 			foreach ($detail_nota as $i => $d) {
 				$detail_nota[$i]['id_pengiriman'] = $id_pengiriman;
 			}
-			
-			$this->db->insert_batch('pengiriman_detail', $detail);
 			$this->db->insert_batch('pengiriman_detail_nota', $detail_nota);
+
+			// insert loop pipa
+				foreach ($detail as $key => $value) {
+					// insert detail
+					$this->db->insert('pengiriman_detail', $value);
+					$id_detail = $this->db->insert_id();
+
+					// insert ke jstok
+					$payload_jstok = [
+						"no_referensi" => $data['no_transaksi'],
+						"tgl" => date("Y-m-d"),
+						"jenis_trx" => "pengiriman",
+						"id_produk" => $value['id_produk'],
+						"qty" => $value['qty'],
+						"id_header" => $id_pengiriman,
+						"id_detail" => $id_detail,
+						"created_by" => user_session('id') 	
+					];
+					$this->db->insert('jstok',$payload_jstok);
+				}			
 		}
 		
 		redirect(site_url('penjualan/pengiriman'));
