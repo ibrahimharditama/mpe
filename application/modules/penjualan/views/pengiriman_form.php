@@ -128,7 +128,7 @@
                         <td>
                             <select class="select2 w-100 select-item" name="produk[0][id]" data-placeholder="">
                                 <option value=""></option>
-                                <?php echo modules::run('options/produk', ''); ?>
+                                <?php echo modules::run('options/produk_qty', ''); ?>
                             </select>
                         </td>
                         <td><input type="text" name="produk[0][uraian]" class="input-box input-nama"
@@ -396,7 +396,7 @@
 						});
 
 						console.log("before");
-						callback();
+						if(callback) callback();
 						console.log("after");
 					},
 					(error) => {
@@ -492,11 +492,13 @@
             var id_satuan = $('option:selected', this).data('id-satuan');
             var satuan = $('option:selected', this).data('satuan');
             var harga_jual = $('option:selected', this).data('harga-jual');
+            var qty = $('option:selected', this).data('qty');
 
             $row.find('.input-nama').val(nama);
             $row.find('.input-id-satuan').val(id_satuan);
             $row.find('.input-satuan').val(satuan);
             $row.find('.input-harga-jual').val(harga_jual);
+            $row.find('.input-qty').val((qty ?? 0));
         });
 
 		$(document).on('change', '.select-item-nota', function(e) {
