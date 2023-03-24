@@ -28,6 +28,7 @@ class Options extends MX_Controller {
 	
 	public function number($start, $end, $selected = '')
 	{
+		$options = '';
 		for ($i = $start; $i <= $end; $i++) {
 			$selected_prop = $i == $selected ? 'selected' : '';
 			$options .= '<option value="'.$i.'" '.$selected_prop.'>'.$i.'</option>';
