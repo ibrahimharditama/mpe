@@ -131,6 +131,30 @@ class Options extends MX_Controller {
 		return $options;
 	}
 
+	public function produk_qty($selected = '')
+	{
+		$src = $this->db
+			->select("
+				a.*, CONCAT(a.kode, ' &middot; ', a.nama) AS kode_nama, b.nama AS satuan,
+				(select sum(qty) from jstok x where x.row_status = 1 and x.id_produk = a.id) qty
+			")
+			->from('ref_produk AS a')
+			->join('ref_lookup AS b', 'a.id_satuan = b.id')
+			->where('a.row_status', 1)
+			->where('a.id_tipe', 22)
+			->order_by('a.kode')
+			->get();
+		
+		$options = '';
+		
+		foreach ($src->result() as $row) {
+			$selected_attr = $selected == $row->id ? 'selected' : '';
+			$options .= '<option value="'.$row->id.'" data-qty="'.$row->qty.'" data-nama="'.$row->nama.'" data-id-satuan="'.$row->id_satuan.'" data-satuan="'.$row->satuan.'" data-harga-beli="'.$row->harga_beli.'" data-harga-jual="'.$row->harga_jual.'" '.$selected_attr.'>'.$row->kode_nama.'</option>';
+		}
+		
+		return $options;
+	}
+
 	public function produk_nota($id_nota,$json= 0 ,$selected = '')
 	{
 		$src = $this->db
