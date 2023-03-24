@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Profil_usaha extends MX_Controller {
+class Perusahaan extends MX_Controller {
 
 	public function __construct()
 	{
@@ -14,7 +14,7 @@ class Profil_usaha extends MX_Controller {
 		$data = $this->db->get_where('profil', array('id' => 1))->row_array();
 		
 		$this->load->view('templates/app_tpl', array (
-			'content' => 'profil_usaha_index',
+			'content' => 'perusahaan_index',
 			'data' => $data,
 		));
 	}
@@ -57,6 +57,6 @@ class Profil_usaha extends MX_Controller {
 			$this->session->set_flashdata('data', $this->input->post());
 		}
 		
-		redirect(site_url('pengaturan/profil-usaha'));
+		redirect(site_url('pengaturan/perusahaan'));
 	}
 }

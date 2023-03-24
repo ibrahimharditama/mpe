@@ -89,10 +89,9 @@
         <thead>
             <tr>
                 <th class="t-left" colspan="2" rowspan="2">
-                    <br><span class="fw-bold f-size-15-s">Makmur Permai</span>
-                    <br><span class="fw-400 f-trebuchet f-size-8-s">Boulevard Timur Blok NE1 No. 40
-                    <br>Telp:453.0095 4584.2138 4584.2139
-                    <br>Fax: 453.0093
+                    <br><span class="fw-bold f-size-15-s"><?= ucwords(strtolower(perusahaan('nama'))); ?></span>
+                    <br><span class="fw-400 f-trebuchet f-size-8-s"><?= perusahaan('alamat'); ?>
+                    <br>Telp:<?= perusahaan('no_telp'); ?>
                 </th>
                 <th colspan="2">
                     <span class="fw-bold f-arial f-size-16">Faktur Penjualan</span>

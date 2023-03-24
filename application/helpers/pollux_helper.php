@@ -19,6 +19,19 @@ function user_session($key)
 	}
 }
 
+function perusahaan($key = '')
+{
+	$ci =& get_instance();
+	
+	$perusahaan = $ci->db->get_where('profil', ['row_status' => 1])->row();
+
+	if($key != '') {
+		return $perusahaan->$key;
+	} else {
+		return $perusahaan;
+	}
+}
+
 function set_user_session($key, $new_value)
 {
 	$ci =& get_instance();
