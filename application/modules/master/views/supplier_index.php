@@ -38,7 +38,7 @@ function init_datatable() {
         'ajax': '<?php echo site_url('/master/supplier/datatable'); ?>',
         'stateSave': true,
         'order': [
-            [2, 'asc']
+            [3, 'asc']
         ],
         'fixedHeader': true,
         'columns': [{
