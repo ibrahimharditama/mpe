@@ -6,7 +6,7 @@
 			<thead>	
 				<tr>
 					<th width="5px">No.</th>
-					                    <th width="5px"></th>
+					<th width="5px"></th>
 					<th>Kode</th>
 					<th>Nama Pelanggan</th>
 					<th>Alamat</th>
@@ -38,7 +38,7 @@ function init_datatable()
 		'serverMethod': 'post',
 		'ajax': '<?php echo site_url('/master/pelanggan/datatable'); ?>',
 		'stateSave': true,
-		'order': [[ 2, 'asc' ]],
+		'order': [[ 3, 'asc' ]],
 		'fixedHeader': true,
 		'columns': [
 			{ data: 'nomor', orderable: false },  

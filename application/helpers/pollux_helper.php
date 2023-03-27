@@ -353,7 +353,7 @@ function umur_bulan($tgl)
 
 function buttonDelete($url)
 {
-	return '<a href="'.$url.'"><img src="'. base_url('assets/img/del.png') .'"></a>';
+	return '<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="'.$url.'"><img src="'. base_url('assets/img/del.png') .'"></a>';
 }
 
 function penyebut($nilai) {
