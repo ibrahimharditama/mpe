@@ -25,9 +25,15 @@ class Produk extends MX_Controller {
 		$order_by = $_POST['columns'][$order_index]['data'];
 		$order_direction = $_POST['order'][0]['dir'];
 		$keyword = $_POST['search']['value'];
-		
+		$tipe = $this->input->post('tipe');
 		$bindings = array("%{$keyword}%", "%{$keyword}%");
-		
+		$where = "";
+		if($tipe == "inventory"){
+			$where = " AND d.nama = 'Inventory'";
+		}
+		elseif($tipe == "jasa"){
+			$where = " AND d.nama = 'Jasa'";
+		}
 		$base_sql = "
 			FROM ref_produk AS a
 			LEFT JOIN pengguna AS b ON a.created_by = b.id
@@ -44,6 +50,7 @@ class Produk extends MX_Controller {
 					a.kode LIKE ?
 					OR a.nama LIKE ?
 				)
+				$where
 		";
 		
 		$data_sql = "
@@ -55,7 +62,10 @@ class Produk extends MX_Controller {
 				, e.nama AS satuan
 				, f.nama AS jenis
 				, g.nama AS merek
-				, h.qty AS stok
+				,(CASE
+					WHEN h.qty IS NULL THEN 0
+					ELSE h.qty
+				END)AS stok
 				, ROW_NUMBER() OVER (
 					ORDER BY {$order_by} {$order_direction}
 				  ) AS nomor
@@ -130,6 +140,11 @@ class Produk extends MX_Controller {
 	{
 		$rules = array (
 			array (
+				'field' => 'kode',
+				'label' => 'Kode',
+				'rules' => 'required|callback_check_kode',
+			),
+			array (
 				'field' => 'id_tipe',
 				'label' => 'Tipe',
 				'rules' => 'required',
@@ -170,7 +185,7 @@ class Produk extends MX_Controller {
 		
 		if ($this->form_validation->run()) {
 			
-			$key = array('id_tipe', 'nama', 'id_jenis', 'id_satuan', 'id_merek', 'harga_beli|number', 'harga_jual|number', 'keterangan');
+			$key = array('kode','id_tipe', 'nama', 'id_jenis', 'id_satuan', 'id_merek', 'harga_beli|number', 'harga_jual|number', 'keterangan');
 			return post_data($key);
 		}
 		else {
@@ -187,12 +202,26 @@ class Produk extends MX_Controller {
 		}
 	}
 	
+	function check_kode($kode) {        
+        if($this->input->post('kode'))
+            $kode = $this->input->post('kode');
+        else
+            $kode = '';
+		$result = $this->db->from('ref_produk')->where('kode', $kode)->get()->num_rows();
+        if($result == 0)
+            $response = true;
+        else {
+            $this->form_validation->set_message('check_kode', 'Kode sudah ada');
+            $response = false;
+        }
+        return $response;
+    }
+
 	public function insert()
 	{
 		$data = $this->_form_data();
 		
 		if ($data != null) {
-			$data['kode'] = new_number('produk');
 			$data['created_by'] = user_session('id');
 			$this->db->insert('ref_produk', $data);
 			$this->session->set_flashdata('post_status', 'inserted');

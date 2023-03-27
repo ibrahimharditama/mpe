@@ -55,7 +55,10 @@ class Pipa extends MX_Controller {
 				, e.nama AS satuan
 				, f.nama AS jenis
 				, g.nama AS merek
-				, h.qty AS stok
+				,(CASE
+					WHEN h.qty IS NULL THEN 0
+					ELSE h.qty
+				END)AS stok				
 				, ROW_NUMBER() OVER (
 					ORDER BY {$order_by} {$order_direction}
 				  ) AS nomor

@@ -9,6 +9,20 @@
         </div>
     </div>
     <?php endif;?>
+    <div class="col-12 mb-2">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tipe" value="semua" checked>
+            <label class="form-check-label">Semua</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tipe" value="inventory">
+            <label class="form-check-label">Inventory</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="tipe" value="jasa">
+            <label class="form-check-label">Jasa</label>
+        </div>
+    </div>
     <div class="col-12">
         <table class="cell-border stripe order-column hover" id="datatable">
             <thead>
@@ -40,13 +54,18 @@
 </div>
 
 <script type="text/javascript">
-function init_datatable() {
+function init_datatable(tipe) {
     datatable = $('#datatable').DataTable({
         'bInfo': true,
         'pageLength': 25,
         'serverSide': true,
         'serverMethod': 'post',
-        'ajax': '<?php echo site_url('/master/produk/datatable'); ?>',
+        'ajax': {
+            'url': '<?php echo site_url('/master/produk/datatable'); ?>',
+            'data': function(data) {
+                data.tipe =tipe;
+            }
+        },
         'stateSave': true,
         'order': [
             [2, 'asc']
@@ -59,7 +78,8 @@ function init_datatable() {
             {
                 orderable: false,
                 render: function(data, type, row, meta) {
-                    return '<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="' + site_url + 'master/produk/hapus/' + row.id +
+                    return '<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="' +
+                        site_url + 'master/produk/hapus/' + row.id +
                         '"><img src="<?php echo base_url(); ?>assets/img/del.png"></a>';
                 }
             },
@@ -108,8 +128,12 @@ function init_datatable() {
 }
 
 $().ready(function() {
-
-    init_datatable();
-
+    var tipe = $('[name=tipe]').val();
+    init_datatable(tipe);
+});
+$(document).on('change', '[name=tipe]', function(e) {
+    var tipe = $(this).val();
+    $("#datatable").dataTable().fnDestroy();
+    init_datatable(tipe);
 });
 </script>
