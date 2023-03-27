@@ -121,13 +121,18 @@ class Rekening extends MX_Controller {
 				'label' => 'No Rekening',
 				'rules' => 'required',
 			),
+			array (
+				'field' => 'nama',
+				'label' => 'Nama Pemilik',
+				'rules' => 'required',
+			),
 		);
 		
 		$this->form_validation->set_rules($rules);
 		
 		if ($this->form_validation->run()) {
 			
-			$key = array('bank', 'no_rekening');
+			$key = array('bank', 'no_rekening', 'nama');
 			return post_data($key);
 		}
 		else {
@@ -147,7 +152,6 @@ class Rekening extends MX_Controller {
 	public function insert()
 	{
 		$data = $this->_form_data();
-		
 		if ($data != null) {
 			$data['created_by'] = user_session('id');
 			$this->db->insert('rekening', $data);

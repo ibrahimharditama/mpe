@@ -31,6 +31,17 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-6">
+				<div class="form-group row">
+					<label class="col-sm-4 col-form-label pr-0"><span class="text-danger">*</span> Nama Pemilik </label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="nama" value="<?php if ($data != null) echo $data['nama']; ?>">
+						<?php if (isset($errors)) echo $errors['nama']; ?>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
