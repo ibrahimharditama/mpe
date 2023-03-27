@@ -173,4 +173,13 @@ class Pelanggan extends MX_Controller {
 			redirect(site_url('master/pelanggan/ubah/'.$id));
 		}
 	}
+	
+	public function hapus($id)
+	{
+		$data['row_status'] = 0;
+		$this->db->update('pelanggan', $data, array('id' => $id));
+		$this->session->set_flashdata('post_status', 'deleted');
+		redirect(site_url('master/pelanggan'));
+	}
+
 }

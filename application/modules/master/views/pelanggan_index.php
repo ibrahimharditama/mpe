@@ -6,6 +6,7 @@
 			<thead>	
 				<tr>
 					<th width="5px">No.</th>
+					                    <th width="5px"></th>
 					<th>Kode</th>
 					<th>Nama Pelanggan</th>
 					<th>Alamat</th>
@@ -37,10 +38,17 @@ function init_datatable()
 		'serverMethod': 'post',
 		'ajax': '<?php echo site_url('/master/pelanggan/datatable'); ?>',
 		'stateSave': true,
-		'order': [[ 1, 'asc' ]],
+		'order': [[ 2, 'asc' ]],
 		'fixedHeader': true,
 		'columns': [
-			{ data: 'nomor', orderable: false },
+			{ data: 'nomor', orderable: false },  
+			{
+                orderable: false,
+                render: function(data, type, row, meta) {
+                    return '<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="' + site_url + 'master/pelanggan/hapus/' + row.id +
+                        '"><img src="<?php echo base_url(); ?>assets/img/del.png"></a>';
+                }
+            },
 			{ data: 'kode' },
 			{
 				data: 'nama',

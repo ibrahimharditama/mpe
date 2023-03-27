@@ -38,7 +38,7 @@ function init_datatable() {
         'ajax': '<?php echo site_url('/master/supplier/datatable'); ?>',
         'stateSave': true,
         'order': [
-            [1, 'asc']
+            [2, 'asc']
         ],
         'fixedHeader': true,
         'columns': [{
@@ -48,7 +48,7 @@ function init_datatable() {
             {
                 orderable: false,
                 render: function(data, type, row, meta) {
-                    return '<a href="' + site_url + 'master/supplier/hapus/' + row.id +
+                    return '<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="' + site_url + 'master/supplier/hapus/' + row.id +
                         '"><img src="<?php echo base_url(); ?>assets/img/del.png"></a>';
                 }
             },

@@ -33,14 +33,14 @@ function init_datatable()
 		'serverMethod': 'post',
 		'ajax': '<?php echo site_url('/master/'.$kategori.'/datatable'); ?>',
 		'stateSave': true,
-		'order': [[ 1, 'asc' ]],
+		'order': [[ 2, 'asc' ]],
 		'fixedHeader': true,
 		'columns': [
 			{ data: 'nomor', orderable: false },
 			{
                 orderable: false,
                 render: function(data, type, row, meta) {
-                    return '<a href="' + site_url + 'master/<?php echo $kategori;?>/hapus/' + row.id +
+                    return '<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="' + site_url + 'master/<?php echo $kategori;?>/hapus/' + row.id +
                         '"><img src="<?php echo base_url(); ?>assets/img/del.png"></a>';
                 }
             },
