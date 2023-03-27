@@ -1,5 +1,4 @@
 <h1 class="my-header">Daftar Item Pipa</h1>
-
 <div class="row m-0">
     <div class="col-12">
         <table class="cell-border stripe order-column hover" id="datatable">
@@ -15,6 +14,7 @@
                     <th>Merek</th>
                     <th>Harga Beli</th>
                     <th>Harga Jual</th>
+                    <th>Stok</th>
                     <th>Yg Buat</th>
                     <th>Yg Ubah</th>
                 </tr>
@@ -50,7 +50,8 @@ function init_datatable() {
             {
                 orderable: false,
                 render: function(data, type, row, meta) {
-                    return '<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="' + site_url + 'master/pipa/hapus/' + row.id +
+                    return '<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="' +
+                        site_url + 'master/pipa/hapus/' + row.id +
                         '"><img src="<?php echo base_url(); ?>assets/img/del.png"></a>';
                 }
             },
@@ -84,6 +85,10 @@ function init_datatable() {
                 className: 'dt-body-right'
             },
             {
+                data: 'stok',
+                className: 'dt-body-right'
+            },
+            {
                 data: 'yg_buat'
             },
             {
@@ -94,8 +99,6 @@ function init_datatable() {
 }
 
 $().ready(function() {
-
     init_datatable();
-
 });
 </script>

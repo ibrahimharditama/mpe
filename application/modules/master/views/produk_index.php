@@ -23,6 +23,7 @@
                     <th>Merek</th>
                     <th>Harga Beli</th>
                     <th>Harga Jual</th>
+                    <th>Stok</th>
                     <th>Yg Buat</th>
                     <th>Yg Ubah</th>
                 </tr>
@@ -90,6 +91,10 @@ function init_datatable() {
             },
             {
                 data: 'harga_jual',
+                className: 'dt-body-right'
+            },
+            {
+                data: 'stok',
                 className: 'dt-body-right'
             },
             {
