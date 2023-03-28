@@ -231,7 +231,13 @@ function init_details()
 $().ready(function() {
 	
 	init_details();
-	
+	$('.table-item tbody').on( 'keypress', 'input', function(e){ 
+		var val = $(this).val();
+		if(e.which == 13) {
+			e.preventDefault();
+			add_row(this, null);
+		}
+	});
 	$('.datepicker').Zebra_DatePicker({
 		offset: [-203, 280]
 	});
