@@ -112,8 +112,12 @@ class Options extends MX_Controller {
 		return options($src, 'id', $selected, 'kode_nama');
 	}
 	
-	public function produk($selected = '')
+	public function produk($selected = '', $kategori = '')
 	{
+		if($kategori != '') {
+			$this->db->where('a.id_tipe', $kategori);
+		}
+
 		$src = $this->db
 			->select("a.*, CONCAT(a.kode, ' &middot; ', a.nama) AS kode_nama, b.nama AS satuan")
 			->from('ref_produk AS a')

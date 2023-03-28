@@ -76,9 +76,9 @@
                     <tr>
                         <th width="320px">Produk</th>
                         <th>Uraian</th>
-                        <th>Satuan</th>
-                        <th>Hrg Satuan (Rp)</th>
                         <th>Qty</th>
+                        <th>Satuan</th>
+                        <th>Hrg Satuan (Rp)</th>                        
                         <th>Diskon (Rp)</th>
                         <th>Sub-Total (Rp)</th>
                         <th colspan="2"></th>
@@ -94,6 +94,9 @@
                         </td>
                         <td><input type="text" name="produk[0][uraian]" class="input-box input-nama"
                                 style="width:320px"></td>
+                        <td><input type="text" name="produk[0][qty]"
+                            class="input-box control-number input-count input-qty" style="width:50px" value="0">
+                        </td>
                         <td>
                             <input type="hidden" name="produk[0][id_satuan]" class="input-id-satuan">
                             <input type="text" name="produk[0][satuan]" class="input-box input-satuan"
@@ -101,10 +104,7 @@
                         </td>
                         <td><input type="text" name="produk[0][harga_beli]"
                                 class="input-box control-number input-count input-harga-beli" style="width:110px"
-                                value="0"></td>
-                        <td><input type="text" name="produk[0][qty]"
-                                class="input-box control-number input-count input-qty" style="width:50px" value="0">
-                        </td>
+                                value="0"></td>                        
                         <td><input type="text" name="produk[0][diskon]"
                                 class="input-box control-number input-count input-diskon" style="width:110px" value="0">
                         </td>
@@ -233,7 +233,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Tgl. Pembayaran</label>
-                                <input type="text" class="form-control input-bayar" name="tgl_pembayaran"
+                                <input type="text" class="form-control input-bayar datepicker" name="tgl_pembayaran"
                                     id="tgl_pembayaran" value="<?=date("Y-m-d");?>" readonly data-message="<b>Tanggal</b> harus diisi.">
 								<div id="err-tgl_pembayaran" class="err"></div>
                             </div>
@@ -320,6 +320,7 @@ function add_row(el, data) {
         $new_row.find('.input-satuan').val(data.satuan);
         $new_row.find('.input-harga-beli').val(data.harga_satuan);
         $new_row.find('.input-qty').val(data.qty);
+        $new_row.find('.input-diskon').val(data.diskon);
     }
 }
 

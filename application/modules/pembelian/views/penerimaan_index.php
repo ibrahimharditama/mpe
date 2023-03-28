@@ -99,7 +99,12 @@ function init_datatable()
 			},
 			{ data: 'tgl' },
 			{ data: 'supplier' },
-			{ data: 'no_pembelian' },
+			{ 
+				data: 'no_pembelian', 
+				render: function (data, type, row, meta) {
+					return '<a href="'+site_url+'pembelian/pesanan/ubah/'+row.id_pembelian+'" target="_blank">'+data+'</a>';
+				}
+			},
 			{ data: 'tgl_pembelian' },
 			{ data: 'qty_pesan', className: 'dt-center' },
 			{ data: 'qty_terima', className: 'dt-center' },

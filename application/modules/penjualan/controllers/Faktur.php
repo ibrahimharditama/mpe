@@ -135,7 +135,7 @@ class Faktur extends MX_Controller {
 		$id_pelanggan = $this->input->post('id_pelanggan');
 		
 		$src = $this->db
-					->select('id, no_transaksi, tgl')
+					->select('id, no_transaksi, tgl, diskon_faktur, biaya_lain')
 					->from('penjualan')
 					->where('row_status', 1)
 					->where('id_pelanggan', $id_pelanggan)
@@ -500,6 +500,7 @@ class Faktur extends MX_Controller {
 			"detail" => $details,
 			"bank" => $bank
 		];
-		$this->pdf->load_view('nota',$data,"a5","landscape",$header->no_transaksi.".pdf");
+		//$this->pdf->load_view('nota',$data,"a5","landscape",$header->no_transaksi.".pdf");
+		$this->pdf->load_pdf('nota2', $data, $header->no_transaksi.".pdf");
 	}
 }

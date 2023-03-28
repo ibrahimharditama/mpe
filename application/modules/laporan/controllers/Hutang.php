@@ -43,7 +43,7 @@ class Hutang extends MX_Controller {
         
         foreach ($src as $row) {
 
-            if($row['sisa'] < 0) continue;
+            if($row['sisa'] <= 0) continue;
 
             $data[$row['kode_pelanggan']][] = array(
                 'id' => $row['id'],

@@ -71,9 +71,9 @@
 				<tr>
 					<th width="320px">Produk</th>
 					<th>Uraian</th>
-					<th>Satuan</th>
-					<th>Hrg Satuan (Rp)</th>
 					<th>Qty</th>
+					<th>Satuan</th>
+					<th>Hrg Satuan (Rp)</th>					
 					<th>Diskon (Rp)</th>
 					<th>Sub-Total (Rp)</th>
 					<th colspan="2"></th>
@@ -88,12 +88,12 @@
 						</select>
 					</td>
 					<td><input type="text" name="produk[0][uraian]" class="input-box input-nama" style="width:320px"></td>
+					<td><input type="text" name="produk[0][qty]" class="input-box control-number input-count input-qty" style="width:50px" value="0"></td>
 					<td>
 						<input type="hidden" name="produk[0][id_satuan]" class="input-id-satuan">
 						<input type="text" name="produk[0][satuan]" class="input-box input-satuan" style="width:100px">
 					</td>
-					<td><input type="text" name="produk[0][harga_jual]" class="input-box control-number input-count input-harga-jual" style="width:110px" value="0"></td>
-					<td><input type="text" name="produk[0][qty]" class="input-box control-number input-count input-qty" style="width:50px" value="0"></td>
+					<td><input type="text" name="produk[0][harga_jual]" class="input-box control-number input-count input-harga-jual" style="width:110px" value="0"></td>					
 					<td><input type="text" name="produk[0][diskon]" class="input-box control-number input-count input-diskon" style="width:110px" value="0"></td>
 					<td><input type="text" class="input-box control-number input-count input-sub-total" style="width:110px" value="0" readonly tabindex="-1"></td>
 					<td align="center"><a href="#" class="btn btn-info btn-ico btn-row-add">+</a></td>
@@ -110,13 +110,13 @@
 				<tr>
 					<td colspan="3" class="border-bottom-none border-left-none"></td>
 					<td colspan="3" class="pr-2" align="right">Diskon Faktur</td>
-					<td><input type="text" name="diskon_faktur" class="input-box control-number input-count input-diskon-faktur" value="0" style="width:110px"></td>
+					<td><input type="text" name="diskon_faktur" class="input-box control-number input-count input-diskon-faktur" value="<?php echo $data == null ? 0 : $data['diskon_faktur']; ?>" style="width:110px"></td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
 					<td colspan="3" class="border-bottom-none border-left-none"></td>
 					<td colspan="3" class="pr-2" align="right">Biaya Lain-lain</td>
-					<td><input type="text" name="biaya_lain" class="input-box control-number input-count input-biaya-lain" value="0" style="width:110px"></td>
+					<td><input type="text" name="biaya_lain" class="input-box control-number input-count input-biaya-lain" value="<?php echo $data == null ? 0 : $data['biaya_lain']; ?>" style="width:110px"></td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
@@ -201,7 +201,7 @@
 							</div>
 							<div class="form-group">
 								<label>Tgl. Pembayaran</label>
-								<input type="text" class="form-control input-bayar" name="tgl_pembayaran" id="tgl_pembayaran" value="<?=date("Y-m-d");?>" readonly>
+								<input type="text" class="form-control input-bayar datepicker" name="tgl_pembayaran" id="tgl_pembayaran" value="<?=date("Y-m-d");?>" readonly>
 							</div>
 							<div class="form-group row">
 								<div class="col-sm-12"><label>Rek. Pembayaran</label></div>
@@ -281,6 +281,7 @@ function add_row(el, data)
 		$new_row.find('.input-satuan').val(data.satuan);
 		$new_row.find('.input-harga-jual').val(data.harga_satuan);
 		$new_row.find('.input-qty').val(data.qty);
+		$new_row.find('.input-diskon').val(data.diskon);
 	}
 }
 
@@ -428,6 +429,7 @@ $().ready(function() {
 				site_url+'penjualan/faktur/ajax-pesanan-detail'
 				, { id_penjualan: id_penjualan }
 				, function(response) {
+					console.log(response);
 					$.each(response, function(i, o) {
 						let last = $body.children().last();
 						add_row(last, o);

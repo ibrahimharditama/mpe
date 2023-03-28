@@ -165,6 +165,7 @@ function add_row(el, data)
 		$new_row.find('.input-satuan').val(data.satuan);
 		$new_row.find('.input-harga-beli').val(data.harga_satuan);
 		$new_row.find('.input-qty').val(data.qty);
+		$new_row.find('.input-diskon').val(data.diskon);
 	}
 }
 

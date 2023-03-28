@@ -6,6 +6,7 @@
     <style type="text/css">
         @page {
             margin: 0px;
+            size: 21.59cm 13.97cm;
         }
         body {
             font-family: Verdana, Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif; 

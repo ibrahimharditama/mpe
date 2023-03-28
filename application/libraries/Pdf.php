@@ -35,4 +35,17 @@ class Pdf extends Dompdf{
         $this->render();
         $this->stream($filename, array("Attachment" => false));
     }
+
+    public function load_pdf($view, $data = array(), $filename)
+    {
+        $html = $this->ci()->load->view($view, $data, TRUE);
+
+		$dompdf = new Dompdf([
+			"isRemoteEnabled" => true,
+			]);
+
+		$dompdf->loadHtml($html);
+        $dompdf->render();
+        $dompdf->stream($filename, array("Attachment" => false));
+    }
 }

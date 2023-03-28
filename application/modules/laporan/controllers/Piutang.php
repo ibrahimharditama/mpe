@@ -43,7 +43,7 @@ class Piutang extends MX_Controller {
         
         foreach ($src as $row) {
 
-            if($row['sisa'] < 0) continue;
+            if($row['sisa'] <= 0) continue;
 
             $data[$row['kode_supplier']][] = array(                
                 'id' => $row['id'],
