@@ -206,15 +206,17 @@
 							<div class="form-group row">
 								<div class="col-sm-12"><label>Rek. Pembayaran</label></div>
 								<div class="col-sm-12">
-									<select name="rek_pembayaran" class="input-bayar" data-placeholder="Pilih Rekening" id="rek_pembayaran">
-										<option value="">- Pilih Rekening -</option>
+									<select name="rek_pembayaran" class="input-bayar" data-placeholder="Pilih Rekening" id="rek_pembayaran" data-message="<b>Rekening</b> harus diisi.">
+										<option></option>
 										<?php echo modules::run('options/rekening', ''); ?>
 									</select>
+									<div id="err-rek_pembayaran" class="err"></div>
 								</div>
 							</div>
 							<div class="form-group">
 								<label>Nominal</label>
-								<input type="text" class="form-control input-bayar control-number" name="nominal_pembayaran" id="nominal_pembayaran" value="0">
+								<input type="text" class="form-control input-bayar control-number" name="nominal_pembayaran" id="nominal_pembayaran" data-message="<b>Nominal</b> harus diisi." value="0">
+								<div id="err-nominal_pembayaran" class="err"></div>
 							</div>
 							<div class="form-group">
 								<button type="submit" class="btn btn-primary btn-block">Simpan Pembayaran</button>
@@ -488,22 +490,25 @@ $(document).on('submit', 'form#frm-pembayaran', function (event) {
 	var form = $(this);
 	var data = new FormData($(this)[0]);
 	var url = form.attr("action");
-	$.ajax({
-		type: form.attr('method'),
-		url: url,
-		data: data,
-		cache: false,
-		contentType: false,
-		processData: false,
-		success: function (data) {
-			showAlert({message: data.message, class:data.type});
-			ajaxLoadPembayaran(site_url+'penjualan/faktur/ajax-load-pembayaran',$("#id_faktur").val());
-			resetModalPayment();
-		},
-		error: function (xhr, textStatus, errorThrown) {
-			alert("Error: " + errorThrown);
-		}
-	});
+	var err = validasi($(".input-bayar"));
+	if(err == 0){
+		$.ajax({
+			type: form.attr('method'),
+			url: url,
+			data: data,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function (data) {
+				showAlert({message: data.message, class:data.type});
+				ajaxLoadPembayaran(site_url+'penjualan/faktur/ajax-load-pembayaran',$("#id_faktur").val());
+				resetModalPayment();
+			},
+			error: function (xhr, textStatus, errorThrown) {
+				alert("Error: " + errorThrown);
+			}
+		});
+	}
 	return false;
 });
 function ajaxLoadPembayaran(url,id) {
@@ -536,15 +541,16 @@ function add_row_bayar(data){
 }
 
 function validasi(komponen){
-	$err = false;
+	$err = 0;
 	komponen.each(function(){
-		if($(this).val() == ""){
+		if(!$(this).val()){
 			$(this).addClass("is-invalid");
-			$err = true;
+			$("#err-"+$(this).attr("id")).html($(this).data("message"))
+			$err++;
 		}
 		else{
 			$(this).removeClass("is-invalid");
-			$err = false;
+			$("#err-"+$(this).attr("id")).html("")
 		}
 	});	
 	return $err
