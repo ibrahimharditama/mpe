@@ -53,12 +53,17 @@
 						<textarea class="form-control" name="keterangan"><?php echo $data == null ? '' : $data['keterangan']; ?></textarea>
 					</div>
 				</div>
-				<div class="form-group row">
+				<div class="form-group row button-action" style="display: none;">
 					<label class="col-sm-3 col-form-label pr-0"></label>
 					<div class="col-sm-9">
-						<a class="btn btn-outline-info" id="do-bayar" style="display:none" href="#" data-toggle="modal" data-target="#exampleModal">
+						<a class="btn btn-outline-info" id="do-bayar" href="#" data-toggle="modal" data-target="#exampleModal">
 							<i class="ti ti-wallet"></i>
 							Pembayaran
+						</a>
+						&nbsp;
+						<a class="btn btn-outline-info" id="cetak" href="#" data-toggle="modal" data-target="#modalCetak">
+							<i class="ti ti-layout-tab"></i>
+							Cetak
 						</a>
 					</div>
 				</div>
@@ -230,6 +235,55 @@
 	</div>
 </div>
 
+<div class="modal fade" id="modalCetak" tabindex="-1" role="dialog" aria-labelledby="modalCetakLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modalCetakLabel">Cetak</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+					<table class="table table-sm table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Nama File</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Faktur</td>
+								<td class="text-center">
+									<?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id )); ?>
+								</td>
+							</tr>
+							<tr>
+								<td>Faktur tanpa header</td>
+								<td class="text-center">
+									<?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/faktur/true' )); ?>
+								</td>
+							</tr>
+							<tr>
+								<td>Surat jalan</td>
+								<td class="text-center">
+									<?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/sj' )); ?>
+								</td>
+							</tr>
+							<tr>
+								<td>Surat jalan tanpa header</td>
+								<td class="text-center">
+									<?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/sj/true' )); ?>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script src="<?php echo site_url('penjualan/faktur/js-detail/'.($data == null ? '0' : $data['id'])); ?>"></script>
 <script>
 var i = 0;
@@ -362,7 +416,7 @@ function load_pesanan()
 	var id_pelanggan = $('[name=id_pelanggan]').val();
 	
 	if(id_faktur != 0){
-		$("#do-bayar").css("display","inline");
+		$(".button-action").show();
 	}
 
 	$.post (

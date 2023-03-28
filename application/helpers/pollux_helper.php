@@ -356,6 +356,11 @@ function buttonDelete($url)
 	return '<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="'.$url.'"><img src="'. base_url('assets/img/del.png') .'"></a>';
 }
 
+function buttonPrint($url)
+{
+	return '<a target="_blank" href="'.$url.'"><img src="'. base_url('assets/img/printer.png') .'"></a>';
+}
+
 function penyebut($nilai) {
 	$nilai = abs($nilai);
 	$huruf = array("", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas");

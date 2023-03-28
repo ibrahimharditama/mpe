@@ -132,8 +132,8 @@
                 <?php endif; ?>
             </td>
             <td width="450px" class="t-center v-top" colspan="3">
-                <span class="fw-bold f-arial f-size-16">FAKTUR PENJUALAN</span><br>
-                <span class="fw-bold f-arial f-size-12">Nota : <?= $header->no_transaksi; ?></span>
+                <span class="fw-bold f-arial f-size-16">SURAT JALAN</span><br>
+                <span class="fw-bold f-arial f-size-12">No SJ <?= $header->no_transaksi; ?></span>
             </td>
             <td class="t-right v-bottom" colspan="2">
                 <span class="fw-bold f-arial f-size-10">Jakarta,</span> <span class="fw-400 f-verdana f-size-9"><?=date("d/m/Y",strtotime($header->tgl))?></span>
@@ -159,20 +159,17 @@
     <table style="padding-top: 6px;">
         <tr class="table-header">
             <td width="30px">No.</td>
-            <td colspan="2" width="250px">Nama Item</td>
-            <td class="t-center">Jml Satuan</td>
-            <td class="t-right">Harga</td>
-            <td class="t-right">Pot</td>
-            <td class="t-center" colspan="2" style="padding-left: 30px;">Total</td>
+            <td class="t-center" width="30px">Jml</td>
+            <td class="t-center" width="80px">Satuan</td>
+            <td colspan="5">Nama Item</td>
         </tr>
-        <?php $no=1;foreach($detail as $dtDetail):?>
+        <?php $no=1; $total_item=0;foreach($detail as $dtDetail):?>
         <tr class="table-body">
             <td><?= $no++; ?></td>
-            <td colspan="2"><?= $dtDetail->nama; ?></td>
-            <td class="t-center"><?= number_format($dtDetail->qty); ?> <?= $dtDetail->satuan; ?></td>
-            <td class="t-right"><?= number_format($dtDetail->harga_satuan); ?></td>
-            <td class="t-right"><?= number_format($dtDetail->diskon); ?></td>
-            <td class="t-right" colspan="2"><?= number_format($dtDetail->qty*$dtDetail->harga_satuan); ?></td>
+            <td class="t-center"><?= number_format($dtDetail->qty); ?></td>
+            <td class="t-center"><?= $dtDetail->satuan; ?></td>
+            <td colspan="5"><?= $dtDetail->nama; ?></td>
+            <?php $total_item += $dtDetail->qty; ?>
         </tr>
         <?php endforeach;?>
         <tr style="border-bottom: 1px solid black;">
@@ -186,59 +183,37 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">
-                <span class="f-size-10 f-verdana fw-bold">Jatuh Tempo :</span> <span class="f-size-10 fw-bold f-arial"><?=date("d/m/Y",strtotime($header->tgl))?></span>
+            <td colspan="5" class="f-size-9 f-verdana fw-400">
+                Keterangan : <?= $header->keterangan ?>
             </td>
-            <td class="t-right f-verdana f-size-9 fw-400">Biaya Lain :</td>
-            <td class="t-right f-verdana f-size-9 fw-400" style="padding-right: 10px;">0</td>
-            <td class="f-size-9 f-verdana fw-400">Sub Total </td>
+            <td class="f-size-9 f-verdana fw-bold">Total Item </td>
             <td class="f-size-9 f-verdana fw-400">:</td>
-            <td class="t-right f-verdana f-size-9 fw-400"><?=number_format($header->total)?></td>
+            <td class="t-right f-verdana f-size-9 fw-bold"><?=number_format($total_item)?></td>
         </tr>
         <tr>
-            <td class="f-size-8 f-verdana fw-400" colspan="5"><?=terbilang($header->grand_total)?></td>
-            <td class="f-size-9 f-verdana fw-400">Potongan</td>
-            <td class="f-size-9 f-verdana fw-400">:</td>
-            <td class="t-right f-verdana f-size-9 fw-400"><?=number_format($header->diskon_faktur)?></td>
+            <td colspan="8"><br></td>
         </tr>
         <tr>
-            <td colspan="5"></td>
-            <td class="f-size-9 f-verdana fw-400">Total Akhir</td>
-            <td class="f-size-9 f-verdana fw-400">:</td>
-            <td class="t-right f-verdana f-size-9 fw-400"><?=number_format($header->grand_total)?></td>
-        </tr>
-        <tr>
-            <td colspan="5"></td>
-            <td class="f-size-9 f-verdana fw-400">DP</td>
-            <td class="f-size-9 f-verdana fw-400">:</td>
-            <td class="t-right f-verdana f-size-9 fw-400"><?=number_format($header->uang_muka)?></td>
-        </tr>
-        <tr>
-            <td colspan="2"></td>
-            <td class="t-center f-verdana f-size-10 fw-400" rowspan="2" style="border: 1px solid black;">
+            <td colspan="3"></td>
+            <td class="t-center f-verdana f-size-10 fw-400" rowspan="2" style="border: 1px solid black;" width="250px">
                 NO REK  <?=$bank->bank?>: <?=$bank->no_rekening?><br>
                 ATN: <?=$bank->nama?>
             </td>
-            <td colspan="2"></td>
-            <td class="f-size-9 f-verdana fw-400">Tunai</td>
-            <td class="f-size-9 f-verdana fw-400">:</td>
-            <td class="t-right f-verdana f-size-9 fw-400">0</td>
+            <td colspan="4"></td>
         </tr>
         <tr>
             <td></td>
             <td class="t-center fw-bold f-verdana f-size-10" >Penerima</td>
-            <td class="t-center fw-bold f-verdana f-size-10" colspan="2">Hormat Kami</td>
-            <td class="f-size-9 fw-400 f-verdana v-top">Kredit</td>
-            <td class="f-size-9 fw-400 f-verdana">:</td>
-            <td class="t-right f-size-9 fw-400 f-verdana v-top">0</td>
+            <td></td>
+            <td class="t-center fw-bold f-verdana f-size-10" colspan="5">Hormat Kami</td>
         </tr>
         <tr>
             <td class="tg-0pky" colspan="8"><br></td>
         </tr>
         <tr>
-            <td colspan="2"></td>
+            <td colspan="3"></td>
             <td class="t-center f-verdana f-size-8 fw-400"  style="border: 1px solid black !important;">Barang telah diterima dengan baik.<br>Barang yang sudah dibeli tidak bisa<br>ditukar atau dikembalikan.</td>
-            <td colspan="5"></td>
+            <td colspan="4"></td>
         </tr>
     </table>
 

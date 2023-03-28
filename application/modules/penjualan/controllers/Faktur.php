@@ -91,6 +91,7 @@ class Faktur extends MX_Controller {
 			'content' => 'faktur_form',
 			'action_url' => site_url("penjualan/faktur/{$aksi}"),
 			'data' => $data,
+			'id' => $data == null ? 0 : $data['id'],
 		));
 	}
 	
@@ -482,7 +483,7 @@ class Faktur extends MX_Controller {
 		echo json_encode($src->row());
 	}
 
-	public function cetak($id)
+	public function cetak($id, $tipe = 'faktur', $no_header = false)
 	{
 		$this->load->library('pdf');
 		$header = $this->db->query(
@@ -498,9 +499,16 @@ class Faktur extends MX_Controller {
 		$data = [
 			"header" => $header,
 			"detail" => $details,
-			"bank" => $bank
+			"bank" => $bank,
+			"no_header" => $no_header
 		];
 		//$this->pdf->load_view('nota',$data,"a5","landscape",$header->no_transaksi.".pdf");
-		$this->pdf->load_pdf('nota2', $data, $header->no_transaksi.".pdf");
+
+		if($tipe == 'faktur') {
+			$this->pdf->load_pdf('nota2', $data, $header->no_transaksi.".pdf");
+		} else {
+			$this->pdf->load_pdf('nota_surat_jalan', $data, $header->no_transaksi.".pdf");
+		}
+		
 	}
 }
