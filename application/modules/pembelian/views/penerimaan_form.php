@@ -439,6 +439,13 @@ function load_penerimaan() {
 
 
 $().ready(function() {
+	$('.table-item tbody').on( 'keypress', 'input', function(e){ 
+		var val = $(this).val();
+		if(e.which == 13) {
+			e.preventDefault();
+			add_row(this, null);
+		}
+	});
 
     init_details();
     load_pesanan();
