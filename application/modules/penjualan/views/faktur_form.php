@@ -128,7 +128,7 @@
 				<tr>
 					<td colspan="3" class="border-bottom-none border-left-none"></td>
 					<td colspan="3" class="pr-2" align="right">Uang Muka</td>
-					<td><input type="text" name="uang_muka" class="input-box control-number input-count input-biaya-lain" value="0" style="width:110px"></td>
+					<td><input type="text" name="uang_muka" class="input-box control-number input-count-dp input-dp" value="0" style="width:110px"></td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
@@ -327,6 +327,13 @@ function count_total()
 	$('.input-grand-total').val(grand_total);
 }
 
+function count_dp() {
+    var gtt = $('.input-grand-total').val();
+    var dp = $('.input-dp').val();
+    var sisa_bayar = gtt - dp;
+    $('#sisa_tagihan').val(sisa_bayar);
+}
+
 function init_details()
 {
 	var $body = $('.table-item tbody');
@@ -477,6 +484,10 @@ $().ready(function() {
 		count_total();
 	});
 	
+	$(document).on('keyup', '.input-count-dp', function(e) {
+        count_dp();
+    });
+
 	$("#exampleModal").on('show.bs.modal', function () {
 		$('#rek_pembayaran').select2({
 			 width: '100%'
