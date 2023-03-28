@@ -58,9 +58,9 @@
 				<tr>
 					<th width="320px">Produk</th>
 					<th>Uraian</th>
+					<th>Qty</th>
 					<th>Satuan</th>
 					<th>Hrg Satuan (Rp)</th>
-					<th>Qty</th>
 					<th>Diskon (Rp)</th>
 					<th>Sub-Total (Rp)</th>
 					<th colspan="2"></th>
@@ -75,12 +75,12 @@
 						</select>
 					</td>
 					<td><input type="text" name="produk[0][uraian]" class="input-box input-nama" style="width:320px"></td>
+					<td><input type="text" name="produk[0][qty]" class="input-box control-number input-count input-qty" style="width:50px" value="0"></td>
 					<td>
 						<input type="hidden" name="produk[0][id_satuan]" class="input-id-satuan">
 						<input type="text" name="produk[0][satuan]" class="input-box input-satuan" style="width:100px">
 					</td>
 					<td><input type="text" name="produk[0][harga_beli]" class="input-box control-number input-count input-harga-beli" style="width:110px" value="0"></td>
-					<td><input type="text" name="produk[0][qty]" class="input-box control-number input-count input-qty" style="width:50px" value="0"></td>
 					<td><input type="text" name="produk[0][diskon]" class="input-box control-number input-count input-diskon" style="width:110px" value="0"></td>
 					<td><input type="text" class="input-box control-number input-count input-sub-total" style="width:110px" value="0" readonly tabindex="-1"></td>
 					<td align="center"><a href="#" class="btn btn-info btn-ico btn-row-add">+</a></td>
