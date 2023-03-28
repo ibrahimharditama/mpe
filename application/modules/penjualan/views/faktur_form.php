@@ -354,13 +354,14 @@ function init_details()
 function load_pesanan()
 {
 	var id_penjualan = '<?php echo $data == null ? 0 : $data['id_penjualan']; ?>';
+	var id_faktur = '<?php echo $data == null ? 0 :  $data['id']; ?>'
 	
 	$('[name=id_penjualan]').data('placeholder', 'Memuat data...').select2({ allowClear: true });
 	$('[name=id_penjualan]').find('[value!=""]').remove();
 	
 	var id_pelanggan = $('[name=id_pelanggan]').val();
 	
-	if(id_penjualan != 0){
+	if(id_faktur != 0){
 		$("#do-bayar").css("display","inline");
 	}
 

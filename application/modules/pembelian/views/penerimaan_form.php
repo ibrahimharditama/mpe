@@ -390,6 +390,7 @@ function init_details() {
 
 function load_pesanan() {
     var id_pembelian = '<?php echo $data == null ? 0 : $data['id_pembelian']; ?>';
+    var id_penerimaan = '<?php echo $data == null ? '0' : $data['id']; ?>';
 
     $('[name=id_pembelian]').data('placeholder', 'Memuat data...').select2({
         allowClear: true
@@ -397,7 +398,7 @@ function load_pesanan() {
     $('[name=id_pembelian]').find('[value!=""]').remove();
 
     var id_supplier = $('[name=id_supplier]').val();
-    if (id_pembelian != 0) {
+    if (id_penerimaan != 0) {
         $("#do-bayar").css("display", "inline");
     }
     $.post(
