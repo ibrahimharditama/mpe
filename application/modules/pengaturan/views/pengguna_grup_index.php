@@ -1,32 +1,32 @@
-<div class="col-md-6 offset-md-3 p-0 mb-4">
-	<div class="card">
-		<div class="card-header">
-			Pengaturan Grup Pengguna
-			<a href="<?php echo site_url('pengaturan/pengguna-grup/tambah'); ?>" class="btn btn-primary btn-sm btn-header">
-				<i class="ti ti-write"></i> Tambah Data
-			</a>
-		</div>
-		<div class="card-body">
-			<?php if ($this->session->flashdata('post_status') == 'inserted'): ?>
+<h1 class="my-header">Pengaturan Grup Pengguna</h1>
+
+<div class="row m-0">
+	<div class="col-6">
+
+		<?php if ($this->session->flashdata('post_status') == 'inserted'): ?>
 			<div class="alert alert-success">Data berhasil ditambahkan.</div>
-			<?php elseif ($this->session->flashdata('post_status') == 'updated'): ?>
+		<?php elseif ($this->session->flashdata('post_status') == 'updated'): ?>
 			<div class="alert alert-success">Perubahan data berhasil disimpan.</div>
-			<?php endif; ?>
-			
-			<table class="cell-border stripe order-column hover" id="datatable">
-				<thead>	
-					<tr>
-						<th width="50px">Aksi</th>
-						<th width="10px">No.</th>
-						<th>Nama Grup Pengguna</th>
-						<th width="50px">Urutan</th>
-					</tr>
-				</thead>
-				<tbody></tbody>
-			</table>
-		</div>
-		<div class="card-footer credit"><?php echo $this->config->item('credit'); ?></div>
+		<?php endif; ?>
+
+		<table class="cell-border stripe order-column hover" id="datatable">
+			<thead>	
+				<tr>
+					<th width="50px">Aksi</th>
+					<th width="10px">No.</th>
+					<th>Nama Grup Pengguna</th>
+					<th width="50px">Urutan</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
 	</div>
+</div>
+
+<div class="actionbar fixed-bottom">
+	<a class="btn btn-primary" href="<?php echo site_url('pengaturan/pengguna-grup/tambah'); ?>">
+		+ Tambah Data
+	</a>
 </div>
 
 <script type="text/javascript">
