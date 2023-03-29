@@ -12,8 +12,8 @@
 		<table class="cell-border stripe order-column hover" id="datatable">
 			<thead>	
 				<tr>
-					<th width="50px">Aksi</th>
-					<th width="10px">No.</th>
+					<th width="5px">No.</th>
+                    <th width="5px"></th>
 					<th>Nama Grup Pengguna</th>
 					<th width="50px">Urutan</th>
 				</tr>
@@ -41,21 +41,19 @@ function init_datatable()
 		'order': [[ 3, 'asc' ]],
 		'fixedHeader': true,
 		'columns': [
-			{
-				data: function (row, type, val, meta) {
-                    return '' +
-                        '<a class="btn btn-action btn-primary" href="'+site_url+'pengaturan/pengguna-grup/ubah/'+row.id+'">'+
-                            '<i class="ti ti-pencil-alt"></i>'+
-                        '</a>&nbsp;'+
-						'<a class="btn btn-action btn-danger btn-delete" href="#">'+
-                            '<i class="ti ti-trash"></i>'+
-                        '</a>';
-                },
-				orderable: false,
-				className: 'dt-body-center'
-			},
 			{ data: 'nomor', orderable: false },
-			{ data: 'nama' },
+			{
+                orderable: false,
+                render: function(data, type, row, meta) {
+                    return '<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="' +
+                        site_url + 'pengaturan/pengguna-grup/hapus/' + row.id +
+                        '"><img src="<?php echo base_url(); ?>assets/img/del.png"></a>';
+                }
+            },
+			{ data: 'nama', render: function(data, type, row, meta) {
+                    return '<a href="' + site_url + 'pengaturan/pengguna-grup/ubah/' + row.id + '">' + data +
+                        '</a>';
+                } },
 			{ data: 'urutan' }
 		]
 	});
