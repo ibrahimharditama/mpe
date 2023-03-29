@@ -55,6 +55,33 @@
                                     class="ti ti-new-window"></i></a>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label pr-0">Supir</label>
+                        <div class="col-sm-9">
+                            <select class="select2 w-75" name="person_supir[]" data-placeholder="Pilih Supir" multiple="multiple">
+                                <option value=""></option>
+                                <?php echo modules::run('options/pengguna', $data == null ? '' : $data['person']['supir']);?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label pr-0">Kenek</label>
+                        <div class="col-sm-9">
+                            <select class="select2 w-75" name="person_kenek[]" data-placeholder="Pilih Kenek" multiple="multiple">
+                                <option value=""></option>
+                                <?php echo modules::run('options/pengguna', $data == null ? '' : $data['person']['kenek']); ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label pr-0">Teknisi</label>
+                        <div class="col-sm-9">
+                            <select class="select2 w-75" name="person_teknisi[]" data-placeholder="Pilih Teknisi" multiple="multiple">
+                                <option value=""></option>
+                                <?php echo modules::run('options/pengguna', $data == null ? '' : $data['person']['teknisi']); ?>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-5">
                     <div class="form-group row">
@@ -94,11 +121,11 @@
                             </select>
                         </td>
                         <td><input type="text" name="nota[0][uraian]" class="input-box input-nama"
-                                style="width:320px"></td>
+                                style="width:320px" readonly></td>
                         <td>
                             <input type="hidden" name="nota[0][id_satuan]" class="input-id-satuan">
                             <input type="text" name="nota[0][satuan]" class="input-box input-satuan"
-                                style="width:100px">
+                                style="width:100px" readonly>
                         </td>
                         <td><input type="text" name="nota[0][qty]"
                                 class="input-box control-number input-count input-qty" style="width:50px"

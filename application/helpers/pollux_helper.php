@@ -124,7 +124,15 @@ function options($src, $id, $ref_val, $text_field, $data_attr = array())
 			$options .= '<option value="'.$opt_value.'" '.$data_attr_str.'selected>'.$text_value.'</option>';
 		}
 		else {
-			$options .= '<option value="'.$opt_value.'" '.$data_attr_str.'>'.$text_value.'</option>';
+			if(is_array($ref_val)){
+				if(in_array($row->$id,$ref_val)){
+					$options .= '<option value="'.$opt_value.'" '.$data_attr_str.'selected>'.$text_value.'</option>';
+				}else{
+					$options .= '<option value="'.$opt_value.'" '.$data_attr_str.'>'.$text_value.'</option>';
+				}
+			}else{
+				$options .= '<option value="'.$opt_value.'" '.$data_attr_str.'>'.$text_value.'</option>';
+			}
 		}
 	}
 	

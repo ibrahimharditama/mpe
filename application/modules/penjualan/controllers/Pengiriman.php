@@ -96,21 +96,51 @@ class Pengiriman extends MX_Controller {
 	
 	public function ubah($id)
 	{
-		if ( ! $this->agent->referrer()) {
-			show_404();
-		}
+		// if ( ! $this->agent->referrer()) {
+		// 	show_404();
+		// }
 		
 		$src = $this->db
 			->from('pengiriman')
 			->where('row_status', 1)
 			->where('id', $id)
 			->get();
-		
+
 		if ($src->num_rows() == 0) {
 			show_404();
 		}
+
+		$src = $src->row_array();
 		
-		$this->_form('update', $src->row_array());
+		// pengiriman person
+		$person = $this->db
+			->from('pengiriman_person')
+			->where('row_status', 1)
+			->where('id_pengiriman', $id)
+			->get()->result();
+
+		$src['person'] = [];
+		$src['person']['supir'] = [];
+		$src['person']['kenek'] = [];
+		$src['person']['teknisi'] = [];
+
+		foreach ($person as $key => $value) {
+			switch ($value->tipe) {
+				case 'supir':
+					$src['person']['supir'][] = $value->id_pengguna;
+					break;
+
+				case 'kenek':
+					$src['person']['kenek'][] = $value->id_pengguna;
+					break;
+
+				case 'teknisi':
+					$src['person']['teknisi'][] = $value->id_pengguna;
+					break;
+			}
+		}
+		
+		$this->_form('update', $src);
 	}
 	
 	public function js_detail($id)
@@ -203,24 +233,56 @@ class Pengiriman extends MX_Controller {
 			$this->db->insert_batch('pengiriman_detail_nota', $detail_nota);
 
 			// insert loop pipa
-				foreach ($detail as $key => $value) {
-					// insert detail
-					$this->db->insert('pengiriman_detail', $value);
-					$id_detail = $this->db->insert_id();
+			foreach ($detail as $key => $value) {
+				// insert detail
+				$this->db->insert('pengiriman_detail', $value);
+				$id_detail = $this->db->insert_id();
 
-					// insert ke jstok
-					$payload_jstok = [
-						"no_referensi" => $data['no_transaksi'],
-						"tgl" => date("Y-m-d"),
-						"jenis_trx" => "pengiriman",
-						"id_produk" => $value['id_produk'],
-						"qty" => $value['qty'],
-						"id_header" => $id_pengiriman,
-						"id_detail" => $id_detail,
-						"created_by" => user_session('id') 	
-					];
-					$this->db->insert('jstok',$payload_jstok);
-				}			
+				// insert ke jstok
+				$payload_jstok = [
+					"no_referensi" => $data['no_transaksi'],
+					"tgl" => date("Y-m-d"),
+					"jenis_trx" => "pengiriman",
+					"id_produk" => $value['id_produk'],
+					"qty" => $value['qty'],
+					"id_header" => $id_pengiriman,
+					"id_detail" => $id_detail,
+					"created_by" => user_session('id') 	
+				];
+				$this->db->insert('jstok',$payload_jstok);
+			}
+
+			// payload pengiriman_person
+			$pengiriman_person_payload = [];
+			foreach ($input['person_supir'] as $key => $value) {
+				$pengiriman_person_payload[] = [
+					"id_pengiriman" => $id_pengiriman,
+					"id_pengguna" => $value, 
+					"tipe" => "supir", 
+				];
+			}
+
+			foreach ($input['person_kenek'] as $key => $value) {
+				$pengiriman_person_payload[] = [
+					"id_pengiriman" => $id_pengiriman,
+					"id_pengguna" => $value, 
+					"tipe" => "kenek", 
+				];
+			}
+
+			foreach ($input['person_teknisi'] as $key => $value) {
+				$pengiriman_person_payload[] = [
+					"id_pengiriman" => $id_pengiriman,
+					"id_pengguna" => $value, 
+					"tipe" => "teknisi",
+				];
+			}
+
+			// delete pengiriman_person
+			// $this->db->where('id_pengiriman',$id_pengiriman)->delete('pengiriman_person');
+
+			// insert pengiriman_person
+			$this->db->insert_batch('pengiriman_person',$pengiriman_person_payload);
 		}
 		
 		redirect(site_url('penjualan/pengiriman'));
@@ -228,6 +290,8 @@ class Pengiriman extends MX_Controller {
 	
 	public function update()
 	{
+		$input = $this->input->post();
+
 		$id_pengiriman = $this->input->post('id');
 		$list_produk = $this->input->post('produk');
 		$list_produk_nota = $this->input->post('nota');
@@ -289,6 +353,38 @@ class Pengiriman extends MX_Controller {
 			$this->db->delete('pengiriman_detail_nota', array('id_pengiriman' => $id_pengiriman));
 			$this->db->insert_batch('pengiriman_detail', $detail);
 			$this->db->insert_batch('pengiriman_detail_nota', $detail_nota);
+
+			// payload pengiriman_person
+			$pengiriman_person_payload = [];
+			foreach ($input['person_supir'] as $key => $value) {
+				$pengiriman_person_payload[] = [
+					"id_pengiriman" => $id_pengiriman,
+					"id_pengguna" => $value, 
+					"tipe" => "supir", 
+				];
+			}
+
+			foreach ($input['person_kenek'] as $key => $value) {
+				$pengiriman_person_payload[] = [
+					"id_pengiriman" => $id_pengiriman,
+					"id_pengguna" => $value, 
+					"tipe" => "kenek", 
+				];
+			}
+
+			foreach ($input['person_teknisi'] as $key => $value) {
+				$pengiriman_person_payload[] = [
+					"id_pengiriman" => $id_pengiriman,
+					"id_pengguna" => $value, 
+					"tipe" => "teknisi",
+				];
+			}
+
+			// delete pengiriman_person
+			$this->db->where('id_pengiriman',$id_pengiriman)->delete('pengiriman_person');
+
+			// insert pengiriman_person
+			$this->db->insert_batch('pengiriman_person',$pengiriman_person_payload);
 			
 		}
 		
