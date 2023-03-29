@@ -48,6 +48,16 @@
                                 name="keterangan"><?php echo $data == null ? '' : $data['keterangan']; ?></textarea>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label pr-0"></label>
+                        <div class="col-sm-9">
+                            <a class="btn btn-outline-info" id="do-bayar" style="display:none"
+                                data-toggle="modal" href="#modal-approve" data-id="<?= $data != null ? $data['id'] : ''; ?>">
+                                <i class="ti-thumb-up"></i>
+                                Approve
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -106,13 +116,9 @@
         <button type="submit" class="btn btn-primary">
             <i class="ti ti-save"></i> Simpan
         </button>
+
         <a class="btn btn-outline-secondary ml-1" href="<?php echo site_url('penjualan/pengembalian-pipa') ?>">
             <i class="ti ti-na"></i> Batalkan
-        </a>
-        <a class="btn btn-outline-info ml-1" id="do-bayar" style="display:none" data-toggle="modal" href="#modal-approve"
-            data-id="<?= $data != null ? $data['id'] : ''; ?>">
-            <i class="ti-thumb-up"></i>
-            Approve
         </a>
     </div>
 
@@ -258,24 +264,23 @@ $().ready(function() {
         qty();
     });
 });
-$('#modal-approve').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget);
-    $('#approve_id').val(button.data('id'));
+$('#modal-approve').on('show.bs.modal', function (event) {
+	var button = $(event.relatedTarget);
+	$('#approve_id').val(button.data('id'));
 });
 
 function ajaxApprove(filename, id) {
-    $.ajax({
-        type: 'GET',
-        data: {
-            id: id
-        },
-        url: filename,
-        success: function(data) {
-            $('#modal-approve').modal('hide');
-        },
-        error: function(xhr, status, error) {
-            alert(xhr.responseText);
-        }
-    });
+	$.ajax({
+		type: 'GET',
+		data: {id: id},
+		url: filename,
+		success: function (data) {
+			$('#modal-approve').modal('hide');
+		},
+		error: function (xhr, status, error) {
+			alert(xhr.responseText);
+		}
+	});
 }
+
 </script>
