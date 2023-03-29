@@ -530,3 +530,26 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 $config['credit'] = 'MAKMUR PERMAI ELEKTRONIK';
+
+
+$config['fk'] = array (
+	'ref_produk' => array (
+		'faktur_detail.id_produk',
+		'jstok.id_produk',
+		'pembelian_detail.id_produk',
+		'penerimaan_detail.id_produk',
+		'pengembalian_pipa_detail.id_produk',
+		'pengiriman_detail.id_produk',
+		'pengiriman_detail_nota.id_produk',
+		'penjualan_detail.id_produk',
+	),
+	'supplier' => array (
+		'pembelian.id_supplier',
+		'penerimaan.id_supplier',
+	),
+	'pelanggan' => array (
+		'faktur.id_pelanggan',
+		'pengiriman.id_pelanggan',
+		'penjualan.id_pelanggan',
+	),	
+);

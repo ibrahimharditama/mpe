@@ -247,12 +247,36 @@ class Produk extends MX_Controller {
 			redirect(site_url('master/produk/ubah/'.$id));
 		}
 	}
-	
+
 	public function hapus($id)
 	{
-		$data['row_status'] = 0;
-		$this->db->update('ref_produk', $data, array('id' => $id));
-		$this->session->set_flashdata('post_status', 'deleted');
+		if ( ! $this->agent->referrer()) {
+			show_404();
+		}
+
+		$src = $this->db
+			->from('ref_produk')
+			->where('row_status', 1)
+			->where('id', $id)
+			->get();
+
+		if ($src->num_rows() == 0) {
+			show_404();
+		}
+
+		$this->load->helper('delete');
+		
+		if (check_fk('ref_produk', $id)) {
+			
+			db_delete('ref_produk', ['id' => $id]);
+			
+			$status = 'ok';
+		}
+		else {
+			$status = 'err';
+		}
+
+		$this->session->set_flashdata('delete_status', $status);
 		redirect(site_url('master/produk'));
 	}
 }

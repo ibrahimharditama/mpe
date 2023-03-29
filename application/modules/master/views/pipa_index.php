@@ -1,6 +1,13 @@
 <h1 class="my-header">Daftar Item Pipa</h1>
 <div class="row m-0">
     <div class="col-12">
+
+        <?php if ($this->session->flashdata('delete_status') == 'ok'): ?>
+		<div class="alert alert-success">Data berhasil dihapus.</div>
+		<?php elseif ($this->session->flashdata('delete_status') == 'err'): ?>
+		<div class="alert alert-danger">Data tidak dapat dihapus karena masih digunakan!</div>
+		<?php endif; ?>
+
         <table class="cell-border stripe order-column hover" id="datatable">
             <thead>
                 <tr>

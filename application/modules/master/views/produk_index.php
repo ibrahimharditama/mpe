@@ -1,14 +1,15 @@
 <h1 class="my-header">Daftar Item Inventory</h1>
 
 <div class="row m-0">
-    <?php if ($this->session->flashdata('post_status') == 'deleted'): ?>
+        
     <div class="col-12">
-        <div class="alert alert-danger">
-            <button type="button" class="close" data-dismiss="alert">x</button>
-            Data berhasil dihapus.
-        </div>
+    <?php if ($this->session->flashdata('delete_status') == 'ok'): ?>
+    <div class="alert alert-success">Data berhasil dihapus.</div>
+    <?php elseif ($this->session->flashdata('delete_status') == 'err'): ?>
+    <div class="alert alert-danger">Data tidak dapat dihapus karena masih digunakan!</div>
+    <?php endif; ?>
     </div>
-    <?php endif;?>
+
     <div class="col-12 mb-2">
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="tipe" value="semua" checked>
