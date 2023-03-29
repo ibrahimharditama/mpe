@@ -80,6 +80,10 @@ $().ready(function() {
 	if (permissions.indexOf("c") < 0) {
 		$('a:contains("Tambah Data")').remove();
 	}
+
+	if (permissions.indexOf("a") < 0) {
+		$('a:contains("Approve")').remove();
+	}
 });
 
 
