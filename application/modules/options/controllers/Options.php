@@ -52,6 +52,17 @@ class Options extends MX_Controller {
 		
 		return $options;
 	}
+
+	public function pengguna($selected = '')
+	{
+		$src = $this->db
+			->from('pengguna')
+			->where('row_status', 1)
+			->order_by('nama')
+			->get();
+		
+		return options($src, 'id', $selected, 'nama');
+	}
 	
 	public function pengguna_grup($selected = '')
 	{
