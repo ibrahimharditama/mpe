@@ -7,6 +7,8 @@
         <div class="col-8">
             <?php if ($this->session->flashdata('post_status') == 'ok'): ?>
             <div class="alert alert-success">Data berhasil disimpan.</div>
+            <?php elseif ($this->session->flashdata('post_status') == 'approve'): ?>
+            <div class="alert alert-success">Stok berhasil dikembalikan.</div>
             <?php endif; ?>
         </div>
 
@@ -138,7 +140,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger"
-                    onclick="ajaxApprove('<?=base_url()?>penjualan/pengembalian-pipa/approve?id='+$('#approve_id').val())">
+                    onclick="ajaxApprove('<?=base_url()?>penjualan/pengembalian-pipa/approve')">
                     Ya
                 </button>
             </div>
@@ -269,13 +271,14 @@ $('#modal-approve').on('show.bs.modal', function (event) {
 	$('#approve_id').val(button.data('id'));
 });
 
-function ajaxApprove(filename, id) {
+function ajaxApprove(filename) {
 	$.ajax({
-		type: 'GET',
-		data: {id: id},
+		type: 'POST',
+		data: {id: $('#approve_id').val()},
 		url: filename,
 		success: function (data) {
 			$('#modal-approve').modal('hide');
+            window.location.reload();
 		},
 		error: function (xhr, status, error) {
 			alert(xhr.responseText);

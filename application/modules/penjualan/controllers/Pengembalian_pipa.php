@@ -205,7 +205,7 @@ class Pengembalian_pipa extends MX_Controller {
 				$this->db->insert_batch('pengembalian_pipa_detail', $detail);
 			}
 
-			$this->insert_delete_stok($id);
+			//$this->insert_delete_stok($id);
 
 			$this->db->trans_complete();	
             $this->session->set_flashdata('post_status', 'ok');
@@ -246,7 +246,7 @@ class Pengembalian_pipa extends MX_Controller {
 				$this->db->insert_batch('pengembalian_pipa_detail', $detail);
 			}
 
-			$this->insert_delete_stok($id);
+			//$this->insert_delete_stok($id);
 
 			$this->db->trans_complete();	
             $this->session->set_flashdata('post_status', 'ok');
@@ -311,4 +311,14 @@ class Pengembalian_pipa extends MX_Controller {
 
 	}
 
+	public function approve()
+	{
+		$id = $this->input->post('id');
+		$this->insert_delete_stok($id);
+		$res = array (
+			'type' => "success",
+		);
+		$this->session->set_flashdata('post_status', 'approve');
+		echo json_encode($res);
+	}
 }
