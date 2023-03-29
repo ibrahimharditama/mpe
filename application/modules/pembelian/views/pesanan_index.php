@@ -45,7 +45,7 @@ function init_datatable()
 			{
 				data: 'no_transaksi',
 				render: function (data, type, row, meta) {
-					return '<a href="'+site_url+'pembelian/pesanan/ubah/'+row.id+'">'+data+'</a>';
+					return buttonUpdate(site_url + 'pembelian/pesanan/ubah/' + row.id, data);
 				}
 			},
 			{ data: 'tgl' },

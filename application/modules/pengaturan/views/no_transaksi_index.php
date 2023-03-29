@@ -46,7 +46,7 @@ function init_datatable()
 			{ 
 				data: 'nama' , 
 				"render": function (row, type, val, meta) {
-                    return '<a href="'+site_url+'pengaturan/no-transaksi/ubah/'+val.id+'">'+row+'</a>';
+					return buttonUpdate(site_url + 'pengaturan/no-transaksi/ubah/' + val.id, row);
                 },
 			},
 			{ data: 'format' },

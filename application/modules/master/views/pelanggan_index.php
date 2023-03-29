@@ -45,15 +45,14 @@ function init_datatable()
 			{
                 orderable: false,
                 render: function(data, type, row, meta) {
-                    return '<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="' + site_url + 'master/pelanggan/hapus/' + row.id +
-                        '"><img src="<?php echo base_url(); ?>assets/img/del.png"></a>';
+					return buttonDelete(site_url + 'master/pelanggan/hapus/' + row.id);
                 }
             },
 			{ data: 'kode' },
 			{
 				data: 'nama',
 				render: function (data, type, row, meta) {
-					return '<a href="'+site_url+'master/pelanggan/ubah/'+row.id+'">'+data+'</a>';
+					return buttonUpdate(site_url + 'master/pelanggan/ubah/' + row.id, data);
 				}
 			},
 			{ data: 'alamat_tidy' },

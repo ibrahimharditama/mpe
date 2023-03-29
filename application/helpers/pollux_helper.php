@@ -19,6 +19,35 @@ function user_session($key)
 	}
 }
 
+function get_menu_akses($key = '') 
+{
+	$ci =& get_instance();
+    $roleId = user_session("id_pengguna_grup");
+
+	$modules    = $ci->uri->segment(1);
+	$controller = $ci->uri->segment(2);
+
+	$uri = "/".$modules."/".$controller;
+
+	$src = $ci->db->query("SELECT r.* 
+							FROM `pengguna_grup_menu` r 
+							JOIN menu m ON m.id = r.id_menu 
+							WHERE m.row_status = 1 AND m.uri = '$uri' 
+								AND r.id_pengguna_grup = $roleId ");
+
+	if($src->num_rows() == 1 ) {
+		if ($key != '') {
+			return $src->row()->$key;
+		} else {
+			return $src->row();
+		}
+	}
+
+
+	return null;
+    
+}
+
 function perusahaan($key = '')
 {
 	$ci =& get_instance();

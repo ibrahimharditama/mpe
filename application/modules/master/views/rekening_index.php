@@ -57,8 +57,7 @@ function init_datatable() {
             {
                 orderable: false,
                 render: function(data, type, row, meta) {
-                    return '<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="' + site_url + 'master/rekening/hapus/' + row.id +
-                        '"><img src="<?php echo base_url(); ?>assets/img/del.png"></a>&nbsp;'+
+                    return buttonDelete(site_url + 'master/rekening/hapus/' + row.id)+'&nbsp;'+
                         '<a href="' + site_url + 'master/rekening/is_rekening_faktur/' + row.id +
                         '" class="btn btn-primary btn-circle btn-circle"><i class="ti-thumb-up"></i></a>';
                 }
@@ -69,8 +68,7 @@ function init_datatable() {
             {
                 data: 'no_rekening',
                 render: function(data, type, row, meta) {
-                    return '<a href="' + site_url + 'master/rekening/ubah/' + row.id + '">' + data +
-                        '</a>';
+                    return buttonUpdate(site_url + 'master/rekening/ubah/' + row.id, data);
                 }
             },
             {

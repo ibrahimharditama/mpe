@@ -94,7 +94,7 @@ function init_datatable()
 			{
 				data: 'no_transaksi',
 				render: function (data, type, row, meta) {
-					return '<a href="'+site_url+'pembelian/penerimaan/ubah/'+row.id+'">'+data+'</a>';
+					return buttonUpdate(site_url + 'pembelian/penerimaan/ubah/' + row.id, data);
 				}
 			},
 			{ data: 'tgl' },
@@ -102,7 +102,7 @@ function init_datatable()
 			{ 
 				data: 'no_pembelian', 
 				render: function (data, type, row, meta) {
-					return '<a href="'+site_url+'pembelian/pesanan/ubah/'+row.id_pembelian+'" target="_blank">'+data+'</a>';
+					return buttonUpdate(site_url + 'pembelian/pesanan/ubah/' + row.id_pembelian, data);
 				}
 			},
 			{ data: 'tgl_pembelian' },

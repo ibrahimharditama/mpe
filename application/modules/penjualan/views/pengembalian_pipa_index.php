@@ -69,7 +69,7 @@
             {
                 "data": "no_transaksi",
                 "render": function (data, type, row, meta) {
-                    return `<a href="` + site_url + `penjualan/pengembalian-pipa/ubah/` + row.id + `">`+ data +`</a>`;
+                    return buttonUpdate(site_url + 'penjualan/pengembalian-pipa/ubah/' + row.id, data);
                 }
             },
             {

@@ -49,7 +49,7 @@ function init_datatable()
 			{
 				data: 'nama',
 				render: function (data, type, row, meta) {
-					return '<a href="'+site_url+'pengaturan/pengguna/ubah/'+row.id+'">'+data+'</a>';
+					return buttonUpdate(site_url + 'pengaturan/pengguna/ubah/' + row.id, data);
 				}
 			},
 			{ data: 'email' },

@@ -23,9 +23,25 @@ function waktuMaintenance(totalhari, tanggal) {
 	return stringText;
 }
 
+function buttonUpdate(url, name) {
+	var permissions = $("#permissionmenu").html();
+	if (permissions.indexOf("u") < 0) {
+		return name;
+	}
+
+	return `<a href="` + url + `">` + name + `</a>`;
+}
+
 function buttonDelete(url) {
+	var permissions = $("#permissionmenu").html();
+	if (permissions.indexOf("d") < 0) {
+		return '';
+	}
+
 	return `<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="` + url + `"><img src="` + site_url + `assets/img/del.png"></a>`;
 }
+
+
 
 
 $().ready(function() {
@@ -57,6 +73,13 @@ $().ready(function() {
 			offset: [-203, 280]
 		});
 	})
+
+	var permissions = $("#permissionmenu").html();
+	console.log(permissions);
+
+	if (permissions.indexOf("c") < 0) {
+		$('a:contains("Tambah Data")').remove();
+	}
 });
 
 

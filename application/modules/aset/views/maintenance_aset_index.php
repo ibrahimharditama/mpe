@@ -5,7 +5,7 @@
 		<table class="cell-border stripe order-column hover" id="datatable">
 			<thead>	
 				<tr>
-                    <th></th>
+                    <th width="5px"></th>
 					<th width="5px">No.</th>
 					<th>Nama Unit</th>
 					<th>Model</th>
@@ -110,7 +110,11 @@
             {
                 "data": "nama",
                 "render": function (data, type, row, meta) {
-                    return `<a href="javascript:void(0)" 
+                    var permissions = $("#permissionmenu").html();
+                    if (permissions.indexOf("u") < 0) {
+                        return data;
+                    } else {
+                        return `<a href="javascript:void(0)" 
                             data-id="`+ row.id +`" 
                             data-idasset="`+ row.id_asset +`" 
                             data-tglmaintenance="`+ row.tgl_maintenance +`" 
@@ -119,6 +123,9 @@
                             `+ data +`
                         </a>`;
                 }
+                    }
+
+                    
             },
             {
                 "data": "model"

@@ -50,9 +50,7 @@ function init_datatable() {
             {
                 orderable: false,
                 render: function(data, type, row, meta) {
-                    return '<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="' +
-                        site_url + 'master/pipa/hapus/' + row.id +
-                        '"><img src="<?php echo base_url(); ?>assets/img/del.png"></a>';
+                    return buttonDelete(site_url + 'master/pipa/hapus/' + row.id);
                 }
             },
             {
@@ -64,7 +62,7 @@ function init_datatable() {
             {
                 data: 'nama',
                 render: function(data, type, row, meta) {
-                    return '<a href="' + site_url + 'master/pipa/ubah/' + row.id + '">' + data + '</a>';
+                    return buttonUpdate(site_url + 'master/pipa/ubah/' + row.id, data);
                 }
             },
             {

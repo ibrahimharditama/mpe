@@ -62,6 +62,8 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+			<div id="permissionmenu" style="display: none;"><?= get_menu_akses('permissions'); ?></div>
 			
 			<?php $menu = menu(user_session('id_pengguna_grup')); ?>
 			
