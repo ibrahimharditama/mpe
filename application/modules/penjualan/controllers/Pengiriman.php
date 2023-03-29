@@ -415,12 +415,16 @@ class Pengiriman extends MX_Controller {
 		$details_nota = $this->db->query(
 			"SELECT a.*,b.* FROM pengiriman_detail_nota a JOIN ref_produk b ON a.id_produk = b.id WHERE a.id_pengiriman = $id"
 		)->result();
+		$bank = $this->db->query(
+			"SELECT a.* FROM rekening a WHERE a.is_use = '1'"
+		)->row();
 		$data = [
 			"header" => $header,
-			"detail" => array_merge($details,$details_nota)
+			"detail" => array_merge($details,$details_nota),
+			"bank" => $bank,
+
 		];
-		$this->pdf->load_view('pengiriman',$data,"a5","landscape",$header->no_transaksi.".pdf");
-		$this->pdf->render();
-		$this->pdf->stream();
+
+		$this->pdf->load_pdf('pengiriman_surat_jalan', $data, $header->no_transaksi.".pdf");
 	}
 }

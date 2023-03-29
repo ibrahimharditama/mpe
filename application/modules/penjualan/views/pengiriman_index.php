@@ -45,7 +45,7 @@ function init_datatable()
                 orderable: false,
                 render: function(data, type, row, meta) {
                     return '<a href="' + site_url + 'penjualan/pengiriman/cetak/' + row.id +
-                        '"><img src="<?php echo base_url(); ?>assets/img/printer.png"></a>';
+                        '" target="_blank"><img src="<?php echo base_url(); ?>assets/img/printer.png"></a>';
                 }
             },
 			{
