@@ -1,6 +1,8 @@
 <?php if ($this->session->flashdata('post_status') == 'err'): ?>
 <?php $errors = $this->session->flashdata('errors'); ?>
 <?php $data = $this->session->flashdata('data'); ?>
+<?php elseif ($this->session->flashdata('post_status') == 'approve'): ?>
+<div class="alert alert-success">Stok berhasil di kurangi.</div>
 <?php endif; ?>
 
 <h1 class="my-header">Form Pengiriman</h1>
@@ -97,6 +99,16 @@
                             <textarea class="form-control" name="keterangan"><?php echo $data == null ? '' : $data['keterangan']; ?></textarea>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label pr-0"></label>
+                        <div class="col-sm-9">
+                            <a class="btn btn-outline-info" id="do-bayar" style="display:none"
+                                data-toggle="modal" href="#modal-approve" data-id="<?= $data != null ? $data['id'] : ''; ?>">
+                                <i class="ti-thumb-up"></i>
+                                Approve
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -188,6 +200,28 @@
     </div>
 
 </form>
+<div class="modal" id="modal-approve" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                Konfirmasi Approve
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Apa anda yakin untuk approve?
+                <input type="hidden" id="approve_id" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger"
+                    onclick="ajaxApprove('<?=base_url()?>penjualan/pengiriman/approve')">
+                    Ya
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="<?php echo site_url('penjualan/pengiriman/js-detail/' . ($data == null ? '0' : $data['id'])); ?>"></script>
 <script>
@@ -395,6 +429,7 @@
 
 	async function load_produk_nota(id_nota,callback) {
 		try {
+            
 			const targetUrl = site_url + "options/produk_nota/"+id_nota+"/1";
 			const result = await fetch(targetUrl, {
 				method: 'GET'
@@ -673,4 +708,25 @@
             '   </div>';
         $('#alert-pembayaran').append(html);
     }
+
+    $('#modal-approve').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        $('#approve_id').val(button.data('id'));
+    });
+
+    function ajaxApprove(filename) {
+        $.ajax({
+            type: 'POST',
+            data: {id: $('#approve_id').val()},
+            url: filename,
+            success: function (data) {
+                $('#modal-approve').modal('hide');
+                window.location.reload();
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    }
+
 </script>

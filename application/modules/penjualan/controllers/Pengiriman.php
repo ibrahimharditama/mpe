@@ -237,19 +237,6 @@ class Pengiriman extends MX_Controller {
 			// insert detail
 			$this->db->insert('pengiriman_detail', $value);
 			$id_detail = $this->db->insert_id();
-
-			// insert ke jstok
-			$payload_jstok = [
-				"no_referensi" => $data['no_transaksi'],
-				"tgl" => date("Y-m-d"),
-				"jenis_trx" => "pengiriman",
-				"id_produk" => $value['id_produk'],
-				"qty" => $value['qty'],
-				"id_header" => $id_pengiriman,
-				"id_detail" => $id_detail,
-				"created_by" => user_session('id') 	
-			];
-			$this->db->insert('jstok',$payload_jstok);
 		}
 
 		// payload pengiriman_person
@@ -287,6 +274,31 @@ class Pengiriman extends MX_Controller {
 		redirect(site_url('penjualan/pengiriman'));
 	}
 	
+	public function insert_jstok($id)
+	{
+		$src_data = $this->db->get_where('pengiriman', ['id' => $id, 'row_status' => 1]);
+		if($src_data->num_rows() > 0) {
+			$data = $src_data->row();
+			$detail = $this->db->get_where('pengiriman_detail', ['id_pengiriman' => $id, 'row_status' => 1])->result();
+
+			$insert = array();
+			foreach ($detail as $row) {
+				$insert[] = array(
+					'no_referensi' => $data->no_transaksi,
+					'tgl' => $data->tgl,
+					'jenis_trx' => 'pengiriman',
+					'id_produk' => $row->id_produk,
+					'qty' => $row->qty * (-1),
+					'id_header' => $row->id_pengiriman,
+					'id_detail' => $row->id,
+					'row_status' => 1,
+					'created_by' => user_session('id'),
+				);
+			}
+			if(count($insert) > 0) $this->db->insert_batch('jstok', $insert);
+		}
+	}
+
 	public function update()
 	{
 		$input = $this->input->post();
@@ -427,4 +439,16 @@ class Pengiriman extends MX_Controller {
 
 		$this->pdf->load_pdf('pengiriman_surat_jalan', $data, $header->no_transaksi.".pdf");
 	}
+
+	public function approve()
+	{
+		$id = $this->input->post('id');
+		$this->insert_jstok($id);
+		$res = array (
+			'type' => "success",
+		);
+		$this->session->set_flashdata('post_status', 'approve');
+		echo json_encode($res);
+	}
+
 }
