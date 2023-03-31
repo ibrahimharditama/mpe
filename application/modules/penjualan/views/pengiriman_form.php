@@ -229,6 +229,7 @@
     var first_load = 1;
     var _obj = [];
 	let produk_nota_list = [];
+	var details_nota_awal  = [];
 	let is_ready = false;
 
     function add_row(el, data) {
@@ -292,12 +293,49 @@
         $new_row.find('.input-harga-jual').attr('name', 'nota[' + i + '][harga_jual]');
         $new_row.find('.input-qty').attr('name', 'nota[' + i + '][qty]');
         $new_row.find('.input-diskon').attr('name', 'nota[' + i + '][diskon]');
-
         if (data != null) {
-			console.log($new_row);
 			console.log($new_row.find('.select-item-nota').find('option')[0]);
             $new_row.find('.select-item-nota').val(data.id_produk)//.trigger('change');
             $new_row.find('.input-nama').val(data.uraian);
+            $new_row.find('.input-id-satuan').val(data.id_satuan);
+            $new_row.find('.input-satuan').val(data.satuan);
+            $new_row.find('.input-harga-jual').val(data.harga_satuan);
+            $new_row.find('.input-qty').val(data.qty);
+
+			$row.find('select.select2').select2('destroy');
+			$('.select2').select2({
+				allowClear: true
+			});
+        }
+    }
+
+	function load_row_nota(el, data) {
+        i++;
+
+        var $row = $(el).closest('tr');
+
+        $row.find('select.select2').select2('destroy');
+
+        var $new_row = $row.clone().insertAfter($row);
+
+        $('.select2').select2({
+            allowClear: true
+        });
+        $('input.control-number').number(true, 0, ',', '.');
+
+        // $new_row.find('.select2').val('').trigger('change');
+        $new_row.find('input[type=text]').val('');
+
+        $new_row.find('.select-item-nota').attr('name', 'nota[' + i + '][id]');
+        $new_row.find('.input-nama').attr('name', 'nota[' + i + '][uraian]');
+        $new_row.find('.input-id-satuan').attr('name', 'nota[' + i + '][id_satuan]');
+        $new_row.find('.input-satuan').attr('name', 'nota[' + i + '][satuan]');
+        $new_row.find('.input-harga-jual').attr('name', 'nota[' + i + '][harga_jual]');
+        $new_row.find('.input-qty').attr('name', 'nota[' + i + '][qty]');
+        $new_row.find('.input-diskon').attr('name', 'nota[' + i + '][diskon]');
+        if (data != null) {
+            $new_row.find('.select-item-nota').val(data.id)//.trigger('change');
+            $new_row.find('.input-nama').val(data.nama);
             $new_row.find('.input-id-satuan').val(data.id_satuan);
             $new_row.find('.input-satuan').val(data.satuan);
             $new_row.find('.input-harga-jual').val(data.harga_satuan);
@@ -376,6 +414,19 @@
         }
     }
 
+    function init_awal_details() {
+		const nota = $('.table-item-nota tbody');
+		$.each(details_nota_awal, function(i, o) {
+			console.log(o);
+            let last = nota.children().last();
+            load_row_nota(last, o);
+        });
+
+        if (details_nota_awal.length > 0) {
+            nota.children().first().remove();
+        }
+    }
+
     function load_pesanan() {
         var id_faktur = '<?php echo $data == null ? 0 : $data['id_faktur']; ?>';
 
@@ -405,10 +456,10 @@
 
                 $('[name=id_faktur]').val(id_faktur).trigger('change');
 				is_ready = true;
+                first_load = 0;
 				load_produk_nota(id_faktur,init_details);
 
 				id_faktur = '0';
-                first_load = 0;
             }
         );
     }
@@ -429,7 +480,6 @@
 
 	async function load_produk_nota(id_nota,callback) {
 		try {
-            
 			const targetUrl = site_url + "options/produk_nota/"+id_nota+"/1";
 			const result = await fetch(targetUrl, {
 				method: 'GET'
@@ -440,6 +490,7 @@
 					(result) => {
 						console.log(result);
 						produk_nota_list = result;
+                        details_nota_awal = result
 						let options = [{
 							text:"",
 							id:""
@@ -458,7 +509,9 @@
 						});
 
 						console.log("before");
-						if(callback) callback();
+						if(callback) {
+                            callback()
+                        };
 						console.log("after");
 					},
 					(error) => {
@@ -490,14 +543,12 @@
 				first.find('.select2').empty();
 				first.find('.select2').val('').trigger('change');
 				first.find('input[type=text]').val('');
-
 				if(val == "") return;
-				load_produk_nota(val);
+				load_produk_nota(val,init_awal_details);
 			}
 		});
 
         $(document).on('change', '[name=id_pelanggan]', function() {
-            console.log("a");
             load_pesanan();
         });
 
