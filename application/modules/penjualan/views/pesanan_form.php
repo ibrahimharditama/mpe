@@ -33,9 +33,7 @@
 				<div class="form-group row">
 					<label class="col-sm-3 col-form-label pr-0"><span class="text-danger">*</span> Pelanggan</label>
 					<div class="col-sm-9">
-						<select class="select2 w-75" name="id_pelanggan" data-placeholder="Pilih Pelanggan">
-							<option value=""></option>
-							<?php echo modules::run('options/pelanggan', $data == null ? '' : $data['id_pelanggan']); ?>
+						<select class="select2 w-75" name="id_pelanggan"  id="id_pelanggan" data-placeholder="Pilih Pelanggan">
 						</select>
 						<a class="btn btn-sm btn-warning btn-lookup" href="#"><i class="ti ti-new-window"></i></a>
 						<?php if (isset($errors)) echo $errors['id_pelanggan']; ?>
@@ -228,6 +226,10 @@ function init_details()
 }
 
 $().ready(function() {
+	var id_pesanan = '<?php echo $data == null ? "0" :  $data['id']; ?>';
+	var id_pelanggan = '<?php echo $data == null ? "0" :  $data['id_pelanggan']; ?>';
+	var nama_pelanggan = '<?php echo $data == null ? "0" :  $data['kode_nama']; ?>';
+
 	$('.table-item tbody').on( 'keypress', 'input', function(e){ 
 		var val = $(this).val();
 		if(e.which == 13) {
@@ -282,5 +284,27 @@ $().ready(function() {
 	$(document).on('keyup', '.input-count', function(e) {
 		count_total();
 	});
+
+	$('#id_pelanggan').select2({
+        placeholder: "Pilih Pelangan",
+        ajax: {
+            url: site_url + "options/data-pelanggan",
+            dataType: 'json',
+            data: function (params) {
+                var query = {
+                    nama: params.term
+                }
+                return query;
+            },
+            processResults: function (data, page) {
+                return {
+                    results: data
+                };
+            },
+        }
+    });
+	if($("input[name='id']").val() !== ""){
+		$('#id_pelanggan').append('<option value='+id_pelanggan+'>'+nama_pelanggan+'</option>');	
+	}
 });
 </script>

@@ -101,9 +101,11 @@ class Pengiriman extends MX_Controller {
 		// }
 		
 		$src = $this->db
+			->select('pengiriman.*,CONCAT(kode, " . ", nama) AS kode_nama')
 			->from('pengiriman')
-			->where('row_status', 1)
-			->where('id', $id)
+			->join('pelanggan', 'pelanggan.id = pengiriman.id_pelanggan')
+			->where('pengiriman.row_status', 1)
+			->where('pengiriman.id', $id)
 			->get();
 
 		if ($src->num_rows() == 0) {
