@@ -358,6 +358,34 @@ function new_number_pengiriman($id_faktur)
 
 }
 
+function pelanggan($nama)
+{
+	$ci =& get_instance();
+
+	if (isset($nama)) {
+		$src = $ci->db
+		->select("id, CONCAT(kode, ' . ', nama) AS kode_nama")
+		->from('pelanggan')
+		->like('LOWER(nama)',  strtolower($nama), 'both');
+	}
+	else{
+		$src = $ci->db
+		->select("id, CONCAT(kode, ' . ', nama) AS kode_nama")
+		->from('pelanggan');
+	}
+	$src = $src->where('row_status', 1)
+				->order_by('kode')
+				->get();  
+	$list = array();
+	$key=0;   
+	foreach ($src->result_array() as $row) {
+		$list[$key]['id'] = $row['id'];
+		$list[$key]['text'] = ucwords(strtolower($row['kode_nama'])); 
+		$key++;
+	}
+	return $list;
+}
+
 function showRestResponse($data = null, $code = 200, $message = "Data berhasil Disimpan."){
 
 	$response = array(

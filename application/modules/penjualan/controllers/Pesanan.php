@@ -105,9 +105,11 @@ class Pesanan extends MX_Controller {
 		}
 		
 		$src = $this->db
-			->from('penjualan')
-			->where('row_status', 1)
-			->where('id', $id)
+		->select('penjualan.*,CONCAT(kode, " . ", nama) AS kode_nama')
+		->from('penjualan')
+		->join('pelanggan', 'pelanggan.id = penjualan.id_pelanggan')
+		->where('penjualan.row_status', 1)
+			->where('penjualan.id', $id)
 			->get();
 		
 		if ($src->num_rows() == 0) {

@@ -107,9 +107,11 @@ class Faktur extends MX_Controller {
 		}
 		
 		$src = $this->db
+			->select('faktur.*,CONCAT(kode, " . ", nama) AS kode_nama')
 			->from('faktur')
-			->where('row_status', 1)
-			->where('id', $id)
+			->join('pelanggan', 'pelanggan.id = faktur.id_pelanggan')
+			->where('faktur.row_status', 1)
+			->where('faktur.id', $id)
 			->get();
 		
 		if ($src->num_rows() == 0) {

@@ -1,6 +1,8 @@
 <?php if ($this->session->flashdata('post_status') == 'err'): ?>
 <?php $errors = $this->session->flashdata('errors'); ?>
 <?php $data = $this->session->flashdata('data'); ?>
+<?php elseif ($this->session->flashdata('post_status') == 'approve'): ?>
+<div class="alert alert-success">Stok berhasil di kurangi.</div>
 <?php endif; ?>
 
 <h1 class="my-header">Form Pengiriman</h1>
@@ -33,9 +35,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label pr-0"><span class="text-danger">*</span> Pelanggan</label>
                         <div class="col-sm-9">
-                            <select class="select2 w-75" name="id_pelanggan" data-placeholder="Pilih Pelanggan">
-                                <option value=""></option>
-                                <?php echo modules::run('options/pelanggan', $data == null ? '' : $data['id_pelanggan']); ?>
+						<select class="select2 w-75" name="id_pelanggan"  id="id_pelanggan" data-placeholder="Pilih Pelanggan">
                             </select>
                             <a class="btn btn-sm btn-warning btn-lookup" href="#"><i
                                     class="ti ti-new-window"></i></a>
@@ -95,6 +95,16 @@
                         <label class="col-sm-3 col-form-label pr-0">Keterangan</label>
                         <div class="col-sm-9">
                             <textarea class="form-control" name="keterangan"><?php echo $data == null ? '' : $data['keterangan']; ?></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label pr-0"></label>
+                        <div class="col-sm-9">
+                            <a class="btn btn-outline-info" id="do-bayar" style="display:none"
+                                data-toggle="modal" href="#modal-approve" data-id="<?= $data != null ? $data['id'] : ''; ?>">
+                                <i class="ti-thumb-up"></i>
+                                Approve
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -188,6 +198,28 @@
     </div>
 
 </form>
+<div class="modal" id="modal-approve" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                Konfirmasi Approve
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Apa anda yakin untuk approve?
+                <input type="hidden" id="approve_id" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger"
+                    onclick="ajaxApprove('<?=base_url()?>penjualan/pengiriman/approve')">
+                    Ya
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="<?php echo site_url('penjualan/pengiriman/js-detail/' . ($data == null ? '0' : $data['id'])); ?>"></script>
 <script>
@@ -195,6 +227,7 @@
     var first_load = 1;
     var _obj = [];
 	let produk_nota_list = [];
+	var details_nota_awal  = [];
 	let is_ready = false;
 
     function add_row(el, data) {
@@ -258,12 +291,49 @@
         $new_row.find('.input-harga-jual').attr('name', 'nota[' + i + '][harga_jual]');
         $new_row.find('.input-qty').attr('name', 'nota[' + i + '][qty]');
         $new_row.find('.input-diskon').attr('name', 'nota[' + i + '][diskon]');
-
         if (data != null) {
-			console.log($new_row);
 			console.log($new_row.find('.select-item-nota').find('option')[0]);
             $new_row.find('.select-item-nota').val(data.id_produk)//.trigger('change');
             $new_row.find('.input-nama').val(data.uraian);
+            $new_row.find('.input-id-satuan').val(data.id_satuan);
+            $new_row.find('.input-satuan').val(data.satuan);
+            $new_row.find('.input-harga-jual').val(data.harga_satuan);
+            $new_row.find('.input-qty').val(data.qty);
+
+			$row.find('select.select2').select2('destroy');
+			$('.select2').select2({
+				allowClear: true
+			});
+        }
+    }
+
+	function load_row_nota(el, data) {
+        i++;
+
+        var $row = $(el).closest('tr');
+
+        $row.find('select.select2').select2('destroy');
+
+        var $new_row = $row.clone().insertAfter($row);
+
+        $('.select2').select2({
+            allowClear: true
+        });
+        $('input.control-number').number(true, 0, ',', '.');
+
+        // $new_row.find('.select2').val('').trigger('change');
+        $new_row.find('input[type=text]').val('');
+
+        $new_row.find('.select-item-nota').attr('name', 'nota[' + i + '][id]');
+        $new_row.find('.input-nama').attr('name', 'nota[' + i + '][uraian]');
+        $new_row.find('.input-id-satuan').attr('name', 'nota[' + i + '][id_satuan]');
+        $new_row.find('.input-satuan').attr('name', 'nota[' + i + '][satuan]');
+        $new_row.find('.input-harga-jual').attr('name', 'nota[' + i + '][harga_jual]');
+        $new_row.find('.input-qty').attr('name', 'nota[' + i + '][qty]');
+        $new_row.find('.input-diskon').attr('name', 'nota[' + i + '][diskon]');
+        if (data != null) {
+            $new_row.find('.select-item-nota').val(data.id)//.trigger('change');
+            $new_row.find('.input-nama').val(data.nama);
             $new_row.find('.input-id-satuan').val(data.id_satuan);
             $new_row.find('.input-satuan').val(data.satuan);
             $new_row.find('.input-harga-jual').val(data.harga_satuan);
@@ -342,6 +412,19 @@
         }
     }
 
+    function init_awal_details() {
+		const nota = $('.table-item-nota tbody');
+		$.each(details_nota_awal, function(i, o) {
+			console.log(o);
+            let last = nota.children().last();
+            load_row_nota(last, o);
+        });
+
+        if (details_nota_awal.length > 0) {
+            nota.children().first().remove();
+        }
+    }
+
     function load_pesanan() {
         var id_faktur = '<?php echo $data == null ? 0 : $data['id_faktur']; ?>';
 
@@ -371,10 +454,10 @@
 
                 $('[name=id_faktur]').val(id_faktur).trigger('change');
 				is_ready = true;
+                first_load = 0;
 				load_produk_nota(id_faktur,init_details);
 
 				id_faktur = '0';
-                first_load = 0;
             }
         );
     }
@@ -405,6 +488,7 @@
 					(result) => {
 						console.log(result);
 						produk_nota_list = result;
+                        details_nota_awal = result
 						let options = [{
 							text:"",
 							id:""
@@ -423,7 +507,9 @@
 						});
 
 						console.log("before");
-						if(callback) callback();
+						if(callback) {
+                            callback()
+                        };
 						console.log("after");
 					},
 					(error) => {
@@ -439,6 +525,8 @@
 	}
 
     $().ready(function() {
+        var id_pelanggan = '<?php echo $data == null ? "0" :  $data['id_pelanggan']; ?>';
+	    var nama_pelanggan = '<?php echo $data == null ? "0" :  $data['kode_nama']; ?>';
         // load_faktur();
         $('.datepicker').Zebra_DatePicker({
             offset: [-203, 280]
@@ -455,14 +543,12 @@
 				first.find('.select2').empty();
 				first.find('.select2').val('').trigger('change');
 				first.find('input[type=text]').val('');
-
 				if(val == "") return;
-				load_produk_nota(val);
+				load_produk_nota(val,init_awal_details);
 			}
 		});
 
         $(document).on('change', '[name=id_pelanggan]', function() {
-            console.log("a");
             load_pesanan();
         });
 
@@ -564,7 +650,28 @@
             .val());
         });
 
-		load_pesanan();
+        $('#id_pelanggan').select2({
+            placeholder: "Pilih Pelangan",
+            ajax: {
+                url: site_url + "options/data-pelanggan",
+                dataType: 'json',
+                data: function (params) {
+                    var query = {
+                        nama: params.term
+                    }
+                    return query;
+                },
+                processResults: function (data, page) {
+                    return {
+                        results: data
+                    };
+                },
+            }
+        });
+        if($("input[name='id']").val() !== ""){
+            $('#id_pelanggan').append('<option value='+id_pelanggan+'>'+nama_pelanggan+'</option>');
+        }
+        load_pesanan();
     });
 
     $(document).on('submit', 'form#frm-pembayaran', function(event) {
@@ -673,4 +780,25 @@
             '   </div>';
         $('#alert-pembayaran').append(html);
     }
+
+    $('#modal-approve').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        $('#approve_id').val(button.data('id'));
+    });
+
+    function ajaxApprove(filename) {
+        $.ajax({
+            type: 'POST',
+            data: {id: $('#approve_id').val()},
+            url: filename,
+            success: function (data) {
+                $('#modal-approve').modal('hide');
+                window.location.reload();
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    }
+
 </script>

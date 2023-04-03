@@ -111,6 +111,13 @@ class Options extends MX_Controller {
 		return options($src, 'id', $selected, 'kode_nama');
 	}
 	
+	public function data_pelanggan()
+    {
+        $q = $this->input->get('nama');
+		$pelanggan = pelanggan($q);
+		echo json_encode($pelanggan);
+    }
+
 	public function rekening($selected = '')
 	{
 		$src = $this->db
