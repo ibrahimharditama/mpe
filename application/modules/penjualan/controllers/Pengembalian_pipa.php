@@ -284,6 +284,8 @@ class Pengembalian_pipa extends MX_Controller {
 		$src_data = $this->db->get_where('pengembalian_pipa', ['id' => $id, 'row_status' => 1]);
 
 		if($src_data->num_rows() > 0) {
+			$dtApprove['is_approve'] = 1;
+			$this->db->update('pengembalian_pipa', $dtApprove, array('id' => $id));
 			$data = $src_data->row();
 			$detail = $this->db->get_where('pengembalian_pipa_detail', ['id_pengembalian_pipa' => $id, 'row_status' => 1])->result();
 			db_delete('jstok', ['id_header' => $data->id]);

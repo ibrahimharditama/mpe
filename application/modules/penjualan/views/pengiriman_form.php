@@ -8,10 +8,7 @@
 <h1 class="my-header">Form Pengiriman</h1>
 
 <form method="post" action="<?php echo $action_url; ?>">
-    <input type="hidden" name="id" value="<?php if ($data != null) {
-        echo $data['id'];
-    } ?>">
-
+    <input type="hidden" name="id" value="<?php if ($data != null) {echo $data['id'];} ?>">
     <div class="row m-0">
         <div class="col-12">
             <div class="row">
@@ -188,7 +185,7 @@
     </div>
 
     <div class="actionbar fixed-bottom">
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" id="simpan">
             <i class="ti ti-save"></i> Simpan
         </button>
 
@@ -527,6 +524,10 @@
     $().ready(function() {
         var id_pelanggan = '<?php echo $data == null ? "0" :  $data['id_pelanggan']; ?>';
 	    var nama_pelanggan = '<?php echo $data == null ? "0" :  $data['kode_nama']; ?>';
+	    var is_approve = '<?php echo $data == null ? "0" :  $data['is_approve']; ?>';
+        if(is_approve == 1){
+            $("#simpan").css("display", "none");;
+        }
         // load_faktur();
         $('.datepicker').Zebra_DatePicker({
             offset: [-203, 280]

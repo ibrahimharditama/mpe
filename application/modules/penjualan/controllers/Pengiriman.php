@@ -280,6 +280,9 @@ class Pengiriman extends MX_Controller {
 	{
 		$src_data = $this->db->get_where('pengiriman', ['id' => $id, 'row_status' => 1]);
 		if($src_data->num_rows() > 0) {
+			$dtApprove['is_approve'] = 1;
+			$this->db->update('pengiriman', $dtApprove, array('id' => $id));
+	
 			$data = $src_data->row();
 			$detail = $this->db->get_where('pengiriman_detail', ['id_pengiriman' => $id, 'row_status' => 1])->result();
 
