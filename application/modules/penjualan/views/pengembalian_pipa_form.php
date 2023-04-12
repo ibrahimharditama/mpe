@@ -115,7 +115,7 @@
     </div>
 
     <div class="actionbar fixed-bottom">
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary" id="simpan">
             <i class="ti ti-save"></i> Simpan
         </button>
 
@@ -254,6 +254,11 @@ $("#form").submit(function(e) {
 
 $().ready(function() {
     var id_pengembalian = '<?php echo $data == null ? '0' : $data['id']; ?>';
+    var is_approve = '<?php echo $data == null ? "0" :  $data['is_approve']; ?>';
+        if(is_approve == 1){
+            $("#simpan").css("display", "none");;
+        }
+
     if (id_pengembalian != 0) {
         $("#do-bayar").css("display", "inline");
     }

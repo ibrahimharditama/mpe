@@ -89,6 +89,7 @@ class Absensi extends MX_Controller {
 					"id", $input["id"]
 				)
 				->update('absensi',[
+					"status" 	=> 1,
 					"approved_at" 	=> date('Y-m-d H:i:s'),
 					"approved_by"	=> user_session('id')
 				]);
