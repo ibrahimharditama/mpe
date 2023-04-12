@@ -232,46 +232,55 @@ class Pengiriman extends MX_Controller {
 		foreach ($detail_nota as $i => $d) {
 			$detail_nota[$i]['id_pengiriman'] = $id_pengiriman;
 		}
-		$this->db->insert_batch('pengiriman_detail_nota', $detail_nota);
 
-		// insert loop pipa
-		foreach ($detail as $key => $value) {
-			// insert detail
-			$this->db->insert('pengiriman_detail', $value);
-			$id_detail = $this->db->insert_id();
+		if(count($detail) > 0) {
+			$this->db->insert_batch('pengiriman_detail', $detail);
+		}
+		
+		if(count($detail_nota) > 0) {
+			$this->db->insert_batch('pengiriman_detail_nota', $detail_nota);
 		}
 
 		// payload pengiriman_person
 		$pengiriman_person_payload = [];
-		foreach ($input['person_supir'] as $key => $value) {
-			$pengiriman_person_payload[] = [
-				"id_pengiriman" => $id_pengiriman,
-				"id_pengguna" => $value, 
-				"tipe" => "supir", 
-			];
+		if(isset($input['person_supir'])) {
+			foreach ($input['person_supir'] as $key => $value) {
+				$pengiriman_person_payload[] = [
+					"id_pengiriman" => $id_pengiriman,
+					"id_pengguna" => $value, 
+					"tipe" => "supir", 
+				];
+			}
+		}
+		
+		if(isset($input['person_kenek'])) {
+			foreach ($input['person_kenek'] as $key => $value) {
+				$pengiriman_person_payload[] = [
+					"id_pengiriman" => $id_pengiriman,
+					"id_pengguna" => $value, 
+					"tipe" => "kenek", 
+				];
+			}
 		}
 
-		foreach ($input['person_kenek'] as $key => $value) {
-			$pengiriman_person_payload[] = [
-				"id_pengiriman" => $id_pengiriman,
-				"id_pengguna" => $value, 
-				"tipe" => "kenek", 
-			];
-		}
-
-		foreach ($input['person_teknisi'] as $key => $value) {
-			$pengiriman_person_payload[] = [
-				"id_pengiriman" => $id_pengiriman,
-				"id_pengguna" => $value, 
-				"tipe" => "teknisi",
-			];
+		if(isset($input['person_teknisi'])) {
+			foreach ($input['person_teknisi'] as $key => $value) {
+				$pengiriman_person_payload[] = [
+					"id_pengiriman" => $id_pengiriman,
+					"id_pengguna" => $value, 
+					"tipe" => "teknisi",
+				];
+			}
 		}
 
 		// delete pengiriman_person
 		// $this->db->where('id_pengiriman',$id_pengiriman)->delete('pengiriman_person');
 
 		// insert pengiriman_person
-		$this->db->insert_batch('pengiriman_person',$pengiriman_person_payload);
+		if(count($pengiriman_person_payload) > 0) {
+			$this->db->insert_batch('pengiriman_person',$pengiriman_person_payload);
+		}
+		
 		
 		redirect(site_url('penjualan/pengiriman'));
 	}
@@ -366,40 +375,54 @@ class Pengiriman extends MX_Controller {
 		
 		$this->db->delete('pengiriman_detail', array('id_pengiriman' => $id_pengiriman));
 		$this->db->delete('pengiriman_detail_nota', array('id_pengiriman' => $id_pengiriman));
-		$this->db->insert_batch('pengiriman_detail', $detail);
-		$this->db->insert_batch('pengiriman_detail_nota', $detail_nota);
+		if(count($detail) > 0) {
+			$this->db->insert_batch('pengiriman_detail', $detail);
+		}
+		
+		if(count($detail_nota) > 0) {
+			$this->db->insert_batch('pengiriman_detail_nota', $detail_nota);
+		}
+		
 
 		// payload pengiriman_person
 		$pengiriman_person_payload = [];
-		foreach ($input['person_supir'] as $key => $value) {
-			$pengiriman_person_payload[] = [
-				"id_pengiriman" => $id_pengiriman,
-				"id_pengguna" => $value, 
-				"tipe" => "supir", 
-			];
+		if(isset($input['person_supir'])) {
+			foreach ($input['person_supir'] as $key => $value) {
+				$pengiriman_person_payload[] = [
+					"id_pengiriman" => $id_pengiriman,
+					"id_pengguna" => $value, 
+					"tipe" => "supir", 
+				];
+			}
+		}
+		
+		if(isset($input['person_kenek'])) {
+			foreach ($input['person_kenek'] as $key => $value) {
+				$pengiriman_person_payload[] = [
+					"id_pengiriman" => $id_pengiriman,
+					"id_pengguna" => $value, 
+					"tipe" => "kenek", 
+				];
+			}
 		}
 
-		foreach ($input['person_kenek'] as $key => $value) {
-			$pengiriman_person_payload[] = [
-				"id_pengiriman" => $id_pengiriman,
-				"id_pengguna" => $value, 
-				"tipe" => "kenek", 
-			];
-		}
-
-		foreach ($input['person_teknisi'] as $key => $value) {
-			$pengiriman_person_payload[] = [
-				"id_pengiriman" => $id_pengiriman,
-				"id_pengguna" => $value, 
-				"tipe" => "teknisi",
-			];
+		if(isset($input['person_teknisi'])) {
+			foreach ($input['person_teknisi'] as $key => $value) {
+				$pengiriman_person_payload[] = [
+					"id_pengiriman" => $id_pengiriman,
+					"id_pengguna" => $value, 
+					"tipe" => "teknisi",
+				];
+			}
 		}
 
 		// delete pengiriman_person
 		$this->db->where('id_pengiriman',$id_pengiriman)->delete('pengiriman_person');
 
 		// insert pengiriman_person
-		$this->db->insert_batch('pengiriman_person',$pengiriman_person_payload);
+		if(count($pengiriman_person_payload) > 0) {
+			$this->db->insert_batch('pengiriman_person',$pengiriman_person_payload);
+		}
 		
 		redirect(site_url('penjualan/pengiriman'));
 	}

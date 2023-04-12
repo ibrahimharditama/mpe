@@ -29,7 +29,6 @@
 							<?php echo modules::run('options/urutan', 'pengguna_grup', $data == null ? '' : $data['urutan']); ?>
 						</select>
 					</div>
-					<button type="submit" class="btn btn-primary"><i class="ti ti-save"></i> Simpan</button>
 				</div>
 				<div class="col-sm-9">
 					<table class="table table-sm table-bordered">

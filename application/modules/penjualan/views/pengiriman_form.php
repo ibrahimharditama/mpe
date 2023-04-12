@@ -1,8 +1,6 @@
 <?php if ($this->session->flashdata('post_status') == 'err'): ?>
 <?php $errors = $this->session->flashdata('errors'); ?>
 <?php $data = $this->session->flashdata('data'); ?>
-<?php elseif ($this->session->flashdata('post_status') == 'approve'): ?>
-<div class="alert alert-success">Stok berhasil di kurangi.</div>
 <?php endif; ?>
 
 <h1 class="my-header">Form Pengiriman</h1>
@@ -11,6 +9,11 @@
     <input type="hidden" name="id" value="<?php if ($data != null) {echo $data['id'];} ?>">
     <div class="row m-0">
         <div class="col-12">
+            
+            <?php if ($this->session->flashdata('post_status') == 'approve'): ?>
+            <div class="alert alert-success">Stok berhasil di kurangi.</div>
+            <?php endif; ?>
+
             <div class="row">
                 <div class="col-5">
                     <div class="form-group row">
@@ -185,7 +188,7 @@
     </div>
 
     <div class="actionbar fixed-bottom">
-        <button class="btn btn-primary" id="simpan">
+        <button type="submit" class="btn btn-primary" id="simpan">
             <i class="ti ti-save"></i> Simpan
         </button>
 
