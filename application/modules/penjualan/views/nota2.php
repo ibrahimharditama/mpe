@@ -187,7 +187,7 @@
         </tr>
         <tr>
             <td colspan="3">
-                <span class="f-size-10 f-verdana fw-bold">Jatuh Tempo :</span> <span class="f-size-10 fw-bold f-arial"><?=date("d/m/Y",strtotime($header->tgl))?></span>
+               <span class="f-size-10 fw-bold f-arial"><?=terbilang($header->grand_total-$header->uang_muka)?></span>
             </td>
             <td class="t-right f-verdana f-size-9 fw-400">Biaya Lain :</td>
             <td class="t-right f-verdana f-size-9 fw-400" style="padding-right: 10px;">0</td>
@@ -196,7 +196,7 @@
             <td class="t-right f-verdana f-size-9 fw-400"><?=number_format($header->total)?></td>
         </tr>
         <tr>
-            <td class="f-size-8 f-verdana fw-400" colspan="5"><?=terbilang($header->grand_total)?></td>
+            <td class="f-size-8 f-verdana fw-400" colspan="5"></td>
             <td class="f-size-9 f-verdana fw-400">Potongan</td>
             <td class="f-size-9 f-verdana fw-400">:</td>
             <td class="t-right f-verdana f-size-9 fw-400"><?=number_format($header->diskon_faktur)?></td>
