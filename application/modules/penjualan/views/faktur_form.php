@@ -258,7 +258,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td>Faktur tanpa header</td>
+								<td>Faktur tanpa blanko</td>
 								<td class="text-center">
 									<?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/faktur/true' )); ?>
 								</td>
@@ -270,7 +270,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td>Surat jalan tanpa header</td>
+								<td>Surat jalan tanpa blanko</td>
 								<td class="text-center">
 									<?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/sj/true' )); ?>
 								</td>
