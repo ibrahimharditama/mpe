@@ -214,6 +214,18 @@
             <td class="t-right f-verdana f-size-9 fw-400"><?=number_format($header->uang_muka)?></td>
         </tr>
         <tr>
+            <td colspan="5"></td>
+            <td class="f-size-9 f-verdana fw-400">Biaya Lain</td>
+            <td class="f-size-9 f-verdana fw-400">:</td>
+            <td class="t-right f-verdana f-size-9 fw-400"><?=number_format($header->biaya_lain)?></td>
+        </tr>
+        <tr>
+            <td colspan="5"></td>
+            <td class="f-size-9 f-verdana fw-400">Ket. Biaya Lain</td>
+            <td class="f-size-9 f-verdana fw-400">:</td>
+            <td class="t-right f-verdana f-size-9 fw-400"><?=$header->keterangan_biaya_lain?></td>
+        </tr>
+        <tr>
             <td colspan="2"></td>
             <td class="t-center f-verdana f-size-10 fw-400" rowspan="2" style="border: 1px solid black;">
                 NO REK  <?=$bank->bank?>: <?=$bank->no_rekening?><br>

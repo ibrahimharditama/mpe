@@ -169,7 +169,7 @@
                         <td colspan="3" class="border-bottom-none border-left-none"></td>
                         <td colspan="3" class="pr-2" align="right" valign="top">Keterangan</td>
                         <td colspan="4">
-                            <textarea class="form-control" name="keterangan_biaya_lain"></textarea>
+                            <textarea class="form-control" rows="1" style="min-height: 40px !important;" name="keterangan_biaya_lain"><?php echo $data == null ? '' : $data['keterangan_biaya_lain']; ?></textarea>
                         </td>
                     </tr>
                     <tr>

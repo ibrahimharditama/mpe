@@ -197,7 +197,7 @@ class Penerimaan extends MX_Controller {
 		}
 		
 		if (count($detail) > 0) {
-			$key = array('tgl', 'id_supplier', 'id_pembelian', 'keterangan', 'diskon_faktur|number', 'biaya_lain|number', 'uang_muka|number', 'rek_pembayaran_dp|number');
+			$key = array('tgl', 'id_supplier', 'id_pembelian', 'keterangan', 'keterangan_biaya_lain', 'diskon_faktur|number', 'biaya_lain|number', 'uang_muka|number', 'rek_pembayaran_dp|number');
 			$data = post_data($key);
 			
 			$data['no_transaksi'] = new_number('tagihan');

@@ -198,7 +198,7 @@ class Faktur extends MX_Controller {
 		}
 		
 		if (count($detail) > 0) {
-			$key = array('tgl', 'id_pelanggan', 'id_penjualan', 'keterangan', 'diskon_faktur|number', 'biaya_lain|number', 'uang_muka|number', 'rek_pembayaran_dp|number');
+			$key = array('tgl', 'id_pelanggan', 'id_penjualan', 'keterangan', 'keterangan_biaya_lain', 'diskon_faktur|number', 'biaya_lain|number', 'uang_muka|number', 'rek_pembayaran_dp|number');
 			$data = post_data($key);
 			
 			$data['no_transaksi'] = new_number('faktur');
