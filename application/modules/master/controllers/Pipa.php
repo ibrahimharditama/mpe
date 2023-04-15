@@ -13,6 +13,7 @@ class Pipa extends MX_Controller {
 	{
 		$this->load->view('templates/app_tpl', array (
 			'content' => 'pipa_index',
+			'periode' => date('Y-m'),
 		));
 	}
 	

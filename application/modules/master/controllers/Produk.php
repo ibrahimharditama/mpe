@@ -13,6 +13,7 @@ class Produk extends MX_Controller {
 	{
 		$this->load->view('templates/app_tpl', array (
 			'content' => 'produk_index',
+			'periode' => date('Y-m'),
 		));
 	}
 	
