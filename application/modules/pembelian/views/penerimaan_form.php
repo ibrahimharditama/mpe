@@ -78,7 +78,7 @@
                         <th>Uraian</th>
                         <th>Qty</th>
                         <th>Satuan</th>
-                        <th>Hrg Satuan (Rp)</th>                        
+                        <th>Hrg Satuan (Rp)</th>
                         <th>Diskon (Rp)</th>
                         <th>Sub-Total (Rp)</th>
                         <th colspan="2"></th>
@@ -95,7 +95,7 @@
                         <td><input type="text" name="produk[0][uraian]" class="input-box input-nama"
                                 style="width:320px"></td>
                         <td><input type="text" name="produk[0][qty]"
-                            class="input-box control-number input-count input-qty" style="width:50px" value="0">
+                                class="input-box control-number input-count input-qty" style="width:50px" value="0">
                         </td>
                         <td>
                             <input type="hidden" name="produk[0][id_satuan]" class="input-id-satuan">
@@ -104,7 +104,7 @@
                         </td>
                         <td><input type="text" name="produk[0][harga_beli]"
                                 class="input-box control-number input-count input-harga-beli" style="width:110px"
-                                value="0"></td>                        
+                                value="0"></td>
                         <td><input type="text" name="produk[0][diskon]"
                                 class="input-box control-number input-count input-diskon" style="width:110px" value="0">
                         </td>
@@ -134,14 +134,6 @@
                     </tr>
                     <tr>
                         <td colspan="3" class="border-bottom-none border-left-none"></td>
-                        <td colspan="3" class="pr-2" align="right">Biaya Lain-lain</td>
-                        <td><input type="text" name="biaya_lain"
-                                class="input-box control-number input-count input-biaya-lain"
-                                value="<?php echo $data == null ? 0 : $data['biaya_lain']; ?>" style="width:110px"></td>
-                        <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="border-bottom-none border-left-none"></td>
                         <td colspan="3" class="pr-2 semi-bold" align="right">GRAND TOTAL</td>
                         <td><input type="text" id="gtt" class="input-box control-number input-grand-total" value="0"
                                 style="width:110px" readonly></td>
@@ -150,9 +142,8 @@
                     <tr>
                         <td colspan="3" class="border-bottom-none border-left-none"></td>
                         <td colspan="3" class="pr-2" align="right">Uang Muka</td>
-                        <td><input type="text" name="uang_muka"
-                                class="input-box control-number input-count-dp input-dp" value="0"
-                                style="width:110px"></td>
+                        <td><input type="text" name="uang_muka" class="input-box control-number input-count-dp input-dp"
+                                value="0" style="width:110px"></td>
                         <td colspan="2"></td>
                     </tr>
                     <tr>
@@ -164,6 +155,21 @@
                                 <option value="">- Pilih Rekening -</option>
                                 <?php echo modules::run('options/rekening', ''); ?>
                             </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="border-bottom-none border-left-none"></td>
+                        <td colspan="3" class="pr-2" align="right">Biaya Lain-lain</td>
+                        <td><input type="text" name="biaya_lain"
+                                class="input-box control-number input-count input-biaya-lain"
+                                value="<?php echo $data == null ? 0 : $data['biaya_lain']; ?>" style="width:110px"></td>
+                        <td colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="border-bottom-none border-left-none"></td>
+                        <td colspan="3" class="pr-2" align="right" valign="top">Keterangan</td>
+                        <td colspan="4">
+                            <textarea class="form-control" name="keterangan_biaya_lain"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -234,8 +240,9 @@
                             <div class="form-group">
                                 <label>Tgl. Pembayaran</label>
                                 <input type="text" class="form-control input-bayar datepicker" name="tgl_pembayaran"
-                                    id="tgl_pembayaran" value="<?=date("Y-m-d");?>" readonly data-message="<b>Tanggal</b> harus diisi.">
-								<div id="err-tgl_pembayaran" class="err"></div>
+                                    id="tgl_pembayaran" value="<?=date("Y-m-d");?>" readonly
+                                    data-message="<b>Tanggal</b> harus diisi.">
+                                <div id="err-tgl_pembayaran" class="err"></div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-12"><label>Rek. Pembayaran</label></div>
@@ -245,14 +252,15 @@
                                         <option value="">- Pilih Rekening -</option>
                                         <?php echo modules::run('options/rekening', ''); ?>
                                     </select>
-									<div id="err-rek_pembayaran" class="err"></div>
+                                    <div id="err-rek_pembayaran" class="err"></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Nominal</label>
                                 <input type="text" class="form-control input-bayar control-number"
-                                    name="nominal_pembayaran" id="nominal_pembayaran" value="0"  data-message="<b>Nominal</b> harus diisi.">
-								<div id="err-nominal_pembayaran" class="err"></div>
+                                    name="nominal_pembayaran" id="nominal_pembayaran" value="0"
+                                    data-message="<b>Nominal</b> harus diisi.">
+                                <div id="err-nominal_pembayaran" class="err"></div>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block">Simpan Pembayaran</button>
@@ -441,13 +449,13 @@ function load_penerimaan() {
 
 
 $().ready(function() {
-	$('.table-item tbody').on( 'keypress', 'input', function(e){ 
-		var val = $(this).val();
-		if(e.which == 13) {
-			e.preventDefault();
-			add_row(this, null);
-		}
-	});
+    $('.table-item tbody').on('keypress', 'input', function(e) {
+        var val = $(this).val();
+        if (e.which == 13) {
+            e.preventDefault();
+            add_row(this, null);
+        }
+    });
 
     init_details();
     load_pesanan();

@@ -220,17 +220,14 @@
                 ATN: <?=$bank->nama?>
             </td>
             <td colspan="2"></td>
-            <td class="f-size-9 f-verdana fw-400">Tunai</td>
+            <td class="f-size-9 f-verdana fw-400">Sisa</td>
             <td class="f-size-9 f-verdana fw-400">:</td>
-            <td class="t-right f-verdana f-size-9 fw-400">0</td>
+            <td class="t-right f-verdana f-size-9 fw-400"><?=number_format($header->grand_total-$header->uang_muka)?></td>
         </tr>
         <tr>
             <td></td>
             <td class="t-center fw-bold f-verdana f-size-10" >Penerima</td>
             <td class="t-center fw-bold f-verdana f-size-10" colspan="2">Hormat Kami</td>
-            <td class="f-size-9 fw-400 f-verdana v-top">Kredit</td>
-            <td class="f-size-9 fw-400 f-verdana">:</td>
-            <td class="t-right f-size-9 fw-400 f-verdana v-top">0</td>
         </tr>
         <tr>
             <td class="tg-0pky" colspan="8"><br></td>

@@ -505,7 +505,6 @@ class Faktur extends MX_Controller {
 			"no_header" => $no_header
 		];
 		//$this->pdf->load_view('nota',$data,"a5","landscape",$header->no_transaksi.".pdf");
-
 		if($tipe == 'faktur') {
 			$this->pdf->load_pdf('nota2', $data, $header->no_transaksi.".pdf");
 		} else {
