@@ -97,16 +97,16 @@
                             <textarea class="form-control" name="keterangan"><?php echo $data == null ? '' : $data['keterangan']; ?></textarea>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                         <label class="col-sm-3 col-form-label pr-0"></label>
                         <div class="col-sm-9">
                             <a class="btn btn-outline-info" id="do-bayar" style="display:none"
                                 data-toggle="modal" href="#modal-approve" data-id="<?= $data != null ? $data['id'] : ''; ?>">
                                 <i class="ti-thumb-up"></i>
-                                Approve
+                                Approv
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -427,7 +427,6 @@
 
     function load_pesanan() {
         var id_faktur = '<?php echo $data == null ? 0 : $data['id_faktur']; ?>';
-
         // $('[name=id_faktur]').data('placeholder', 'Memuat data...').select2({ allowClear: true });
         // $('[name=id_faktur]').find('[value!=""]').remove();
 
