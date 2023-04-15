@@ -56,7 +56,7 @@
                             <a class="btn btn-outline-info" id="do-bayar" style="display:none"
                                 data-toggle="modal" href="#modal-approve" data-id="<?= $data != null ? $data['id'] : ''; ?>">
                                 <i class="ti-thumb-up"></i>
-                                Approve
+                                Approv
                             </a>
                         </div>
                     </div>

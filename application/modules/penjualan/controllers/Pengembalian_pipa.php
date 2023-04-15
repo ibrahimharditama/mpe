@@ -19,9 +19,9 @@ class Pengembalian_pipa extends MX_Controller {
 
     public function datatable()
 	{
-		$this->datatables->select("id, tgl, id_pengiriman, no_transaksi, no_pengiriman, qty, keterangan, created_by, updated_by")
+		$this->datatables->select("id, tgl, id_pengiriman, no_transaksi, no_pengiriman, qty, keterangan,is_approve, created_by, updated_by")
                     ->from("(SELECT pp.id, pp.tgl, pp.id_pengiriman, pp.no_transaksi, p.no_transaksi AS no_pengiriman, 
-							pp.qty, pp.keterangan, IFNULL(b.nama, '') AS created_by, IFNULL(c.nama, '') AS updated_by 
+							pp.qty, pp.keterangan,pp.is_approve, IFNULL(b.nama, '') AS created_by, IFNULL(c.nama, '') AS updated_by 
 							FROM pengembalian_pipa pp 
 							JOIN pengiriman p ON p.id = pp.id_pengiriman AND p.row_status = 1 
 							LEFT JOIN pengguna AS b ON pp.created_by = b.id

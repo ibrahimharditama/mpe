@@ -30,6 +30,28 @@
 	</a>
 </div>
 
+<div class="modal" id="modal-approve" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                Konfirmasi Approve
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Apa anda yakin untuk approve?
+                <input type="hidden" id="approve_id" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger"
+                    onclick="ajaxApprove('<?=base_url()?>penjualan/pengembalian-pipa/approve')">
+                    Ya
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script>
@@ -73,7 +95,14 @@
                 }
             },
             {
-                "data": "tgl"
+                "data": "tgl",
+                render: function(data, type, row, meta) {
+					if(row.is_approve == 1){
+						return data;
+					}
+                    return '<a data-toggle="modal" href="#modal-approve" data-id="' + row.id + '">' +
+                        data + '</a>';
+                }
             },
             {
                 "data": "no_pengiriman",
@@ -101,6 +130,25 @@
         
     });
 
-    
+$('#modal-approve').on('show.bs.modal', function (event) {
+	var button = $(event.relatedTarget);
+	$('#approve_id').val(button.data('id'));
+});
+
+function ajaxApprove(filename) {
+	$.ajax({
+		type: 'POST',
+		data: {id: $('#approve_id').val()},
+		url: filename,
+		success: function (data) {
+			$('#modal-approve').modal('hide');
+            window.location.reload();
+		},
+		error: function (xhr, status, error) {
+			alert(xhr.responseText);
+		}
+	});
+}
+
 
 </script>
