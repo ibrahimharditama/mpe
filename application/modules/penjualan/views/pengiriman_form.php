@@ -97,7 +97,7 @@
                             <textarea class="form-control" name="keterangan"><?php echo $data == null ? '' : $data['keterangan']; ?></textarea>
                         </div>
                     </div>
-                    <!-- <div class="form-group row">
+                    <div class="form-group row">
                         <label class="col-sm-3 col-form-label pr-0"></label>
                         <div class="col-sm-9">
                             <a class="btn btn-outline-info" id="do-bayar" style="display:none"
@@ -106,7 +106,7 @@
                                 Approv
                             </a>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>

@@ -95,14 +95,7 @@
                 }
             },
             {
-                "data": "tgl",
-                render: function(data, type, row, meta) {
-					if(row.is_approve == 1){
-						return data;
-					}
-                    return '<a data-toggle="modal" href="#modal-approve" data-id="' + row.id + '">' +
-                        data + '</a>';
-                }
+                "data": "tgl"
             },
             {
                 "data": "no_pengiriman",
