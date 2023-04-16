@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="col-5">
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                         <label class="col-sm-3 col-form-label pr-0">Alamat Pengiriman</label>
                         <div class="col-sm-9">
                             <textarea class="form-control" name="alamat"><?php echo $data == null ? '' : $data['alamat']; ?></textarea>
@@ -96,17 +96,7 @@
                         <div class="col-sm-9">
                             <textarea class="form-control" name="keterangan"><?php echo $data == null ? '' : $data['keterangan']; ?></textarea>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0"></label>
-                        <div class="col-sm-9">
-                            <a class="btn btn-outline-info" id="do-bayar" style="display:none"
-                                data-toggle="modal" href="#modal-approve" data-id="<?= $data != null ? $data['id'] : ''; ?>">
-                                <i class="ti-thumb-up"></i>
-                                Approv
-                            </a>
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -194,6 +184,12 @@
 
         <a class="btn btn-outline-secondary ml-1" href="<?php echo site_url('penjualan/pengiriman'); ?>">
             <i class="ti ti-na"></i> Batalkan
+        </a>
+
+        <a class="btn btn-outline-info ml-1" id="do-bayar" style="display:none"
+            data-toggle="modal" href="#modal-approve" data-id="<?= $data != null ? $data['id'] : ''; ?>">
+            <i class="ti-thumb-up"></i>
+            Approv
         </a>
     </div>
 

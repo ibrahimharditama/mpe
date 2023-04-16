@@ -1,7 +1,11 @@
 <div class="my-header pb-0 d-flex">
-    <p class="mr-3 mt-1">Kartu Stok</p> 
+<p class="mr-3 mt-1">Kartu Stok</p> 
     <div style="width: 130px;">
         <input type="text" class="form-control datepicker-year-month" name="tgl" value="<?= $periode; ?>" readonly>
+    </div>
+    <p class="mr-3 mt-1 ml-3">Nama</p> 
+    <div style="width: 250px;">
+        <input type="text" class="form-control" name="nama" value="<?= $nama; ?>">
     </div>
 </div>
 
@@ -93,10 +97,16 @@
             show_clear_date: false, 
             view: 'months',
             onSelect: function() {
-                var url = site_url + 'laporan/kartustok/index/' + $(this).val();
+                var url = site_url + 'laporan/kartustok/index/' + $(this).val()+"/"+$("[name='nama']").val();
                 window.location.href = url;
             }
 
+        });
+        $("[name='nama']").on('keypress',function(e) {
+            if(e.which == 13) {
+                var url = site_url + 'laporan/kartustok/index/' + $("[name='tgl']").val()+"/"+$(this).val();
+                window.location.href = url;
+            }
         });
     });
 

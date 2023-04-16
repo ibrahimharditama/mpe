@@ -9,17 +9,18 @@ class Kartustok extends MX_Controller {
 		$this->form_validation->CI =& $this;
 	}
 	
-	public function index($periode = '')
+	public function index($periode = '',$nama = '')
 	{   
 
 		$this->load->view('templates/app_tpl', array (
 			'content' => 'kartustok_index',
-            'data' => $this->_data($periode != '' ? $periode : date('Y-m')),
+            'data' => $this->_data($periode != '' ? $periode : date('Y-m'),$nama != '' ? $nama : ''),
             'periode' => $periode != '' ? $periode : date('Y-m'),
+            'nama' => $nama != '' ? $nama : ''
 		));
 	}
 
-    private function _data($periode)
+    private function _data($periode,$nama)
     {
         $data = $this->db->query("SELECT * 
                                 FROM(
@@ -62,7 +63,7 @@ class Kartustok extends MX_Controller {
                                         WHERE row_status = 1 AND DATE_FORMAT(tgl, '%Y-%m') = '$periode' AND qty < 0
                                         GROUP BY id_produk
                                     ) so ON so.id_produk = p.id
-                                    WHERE p.row_status = 1 
+                                    WHERE p.row_status = 1 and t.nama != 'Jasa' and LOWER(p.nama) LIKE  LOWER('%".$nama."%')
                                     ORDER BY p.id_tipe, p.nama
                                 ) a 
                                 WHERE stokawal != 0 OR stokin != 0 OR stokout != 0 OR stokakhir != 0 
