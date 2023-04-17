@@ -124,7 +124,7 @@
     <table>
         <tr>
             <td width="250px" class="t-left v-top" rowspan="3" style="padding-top: 10px">
-                <?php if(!$no_header): ?>
+                <?php if(json_decode($no_header) == false):?>
                     <span class="fw-bold f-verdana f-size-15-s"><?= ucwords(strtolower(perusahaan('nama'))); ?></span><br>
                     <span class="fw-400 f-trebuchet f-size-8-s">
                         <?= perusahaan('alamat'); ?>
@@ -195,10 +195,15 @@
         </tr>
         <tr>
             <td colspan="3"></td>
+            <?php if(json_decode($is_rekening) == true):?>
             <td class="t-center f-verdana f-size-10 fw-400" rowspan="2" style="border: 1px solid black;" width="250px">
                 NO REK  <?=$bank->bank?>: <?=$bank->no_rekening?><br>
                 ATN: <?=$bank->nama?>
             </td>
+            <?php else:?>
+                <td rowspan="2">
+                </td>
+            <?php endif;?>
             <td colspan="4"></td>
         </tr>
         <tr>
@@ -207,9 +212,11 @@
             <td></td>
             <td class="t-center fw-bold f-verdana f-size-10" colspan="5">Hormat Kami</td>
         </tr>
+        <?php if(json_decode($is_rekening) == true):?>
         <tr>
             <td class="tg-0pky" colspan="8"><br></td>
         </tr>
+        <?php endif;?>
         <tr>
             <td colspan="3"></td>
             <td class="t-center f-verdana f-size-8 fw-400"  style="border: 1px solid black !important;">Barang telah diterima dengan baik.<br>Barang yang sudah dibeli tidak bisa<br>ditukar atau dikembalikan.</td>

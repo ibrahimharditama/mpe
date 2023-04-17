@@ -47,7 +47,7 @@ function init_datatable()
                 orderable: false,
                 render: function(data, type, row, meta) {
                     return '<a target="_blank" href="' + site_url + 'penjualan/faktur/cetak/' + row.id +
-                        '"><img src="<?php echo base_url(); ?>assets/img/printer.png"></a>';
+                        '/faktur/false/true"><img src="<?php echo base_url(); ?>assets/img/printer.png"></a>';
                 }
             },
 			{

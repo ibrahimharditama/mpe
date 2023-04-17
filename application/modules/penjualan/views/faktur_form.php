@@ -299,25 +299,37 @@
                         <tr>
                             <td>Faktur</td>
                             <td class="text-center">
-                                <?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id )); ?>
+                                <?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id.'/faktur/false/true' )); ?>
                             </td>
                         </tr>
                         <tr>
                             <td>Faktur tanpa blanko</td>
                             <td class="text-center">
-                                <?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/faktur/true' )); ?>
+                                <?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/faktur/true/true' )); ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Faktur tanpa rekening pakai blanko</td>
+                            <td class="text-center">
+                                <?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/faktur/false/false' )); ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Faktur tanpa rekening tanpa blanko</td>
+                            <td class="text-center">
+                                <?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/faktur/true/false' )); ?>
                             </td>
                         </tr>
                         <tr>
                             <td>Surat jalan</td>
                             <td class="text-center">
-                                <?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/sj' )); ?>
+                                <?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/sj/false/true' )); ?>
                             </td>
                         </tr>
                         <tr>
                             <td>Surat jalan tanpa blanko</td>
                             <td class="text-center">
-                                <?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/sj/true' )); ?>
+                                <?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/sj/true/true' )); ?>
                             </td>
                         </tr>
                     </tbody>

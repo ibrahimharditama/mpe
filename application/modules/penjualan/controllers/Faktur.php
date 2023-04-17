@@ -485,7 +485,7 @@ class Faktur extends MX_Controller {
 		echo json_encode($src->row());
 	}
 
-	public function cetak($id, $tipe = 'faktur', $no_header = false)
+	public function cetak($id, $tipe = 'faktur', $no_header, $is_rekening)
 	{
 		$this->load->library('pdf');
 		$header = $this->db->query(
@@ -497,12 +497,12 @@ class Faktur extends MX_Controller {
 		$bank = $this->db->query(
 			"SELECT a.* FROM rekening a WHERE a.is_use = '1'"
 		)->row();
-
 		$data = [
 			"header" => $header,
 			"detail" => $details,
 			"bank" => $bank,
-			"no_header" => $no_header
+			"no_header" => $no_header,
+			"is_rekening" => $is_rekening
 		];
 		//$this->pdf->load_view('nota',$data,"a5","landscape",$header->no_transaksi.".pdf");
 		if($tipe == 'faktur') {
