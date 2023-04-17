@@ -90,7 +90,7 @@ function init_datatable() {
                 data: 'pelanggan'
             },
             {
-                data: 'qty_pesan',
+                data: 'qty_semua',
                 className: 'dt-center'
             },
             {

@@ -44,7 +44,7 @@ class Pengiriman extends MX_Controller {
 		
 		$data_sql = "
 			SELECT
-				a.*
+				a.*,a.qty_pesan+a.qty_nota as qty_semua
 				, UPPER(b.username) AS yg_buat
 				, UPPER(c.username) AS yg_ubah
 				, CONCAT(d.kode, ' &middot; ', d.nama) AS pelanggan

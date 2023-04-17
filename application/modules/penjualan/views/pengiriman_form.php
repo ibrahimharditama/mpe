@@ -423,8 +423,8 @@
 
     function load_pesanan() {
         var id_faktur = '<?php echo $data == null ? 0 : $data['id_faktur']; ?>';
-        // $('[name=id_faktur]').data('placeholder', 'Memuat data...').select2({ allowClear: true });
-        // $('[name=id_faktur]').find('[value!=""]').remove();
+        $('[name=id_faktur]').select2({ allowClear: true });
+        $('[name=id_faktur]').find('[value!=""]').remove();
 
         var id_pelanggan = $('[name=id_pelanggan]').val();
 
@@ -440,8 +440,8 @@
             function(response) {
                 $.each(response, function(i, o) {
                     _obj[parseInt(o.id)] = o;
-
-                    var option = new Option(o.no_transaksi + ' - ' + o.tgl, o.id, false, false);
+                    var option = new Option(o.no_transaksi + ' -- ' + o.tgl, o.id, false, false);
+                    console.log(option);
                     $('[name=id_faktur]').append(option).trigger('change');
                 });
 
@@ -647,6 +647,9 @@
             });
             ajaxLoadPembayaran(site_url + 'penjualan/faktur/ajax-load-pembayaran', $("#id_faktur")
             .val());
+        });
+        $('#id_pelanggan').select2({
+            allowClear: true
         });
 
         $('#id_pelanggan').select2({
