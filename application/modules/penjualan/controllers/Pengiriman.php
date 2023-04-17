@@ -216,7 +216,16 @@ class Pengiriman extends MX_Controller {
 
 		$key = array('tgl', 'id_pelanggan','id_faktur','alamat', 'keterangan');
 		$data = post_data($key);
-		
+		$count_kirim = "SELECT SUM(qty_nota) AS total from pengiriman where id_faktur = '".$data['id_faktur']."'";
+		$total_kirim = $this->db->query($count_kirim)->row('total');
+		$total_all_kirim = $total_kirim+$qty_nota;
+		$qty_kirim = $this->db->query("SELECT qty_kirim from faktur where id = '".$data['id_faktur']."'")->row('qty_kirim');
+		$is_kirim = 1;
+		if($qty_kirim > $total_all_kirim){
+			$is_kirim = 0;
+		}
+		echo $is_kirim;
+		exit();
 		$data['no_transaksi'] = new_number_pengiriman($data['id_faktur']);
 		$data['created_by'] = user_session('id');
 		$data['qty_pesan'] = $qty_pesan;
