@@ -323,4 +323,27 @@ class Pengembalian_pipa extends MX_Controller {
 		$this->session->set_flashdata('post_status', 'approve');
 		echo json_encode($res);
 	}
+
+	public function cetak($id)
+	{
+		$this->load->library('pdf');
+		$header = $this->db->query(
+			"SELECT a.*,b.*,c.* FROM pengembalian_pipa a JOIN pengiriman b ON b.id = a.id_pengiriman JOIN pelanggan c ON b.id_pelanggan = c.id WHERE a.id = $id"
+		)->row();
+		$details = $this->db->query(
+			"SELECT a.*,b.* FROM pengembalian_pipa_detail a JOIN ref_produk b ON a.id_produk = b.id WHERE a.id_pengembalian_pipa = $id"
+		)->result();
+		$bank = $this->db->query(
+			"SELECT a.* FROM rekening a WHERE a.is_use = '1'"
+		)->row();
+		$data = [
+			"header" => $header,
+			"detail" => $details,
+			"bank" => $bank
+		];
+		// return $this->load->view('nota_pengembalian', $data);
+		// $this->pdf->load_view('nota',$data,"a5","landscape",$header->no_transaksi.".pdf");
+		$this->pdf->load_pdf('nota_pengembalian', $data, $header->no_transaksi.".pdf");		
+	}
+
 }

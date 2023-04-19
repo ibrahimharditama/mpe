@@ -8,7 +8,7 @@
 		<table class="cell-border stripe order-column hover" id="datatable">
 			<thead>	
 				<tr>
-                    <th width="5px"></th>
+                    <th width="40px"></th>
 					<th width="5px">No.</th>
                     <th width="150px">No. Transaksi</th>
                     <th width="100px">Tgl.</th>
@@ -77,7 +77,7 @@
                 "sortable": false, 
                 "searchable": false,
                 "render": function (data, type, row, meta) {
-                    return buttonDelete(site_url + 'penjualan/pengembalian-pipa/delete/' + data);
+                    return buttonDelete(site_url + 'penjualan/pengembalian-pipa/delete/' + data)+'<a target="_blank" href="' + site_url + 'penjualan/pengembalian-pipa/cetak/'+data+'"><img src="<?php echo base_url(); ?>assets/img/printer.png"></a>';
                 }
             },
             {
