@@ -494,12 +494,16 @@ class Faktur extends MX_Controller {
 		$details = $this->db->query(
 			"SELECT a.*,b.* FROM faktur_detail a JOIN ref_produk b ON a.id_produk = b.id WHERE a.id_faktur = $id"
 		)->result();
+		$detailPipas = $this->db->query(
+			"SELECT b.uraian as nama,b.qty,b.satuan FROM pengiriman a JOIN pengiriman_detail b ON b.id_pengiriman = a.id where a.id_faktur = $id"
+		)->result();
 		$bank = $this->db->query(
 			"SELECT a.* FROM rekening a WHERE a.is_use = '1'"
 		)->row();
 		$data = [
 			"header" => $header,
 			"detail" => $details,
+			"detailPipa" => $detailPipas,
 			"bank" => $bank,
 			"no_header" => $no_header,
 			"is_rekening" => $is_rekening

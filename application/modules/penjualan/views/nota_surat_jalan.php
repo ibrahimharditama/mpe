@@ -163,13 +163,22 @@
             <td class="t-center" width="80px">Satuan</td>
             <td colspan="5">Nama Item</td>
         </tr>
-        <?php $no=1; $total_item=0;foreach($detail as $dtDetail):?>
+        <?php $no=1; $total_item=0; $total_item_pipa=0;foreach($detail as $dtDetail):?>
         <tr class="table-body">
             <td><?= $no++; ?></td>
             <td class="t-center"><?= number_format($dtDetail->qty); ?></td>
             <td class="t-center"><?= $dtDetail->satuan; ?></td>
             <td colspan="5"><?= $dtDetail->nama; ?></td>
             <?php $total_item += $dtDetail->qty; ?>
+        </tr>
+        <?php endforeach;?>
+        <?php foreach($detailPipa as $dtDetailPipa):?>
+            <tr class="table-body">
+            <td><?= $no++; ?></td>
+            <td class="t-center"><?= number_format($dtDetailPipa->qty); ?></td>
+            <td class="t-center"><?= $dtDetailPipa->satuan; ?></td>
+            <td colspan="5"><?= $dtDetailPipa->nama; ?></td>
+            <?php $total_item_pipa += $dtDetailPipa->qty; ?>
         </tr>
         <?php endforeach;?>
         <tr style="border-bottom: 1px solid black;">
@@ -188,7 +197,7 @@
             </td>
             <td class="f-size-9 f-verdana fw-bold">Total Item </td>
             <td class="f-size-9 f-verdana fw-400">:</td>
-            <td class="t-right f-verdana f-size-9 fw-bold"><?=number_format($total_item)?></td>
+            <td class="t-right f-verdana f-size-9 fw-bold"><?=number_format($total_item+$total_item_pipa)?></td>
         </tr>
         <tr>
             <td colspan="8"><br></td>
