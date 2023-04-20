@@ -90,6 +90,7 @@ class Pesanan extends MX_Controller {
 			'content' => 'pesanan_form',
 			'action_url' => site_url("penjualan/pesanan/{$aksi}"),
 			'data' => $data,
+			'id' => $data == null ? 0 : $data['id'],
 		));
 	}
 	
