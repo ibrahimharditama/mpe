@@ -487,4 +487,25 @@ class Penerimaan extends MX_Controller {
 		echo json_encode($src->row());
 	}
 
+	public function cetak($id)
+	{
+		$this->load->library('pdf');
+		$header = $this->db->query(
+			"SELECT a.*,b.* FROM penerimaan a JOIN supplier b ON a.id_supplier = b.id WHERE a.id = $id"
+		)->row();
+		$details = $this->db->query(
+			"SELECT a.*,b.* FROM penerimaan_detail a JOIN ref_produk b ON a.id_produk = b.id WHERE a.id_penerimaan = $id"
+		)->result();
+		$bank = $this->db->query(
+			"SELECT a.* FROM rekening a WHERE a.is_use = '1'"
+		)->row();
+		$data = [
+			"header" => $header,
+			"detail" => $details,
+			"bank" => $bank,
+		];
+		//return $this->load->view('nota-penerimaan',$data);
+		$this->pdf->load_pdf('nota-pesanan-pembelian', $data, $header->no_transaksi.".pdf");		
+	}
+
 }

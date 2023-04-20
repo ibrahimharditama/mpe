@@ -6,6 +6,7 @@
 			<thead>	
 				<tr>
 					<th width="5px">No.</th>
+					<th width="5px"></th>
 					<th>No. Transaksi</th>
 					<th>Tgl. Terima</th>
 					<th>Supplier</th>
@@ -87,10 +88,16 @@ function init_datatable()
 		'serverMethod': 'post',
 		'ajax': '<?php echo site_url('/pembelian/penerimaan/datatable'); ?>',
 		'stateSave': true,
-		'order': [[ 1, 'desc' ]],
+		'order': [[ 1, 'asc' ]],
 		'fixedHeader': true,
 		'columns': [
 			{ data: 'nomor', orderable: false },
+			{
+                orderable: false,
+                render: function(data, type, row, meta) {
+                    return '<a target="_blank" href="' + site_url + 'pembelian/penerimaan/cetak/' + row.id+'"><img src="<?php echo base_url(); ?>assets/img/printer.png"></a>';
+                }
+            },
 			{
 				data: 'no_transaksi',
 				render: function (data, type, row, meta) {
