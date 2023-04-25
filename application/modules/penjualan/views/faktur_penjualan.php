@@ -130,7 +130,7 @@
                     </span>
             </td>
             <td width="450px" class="t-center v-top" colspan="3">
-                <span class="fw-bold f-arial f-size-16">PESANAN PEMBELIAN</span><br>
+                <span class="fw-bold f-arial f-size-16">FAKTUR PENJUALAN</span><br>
                 <span class="fw-bold f-arial f-size-12">Nota : <?= $header->no_transaksi; ?></span>
             </td>
             <td class="t-right v-bottom" colspan="2">
@@ -175,17 +175,11 @@
         <?php endforeach;?>
         <tr style="border-bottom: 1px solid black;">
             <td colspan="8">
-                <?php 
-                    $totalData = count($detail); 
-                    if($totalData < 5) echo '<br>';
-                    if($totalData <= 3) echo '<br>';
-                    if($totalData <= 1) echo '<br>';
-                ?>
             </td>
         </tr>
         <tr>
             <td colspan="3">
-               <span class="f-size-10 fw-bold f-arial"></span>
+               <span class="f-size-10 fw-bold f-arial"><?=terbilang($header->grand_total)?></span>
             </td>
             <td class="t-right f-verdana f-size-9 fw-400"></td>
             <td class="t-right f-verdana f-size-9 fw-400" style="padding-right: 10px;"></td>
@@ -207,27 +201,9 @@
         </tr>
         <tr>
             <td colspan="5"></td>
-            <td class="f-size-9 f-verdana fw-400">DP</td>
-            <td class="f-size-9 f-verdana fw-400">:</td>
-            <td class="t-right f-verdana f-size-9 fw-400"><?=number_format($header->uang_muka)?></td>
-        </tr>
-        <tr>
-            <td colspan="5"></td>
             <td class="f-size-9 f-verdana fw-400">Biaya Lain</td>
             <td class="f-size-9 f-verdana fw-400">:</td>
             <td class="t-right f-verdana f-size-9 fw-400"><?=number_format($header->biaya_lain)?></td>
-        </tr>
-        <tr>
-            <td colspan="5"></td>
-            <td class="f-size-9 f-verdana fw-400">Ket Biaya Lain</td>
-            <td class="f-size-9 f-verdana fw-400">:</td>
-            <td class="t-right f-verdana f-size-9 fw-400"><?=$header->keterangan_biaya_lain;?></td>
-        </tr>
-        <tr>
-            <td colspan="5"></td>
-            <td class="f-size-9 f-verdana fw-400">Sisa</td>
-            <td class="f-size-9 f-verdana fw-400">:</td>
-            <td class="t-right f-verdana f-size-9 fw-400"><?=number_format($header->sisa_tagihan)?></td>
         </tr>
         <tr>
             <td colspan="2"></td>
@@ -236,9 +212,9 @@
                 ATN: <?=$bank->nama?>
             </td>
             <td colspan="2"></td>
-            <td class="f-size-9 f-verdana fw-400"></td>
-            <td class="f-size-9 f-verdana fw-400"></td>
-            <td class="t-right f-verdana f-size-9 fw-400"></td>
+            <td class="f-size-9 f-verdana fw-400">Sisa</td>
+            <td class="f-size-9 f-verdana fw-400">:</td>
+            <td class="t-right f-verdana f-size-9 fw-400"><?=number_format($header->grand_total)?></td>
         </tr>
         <tr>
             <td></td>

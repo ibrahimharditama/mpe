@@ -337,6 +337,7 @@ function count_total() {
     var $list_qty = $('.input-qty');
     var $list_diskon = $('.input-diskon');
     var $list_subtotal = $('.input-sub-total');
+    var dp = $('.input-dp').val();
 
     var total = 0;
     var diskon_faktur = parseInt($('.input-diskon-faktur').val());
@@ -372,6 +373,7 @@ function count_total() {
 
     $('.input-total').val(total);
     $('.input-grand-total').val(grand_total);
+    console.log((grand_total-dp));
 }
 
 function count_dp() {

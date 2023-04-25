@@ -240,4 +240,32 @@ class Pesanan extends MX_Controller {
 		
 		redirect(site_url('penjualan/pesanan'));
 	}
+
+	public function cetak($id, $tipe)
+	{
+		$this->load->library('pdf');
+		$header = $this->db->query(
+			"SELECT a.*,b.* FROM penjualan a JOIN pelanggan b ON a.id_pelanggan = b.id WHERE a.id = $id"
+		)->row();
+		$details = $this->db->query(
+			"SELECT a.*,b.* FROM penjualan_detail a JOIN ref_produk b ON a.id_produk = b.id WHERE a.id_penjualan = $id"
+		)->result();
+		$bank = $this->db->query(
+			"SELECT a.* FROM rekening a WHERE a.is_use = '1'"
+		)->row();
+		$data = [
+			"header" => $header,
+			"detail" => $details,
+			"bank" => $bank
+		];
+		//return $this->load->view('faktur_penjualan', $data);
+		//$this->pdf->load_view('nota',$data,"a5","landscape",$header->no_transaksi.".pdf");
+		if($tipe == 'faktur') {
+			$this->pdf->load_pdf('faktur_penjualan', $data, $header->no_transaksi.".pdf");
+		} else {
+			$this->pdf->load_pdf('penawaran_pesanan', $data, $header->no_transaksi.".pdf");
+		}
+		
+	}
+
 }
