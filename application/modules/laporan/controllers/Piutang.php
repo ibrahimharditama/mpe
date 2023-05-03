@@ -23,7 +23,7 @@ class Piutang extends MX_Controller {
                                     p.id_supplier, 
                                     s.kode AS kode_supplier, 
                                     s.nama AS supplier,
-                                    s.alamat AS alamat_supplier,
+                                    p.tgl,
                                     p.no_transaksi, 
                                     p.grand_total AS total,
                                     IFNULL(x.total_bayar, 0) AS bayar, 
@@ -45,10 +45,10 @@ class Piutang extends MX_Controller {
 
             if($row['sisa'] <= 0) continue;
 
-            $data[$row['kode_supplier']][] = array(                
+            $data[$row['kode_supplier'] .'  &middot; '. $row['supplier']][] = array(                
                 'id' => $row['id'],
                 'no_transaksi' => $row['no_transaksi'],
-                'supplier' => $row['supplier'] .'  &middot; '. $row['kode_supplier'] .'<br>'. $row['alamat_supplier'],
+                'tgl' => $row['tgl'],
                 'total' => $row['total'],
                 'bayar' => $row['bayar'],
                 'sisa' => $row['sisa'],
