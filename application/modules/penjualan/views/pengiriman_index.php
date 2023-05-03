@@ -1,4 +1,4 @@
-<h1 class="my-header">Pesanan Penjualan</h1>
+<h1 class="my-header">Pengiriman Penjualan</h1>
 
 <div class="row m-0">
     <div class="col-12">
