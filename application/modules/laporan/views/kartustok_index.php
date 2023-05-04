@@ -7,6 +7,10 @@
     <div style="width: 250px;">
         <input type="text" class="form-control" name="nama" value="<?= $nama; ?>">
     </div>
+    <form action="<?=site_url("laporan/kartustok")?>" method="post" id="frm-cari">
+    <input type="hidden" name="periode" id="periode"/>
+    <input type="hidden" name="nama_cari" id="nama_cari"/>
+    </form>
 </div>
 
 <div class="row m-0">
@@ -97,15 +101,18 @@
             show_clear_date: false, 
             view: 'months',
             onSelect: function() {
-                var url = site_url + 'laporan/kartustok/index/' + $(this).val()+"/"+$("[name='nama']").val();
-                window.location.href = url;
+                $("#periode").val($(this).val());
+                $("#nama_cari").val($("[name='nama']").val());
+                $('form#frm-cari').submit()
+
             }
 
         });
         $("[name='nama']").on('keypress',function(e) {
             if(e.which == 13) {
-                var url = site_url + 'laporan/kartustok/index/' + $("[name='tgl']").val()+"/"+$(this).val();
-                window.location.href = url;
+                $("#periode").val($("[name='tgl']").val());
+                $("#nama_cari").val($("[name='nama']").val());
+                $('form#frm-cari').submit()
             }
         });
     });
