@@ -1,22 +1,14 @@
 {
-    "righteous": {
-        "normal": "righteous_normal_5df1656c90d5e769d8537706a7c1cc24"
-    },
-    "roboto": {
-        "100": "C:\\xampp\\htdocs\\mpe_pos\\vendor\\dompdf\\dompdf\/lib\/fonts\/roboto_100_1c4e32da7e6c8539dd3a51af38f413be",
-        "normal": "C:\\xampp\\htdocs\\mpe_pos\\vendor\\dompdf\\dompdf\/lib\/fonts\/roboto_normal_7bc701b343c10631f60048716b96e4f7",
-        "bold": "roboto_bold_8db5cb5d0586c1e891426d13097b1d04"
+    "arimo": {
+        "normal": "C:\\xampp\\htdocs\\makmurpermai\\vendor\\dompdf\\dompdf\/lib\/fonts\/arimo_normal_4169487fb5b6cd2ff8e60d80c8e3e53d",
+        "bold": "arimo_bold_9c5b8ff72a4459f186f52dec5f6a04f3"
     },
     "trebuchet ms": {
-        "normal": "trebuchet_ms_normal_89055a096206e505f9af8ea4984a014e",
-        "bold": "C:\\xampp\\htdocs\\makmurpermai\\vendor\\dompdf\\dompdf\/lib\/fonts\/trebuchet_ms_bold_ba330c84c5f19ef162c6c7377797e147"
+        "normal": "C:\\xampp\\htdocs\\makmurpermai\\vendor\\dompdf\\dompdf\/lib\/fonts\/trebuchet_ms_normal_c720d786d5e639f266ab1cb2e58055a0",
+        "bold": "trebuchet_ms_bold_40d615f82dd41df08f3f09526813b62e"
     },
     "verdana": {
-        "normal": "verdana_normal_d0bb53620b1b7ccad49c1081621f43bb",
-        "bold": "C:\\xampp\\htdocs\\makmurpermai\\vendor\\dompdf\\dompdf\/lib\/fonts\/verdana_bold_0dfd2f61af63fd7e986b61474f597674"
-    },
-    "arimo": {
-        "normal": "arimo_normal_dd60c91c77ad1d4a5acac0cb7865a013",
-        "bold": "C:\\xampp\\htdocs\\makmurpermai\\vendor\\dompdf\\dompdf\/lib\/fonts\/arimo_bold_216fc4f839979af9724976d0d0d4a044"
+        "normal": "C:\\xampp\\htdocs\\makmurpermai\\vendor\\dompdf\\dompdf\/lib\/fonts\/verdana_normal_d0bb53620b1b7ccad49c1081621f43bb",
+        "bold": "verdana_bold_0dfd2f61af63fd7e986b61474f597674"
     }
 }

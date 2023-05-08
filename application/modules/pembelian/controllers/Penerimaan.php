@@ -505,7 +505,7 @@ class Penerimaan extends MX_Controller {
 			"bank" => $bank,
 		];
 		//return $this->load->view('nota-penerimaan',$data);
-		$this->pdf->load_pdf('nota-pesanan-pembelian', $data, $header->no_transaksi.".pdf");		
+		$this->pdf->load_pdf('nota-penerimaan', $data, $header->no_transaksi.".pdf");		
 	}
 
 }
