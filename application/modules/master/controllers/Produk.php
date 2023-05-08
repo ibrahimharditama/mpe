@@ -203,12 +203,19 @@ class Produk extends MX_Controller {
 		}
 	}
 	
-	function check_kode($kode) {        
-        if($this->input->post('kode'))
-            $kode = $this->input->post('kode');
-        else
-            $kode = '';
-		$result = $this->db->from('ref_produk')->where('kode', $kode)->get()->num_rows();
+	function check_kode($kode) { 
+		$id = $this->input->post('id');
+
+		if(isset($id))
+			if($id != null && $id != ''){
+				$this->db->where('id !=', $id);
+			}
+
+		$this->db->where('kode', $kode);
+		$this->db->from('ref_produk');
+
+		$result = $this->db->get()->num_rows();
+		
         if($result == 0)
             $response = true;
         else {
