@@ -23,8 +23,8 @@ class Hutang extends MX_Controller {
                                     f.id_pelanggan, 
                                     plg.kode AS kode_pelanggan, 
                                     plg.nama AS pelanggan,
-                                    plg.alamat AS alamat_plg,
                                     f.no_transaksi, 
+                                    f.tgl,
                                     f.grand_total AS total,
                                     IFNULL(x.total_bayar, 0) AS bayar, 
                                     (f.grand_total - IFNULL(x.total_bayar, 0)) AS sisa
@@ -45,10 +45,10 @@ class Hutang extends MX_Controller {
 
             if($row['sisa'] <= 0) continue;
 
-            $data[$row['kode_pelanggan']][] = array(
+            $data[$row['kode_pelanggan'] .'  &middot; '. $row['pelanggan']][] = array(
                 'id' => $row['id'],
                 'no_transaksi' => $row['no_transaksi'],
-                'pelanggan' => $row['pelanggan'] .'  &middot; '.$row['kode_pelanggan'] .'<br>'. $row['alamat_plg'],
+                'tgl' => $row['tgl'],
                 'total' => $row['total'],
                 'bayar' => $row['bayar'],
                 'sisa' => $row['sisa'],

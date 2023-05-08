@@ -11,7 +11,10 @@ class Kartustok extends MX_Controller {
 	
 	public function index($periode = '',$nama = '')
 	{   
-
+        if ($this->input->server('REQUEST_METHOD') === 'POST') {
+            $periode = $this->input->post("periode");
+            $nama = $this->input->post("nama_cari");
+        }
 		$this->load->view('templates/app_tpl', array (
 			'content' => 'kartustok_index',
             'data' => $this->_data($periode != '' ? $periode : date('Y-m'),$nama != '' ? $nama : ''),

@@ -9,92 +9,82 @@ class Absensi extends MX_Controller {
 		$this->form_validation->CI =& $this;
 	}
 	
-	public function index()
+	public function index($date = '')
 	{
+		if($date == '') $date = date('Y-m');
+
 		$this->load->view('templates/app_tpl', array (
 			'content' => 'absensi_index',
+			'periode' => str_replace('_', '-', $date),
+			'data' => $this->_data(str_replace('_', '-', $date)),
 		));
 	}
 	
-	public function datatable()
+	private function _data($date)
 	{
-		$draw = $this->input->post('draw');
-		$offset = $this->input->post('start');
-		$num_rows = $this->input->post('length');
-		$order_index = $_POST['order'][0]['column'];
-		$order_by = $_POST['columns'][$order_index]['data'];
-		$order_direction = $_POST['order'][0]['dir'];
-		$keyword = $_POST['search']['value'];
-		
-		$bindings = array("%{$keyword}%", "%{$keyword}%", "%{$keyword}%");
-		
-		$base_sql = "
-			FROM absensi AS a
-			LEFT JOIN pengguna AS b ON a.created_by = b.id
-			LEFT JOIN pengguna AS c ON a.updated_by = c.id
-			LEFT JOIN pengguna AS d ON a.approved_by = d.id
-			LEFT JOIN pengguna AS x ON a.id_pengguna = x.id
-			WHERE
-				a.row_status = 1
-				AND (
-					x.nama LIKE ?
-					OR x.username LIKE ?
-					OR x.email LIKE ?
-				)
-		";
-		
-		$data_sql = "
-			SELECT
-				a.*
-				, UPPER(b.username) AS yg_buat
-				, UPPER(c.username) AS yg_ubah
-				, UPPER(d.username) AS yg_approve
-				, UPPER(x.username) AS pegawai
-				, ROW_NUMBER() OVER (
-					ORDER BY {$order_by} {$order_direction}
-				  ) AS nomor
-			{$base_sql}
-			ORDER BY
-				{$order_by} {$order_direction}
-			LIMIT {$offset}, {$num_rows}
-		";
-		$src = $this->db->query($data_sql, $bindings);
-		
-		$count_sql = "
-			SELECT COUNT(*) AS total
-			{$base_sql}
-		";
-		$total_records = $this->db->query($count_sql, $bindings)->row('total');
-		
-		$aaData = $src->result_array();
-		
-		$response = array (
-			'draw' => intval($draw),
-			'iTotalRecords' => $src->num_rows(),
-			'iTotalDisplayRecords' => $total_records,
-			'aaData' => $aaData,
+		$date = str_replace('_', '-', $date);
+		$start = date('Y-m-01', strtotime($date.'-01'));
+		$end = date('Y-m-t', strtotime($date.'-01'));
+
+		$startDate = new DateTime(str_replace('_', '-', $start));
+		$endDate = new DateTime(str_replace('_', '-', $end));
+
+		$interval = DateInterval::createFromDateString('1 day');
+		$period = new DatePeriod($startDate, $interval, $endDate->modify('+1 day'));
+
+		$header = ['Pegawai'];
+		$cal = [];
+		$sql = "SELECT x.id_pengguna, x.nama";
+
+		foreach ($period as $dt) {
+			$header[] = $dt->format('j');
+			$cal[] = array(
+				'tgl' => $dt->format('Y-m-d')
+			);
+
+			$sql .= ", MAX(CASE WHEN x.tgl = '".$dt->format('Y-m-d')."' THEN IFNULL(a.`status`, '-') END) AS '".$dt->format('Y-m-d')."'";
+		}
+
+		$sql .= "FROM (
+					SELECT k.tgl, p.id AS id_pengguna, p.nama
+					FROM kalender k 
+					JOIN pengguna p
+					WHERE p.row_status = 1
+				) x 
+				LEFT JOIN absensi a ON a.tgl = x.tgl AND a.id_pengguna = x.id_pengguna
+				GROUP BY x.id_pengguna, x.nama
+				ORDER BY x.nama";
+
+		$this->db->truncate('kalender');
+		$this->db->insert_batch('kalender', $cal);
+
+		$src = $this->db->query($sql)->result();
+
+		$data = array(
+			'header' =>  $header,
+			'body' => $src,
 		);
-		
-		echo json_encode($response);
+
+		return $data;
 	}
 
-	public function approve($id)
+	public function approve()
 	{
 		$input = $this->input->post();
-		$input["id"] = $id;
 
-		// update
-		$this->db
-				->where(
-					"id", $input["id"]
-				)
-				->update('absensi',[
-					"status" 	=> 1,
-					"approved_at" 	=> date('Y-m-d H:i:s'),
-					"approved_by"	=> user_session('id')
-				]);
+		$data = array(
+			'status' => $input['status'],
+			'approved_at' => date('Y-m-d H:i:s'),
+			'approved_by'=> user_session('id')
+		);
 
-		// redirect
-		redirect(site_url('absensi'));
+		$this->db->update('absensi', $data, [
+			'id_pengguna' => $input['id_pengguna'],
+			'tgl' => $input['tgl'],
+		]);
+
+		echo 'ok';
 	}
+
+	
 }

@@ -8,7 +8,16 @@
         "bold": "trebuchet_ms_bold_40d615f82dd41df08f3f09526813b62e"
     },
     "verdana": {
+<<<<<<< HEAD
         "normal": "C:\\xampp\\htdocs\\makmurpermai\\vendor\\dompdf\\dompdf\/lib\/fonts\/verdana_normal_d0bb53620b1b7ccad49c1081621f43bb",
         "bold": "verdana_bold_0dfd2f61af63fd7e986b61474f597674"
+=======
+        "normal": "verdana_normal_d0bb53620b1b7ccad49c1081621f43bb",
+        "bold": "C:\\xampp\\htdocs\\makmurpermai\\vendor\\dompdf\\dompdf\/lib\/fonts\/verdana_bold_0dfd2f61af63fd7e986b61474f597674"
+    },
+    "arimo": {
+        "normal": "C:\\xampp\\htdocs\\makmurpermai\\vendor\\dompdf\\dompdf\/lib\/fonts\/arimo_normal_4169487fb5b6cd2ff8e60d80c8e3e53d",
+        "bold": "arimo_bold_9c5b8ff72a4459f186f52dec5f6a04f3"
+>>>>>>> 34b31db62e25ccb2d47dcdc1a3fbc33a7b0eb6f2
     }
 }
