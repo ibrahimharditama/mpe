@@ -134,6 +134,21 @@
                     </tr>
                     <tr>
                         <td colspan="3" class="border-bottom-none border-left-none"></td>
+                        <td colspan="3" class="pr-2" align="right">Biaya Lain-lain</td>
+                        <td><input type="text" name="biaya_lain"
+                                class="input-box control-number input-count input-biaya-lain"
+                                value="<?php echo $data == null ? 0 : $data['biaya_lain']; ?>" style="width:110px"></td>
+                        <td colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="border-bottom-none border-left-none"></td>
+                        <td colspan="3" class="pr-2" align="right" valign="top">Keterangan</td>
+                        <td colspan="4">
+                            <textarea class="form-control" rows="1" style="min-height: 40px !important;" name="keterangan_biaya_lain"><?php echo $data == null ? '' : $data['keterangan_biaya_lain']; ?></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="border-bottom-none border-left-none"></td>
                         <td colspan="3" class="pr-2 semi-bold" align="right">GRAND TOTAL</td>
                         <td><input type="text" id="gtt" class="input-box control-number input-grand-total" value="0"
                                 style="width:110px" readonly></td>
@@ -157,21 +172,7 @@
                             </select>
                         </td>
                     </tr>
-                    <tr>
-                        <td colspan="3" class="border-bottom-none border-left-none"></td>
-                        <td colspan="3" class="pr-2" align="right">Biaya Lain-lain</td>
-                        <td><input type="text" name="biaya_lain"
-                                class="input-box control-number input-count input-biaya-lain"
-                                value="<?php echo $data == null ? 0 : $data['biaya_lain']; ?>" style="width:110px"></td>
-                        <td colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="border-bottom-none border-left-none"></td>
-                        <td colspan="3" class="pr-2" align="right" valign="top">Keterangan</td>
-                        <td colspan="4">
-                            <textarea class="form-control" rows="1" style="min-height: 40px !important;" name="keterangan_biaya_lain"><?php echo $data == null ? '' : $data['keterangan_biaya_lain']; ?></textarea>
-                        </td>
-                    </tr>
+                    
                     <tr>
                         <td colspan="3" class="border-bottom-none border-left-none"></td>
                         <td colspan="3" class="pr-2" align="right">Sisa Pembayaran</td>
@@ -345,6 +346,7 @@ function count_total() {
 
     if (isNaN(diskon_faktur)) diskon_faktur = 0;
     if (isNaN(biaya_lain)) biaya_lain = 0;
+    if (isNaN(dp)) dp = 0;
 
     $.each($list_harga_beli, function(i, o) {
         var harga_beli = parseInt($($list_harga_beli[i]).val());
@@ -370,9 +372,11 @@ function count_total() {
     });
 
     var grand_total = total - diskon_faktur + biaya_lain;
+    var sisa_bayar = grand_total - dp;
 
     $('.input-total').val(total);
     $('.input-grand-total').val(grand_total);
+    $('#sisa_tagihan').val(sisa_bayar);
     console.log((grand_total-dp));
 }
 
