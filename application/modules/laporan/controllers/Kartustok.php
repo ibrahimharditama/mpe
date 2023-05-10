@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Kartustok extends MX_Controller {
 
@@ -110,6 +112,87 @@ class Kartustok extends MX_Controller {
         echo json_encode($data);
 
         
+    }
+
+    public function excel()
+    {   
+        $periode = date('Y-m');
+        $nama = '';
+
+        if ($this->input->server('REQUEST_METHOD') === 'POST') {
+            $periode = $this->input->post("periode");
+            $nama = $this->input->post("nama_cari");
+        }
+
+        $data = $this->_data($periode,$nama);
+
+        $spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+
+		$sheet->setCellValue('A1', 'KARTU STOK PERIODE '.$periode);
+        $sheet->mergeCells('A1:G1');
+		$sheet->getStyle('A1')->getFont()->setSize(14)->setBold( true );
+		$sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+        $sheet->setCellValue('A3', 'Kode Produk');
+        $sheet->mergeCells('A3:A4');
+		$sheet->setCellValue('B3', 'Nama Produk');
+        $sheet->mergeCells('B3:B4');
+		$sheet->setCellValue('C3', 'STOK');
+        $sheet->mergeCells('C3:G3');
+
+		$sheet->setCellValue('C4', 'Satuan');
+        $sheet->setCellValue('D4', 'Awal');
+        $sheet->setCellValue('E4', 'Masuk');
+        $sheet->setCellValue('F4', 'Keluar');
+        $sheet->setCellValue('G4', 'Akhir');
+
+		$sheet->getStyle('A3:G4')->getFont()->setBold( true );
+        $sheet->getStyle('A3:G4')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+        $row = 4;
+        
+
+        foreach ($data as $d){
+            $row++;
+            $sheet->setCellValue('A'.$row, $d['kode']);
+            $sheet->setCellValue('B'.$row, $d['nama'].' - '.$d['jenis'].' - '.$d['merek']);
+            $sheet->setCellValue('C'.$row, $d['satuan']);
+            $sheet->setCellValue('D'.$row, $d['stokawal']);
+            $sheet->setCellValue('E'.$row, $d['stokin']);
+            $sheet->setCellValue('F'.$row, $d['stokout']);
+            $sheet->setCellValue('G'.$row, $d['stokakhir']);
+            
+
+            
+        }
+
+        $sheet->getStyle('D5:G'.$row)->getNumberFormat()->setFormatCode('#,##0');
+
+        $styleArray = [
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' =>  \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN
+                ]
+            ]
+        ];
+
+        
+        $sheet->getStyle('A3:G'.$row)->applyFromArray($styleArray);
+        foreach ($sheet->getColumnIterator() as $column) {
+		   	$sheet->getColumnDimension($column->getColumnIndex())->setAutoSize(true);
+		}
+
+
+        $writer = new Xlsx($spreadsheet);
+		
+		if (ob_get_contents()) ob_end_clean();
+		header( "Content-type: application/vnd.ms-excel" );
+		header('Content-Disposition: attachment; filename="kartu-stok-'.date('ymdHi').'.xlsx"');
+		header("Pragma: no-cache");
+		header("Expires: 0");
+		if (ob_get_contents()) ob_end_clean();
+		$writer->save('php://output');
     }
 
 }

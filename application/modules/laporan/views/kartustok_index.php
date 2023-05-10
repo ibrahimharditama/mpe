@@ -8,8 +8,8 @@
         <input type="text" class="form-control" name="nama" value="<?= $nama; ?>">
     </div>
     <form action="<?=site_url("laporan/kartustok")?>" method="post" id="frm-cari">
-    <input type="hidden" name="periode" id="periode"/>
-    <input type="hidden" name="nama_cari" id="nama_cari"/>
+        <input type="hidden" name="periode" id="periode"/>
+        <input type="hidden" name="nama_cari" id="nama_cari"/>
     </form>
 </div>
 
@@ -55,6 +55,12 @@
             </tbody>
 		</table>
 	</div>
+</div>
+
+<div class="actionbar fixed-bottom">
+	<a class="btn btn-primary" id="excel" href="javascript:void(0);">
+		<i class="ti ti-file"> Excel</i>
+	</a>
 </div>
 
 <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-hidden="true">
@@ -103,6 +109,7 @@
             onSelect: function() {
                 $("#periode").val($(this).val());
                 $("#nama_cari").val($("[name='nama']").val());
+                $("#frm-cari").attr("action", site_url + "laporan/kartustok");
                 $('form#frm-cari').submit()
 
             }
@@ -112,8 +119,18 @@
             if(e.which == 13) {
                 $("#periode").val($("[name='tgl']").val());
                 $("#nama_cari").val($("[name='nama']").val());
+                $("#frm-cari").attr("action", site_url + "laporan/kartustok");
                 $('form#frm-cari').submit()
             }
+        });
+
+        $("#excel").on('click',function(e) {
+            e.preventDefault;
+            $("#periode").val($("[name='tgl']").val());
+            $("#nama_cari").val($("[name='nama']").val());
+            $("#frm-cari").attr("action", site_url + "laporan/kartustok/excel");
+            $('form#frm-cari').submit()
+            
         });
     });
 

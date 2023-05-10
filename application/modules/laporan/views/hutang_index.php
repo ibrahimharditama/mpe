@@ -25,7 +25,7 @@
                         $sisa_tagihan = 0;
                     ?>
 
-<tr>
+                    <tr>
                         <td class="font-weight-bold" colspan="4"><?= $key; ?></td>
                     </tr>
 
@@ -65,6 +65,12 @@
             </tfoot>
 		</table>
 	</div>
+</div>
+
+<div class="actionbar fixed-bottom">
+	<a class="btn btn-primary" href="<?php echo site_url('laporan/hutang/excel'); ?>">
+		<i class="ti ti-file"> Excel</i>
+	</a>
 </div>
 
 <script>

@@ -65,6 +65,12 @@
 	</div>
 </div>
 
+<div class="actionbar fixed-bottom">
+	<a class="btn btn-primary" href="<?php echo site_url('laporan/piutang/excel'); ?>">
+		<i class="ti ti-file"> Excel</i>
+	</a>
+</div>
+
 <script>
 
 
