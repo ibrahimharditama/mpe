@@ -200,7 +200,7 @@
 		modal.find(".id_asset").val(idasset).trigger('change');
         modal.find("input[name=tgl_maintenance]").val(tglmaintenance);
 		modal.find("textarea[name=keterangan]").val(keterangan);
-		modal.find("#form").attr("action", site_url + "aset/maintenanceaset/insert");
+		modal.find("#form").attr("action", site_url + "aset/maintenanceaset/update");
 
         modal.modal('show');
 
