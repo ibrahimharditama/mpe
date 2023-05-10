@@ -182,14 +182,14 @@
             <i class="ti ti-save"></i> Simpan
         </button>
 
-        <a class="btn btn-outline-secondary ml-1" href="<?php echo site_url('penjualan/pengiriman'); ?>">
-            <i class="ti ti-na"></i> Batalkan
-        </a>
-
         <a class="btn btn-outline-info ml-1" id="do-bayar" style="display:none"
             data-toggle="modal" href="#modal-approve" data-id="<?= $data != null ? $data['id'] : ''; ?>">
             <i class="ti-thumb-up"></i>
-            Approv
+            Approve
+        </a>
+
+        <a class="btn btn-outline-secondary ml-1" href="<?php echo site_url('penjualan/pengiriman'); ?>">
+            <i class="ti ti-na"></i> Batalkan
         </a>
     </div>
 
@@ -423,6 +423,7 @@
 
     function load_pesanan() {
         var id_faktur = '<?php echo $data == null ? 0 : $data['id_faktur']; ?>';
+        var is_approve = '<?php echo $data == null ? "0" :  $data['is_approve']; ?>';
         $('[name=id_faktur]').select2({ allowClear: true });
         $('[name=id_faktur]').find('[value!=""]').remove();
 
@@ -430,6 +431,10 @@
 
         if (id_faktur != 0) {
             $("#do-bayar").css("display", "inline");
+        }
+
+        if(is_approve == 1){
+            $("#do-bayar").css("display", "none");
         }
 
         $.post(
@@ -524,7 +529,8 @@
 	    var nama_pelanggan = '<?php echo $data == null ? "0" :  $data['kode_nama']; ?>';
 	    var is_approve = '<?php echo $data == null ? "0" :  $data['is_approve']; ?>';
         if(is_approve == 1){
-            $("#simpan").css("display", "none");;
+            $("#simpan").css("display", "none");
+            $("#do-bayar").css("display", "none");
         }
         // load_faktur();
         $('.datepicker').Zebra_DatePicker({

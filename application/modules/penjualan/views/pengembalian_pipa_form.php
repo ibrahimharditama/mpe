@@ -50,16 +50,6 @@
                                 name="keterangan"><?php echo $data == null ? '' : $data['keterangan']; ?></textarea>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0"></label>
-                        <div class="col-sm-9">
-                            <a class="btn btn-outline-info" id="do-bayar" style="display:none"
-                                data-toggle="modal" href="#modal-approve" data-id="<?= $data != null ? $data['id'] : ''; ?>">
-                                <i class="ti-thumb-up"></i>
-                                Approv
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -118,6 +108,12 @@
         <button type="submit" class="btn btn-primary" id="simpan">
             <i class="ti ti-save"></i> Simpan
         </button>
+
+        <a class="btn btn-outline-info ml-1" id="do-bayar" style="display:none"
+            data-toggle="modal" href="#modal-approve" data-id="<?= $data != null ? $data['id'] : ''; ?>">
+            <i class="ti-thumb-up"></i>
+            Approve
+        </a>
 
         <a class="btn btn-outline-secondary ml-1" href="<?php echo site_url('penjualan/pengembalian-pipa') ?>">
             <i class="ti ti-na"></i> Batalkan
@@ -255,12 +251,14 @@ $("#form").submit(function(e) {
 $().ready(function() {
     var id_pengembalian = '<?php echo $data == null ? '0' : $data['id']; ?>';
     var is_approve = '<?php echo $data == null ? "0" :  $data['is_approve']; ?>';
-        if(is_approve == 1){
-            $("#simpan").css("display", "none");;
-        }
 
     if (id_pengembalian != 0) {
         $("#do-bayar").css("display", "inline");
+    }
+
+    if(is_approve == 1){
+        $("#simpan").css("display", "none");
+        $("#do-bayar").css("display", "none");
     }
 
     $('.datepicker').Zebra_DatePicker({
