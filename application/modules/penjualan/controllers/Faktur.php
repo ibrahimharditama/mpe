@@ -489,7 +489,7 @@ class Faktur extends MX_Controller {
 	{
 		$this->load->library('pdf');
 		$header = $this->db->query(
-			"SELECT a.*,b.* FROM faktur a JOIN pelanggan b ON a.id_pelanggan = b.id WHERE a.id = $id"
+			"SELECT a.*,b.*, a.keterangan AS keterangan_faktur FROM faktur a JOIN pelanggan b ON a.id_pelanggan = b.id WHERE a.id = $id"
 		)->row();
 		$details = $this->db->query(
 			"SELECT a.*,b.* FROM faktur_detail a JOIN ref_produk b ON a.id_produk = b.id WHERE a.id_faktur = $id"
@@ -501,19 +501,24 @@ class Faktur extends MX_Controller {
 			"SELECT a.* FROM rekening a WHERE a.is_use = '1'"
 		)->row();
 		$data = [
+			"tipe" => $tipe,
 			"header" => $header,
 			"detail" => $details,
 			"detailPipa" => $detailPipas,
 			"bank" => $bank,
 			"no_header" => $no_header,
-			"is_rekening" => $is_rekening
+			"is_rekening" => $is_rekening,
+			"table_count" => ceil(count($details) / 10),
 		];
+
+		$this->load->view('faktur_penjualan_print', $data);
+
 		//$this->pdf->load_view('nota',$data,"a5","landscape",$header->no_transaksi.".pdf");
-		if($tipe == 'faktur') {
-			$this->pdf->load_pdf('nota2', $data, $header->no_transaksi.".pdf");
-		} else {
-			$this->pdf->load_pdf('nota_surat_jalan', $data, $header->no_transaksi.".pdf");
-		}
+		// if($tipe == 'faktur') {
+		// 	$this->pdf->load_pdf('nota2', $data, $header->no_transaksi.".pdf");
+		// } else {
+		// 	$this->pdf->load_pdf('nota_surat_jalan', $data, $header->no_transaksi.".pdf");
+		// }
 		
 	}
 }
