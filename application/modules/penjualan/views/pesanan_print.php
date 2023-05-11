@@ -17,24 +17,22 @@
         <table>
             <tr>
                 <td width="33.3%">
-                    <?php if(json_decode($no_header) == false): ?>
-                        <table class="padding-top: 10px">
-                            <tr>
-                                <td>
-                                    <span class="fw-bold f-verdana f-size-15-s"><?= ucwords(strtolower(perusahaan('nama'))); ?></span><br>
-                                    <span class="fw-400 f-trebuchet f-size-8-s"><?= perusahaan('alamat'); ?></span>
-                                </td>
-                            </tr>
-                        </table>
-                    <?php endif; ?>
+                    <table class="padding-top: 10px">
+                        <tr>
+                            <td>
+                                <span class="fw-bold f-verdana f-size-15-s"><?= ucwords(strtolower(perusahaan('nama'))); ?></span><br>
+                                <span class="fw-400 f-trebuchet f-size-8-s"><?= perusahaan('alamat'); ?></span>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
 
                 <td width="66.7%">
                     <table>
                         <tr>
                             <td class="t-center">
-                                <span class="fw-bold f-arial f-size-16"><?= $tipe == 'faktur' ? 'FAKTUR PENJUALAN' : 'SURAT JALAN'; ?></span><br>
-                                <span class="fw-bold f-arial f-size-12"><?= $tipe == 'faktur' ? 'Nota : '.$header->no_transaksi : 'No. SJ : '.$header->no_transaksi; ?></span>
+                                <span class="fw-bold f-arial f-size-16"><?= $tipe == 'faktur' ? 'FAKTUR PENJUALAN' : 'PENAWARAN PESANAN'; ?></span><br>
+                                <span class="fw-bold f-arial f-size-12">Nota : <?= $header->no_transaksi; ?></span>
                             </td>
                             <td width="40%" class="v-bottom t-right">
                                 <span class="fw-bold f-arial f-size-10">Jakarta,</span> <span class="fw-400 f-verdana f-size-9"><?=date("d/m/Y",strtotime($header->tgl))?></span>
@@ -97,20 +95,13 @@
                     <table>
                         <tr>
                             <td width="65%" class="v-top">
-                                <span class="table-footer"><?= terbilang($header->grand_total - $header->uang_muka); ?></span> <br><br>
-                                <span class="table-footer"><?= $header->keterangan_faktur; ?></span>
+                                <span class="table-footer"><?= terbilang($header->grand_total); ?></span>
                             </td>
                             <td width="35%" class="v-top">
                                 <table>
                                     <tr class="table-footer">
                                         <td width="42%">Biaya Lain : </td>
                                         <td class="t-right"><?= number_format($header->biaya_lain); ?> </td>
-                                    </tr>
-                                    <tr class="table-footer">
-                                        <td colspan="2">Ket. Biaya Lain : </td>
-                                    </tr>
-                                    <tr class="table-footer">
-                                        <td colspan="2" rowspan="1"><?= $header->keterangan_biaya_lain; ?></td>
                                     </tr>
                                 </table>
                             </td> 
@@ -124,11 +115,9 @@
                                     <tr>
                                         <td width="30%" class="t-center fw-bold f-verdana f-size-10">Penerima</td>
                                         
-                                        <td width="40%" class="t-center f-verdana f-size-10 fw-400" style="<?= json_decode($is_rekening) == true ? 'border: 1px solid black' : ''; ?>">
-                                            <?php if(json_decode($is_rekening) == true): ?>
-                                                NO REK <?= $bank->bank; ?>: <?= $bank->no_rekening;?><br>
-                                                ATN: <?= $bank->nama; ?>
-                                            <?php endif; ?>
+                                        <td width="40%" class="t-center f-verdana f-size-10 fw-400" style="border: 1px solid black">
+                                            NO REK <?= $bank->bank; ?>: <?= $bank->no_rekening;?><br>
+                                            ATN: <?= $bank->nama; ?>
                                             
                                         </td>
                                         <td width="30%" class="t-center fw-bold f-verdana f-size-10">Hormat Kami</td>
@@ -170,12 +159,12 @@
                         <tr class="table-footer">
                             <td width="35%">DP</td>
                             <td width="2%" class="t-center">:</td>
-                            <td class="t-right"><?= number_format($header->uang_muka); ?> </td>
+                            <td class="t-right">0</td>
                         </tr>
                         <tr class="table-footer">
                             <td width="35%">Sisa</td>
                             <td width="2%" class="t-center">:</td>
-                            <td class="t-right"><?= number_format($header->grand_total - $header->uang_muka); ?> </td>
+                            <td class="t-right"><?= number_format($header->grand_total); ?> </td>
                         </tr>
                     </table>
                 </td>

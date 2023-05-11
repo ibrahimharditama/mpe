@@ -77,7 +77,7 @@
                 "sortable": false, 
                 "searchable": false,
                 "render": function (data, type, row, meta) {
-                    return buttonDelete(site_url + 'penjualan/pengembalian-pipa/delete/' + data)+'<a target="_blank" href="' + site_url + 'penjualan/pengembalian-pipa/cetak/'+data+'"><img src="<?php echo base_url(); ?>assets/img/printer.png"></a>';
+                    return buttonDelete(site_url + 'penjualan/pengembalian-pipa/delete/' + data)+'&nbsp;<a target="_blank" href="' + site_url + 'penjualan/pengembalian-pipa/cetak/'+data+'"><img src="<?php echo base_url(); ?>assets/img/printer.png"></a>';
                 }
             },
             {

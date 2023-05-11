@@ -455,7 +455,6 @@ class Pengiriman extends MX_Controller {
 
 	public function cetak($id)
 	{
-		$this->load->library('pdf');
 		$header = $this->db->query(
 			"SELECT a.*,b.* FROM pengiriman a JOIN pelanggan b ON a.id_pelanggan = b.id WHERE a.id = $id"
 		)->row();
@@ -472,10 +471,11 @@ class Pengiriman extends MX_Controller {
 			"header" => $header,
 			"detail" => array_merge($details,$details_nota),
 			"bank" => $bank,
+			"table_count" => ceil(count($details) / 10),
 
 		];
 
-		$this->pdf->load_pdf('pengiriman_surat_jalan', $data, $header->no_transaksi.".pdf");
+		$this->load->view('pengiriman_print', $data);
 	}
 
 	public function approve()

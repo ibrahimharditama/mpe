@@ -254,17 +254,13 @@ class Pesanan extends MX_Controller {
 			"SELECT a.* FROM rekening a WHERE a.is_use = '1'"
 		)->row();
 		$data = [
+			"tipe" => $tipe,
 			"header" => $header,
 			"detail" => $details,
-			"bank" => $bank
+			"bank" => $bank,
+			"table_count" => ceil(count($details) / 10),
 		];
-		//return $this->load->view('faktur_penjualan', $data);
-		//$this->pdf->load_view('nota',$data,"a5","landscape",$header->no_transaksi.".pdf");
-		if($tipe == 'faktur') {
-			$this->pdf->load_pdf('faktur_penjualan', $data, $header->no_transaksi.".pdf");
-		} else {
-			$this->pdf->load_pdf('penawaran_pesanan', $data, $header->no_transaksi.".pdf");
-		}
+		$this->load->view('pesanan_print', $data);
 		
 	}
 

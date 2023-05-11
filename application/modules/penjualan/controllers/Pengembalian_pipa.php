@@ -333,17 +333,13 @@ class Pengembalian_pipa extends MX_Controller {
 		$details = $this->db->query(
 			"SELECT a.*,b.* FROM pengembalian_pipa_detail a JOIN ref_produk b ON a.id_produk = b.id WHERE a.id_pengembalian_pipa = $id"
 		)->result();
-		$bank = $this->db->query(
-			"SELECT a.* FROM rekening a WHERE a.is_use = '1'"
-		)->row();
 		$data = [
 			"header" => $header,
 			"detail" => $details,
-			"bank" => $bank
+			"table_count" => ceil(count($details) / 10),
 		];
-		// return $this->load->view('nota_pengembalian', $data);
-		// $this->pdf->load_view('nota',$data,"a5","landscape",$header->no_transaksi.".pdf");
-		$this->pdf->load_pdf('nota_pengembalian', $data, $header->no_transaksi.".pdf");		
+		
+		$this->load->view('pengembalian_pipa_print', $data);		
 	}
 
 }
