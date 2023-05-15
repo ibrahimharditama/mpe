@@ -31,7 +31,7 @@
                     <table>
                         <tr>
                             <td class="t-center">
-                                <span class="fw-bold f-arial f-size-16"><?= $tipe == 'faktur' ? 'FAKTUR PENJUALAN' : 'PENAWARAN PESANAN'; ?></span><br>
+                                <span class="fw-bold f-arial f-size-16"><?= $tipe == 'faktur' ? 'FAKTUR PENJUALAN' : 'SURAT PENAWARAN'; ?></span><br>
                                 <span class="fw-bold f-arial f-size-12">Nota : <?= $header->no_transaksi; ?></span>
                             </td>
                             <td width="40%" class="v-bottom t-right">

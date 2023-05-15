@@ -332,6 +332,12 @@
                                 <?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/sj/true/true' )); ?>
                             </td>
                         </tr>
+                        <tr>
+                            <td>Surat jalan tanpa rekening tanpa blanko</td>
+                            <td class="text-center">
+                                <?= buttonPrint(base_url('penjualan/faktur/cetak/'. $id .'/sj/true/false' )); ?>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
