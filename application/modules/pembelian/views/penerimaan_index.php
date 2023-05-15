@@ -1,4 +1,4 @@
-<h1 class="my-header">Tagihan Pembelian</h1>
+<h1 class="my-header">Pembelian</h1>
 
 <div class="row m-0">
 	<div class="col-12">

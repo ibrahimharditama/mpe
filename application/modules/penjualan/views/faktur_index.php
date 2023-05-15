@@ -1,4 +1,4 @@
-<h1 class="my-header">Nota Penjualan</h1>
+<h1 class="my-header">Penjualan</h1>
 
 <div class="row m-0">
 	<div class="col-12">
