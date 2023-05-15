@@ -28,17 +28,17 @@
 								
 								<?php 
 									$id_pengguna = $row->id_pengguna;
-									$absen = '';
+									$dataAbsen = $id_pengguna.'#'.$value.'#'.$v;
+									$absen = '<a href="javascript:void(0)" class="text-danger" data-absen="'.$dataAbsen.'" onclick="absen(this)"><i class="ti-pencil-alt"><i></a>';
 
 									if ($v == 'id_pengguna') continue; 
 
 									if ($v != 'nama') {
-										$dataAbsen = $id_pengguna.'#'.$value.'#'.$v;
 										if ($value == '1') {
 											$total += 1;
-											$absen = '<a href="javascript:void(0)" data-absen="'.$dataAbsen.'" onclick="absen(this)"><i class="ti-check-box"><i></a>';
+											$absen = '<a href="javascript:void(0)" class="text-success" data-absen="'.$dataAbsen.'" onclick="absen(this)"><i class="ti-check-box"><i></a>';
 										}
-										if ($value == '0') $absen = '<a href="javascript:void(0)" data-absen="'.$dataAbsen.'" onclick="absen(this)"><i class="ti-thumb-up"><i></a>';
+										if ($value == '0') $absen = '<a href="javascript:void(0)" class="text-primary" data-absen="'.$dataAbsen.'" onclick="absen(this)"><i class="ti-thumb-up"><i></a>';
 										
 									}
 								?>
@@ -78,7 +78,10 @@
 		var data = absen.split('#');
 
 		var id_pengguna = data[0];
-		var status = data[1] == '1' ? 0 : 1;
+		var status = data[1];
+		if(data[1] != '-') {
+			status = data[1] == '1' ? 0 : 1;
+		}
 		var tgl = data[2];
 
 		$.post(site_url + 'absensi/approve', {
@@ -90,16 +93,25 @@
 			var total = $('.totalAbsen_' + id_pengguna);
 			var totalAbsen = parseInt(total.html());
 			var html = '';
-			if(status == 1){
+			var clas = '';
+			if(status == 1 || status == '-'){
 				totalAbsen += 1;
+				clas = 'text-success';
 				html = '<i class="ti-check-box"><i>'
+
+				if(status == '-') {
+					status = 1;
+				}
+
 			} else {
 				totalAbsen -= 1;
+				clas = 'text-primary';
 				html = '<i class="ti-thumb-up"><i>'
 			}
 
 			total.html(totalAbsen);
 
+			$(ini).attr('class', clas);
 			$(ini).attr('data-absen', id_pengguna + '#' + status + '#' + tgl);
 			$(ini).html(html);
 		});
