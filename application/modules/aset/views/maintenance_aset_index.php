@@ -23,6 +23,9 @@
 	<a class="btn btn-primary" href="javascript:void(0)" data-toggle="modal" data-target="#modalMaintenance">
 		+ Tambah Data
 	</a>
+    <a class="btn btn-primary" href="<?php echo site_url('aset/maintenanceaset/excel'); ?>">
+		<i class="ti ti-file"> Excel</i>
+	</a>
 </div>
 
 <div class="modal fade" id="modalMaintenance" tabindex="-1" role="dialog" aria-hidden="true">
