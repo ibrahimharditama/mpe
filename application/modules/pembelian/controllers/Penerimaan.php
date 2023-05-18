@@ -50,7 +50,7 @@ class Penerimaan extends MX_Controller {
 				, UPPER(b.username) AS yg_buat
 				, UPPER(c.username) AS yg_ubah
 				, CONCAT(d.kode, ' &middot; ', d.nama) AS supplier
-				, e.no_transaksi AS no_pembelian
+				, IFNULL(e.no_transaksi, '') AS no_pembelian
 				, e.tgl AS tgl_pembelian
 				, e.qty_pesan
 				, ROW_NUMBER() OVER (

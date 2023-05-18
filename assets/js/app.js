@@ -41,6 +41,23 @@ function buttonDelete(url) {
 	return `<a onclick="return confirm(\'Yakin untuk menghapus?\');" href="` + url + `"><img src="` + site_url + `assets/img/del.png"></a>`;
 }
 
+function angka(angka)
+{
+	return $.number(angka, 0, ',', '.')
+}
+
+function rupiah(angka, decimal = false, show_null = false)
+{
+	if (parseInt(angka) == 0) 
+	{
+		return show_null ? 'Rp0' : null;
+	} else {
+		if (parseInt(angka) >= 0) return !decimal ? 'Rp' + $.number(angka, 0, ',', '.') : 'Rp' + $.number(angka, 2, ',', '.');
+		else if (parseInt(angka) < 0) return !decimal ? '( Rp' + $.number(angka, 0, ',', '.') + ' )' : '( Rp' + $.number(angka, 2, ',', '.') + ' )';
+		else return null;
+	}
+}
+
 
 
 

@@ -7,6 +7,7 @@ class Pesanan extends MX_Controller {
 	{
 		parent::__construct();
 		$this->form_validation->CI =& $this;
+		$this->load->library('datatables');
 	}
 	
 	public function index()
@@ -18,65 +19,24 @@ class Pesanan extends MX_Controller {
 	
 	public function datatable()
 	{
-		$draw = $this->input->post('draw');
-		$offset = $this->input->post('start');
-		$num_rows = $this->input->post('length');
-		$order_index = $_POST['order'][0]['column'];
-		$order_by = $_POST['columns'][$order_index]['data'];
-		$order_direction = $_POST['order'][0]['dir'];
-		$keyword = $_POST['search']['value'];
-		
-		$bindings = array("%{$keyword}%", "%{$keyword}%", "%{$keyword}%");
-		
-		$base_sql = "
-			FROM pembelian AS a
-			LEFT JOIN pengguna AS b ON a.created_by = b.id
-			LEFT JOIN pengguna AS c ON a.updated_by = c.id
-			JOIN supplier AS d ON a.id_supplier = d.id
-			WHERE
-				a.row_status = 1
-				AND (
-					a.no_transaksi LIKE ?
-					OR d.kode LIKE ?
-					OR d.nama LIKE ?
-				)
-		";
-		
-		$data_sql = "
-			SELECT
-				a.*
-				, UPPER(b.username) AS yg_buat
-				, UPPER(c.username) AS yg_ubah
-				, CONCAT(d.kode, ' &middot; ', d.nama) AS supplier
-				, ROW_NUMBER() OVER (
-					ORDER BY {$order_by} {$order_direction}
-				  ) AS nomor
-			{$base_sql}
-			ORDER BY
-				{$order_by} {$order_direction}
-			LIMIT {$offset}, {$num_rows}
-		";
-		$src = $this->db->query($data_sql, $bindings);
-		
-		$count_sql = "
-			SELECT COUNT(*) AS total
-			{$base_sql}
-		";
-		$total_records = $this->db->query($count_sql, $bindings)->row('total');
-		
-		$aaData = $src->result_array();
-		
-		foreach ($aaData as $i => $d) {
-			$aaData[$i]['grand_total'] = rupiah($d['grand_total']);
-		}
-		
-		$response = array (
-			'draw' => intval($draw),
-			'iTotalRecords' => $src->num_rows(),
-			'iTotalDisplayRecords' => $total_records,
-			'aaData' => $aaData,
-		);
-		
+		$this->datatables->select("id, no_transaksi, tgl, tgl_kirim, qty_pesan, qty_kirim, grand_total, yg_buat, yg_ubah, supplier")
+                    ->from("(SELECT a.id, a.no_transaksi, a.tgl, a.tgl_kirim, a.qty_pesan, a.qty_kirim, a.grand_total,
+							UPPER(b.username) AS yg_buat,
+							UPPER(c.username) AS yg_ubah,
+							CONCAT(d.kode, ' &middot; ', d.nama) AS supplier
+							FROM pembelian AS a
+							LEFT JOIN pengguna AS b ON a.created_by = b.id
+							LEFT JOIN pengguna AS c ON a.updated_by = c.id
+							JOIN supplier AS d ON a.id_supplier = d.id
+							WHERE a.row_status = 1) a");
+
+        $result = json_decode($this->datatables->generate());
+
+        $response['datatable'] = $result;
+        $response['draw'] =  $result->draw;
+        $response['recordsTotal'] =  $result->recordsTotal;
+        $response['recordsFiltered'] =  $result->recordsFiltered;
+
 		echo json_encode($response);
 	}
 	

@@ -29,47 +29,74 @@
 	</a>
 </div>
 
-<script type="text/javascript">
-function init_datatable()
-{
-	datatable = $('#datatable').DataTable ({
-		'bInfo': true,
-		'pageLength': 25,
-		'serverSide': true,
-		'serverMethod': 'post',
-		'ajax': '<?php echo site_url('/pembelian/pesanan/datatable'); ?>',
-		'stateSave': true,
-		'order': [[ 1, 'desc' ]],
-		'fixedHeader': true,
-		'columns': [
-			{ data: 'nomor', orderable: false },
+<script>
+
+	$('#datatable').DataTable({
+        ajax: {
+            url: site_url + 'pembelian/pesanan/datatable',
+            dataSrc: 'datatable.data',
+            data: function(d) {
+            }
+        },
+        serverSide: true,
+        order: [[2, 'desc']],
+        language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+            lengthMenu: '_MENU_ items/page',
+        },
+        columns: [
+            {
+				"data": null,
+                "sortable": false, 
+                "searchable": false,
+                "render": function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                },
+			},
 			{
-                orderable: false,
-                render: function(data, type, row, meta) {
+				"data": "id",
+                "sortable": false, 
+                "searchable": false,
+                "render": function(data, type, row, meta) {
                     return '<a target="_blank" href="' + site_url + 'pembelian/pesanan/cetak/' + row.id+'"><img src="<?php echo base_url(); ?>assets/img/printer.png"></a>';
                 }
             },
 			{
-				data: 'no_transaksi',
-				render: function (data, type, row, meta) {
+				"data": "no_transaksi",
+				"render": function (data, type, row, meta) {
 					return buttonUpdate(site_url + 'pembelian/pesanan/ubah/' + row.id, data);
 				}
 			},
-			{ data: 'tgl' },
-			{ data: 'tgl_kirim' },
-			{ data: 'supplier' },
-			{ data: 'qty_pesan', className: 'dt-center' },
-			{ data: 'qty_kirim', className: 'dt-center' },
-			{ data: 'grand_total', className: 'dt-body-right' },
-			{ data: 'yg_buat' },
-			{ data: 'yg_ubah' },
-		]
-	});
-}
+			{ "data": "tgl" },
+			{ "data": "tgl_kirim" },
+			{ "data": "supplier" },
+			{ 
+				"data": "qty_pesan", 
+				"className": "dt-center", 
+				"render": function (data, type, row, meta) {
+					return angka(data);
+				}
+			},
+			{ 
+				"data": "qty_kirim", 
+				"className": "dt-center",
+				"render": function (data, type, row, meta) {
+					return angka(data);
+				}
+			},
+			{ 
+				"data": "grand_total", 
+				"className": "dt-body-right",
+				"render": function (data, type, row, meta) {
+					return rupiah(data);
+				} 
+			},
+			{ "data": "yg_buat" },
+			{ "data": "yg_ubah" },
+        ],
+        
+    });
 
-$().ready(function() {
-	
-	init_datatable();
-	
-});
+
 </script>

@@ -88,7 +88,7 @@ function init_datatable()
 		'serverMethod': 'post',
 		'ajax': '<?php echo site_url('/pembelian/penerimaan/datatable'); ?>',
 		'stateSave': true,
-		'order': [[ 1, 'asc' ]],
+		'order': [[ 2, 'desc' ]],
 		'fixedHeader': true,
 		'columns': [
 			{ data: 'nomor', orderable: false },
@@ -113,8 +113,20 @@ function init_datatable()
 				}
 			},
 			{ data: 'tgl_pembelian' },
-			{ data: 'qty_pesan', className: 'dt-center' },
-			{ data: 'qty_terima', className: 'dt-center' },
+			{ 
+				data: 'qty_pesan', 
+				className: 'dt-center',
+				render: function (data, type, row, meta) {
+					return angka(data);
+				}
+			},
+			{ 
+				data: 'qty_terima', 
+				className: 'dt-center',
+				render: function (data, type, row, meta) {
+					return angka(data);
+				}
+			},
 			{ data: 'yg_buat' },
 			{ data: 'yg_ubah' },
 		]

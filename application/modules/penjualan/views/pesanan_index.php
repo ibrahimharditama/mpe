@@ -38,8 +38,7 @@ function init_datatable()
 		'serverSide': true,
 		'serverMethod': 'post',
 		'ajax': '<?php echo site_url('/penjualan/pesanan/datatable'); ?>',
-		'stateSave': true,
-		'order': [[ 1, 'desc' ]],
+		'order': [[ 2, 'desc' ]],
 		'fixedHeader': true,
 		'columns': [
 			{ data: 'nomor', orderable: false },
@@ -59,8 +58,20 @@ function init_datatable()
 			{ data: 'tgl' },
 			{ data: 'tgl_kirim' },
 			{ data: 'pelanggan' },
-			{ data: 'qty_pesan', className: 'dt-center' },
-			{ data: 'qty_kirim', className: 'dt-center' },
+			{ 
+				data: 'qty_pesan', 
+				className: 'dt-center',
+				render: function (data, type, row, meta) {
+					return angka(data);
+				}
+			},
+			{ 
+				data: 'qty_kirim', 
+				className: 'dt-center',
+				render: function (data, type, row, meta) {
+					return angka(data);
+				}
+			},
 			{ data: 'grand_total', className: 'dt-body-right' },
 			{ data: 'yg_buat' },
 			{ data: 'yg_ubah' },

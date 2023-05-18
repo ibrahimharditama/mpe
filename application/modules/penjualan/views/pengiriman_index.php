@@ -59,9 +59,8 @@ function init_datatable() {
         'serverSide': true,
         'serverMethod': 'post',
         'ajax': '<?php echo site_url('/penjualan/pengiriman/datatable'); ?>',
-        'stateSave': true,
         'order': [
-            [1, 'desc']
+            [2, 'desc']
         ],
         'fixedHeader': true,
         'columns': [{
@@ -91,7 +90,10 @@ function init_datatable() {
             },
             {
                 data: 'qty_semua',
-                className: 'dt-center'
+                className: 'dt-center',
+                render: function (data, type, row, meta) {
+					return angka(data);
+				}
             },
             {
                 data: 'yg_buat'
