@@ -7,6 +7,7 @@ class Penerimaan extends MX_Controller {
 	{
 		parent::__construct();
 		$this->form_validation->CI =& $this;
+		$this->load->library('datatables');
 	}
 	
 	public function index()
@@ -18,66 +19,38 @@ class Penerimaan extends MX_Controller {
 	
 	public function datatable()
 	{
-		$draw = $this->input->post('draw');
-		$offset = $this->input->post('start');
-		$num_rows = $this->input->post('length');
-		$order_index = $_POST['order'][0]['column'];
-		$order_by = $_POST['columns'][$order_index]['data'];
-		$order_direction = $_POST['order'][0]['dir'];
-		$keyword = $_POST['search']['value'];
-		
-		$bindings = array("%{$keyword}%", "%{$keyword}%", "%{$keyword}%", "%{$keyword}%");
-		
-		$base_sql = "
-			FROM penerimaan AS a
-			LEFT JOIN pengguna AS b ON a.created_by = b.id
-			LEFT JOIN pengguna AS c ON a.updated_by = c.id
-			JOIN supplier AS d ON a.id_supplier = d.id
-			LEFT JOIN pembelian AS e ON a.id_pembelian = e.id
-			WHERE
-				a.row_status = 1
-				AND (
-					a.no_transaksi LIKE ?
-					OR d.kode LIKE ?
-					OR d.nama LIKE ?
-					OR e.no_transaksi LIKE ?
-				)
-		";
-		
-		$data_sql = "
-			SELECT
-				a.*
-				, UPPER(b.username) AS yg_buat
-				, UPPER(c.username) AS yg_ubah
-				, CONCAT(d.kode, ' &middot; ', d.nama) AS supplier
-				, IFNULL(e.no_transaksi, '') AS no_pembelian
-				, e.tgl AS tgl_pembelian
-				, e.qty_pesan
-				, ROW_NUMBER() OVER (
-					ORDER BY {$order_by} {$order_direction}
-				  ) AS nomor
-			{$base_sql}
-			ORDER BY
-				{$order_by} {$order_direction}
-			LIMIT {$offset}, {$num_rows}
-		";
-		$src = $this->db->query($data_sql, $bindings);
-		
-		$count_sql = "
-			SELECT COUNT(*) AS total
-			{$base_sql}
-		";
-		$total_records = $this->db->query($count_sql, $bindings)->row('total');
-		
-		$aaData = $src->result_array();
-		
-		$response = array (
-			'draw' => intval($draw),
-			'iTotalRecords' => $src->num_rows(),
-			'iTotalDisplayRecords' => $total_records,
-			'aaData' => $aaData,
-		);
-		
+		$this->datatables->select("id, no_transaksi, tgl, supplier, no_pembelian, tgl_pembelian, qty_pesan, 
+								qty_terima, yg_buat, yg_ubah, keterangan_pay, grand_total")
+                    ->from("(SELECT a.*
+								, UPPER(b.username) AS yg_buat
+								, UPPER(c.username) AS yg_ubah
+								, CONCAT(d.kode, ' &middot; ', d.nama) AS supplier
+								, IFNULL(e.no_transaksi, '') AS no_pembelian
+								, IFNULL(e.tgl, '') AS tgl_pembelian
+								, IFNULL(e.qty_pesan, 0) AS qty_pesan
+								, IFNULL(x.keterangan, '') AS keterangan_pay
+							FROM penerimaan AS a
+							LEFT JOIN pengguna AS b ON a.created_by = b.id
+							LEFT JOIN pengguna AS c ON a.updated_by = c.id
+							JOIN supplier AS d ON a.id_supplier = d.id
+							LEFT JOIN pembelian AS e ON a.id_pembelian = e.id
+							LEFT JOIN (
+								SELECT id_pembelian, GROUP_CONCAT(CONCAT(r.no_rekening, ' (', r.bank, ') - Rp', p.nominal, ' ', p.keterangan) SEPARATOR ' | ') AS keterangan
+								FROM pembayaran_beli p 
+								JOIN rekening r ON r.id = p.rek_pembayaran 
+								WHERE p.row_status = 1 
+								GROUP BY id_pembelian
+								ORDER BY tgl DESC
+							) x ON x.id_pembelian = a.id
+							WHERE a.row_status = 1) a");
+
+        $result = json_decode($this->datatables->generate());
+
+        $response['datatable'] = $result;
+        $response['draw'] =  $result->draw;
+        $response['recordsTotal'] =  $result->recordsTotal;
+        $response['recordsFiltered'] =  $result->recordsFiltered;
+
 		echo json_encode($response);
 	}
 	
@@ -104,12 +77,20 @@ class Penerimaan extends MX_Controller {
 		if ( ! $this->agent->referrer()) {
 			show_404();
 		}
-		
-		$src = $this->db
-			->from('penerimaan')
-			->where('row_status', 1)
-			->where('id', $id)
-			->get();
+
+		$src = $this->db->query("SELECT p.*, IFNULL(pb.no_transaksi, '') AS pembelian, s.nama AS supplier, 
+								IFNULL(x.total_bayar, 0) AS total_bayar
+								FROM penerimaan p 
+								LEFT JOIN pembelian pb ON pb.id = p.id_pembelian 
+								JOIN supplier s ON s.id = p.id_supplier 
+								LEFT JOIN (
+									SELECT id_pembelian, SUM(nominal) AS total_bayar 
+									FROM pembayaran_beli 
+									WHERE row_status = 1 
+									GROUP BY id_pembelian
+								) x ON x.id_pembelian = p.id
+								WHERE p.row_status = 1 AND p.id = $id
+							");		
 		
 		if ($src->num_rows() == 0) {
 			show_404();
@@ -151,16 +132,27 @@ class Penerimaan extends MX_Controller {
 	public function ajax_pembelian_detail()
 	{
 		$id_pembelian = $this->input->post('id_pembelian');
-		
+
 		$src = $this->db
+					->from('pembelian')
+					->where('row_status', 1)
+					->where('id', $id_pembelian)
+					->get();
+		
+		$src_detail = $this->db
 					->from('pembelian_detail')
 					->where('row_status', 1)
 					->where('id_pembelian', $id_pembelian)
 					->order_by('id')
 					->get();
+
+		$data = (object) array(
+			'pembelian' => $src->row(),
+			'detail' => $src_detail->result()
+		);
 		
 		header('Content-Type: application/json');
-		echo json_encode($src->result());
+		echo json_encode($data);
 	}
 	
 	public function insert()
@@ -175,10 +167,10 @@ class Penerimaan extends MX_Controller {
 			
 			if ($produk['qty'] > 0) {
 				
-				$qty = $produk['qty'];
+				$qty = str_replace('.', '', $produk['qty']);
 				$harga_beli = str_replace('.', '', $produk['harga_beli']);
 				$diskon = str_replace('.', '', $produk['diskon']);
-				$sub_total = $produk['qty'] * ($harga_beli - $diskon);
+				$sub_total = $qty * ($harga_beli - $diskon);
 				
 				$detail[] = array (
 					'id_produk' => $produk['id'],
@@ -197,7 +189,7 @@ class Penerimaan extends MX_Controller {
 		}
 		
 		if (count($detail) > 0) {
-			$key = array('tgl', 'id_supplier', 'id_pembelian', 'keterangan', 'keterangan_biaya_lain', 'diskon_faktur|number', 'biaya_lain|number', 'uang_muka|number', 'rek_pembayaran_dp|number');
+			$key = array('tgl', 'id_supplier', 'id_pembelian', 'keterangan', 'keterangan_biaya_lain', 'diskon_faktur|number', 'biaya_lain|number');
 			$data = post_data($key);
 			
 			$data['no_transaksi'] = new_number('tagihan');
@@ -205,81 +197,30 @@ class Penerimaan extends MX_Controller {
 			$data['qty_terima'] = $qty_terima;
 			$data['total'] = $total;
 			$data['grand_total'] = $total - $data['diskon_faktur'] + $data['biaya_lain'];
-			$uang_muka = str_replace('.', '', $data['uang_muka']);
-			$data['sisa_tagihan'] = $data['grand_total']-$uang_muka;
 
 			$this->db->insert('penerimaan', $data);
 			$id_penerimaan = $this->db->insert_id();
-			
-			//---membuat no pembayaran
-			$data_pembelian = $this->db->from('penerimaan')->where('id', $id_penerimaan)->get()->row();
-			$no_transaksi=$data_pembelian->no_transaksi;
-			$jml_pembayaran = $this->db->from('pembayaran_beli')->where('id_pembelian', $id_penerimaan)->get()->num_rows();
-			$no_selanjutnya = $jml_pembayaran+1;
-			$no_pembayaran = "P-".$no_transaksi."-".$no_selanjutnya;
 
-			$dataDp['no_transaksi'] = $no_pembayaran;
-			$dataDp['id_pembelian'] = $id_penerimaan;
-			$dataDp['tgl'] = date("Y-m-d");
-			$dataDp['rek_pembayaran'] = $data['rek_pembayaran_dp'];
-			$dataDp['nominal'] =  $uang_muka;
-			$dataDp['created_by'] = user_session('id');
-			 $this->db->insert('pembayaran_beli', $dataDp);
-
-			//--------------------------
 			foreach ($detail as $i => $d) {
 				$detail[$i]['id_penerimaan'] = $id_penerimaan;
 			}
 			
 			$this->db->insert_batch('penerimaan_detail', $detail);
 			
-			#
+			
 			# MASUKKAN JURNAL STOK
-			#
-			$src = $this->db
-					->from('penerimaan_detail')
-					->where('row_status', 1)
-					->where('id_penerimaan', $id_penerimaan)
-					->order_by('id')
-					->get();
+
+			$this->_ins_del_stok($data['tgl'], $data['no_transaksi'], $id_penerimaan);
 			
-			$jstok = array();
 			
-			foreach ($src->result() as $row) {
-				$jstok[] = array (
-					'no_referensi' => $data['no_transaksi'],
-					'tgl' => $data['tgl'],
-					'jenis_trx' => 'pembelian',
-					'id_produk' => $row->id_produk,
-					'qty' => $row->qty,
-					'id_header' => $row->id_penerimaan,
-					'id_detail' => $row->id,
-					'created_by' => $data['created_by'],
-				);
-			}
-			
-			$this->db->insert_batch('jstok', $jstok);
-			
-			#
 			# UPDATE PEMBELIAN
-			#
-			$sql = "
-				UPDATE pembelian
-				SET qty_kirim = (
-					SELECT SUM(qty)
-					FROM penerimaan_detail
-					WHERE id_penerimaan IN (
-						SELECT id
-						FROM penerimaan
-						WHERE id_pembelian = '{$data['id_pembelian']}'
-					)
-				)
-				WHERE id = '{$data['id_pembelian']}'
-			";
-			$this->db->query($sql);
+
+			if(isset($data['id_pembelian']) && $data['id_pembelian'] != null && $data['id_pembelian'] != '') {
+				$this->_upd_pembelian($data['id_pembelian']);
+			}
 		}
 		
-		redirect(site_url('pembelian/penerimaan'));
+		redirect(site_url('pembelian/penerimaan/ubah/' . $id_penerimaan));
 	}
 	
 	public function update()
@@ -296,10 +237,10 @@ class Penerimaan extends MX_Controller {
 			
 			if ($produk['qty'] > 0) {
 				
-				$qty = $produk['qty'];
+				$qty = str_replace('.', '', $produk['qty']);
 				$harga_beli = str_replace('.', '', $produk['harga_beli']);
 				$diskon = str_replace('.', '', $produk['diskon']);
-				$sub_total = $produk['qty'] * ($harga_beli - $diskon);
+				$sub_total = $qty * ($harga_beli - $diskon);
 				
 				$detail[] = array (
 					'id_produk' => $produk['id'],
@@ -318,7 +259,7 @@ class Penerimaan extends MX_Controller {
 		}
 		
 		if (count($detail) > 0) {
-			$key = array('no_transaksi', 'tgl', 'id_supplier', 'id_pembelian', 'keterangan', 'diskon_faktur|number', 'biaya_lain|number');
+			$key = array('tgl', 'id_supplier', 'id_pembelian', 'keterangan', 'keterangan_biaya_lain', 'diskon_faktur|number', 'biaya_lain|number');
 			$data = post_data($key);
 			
 			$data['updated_by'] = user_session('id');
@@ -334,52 +275,17 @@ class Penerimaan extends MX_Controller {
 			
 			$this->db->delete('penerimaan_detail', array('id_penerimaan' => $id_penerimaan));
 			$this->db->insert_batch('penerimaan_detail', $detail);
-			
-			#
+
 			# MASUKKAN JURNAL STOK
-			#
-			$src = $this->db
-					->from('penerimaan_detail')
-					->where('row_status', 1)
-					->where('id_penerimaan', $id_penerimaan)
-					->order_by('id')
-					->get();
+
+			$this->_ins_del_stok($data['tgl'], $data['no_transaksi'], $id_penerimaan);
 			
-			$jstok = array();
 			
-			foreach ($src->result() as $row) {
-				$jstok[] = array (
-					'no_referensi' => $data['no_transaksi'],
-					'tgl' => $data['tgl'],
-					'jenis_trx' => 'pembelian',
-					'id_produk' => $row->id_produk,
-					'qty' => $row->qty,
-					'id_header' => $row->id_penerimaan,
-					'id_detail' => $row->id,
-					'created_by' => $data['updated_by'],
-				);
-			}
-			
-			$this->db->delete('jstok', array('jenis_trx' => 'pembelian', 'id_header' => $id_penerimaan));
-			$this->db->insert_batch('jstok', $jstok);
-			
-			#
 			# UPDATE PEMBELIAN
-			#
-			$sql = "
-				UPDATE pembelian
-				SET qty_kirim = (
-					SELECT SUM(qty)
-					FROM penerimaan_detail
-					WHERE id_penerimaan IN (
-						SELECT id
-						FROM penerimaan
-						WHERE id_pembelian = '{$data['id_pembelian']}'
-					)
-				)
-				WHERE id = '{$data['id_pembelian']}'
-			";
-			$this->db->query($sql);
+
+			if(isset($data['id_pembelian']) && $data['id_pembelian'] != null && $data['id_pembelian'] != '') {
+				$this->_upd_pembelian($data['id_pembelian']);
+			}
 			
 			#
 			# UPDATE PEMBELIAN SEBELUMNYA
@@ -400,7 +306,51 @@ class Penerimaan extends MX_Controller {
 			$this->db->query($sql);
 		}
 		
-		redirect(site_url('pembelian/penerimaan'));
+		redirect($this->agent->referrer());
+	}
+
+	private function _ins_del_stok($tgl, $no_transaksi, $id_penerimaan)
+	{
+		$this->db->delete('jstok', ['jenis_trx' => 'pembelian', 'id_header' => $id_penerimaan]);
+
+		$src = $this->db
+					->from('penerimaan_detail')
+					->where('row_status', 1)
+					->where('id_penerimaan', $id_penerimaan)
+					->order_by('id')
+					->get();
+			
+		$jstok = array();
+		
+		foreach ($src->result() as $row) {
+			$jstok[] = array (
+				'no_referensi' => $no_transaksi,
+				'tgl' => $tgl,
+				'jenis_trx' => 'pembelian',
+				'id_produk' => $row->id_produk,
+				'qty' => $row->qty,
+				'id_header' => $id_penerimaan,
+				'id_detail' => $row->id,
+				'created_by' => user_session('id'),
+			);
+		}
+		
+		$this->db->insert_batch('jstok', $jstok);
+	}
+
+	private function _upd_pembelian($id_pembelian) 
+	{
+		$this->db->query("UPDATE pembelian
+						SET qty_kirim = (
+							SELECT SUM(qty)
+							FROM penerimaan_detail
+							WHERE id_penerimaan IN (
+								SELECT id
+								FROM penerimaan
+								WHERE id_pembelian = $id_pembelian
+							)
+						)
+						WHERE id = $id_pembelian");
 	}
 	
 	public function pembayaran()
@@ -417,12 +367,14 @@ class Penerimaan extends MX_Controller {
 		$tgl_pembayaran = $this->input->post('tgl_pembayaran');
 		$rek_pembayaran = $this->input->post('rek_pembayaran');
 		$nominal_pembayaran = $this->input->post('nominal_pembayaran');
+		$keterangan = $this->input->post('keterangan');
 		
 		$data['no_transaksi'] = $no_pembayaran;
 		$data['id_pembelian'] = $id_pembelian;
 		$data['tgl'] = $tgl_pembayaran;
 		$data['rek_pembayaran'] = $rek_pembayaran;
 		$data['nominal'] =  str_replace('.', '', $nominal_pembayaran);
+		$data['keterangan'] = $keterangan;
 		$data['created_by'] = user_session('id');
 		$res = [];
 		if($id_pembayaran !== ""){
@@ -490,9 +442,17 @@ class Penerimaan extends MX_Controller {
 	public function cetak($id)
 	{
 		$this->load->library('pdf');
-		$header = $this->db->query(
-			"SELECT a.*,b.* FROM penerimaan a JOIN supplier b ON a.id_supplier = b.id WHERE a.id = $id"
-		)->row();
+		$header = $this->db->query("SELECT a.*, b.*, IFNULL(x.total_bayar, 0) AS total_bayar 
+									FROM penerimaan a 
+									JOIN supplier b ON a.id_supplier = b.id 
+									LEFT JOIN (
+										SELECT id_pembelian, SUM(nominal) AS total_bayar 
+										FROM pembayaran_beli 
+										WHERE row_status = 1 
+										GROUP BY id_pembelian
+									) x ON x.id_pembelian = a.id
+									WHERE a.id = $id 
+								")->row();
 		$details = $this->db->query(
 			"SELECT a.*,b.* FROM penerimaan_detail a JOIN ref_produk b ON a.id_produk = b.id WHERE a.id_penerimaan = $id"
 		)->result();

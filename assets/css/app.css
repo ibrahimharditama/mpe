@@ -499,3 +499,8 @@ h5.header-sm {
 .border-left-none {
 	border-left: 0 !important;
 }
+
+.togle-datatable-inv {
+    font-size: 12px;
+    font-weight: 600;
+}

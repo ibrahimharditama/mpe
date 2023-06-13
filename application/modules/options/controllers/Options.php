@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Options extends MX_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->library('datatables');
+	}
+
 	public function urutan($table, $selected = '')
 	{
 		$src = $this->db
@@ -208,10 +214,11 @@ class Options extends MX_Controller {
 	public function aset($selected = '')
 	{
 		$src = $this->db
-			->select("id, CONCAT(nama, ' - ', model ) AS nama")
-			->from('asset')
-			->where('row_status', 1)
-			->order_by('nama')
+			->select("a.id, CONCAT(a.nama, ' - ', a.model, ' - ', p.nama ) AS nama")
+			->from('asset a')
+			->join('pengguna p', 'a.id_pegawai = p.id')
+			->where('a.row_status', 1)
+			->order_by('a.nama')
 			->get();
 		
 		return options($src, 'id', $selected, 'nama');
@@ -228,5 +235,75 @@ class Options extends MX_Controller {
 			->get();
 		
 		return options($src, 'id', $selected, 'kode');
+	}
+	
+	public function supplier_db()
+	{
+		$this->datatables->select("id, kode, nama, alamat, kontak, data")
+                    ->from("(SELECT id, kode, nama, alamat, CONCAT(no_telp, ' - ', no_hp) AS kontak,
+                    		CONCAT(id, '|', kode, '|', nama) AS data
+                    		FROM supplier 
+                    		WHERE row_status = 1) a");
+
+        $result = json_decode($this->datatables->generate());
+
+        $response['datatable'] = $result;
+        $response['draw'] =  $result->draw;
+        $response['recordsTotal'] =  $result->recordsTotal;
+        $response['recordsFiltered'] =  $result->recordsFiltered;
+
+        echo json_encode($response);
+	}
+
+	public function pelanggan_db()
+	{
+		$this->datatables->select("id, kode, nama, alamat, kontak, data")
+                    ->from("(SELECT id, kode, nama, alamat, CONCAT(no_telp, ' - ', no_hp) AS kontak,
+                    		CONCAT(id, '|', kode, '|', nama) AS data
+                    		FROM pelanggan 
+                    		WHERE row_status = 1) a");
+
+        $result = json_decode($this->datatables->generate());
+
+        $response['datatable'] = $result;
+        $response['draw'] =  $result->draw;
+        $response['recordsTotal'] =  $result->recordsTotal;
+        $response['recordsFiltered'] =  $result->recordsFiltered;
+
+        echo json_encode($response);
+	}
+
+	public function pembelian_db()
+	{
+		$where = '';
+		$input = $this->input->get();
+
+		if(isset($input['id_supplier'])) 
+			if($input['id_supplier'] != null && $input['id_supplier'] != '') {
+				$where = " AND a.id_supplier = '".$input['id_supplier']."' AND a.qty_pesan > a.qty_kirim ";
+			}
+
+		if(isset($input['id_pembelian'])) 
+			if($input['id_pembelian'] != null && $input['id_pembelian'] != '') {
+				$where = " AND a.id_supplier = '".$input['id_supplier']."' AND (a.qty_pesan > a.qty_kirim OR a.id = '".$input['id_pembelian']."')";
+			}
+		
+
+
+		$this->datatables->select("id, no_transaksi, tgl, tgl_kirim, qty_pesan, qty_kirim, grand_total, supplier")
+                    ->from("(SELECT a.id, a.no_transaksi, a.tgl, a.tgl_kirim, a.qty_pesan, a.qty_kirim, a.grand_total,
+							CONCAT(d.kode, ' &middot; ', d.nama) AS supplier
+							FROM pembelian AS a
+							JOIN supplier AS d ON a.id_supplier = d.id
+							WHERE a.row_status = 1 $where) a");
+
+        $result = json_decode($this->datatables->generate());
+
+        $response['datatable'] = $result;
+        $response['draw'] =  $result->draw;
+        $response['recordsTotal'] =  $result->recordsTotal;
+        $response['recordsFiltered'] =  $result->recordsFiltered;
+
+		echo json_encode($response);
 	}
 }

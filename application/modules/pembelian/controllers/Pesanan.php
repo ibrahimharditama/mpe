@@ -57,18 +57,18 @@ class Pesanan extends MX_Controller {
 	{
 		$this->_form();
 	}
-	
+
 	public function ubah($id)
 	{
 		if ( ! $this->agent->referrer()) {
 			show_404();
 		}
-		
-		$src = $this->db
-			->from('pembelian')
-			->where('row_status', 1)
-			->where('id', $id)
-			->get();
+
+		$src = $this->db->query("SELECT p.*, CONCAT(s.kode, ' - ', s.nama) AS supplier 
+								FROM pembelian p 
+								LEFT JOIN supplier s ON s.id = p.id_supplier
+								WHERE p.row_status = 1 AND p.id = $id
+							");
 		
 		if ($src->num_rows() == 0) {
 			show_404();
@@ -141,7 +141,7 @@ class Pesanan extends MX_Controller {
 			$this->db->insert_batch('pembelian_detail', $detail);
 		}
 		
-		redirect(site_url('pembelian/pesanan'));
+		redirect(site_url('pembelian/pesanan/ubah/' . $id_pembelian));
 	}
 	
 	public function update()
@@ -157,7 +157,7 @@ class Pesanan extends MX_Controller {
 			
 			if ($produk['qty'] > 0) {
 				
-				$qty = $produk['qty'];
+				$qty = str_replace('.', '', $produk['qty']);
 				$harga_beli = str_replace('.', '', $produk['harga_beli']);
 				$diskon = str_replace('.', '', $produk['diskon']);
 				$sub_total = $produk['qty'] * ($harga_beli - $diskon);
@@ -194,7 +194,7 @@ class Pesanan extends MX_Controller {
 			$this->db->insert_batch('pembelian_detail', $detail);
 		}
 		
-		redirect(site_url('pembelian/pesanan'));
+		redirect($this->agent->referrer());
 	}
 
 	public function cetak($id)

@@ -53,7 +53,10 @@
                 }
             },            
             {
-                "data": "nama"
+                "data": "nama", 
+                "render": function (data, type, row, meta) {
+                    return data + " - " + row.pegawai;
+                }
             },
             {
                 "data": "model"

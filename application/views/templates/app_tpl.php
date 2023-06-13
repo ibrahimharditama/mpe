@@ -31,6 +31,8 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/plugins/DataTables/datatables.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/plugins/DataTables/datatables.custom.css">
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/DataTables/datatables.min.js"></script>
+	<script type="text/javascript" src="<?= base_url(); ?>assets/plugins/DataTables/checkboxes/js/dataTables.checkboxes.min.js"></script>
+	<script type="text/javascript" src="<?= base_url(); ?>assets/plugins/DataTables/select/js/dataTables.select.min.js"></script>
 	
 	<!-- JQUERY NUMBER -->
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/plugins/jquery.number.min.js"></script>
@@ -58,8 +60,8 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-info fixed-top">
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
+		<button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<i class="ti ti-menu"  style="color: black;"></i>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 

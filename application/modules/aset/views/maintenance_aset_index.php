@@ -115,7 +115,7 @@
                 "render": function (data, type, row, meta) {
                     var permissions = $("#permissionmenu").html();
                     if (permissions.indexOf("u") < 0) {
-                        return data;
+                        return data + " - " + row.pegawai;
                     } else {
                         return `<a href="javascript:void(0)" 
                             data-id="`+ row.id +`" 
@@ -123,7 +123,7 @@
                             data-tglmaintenance="`+ row.tgl_maintenance +`" 
                             data-keterangan="`+ row.keterangan +`" 
                             onclick="edit(this)">
-                            `+ data +`
+                            `+ data +` - `+ row.pegawai +`
                         </a>`;
                 }
                     }

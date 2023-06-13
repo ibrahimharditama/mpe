@@ -88,7 +88,7 @@ class Daftaraset extends MX_Controller {
         foreach ($data as $d){
             $row++;
             $sheet->setCellValue('A'.$row, $no++);
-            $sheet->setCellValue('B'.$row, $d->nama);
+            $sheet->setCellValue('B'.$row, $d->nama ." - ". $d->pegawai);
             $sheet->setCellValue('C'.$row, $d->model);
             $sheet->setCellValue('D'.$row, $d->tgl_pembelian);
             $sheet->setCellValue('E'.$row, umur_bulan($d->tgl_pembelian));

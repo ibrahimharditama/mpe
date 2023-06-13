@@ -95,7 +95,7 @@
                     <table>
                         <tr>
                             <td width="65%" class="v-top">
-                                <span class="table-footer"><?= terbilang($header->grand_total - $header->uang_muka); ?></span>
+                                <span class="table-footer"><?= terbilang($header->total_bayar); ?></span>
                             </td>
                             <td width="35%" class="v-top">
                                 <table>
@@ -140,29 +140,29 @@
                 <td width="27%" class="v-top">
                     <table>
                         <tr class="table-footer">
-                            <td width="35%">Sub Total</td>
-                            <td width="2%" class="t-center">:</td>
+                            <td width="36%">Sub Total</td>
+                            <td width="1%" class="t-center">:</td>
                             <td class="t-right"><?= number_format($header->total); ?> </td>
                         </tr>
                         <tr class="table-footer">
-                            <td width="35%">Potongan</td>
-                            <td width="2%" class="t-center">:</td>
+                            <td width="36%">Potongan</td>
+                            <td width="1%" class="t-center">:</td>
                             <td class="t-right"><?= number_format($header->diskon_faktur); ?> </td>
                         </tr>
                         <tr class="table-footer">
-                            <td width="35%">Total Akhir</td>
-                            <td width="2%" class="t-center">:</td>
+                            <td width="36%">Total Akhir</td>
+                            <td width="1%" class="t-center">:</td>
                             <td class="t-right"><?= number_format($header->grand_total); ?> </td>
                         </tr>
                         <tr class="table-footer">
-                            <td width="35%">DP</td>
-                            <td width="2%" class="t-center">:</td>
-                            <td class="t-right"><?= number_format($header->uang_muka); ?> </td>
+                            <td width="36%">Total Bayar</td>
+                            <td width="1%" class="t-center">:</td>
+                            <td class="t-right"><?= number_format($header->total_bayar); ?> </td>
                         </tr>
                         <tr class="table-footer">
-                            <td width="35%">Sisa</td>
-                            <td width="2%" class="t-center">:</td>
-                            <td class="t-right"><?= number_format($header->grand_total - $header->uang_muka); ?> </td>
+                            <td width="36%">Sisa</td>
+                            <td width="1%" class="t-center">:</td>
+                            <td class="t-right"><?= number_format($header->grand_total - $header->total_bayar); ?> </td>
                         </tr>
                     </table>
                 </td>

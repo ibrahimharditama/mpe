@@ -456,7 +456,7 @@ function penyebut($nilai) {
 
 function terbilang($nilai) {
 	if($nilai<0) {
-		$hasil = "minus ". trim($this->penyebut($nilai));
+		$hasil = "minus ". trim(penyebut($nilai));
 	} else {
 		$hasil = trim(penyebut($nilai));
 	}     		

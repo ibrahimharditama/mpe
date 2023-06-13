@@ -146,7 +146,7 @@ class Maintenanceaset extends MX_Controller {
         foreach ($data as $d){
             $row++;
             $sheet->setCellValue('A'.$row, $no++);
-            $sheet->setCellValue('B'.$row, $d->nama);
+            $sheet->setCellValue('B'.$row, $d->nama . ' - ' . $d->pegawai);
             $sheet->setCellValue('C'.$row, $d->model);
             $sheet->setCellValue('D'.$row, $d->pegawai);
             $sheet->setCellValue('E'.$row, $d->tgl_maintenance);
