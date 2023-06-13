@@ -260,7 +260,7 @@ class Penerimaan extends MX_Controller {
 		}
 		
 		if (count($detail) > 0) {
-			$key = array('tgl', 'id_supplier', 'id_pembelian', 'keterangan', 'keterangan_biaya_lain', 'diskon_faktur|number', 'biaya_lain|number');
+			$key = array('no_transaksi', 'tgl', 'id_supplier', 'id_pembelian', 'keterangan', 'keterangan_biaya_lain', 'diskon_faktur|number', 'biaya_lain|number');
 			$data = post_data($key);
 			
 			$data['updated_by'] = user_session('id');

@@ -60,20 +60,22 @@
         <table style="margin-top: 5px;">
             <tr class="table-header">
                 <td width="5%">No.</td>
-                <td width="15%" class="t-center">Jml Satuan</td>
+                <td width="5%" class="t-right">Jml</td>
+                <td width="10%">Satuan</td>
                 <td width="80%">Nama Item</td>
             </tr>
             <?php foreach(array_slice($detail, $start, 10) as $dtDetail): ?>
                 <tr class="table-body">
                     <td><?= $no++; ?></td>
-                    <td class="t-center"><?= number_format($dtDetail->qty); ?> <?= $dtDetail->satuan; ?></td>
+                    <td class="t-right"><?= number_format($dtDetail->qty); ?></td>
+                    <td><?= $dtDetail->satuan; ?></td>
                     <td><?= $dtDetail->nama; ?></td>
                 </tr>
                 <?php $total_item += $dtDetail->qty; ?>
             <?php endforeach; ?>
 
             <tr style="border-bottom: 1px solid black;">
-                <td colspan="6">
+                <td colspan="7">
                     <?php 
                         $totalData = count(array_slice($detail, $start, 10)); 
                         if($totalData < 5) echo '<br>';

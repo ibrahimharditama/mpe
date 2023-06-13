@@ -61,7 +61,8 @@
             <tr class="table-header">
                 <td width="5%">No.</td>
                 <td width="43%">Nama Item</td>
-                <td width="15%" class="t-center">Jml Satuan</td>
+                <td width="5%" class="t-right">Jml</td>
+                <td width="10%">Satuan</td>
                 <td width="15%" class="t-right">Harga</td>
                 <td width="5%" class="t-right">Pot</td>
                 <td width="17%" class="t-center">Total</td>
@@ -70,7 +71,8 @@
                 <tr class="table-body">
                     <td><?= $no++; ?></td>
                     <td><?= $dtDetail->nama; ?></td>
-                    <td class="t-center"><?= number_format($dtDetail->qty); ?> <?= $dtDetail->satuan; ?></td>
+                    <td class="t-right"><?= number_format($dtDetail->qty); ?></td>
+                    <td><?= $dtDetail->satuan; ?></td>
                     <td class="t-right"><?= number_format($dtDetail->harga_satuan); ?></td>
                     <td class="t-right"><?= number_format($dtDetail->diskon); ?></td>
                     <td class="t-right"><?= number_format($dtDetail->qty*$dtDetail->harga_satuan-$dtDetail->diskon); ?></td>
@@ -78,7 +80,7 @@
             <?php endforeach; ?>
 
             <tr style="border-bottom: 1px solid black;">
-                <td colspan="6">
+                <td colspan="7">
                     <?php 
                         $totalData = count(array_slice($detail, $start, 10)); 
                         if($totalData < 5) echo '<br>';
