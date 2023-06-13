@@ -134,6 +134,11 @@ class Pipa extends MX_Controller {
 	{
 		$rules = array (
 			array (
+				'field' => 'kode',
+				'label' => 'Kode',
+				'rules' => 'required|callback_check_kode',
+			),
+			array (
 				'field' => 'id_tipe',
 				'label' => 'Tipe',
 				'rules' => 'required',
@@ -174,7 +179,7 @@ class Pipa extends MX_Controller {
 		
 		if ($this->form_validation->run()) {
 			
-			$key = array('id_tipe', 'nama', 'id_jenis', 'id_satuan', 'id_merek', 'harga_beli|number', 'harga_jual|number', 'keterangan');
+			$key = array('kode','id_tipe', 'nama', 'id_jenis', 'id_satuan', 'id_merek', 'harga_beli|number', 'harga_jual|number', 'keterangan');
 			return post_data($key);
 		}
 		else {
@@ -190,13 +195,34 @@ class Pipa extends MX_Controller {
 			return null;
 		}
 	}
+
+	function check_kode($kode) { 
+		$id = $this->input->post('id');
+
+		if(isset($id))
+			if($id != null && $id != ''){
+				$this->db->where('id !=', $id);
+			}
+
+		$this->db->where('kode', $kode);
+		$this->db->from('ref_produk');
+
+		$result = $this->db->get()->num_rows();
+		
+        if($result == 0)
+            $response = true;
+        else {
+            $this->form_validation->set_message('check_kode', 'Kode sudah ada');
+            $response = false;
+        }
+        return $response;
+    }
 	
 	public function insert()
 	{
 		$data = $this->_form_data();
 		
 		if ($data != null) {
-			$data['kode'] = new_number('produk');
 			$data['created_by'] = user_session('id');
 			$this->db->insert('ref_produk', $data);
 			$this->session->set_flashdata('post_status', 'inserted');

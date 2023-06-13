@@ -15,7 +15,8 @@
 				<div class="form-group row">
 					<label class="col-sm-4 col-form-label pr-0">Kode Item</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="kode" placeholder="Dibuat otomatis" value="<?php if ($data != null) echo $data['kode']; ?>" readonly>
+						<input type="text" class="form-control" name="kode" value="<?php if ($data != null) echo $data['kode']; ?>">
+						<?php if (isset($errors)) echo $errors['kode']; ?>
 					</div>
 				</div>
 				<div class="form-group row">
