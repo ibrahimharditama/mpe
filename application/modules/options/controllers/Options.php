@@ -306,4 +306,38 @@ class Options extends MX_Controller {
 
 		echo json_encode($response);
 	}
+
+	public function penjualan_db()
+	{
+		$where = '';
+		$input = $this->input->get();
+
+		if(isset($input['id_pelanggan'])) 
+			if($input['id_pelanggan'] != null && $input['id_pelanggan'] != '') {
+				$where = " AND a.id_pelanggan = '".$input['id_pelanggan']."' AND a.qty_pesan > a.qty_kirim ";
+			}
+
+		if(isset($input['id_penjualan'])) 
+			if($input['id_penjualan'] != null && $input['id_penjualan'] != '') {
+				$where = " AND a.id_pelanggan = '".$input['id_pelanggan']."' AND (a.qty_pesan > a.qty_kirim OR a.id = '".$input['id_penjualan']."')";
+			}
+		
+
+
+		$this->datatables->select("id, no_transaksi, tgl, tgl_kirim, qty_pesan, qty_kirim, grand_total, pelanggan")
+                    ->from("(SELECT a.id, a.no_transaksi, a.tgl, a.tgl_kirim, a.qty_pesan, a.qty_kirim, a.grand_total,
+							CONCAT(d.kode, ' &middot; ', d.nama) AS pelanggan
+							FROM penjualan AS a
+							JOIN pelanggan AS d ON a.id_pelanggan = d.id
+							WHERE a.row_status = 1 $where) a");
+
+        $result = json_decode($this->datatables->generate());
+
+        $response['datatable'] = $result;
+        $response['draw'] =  $result->draw;
+        $response['recordsTotal'] =  $result->recordsTotal;
+        $response['recordsFiltered'] =  $result->recordsFiltered;
+
+		echo json_encode($response);
+	}
 }

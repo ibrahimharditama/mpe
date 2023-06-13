@@ -14,6 +14,9 @@
                     <th>Tgl.</th>
                     <th>Pelanggan</th>
                     <th>Qty<br>Kirim</th>
+                    <th>Supir</th>
+                    <th>Kenek</th>
+                    <th>Teknisi</th>
                     <th>Yg Buat</th>
                     <th>Yg Ubah</th>
                 </tr>
@@ -28,107 +31,66 @@
         + Tambah Data
     </a>
 </div>
-<div class="modal" id="modal-approve" tabindex="-1" role="dialog" data-backdrop="static">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                Konfirmasi Approve
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Apa anda yakin untuk approve?
-                <input type="hidden" id="approve_id" />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger"
-                    onclick="ajaxApprove('<?=base_url()?>penjualan/pengiriman/approve')">
-                    Ya
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<script type="text/javascript">
-function init_datatable() {
-    datatable = $('#datatable').DataTable({
-        'bInfo': true,
-        'pageLength': 25,
-        'serverSide': true,
-        'serverMethod': 'post',
-        'ajax': '<?php echo site_url('/penjualan/pengiriman/datatable'); ?>',
-        'order': [
-            [2, 'desc']
-        ],
-        'fixedHeader': true,
-        'columns': [{
-                data: 'nomor',
-                orderable: false
-            },
-
+<script>
+    $('#datatable').DataTable({
+        ajax: {
+            url: site_url + 'penjualan/pengiriman/datatable',
+            dataSrc: 'datatable.data',
+            data: function(d) {
+            }
+        },
+        serverSide: true,
+        order: [[2, 'desc']],
+        language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+            lengthMenu: '_MENU_ items/page',
+        },
+        columns: [
             {
-                orderable: false,
-                render: function(data, type, row, meta) {
-                    return '<a href="' + site_url + 'penjualan/pengiriman/cetak/' + row.id +
-                        '" target="_blank"><img src="<?php echo base_url(); ?>assets/img/printer.png"></a>';
+				"data": null,
+                "sortable": false, 
+                "searchable": false,
+                "render": function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                },
+			},
+			{
+				"data": "id",
+                "sortable": false, 
+                "searchable": false,
+                "render": function(data, type, row, meta) {
+                    return '<a target="_blank" href="' + site_url + 'penjualan/pengiriman/cetak/' + row.id+'"><img src="<?php echo base_url(); ?>assets/img/printer.png"></a>';
                 }
             },
-            {
-                data: 'no_transaksi',
-                render: function(data, type, row, meta) {
-                    return '<a href="' + site_url + 'penjualan/pengiriman/ubah/' + row.id + '">' +
-                        data+ '</a>';
-                }
-            },
-            {
-                data: 'tgl'
-            },
-            {
-                data: 'pelanggan'
-            },
-            {
-                data: 'qty_semua',
-                className: 'dt-center',
-                render: function (data, type, row, meta) {
+			{
+				"data": "no_transaksi",
+				"render": function (data, type, row, meta) {
+					return buttonUpdate(site_url + 'penjualan/pengiriman/ubah/' + row.id, data);
+				}
+			},
+			{ "data": "tgl" },
+			{ "data": "pelanggan" },
+			{ 
+				"data": "qty_semua", 
+				"className": "dt-center", 
+				"render": function (data, type, row, meta) {
 					return angka(data);
 				}
+			},
+            { "data": "supir" },
+            { "data": "kenek" },
+            { "data": "teknisi" },
+			{ 
+				"data": "yg_buat", 
+				"visible": false, 
             },
-            {
-                data: 'yg_buat'
-            },
-            {
-                data: 'yg_ubah'
-            },
-        ]
+			{ 
+				"data": "yg_ubah",
+				"visible": false, 
+			},
+        ],
+        
     });
-}
-$('#modal-approve').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget);
-    $('#approve_id').val(button.data('id'));
-});
-
-function ajaxApprove(filename) {
-    $.ajax({
-        type: 'POST',
-        data: {
-            id: $('#approve_id').val()
-        },
-        url: filename,
-        success: function(data) {
-            $('#modal-approve').modal('hide');
-            window.location.reload();
-        },
-        error: function(xhr, status, error) {
-            alert(xhr.responseText);
-        }
-    });
-}
-
-$().ready(function() {
-
-    init_datatable();
-
-});
 </script>

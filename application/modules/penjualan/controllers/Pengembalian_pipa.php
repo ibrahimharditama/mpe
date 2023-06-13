@@ -205,6 +205,8 @@ class Pengembalian_pipa extends MX_Controller {
 				$this->db->insert_batch('pengembalian_pipa_detail', $detail);
 			}
 
+			$response['url'] = base_url().'penjualan/pengembalian-pipa/ubah/' . $id;
+
 			//$this->insert_delete_stok($id);
 
 			$this->db->trans_complete();	

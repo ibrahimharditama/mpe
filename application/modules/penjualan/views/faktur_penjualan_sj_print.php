@@ -11,28 +11,30 @@
 </head>
 
 <body>
-    <?php $start=0; $no=1; for ($i=1; $i <= $table_count; $i++): ?>
+    <?php $start=0; $no=1; $total_item=0; for ($i=1; $i <= $table_count; $i++): ?>
         <div class="page-break">
         <!-- header -->
         <table>
             <tr>
                 <td width="33.3%">
-                    <table class="padding-top: 10px">
-                        <tr>
-                            <td>
-                                <span class="fw-bold f-verdana f-size-15-s"><?= ucwords(strtolower(perusahaan('nama'))); ?></span><br>
-                                <span class="fw-400 f-trebuchet f-size-8-s"><?= perusahaan('alamat'); ?></span>
-                            </td>
-                        </tr>
-                    </table>
+                    <?php if(json_decode($no_header) == false): ?>
+                        <table class="padding-top: 10px">
+                            <tr>
+                                <td>
+                                    <span class="fw-bold f-verdana f-size-15-s"><?= ucwords(strtolower(perusahaan('nama'))); ?></span><br>
+                                    <span class="fw-400 f-trebuchet f-size-8-s"><?= perusahaan('alamat'); ?></span>
+                                </td>
+                            </tr>
+                        </table>
+                    <?php endif; ?>
                 </td>
 
                 <td width="66.7%">
                     <table>
                         <tr>
                             <td class="t-center">
-                                <span class="fw-bold f-arial f-size-16"><?= $tipe == 'faktur' ? 'FAKTUR PENJUALAN' : 'SURAT PENAWARAN'; ?></span><br>
-                                <span class="fw-bold f-arial f-size-12">Nota : <?= $header->no_transaksi; ?></span>
+                                <span class="fw-bold f-arial f-size-16">SURAT JALAN</span><br>
+                                <span class="fw-bold f-arial f-size-12">No. SJ : <?= $header->no_transaksi; ?></span>
                             </td>
                             <td width="40%" class="v-bottom t-right">
                                 <span class="fw-bold f-arial f-size-10">Jakarta,</span> <span class="fw-400 f-verdana f-size-9"><?=date("d/m/Y",strtotime($header->tgl))?></span>
@@ -58,21 +60,16 @@
         <table style="margin-top: 5px;">
             <tr class="table-header">
                 <td width="5%">No.</td>
-                <td width="43%">Nama Item</td>
                 <td width="15%" class="t-center">Jml Satuan</td>
-                <td width="15%" class="t-right">Harga</td>
-                <td width="5%" class="t-right">Pot</td>
-                <td width="17%" class="t-center">Total</td>
+                <td width="80%">Nama Item</td>
             </tr>
             <?php foreach(array_slice($detail, $start, 10) as $dtDetail): ?>
                 <tr class="table-body">
                     <td><?= $no++; ?></td>
-                    <td><?= $dtDetail->nama; ?></td>
                     <td class="t-center"><?= number_format($dtDetail->qty); ?> <?= $dtDetail->satuan; ?></td>
-                    <td class="t-right"><?= number_format($dtDetail->harga_satuan); ?></td>
-                    <td class="t-right"><?= number_format($dtDetail->diskon); ?></td>
-                    <td class="t-right"><?= number_format($dtDetail->qty*$dtDetail->harga_satuan-$dtDetail->diskon); ?></td>
+                    <td><?= $dtDetail->nama; ?></td>
                 </tr>
+                <?php $total_item += $dtDetail->qty; ?>
             <?php endforeach; ?>
 
             <tr style="border-bottom: 1px solid black;">
@@ -95,13 +92,14 @@
                     <table>
                         <tr>
                             <td width="65%" class="v-top">
-                                <span class="table-footer"><?= terbilang($header->grand_total); ?></span>
+                                <span class="table-footer">Keterangan : <?= $header->keterangan; ?></span>
                             </td>
                             <td width="35%" class="v-top">
                                 <table>
                                     <tr class="table-footer">
-                                        <td width="42%">Biaya Lain : </td>
-                                        <td class="t-right"><?= number_format($header->biaya_lain); ?> </td>
+                                        <td class="fw-bold" width="42%"><span class="fw-bold">Total Item</span></td>
+                                        <td>:</td>
+                                        <td class="fw-bold"><span class="fw-bold"><?= number_format($total_item); ?></span></td>
                                     </tr>
                                 </table>
                             </td> 
@@ -115,9 +113,11 @@
                                     <tr>
                                         <td width="30%" class="t-center fw-bold f-verdana f-size-10">Penerima</td>
                                         
-                                        <td width="40%" class="t-center f-verdana f-size-10 fw-400" style="border: 1px solid black">
-                                            NO REK <?= $bank->bank; ?>: <?= $bank->no_rekening;?><br>
-                                            ATN: <?= $bank->nama; ?>
+                                        <td width="40%" class="t-center f-verdana f-size-10 fw-400" style="<?= json_decode($is_rekening) == true ? 'border: 1px solid black' : ''; ?>">
+                                            <?php if(json_decode($is_rekening) == true): ?>
+                                                NO REK <?= $bank->bank; ?>: <?= $bank->no_rekening;?><br>
+                                                ATN: <?= $bank->nama; ?>
+                                            <?php endif; ?>
                                             
                                         </td>
                                         <td width="30%" class="t-center fw-bold f-verdana f-size-10">Hormat Kami</td>
@@ -137,37 +137,6 @@
                                 </table>
                             </td>
                         </tr>
-                    </table>
-                </td>
-                <td width="27%" class="v-top">
-                    <table>
-                        <tr class="table-footer">
-                            <td width="36%">Sub Total</td>
-                            <td width="1%" class="t-center">:</td>
-                            <td class="t-right"><?= number_format($header->total); ?> </td>
-                        </tr>
-                        <tr class="table-footer">
-                            <td width="36%">Potongan</td>
-                            <td width="1%" class="t-center">:</td>
-                            <td class="t-right"><?= number_format($header->diskon_faktur); ?> </td>
-                        </tr>
-                        <tr class="table-footer">
-                            <td width="36%">Total Akhir</td>
-                            <td width="1%" class="t-center">:</td>
-                            <td class="t-right"><?= number_format($header->grand_total); ?> </td>
-                        </tr>
-                        <?php if($tipe == 'faktur'): ?>
-                            <tr class="table-footer">
-                                <td width="36%">Total Bayar</td>
-                                <td width="1%" class="t-center">:</td>
-                                <td class="t-right">0</td>
-                            </tr>
-                            <tr class="table-footer">
-                                <td width="36%">Sisa</td>
-                                <td width="1%" class="t-center">:</td>
-                                <td class="t-right"><?= number_format($header->grand_total); ?> </td>
-                            </tr>
-                        <?php endif; ?>
                     </table>
                 </td>
             </tr>

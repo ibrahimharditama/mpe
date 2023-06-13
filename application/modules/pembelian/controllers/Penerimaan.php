@@ -19,7 +19,7 @@ class Penerimaan extends MX_Controller {
 	
 	public function datatable()
 	{
-		$this->datatables->select("id, no_transaksi, tgl, supplier, no_pembelian, tgl_pembelian, qty_pesan, 
+		$this->datatables->select("id, no_transaksi, tgl, supplier, id_pembelian, no_pembelian, tgl_pembelian, qty_pesan, 
 								qty_terima, yg_buat, yg_ubah, keterangan_pay, grand_total")
                     ->from("(SELECT a.*
 								, UPPER(b.username) AS yg_buat
@@ -78,7 +78,8 @@ class Penerimaan extends MX_Controller {
 			show_404();
 		}
 
-		$src = $this->db->query("SELECT p.*, IFNULL(pb.no_transaksi, '') AS pembelian, s.nama AS supplier, 
+		$src = $this->db->query("SELECT p.*, IFNULL(pb.no_transaksi, '') AS pembelian, 
+								CONCAT(s.kode, ' - ', s.nama) AS supplier, 
 								IFNULL(x.total_bayar, 0) AS total_bayar
 								FROM penerimaan p 
 								LEFT JOIN pembelian pb ON pb.id = p.id_pembelian 

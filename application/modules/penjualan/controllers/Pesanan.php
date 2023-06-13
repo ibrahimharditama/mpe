@@ -7,6 +7,7 @@ class Pesanan extends MX_Controller {
 	{
 		parent::__construct();
 		$this->form_validation->CI =& $this;
+		$this->load->library('datatables');
 	}
 	
 	public function index()
@@ -18,65 +19,25 @@ class Pesanan extends MX_Controller {
 	
 	public function datatable()
 	{
-		$draw = $this->input->post('draw');
-		$offset = $this->input->post('start');
-		$num_rows = $this->input->post('length');
-		$order_index = $_POST['order'][0]['column'];
-		$order_by = $_POST['columns'][$order_index]['data'];
-		$order_direction = $_POST['order'][0]['dir'];
-		$keyword = $_POST['search']['value'];
-		
-		$bindings = array("%{$keyword}%", "%{$keyword}%", "%{$keyword}%");
-		
-		$base_sql = "
-			FROM penjualan AS a
-			LEFT JOIN pengguna AS b ON a.created_by = b.id
-			LEFT JOIN pengguna AS c ON a.updated_by = c.id
-			JOIN pelanggan AS d ON a.id_pelanggan = d.id
-			WHERE
-				a.row_status = 1
-				AND (
-					a.no_transaksi LIKE ?
-					OR d.kode LIKE ?
-					OR d.nama LIKE ?
-				)
-		";
-		
-		$data_sql = "
-			SELECT
-				a.*
-				, UPPER(b.username) AS yg_buat
-				, UPPER(c.username) AS yg_ubah
-				, CONCAT(d.kode, ' &middot; ', d.nama) AS pelanggan
-				, ROW_NUMBER() OVER (
-					ORDER BY {$order_by} {$order_direction}
-				  ) AS nomor
-			{$base_sql}
-			ORDER BY
-				{$order_by} {$order_direction}
-			LIMIT {$offset}, {$num_rows}
-		";
-		$src = $this->db->query($data_sql, $bindings);
-		
-		$count_sql = "
-			SELECT COUNT(*) AS total
-			{$base_sql}
-		";
-		$total_records = $this->db->query($count_sql, $bindings)->row('total');
-		
-		$aaData = $src->result_array();
-		
-		foreach ($aaData as $i => $d) {
-			$aaData[$i]['grand_total'] = rupiah($d['grand_total']);
-		}
-		
-		$response = array (
-			'draw' => intval($draw),
-			'iTotalRecords' => $src->num_rows(),
-			'iTotalDisplayRecords' => $total_records,
-			'aaData' => $aaData,
-		);
-		
+
+		$this->datatables->select("id, no_transaksi, tgl, tgl_kirim, pelanggan, qty_pesan, qty_kirim, grand_total, yg_buat, yg_ubah")
+                    ->from("(SELECT a.*
+							, UPPER(b.username) AS yg_buat
+							, UPPER(c.username) AS yg_ubah
+							, CONCAT(d.kode, ' &middot; ', d.nama) AS pelanggan
+							FROM penjualan AS a
+							LEFT JOIN pengguna AS b ON a.created_by = b.id
+							LEFT JOIN pengguna AS c ON a.updated_by = c.id
+							JOIN pelanggan AS d ON a.id_pelanggan = d.id
+							WHERE a.row_status = 1) a");
+
+        $result = json_decode($this->datatables->generate());
+
+        $response['datatable'] = $result;
+        $response['draw'] =  $result->draw;
+        $response['recordsTotal'] =  $result->recordsTotal;
+        $response['recordsFiltered'] =  $result->recordsFiltered;
+
 		echo json_encode($response);
 	}
 	
@@ -104,14 +65,12 @@ class Pesanan extends MX_Controller {
 		if ( ! $this->agent->referrer()) {
 			show_404();
 		}
-		
-		$src = $this->db
-		->select('penjualan.*,CONCAT(kode, " . ", nama) AS kode_nama')
-		->from('penjualan')
-		->join('pelanggan', 'pelanggan.id = penjualan.id_pelanggan')
-		->where('penjualan.row_status', 1)
-			->where('penjualan.id', $id)
-			->get();
+
+		$src = $this->db->query("SELECT p.*, CONCAT(s.kode, ' - ', s.nama) AS pelanggan 
+								FROM penjualan p 
+								LEFT JOIN pelanggan s ON s.id = p.id_pelanggan
+								WHERE p.row_status = 1 AND p.id = $id
+							");
 		
 		if ($src->num_rows() == 0) {
 			show_404();
@@ -144,10 +103,10 @@ class Pesanan extends MX_Controller {
 			
 			if ($produk['qty'] > 0) {
 				
-				$qty = $produk['qty'];
+				$qty = str_replace('.', '', $produk['qty']);
 				$harga_jual = str_replace('.', '', $produk['harga_jual']);
 				$diskon = str_replace('.', '', $produk['diskon']);
-				$sub_total = $produk['qty'] * ($harga_jual - $diskon);
+				$sub_total = $qty * ($harga_jual - $diskon);
 				
 				$detail[] = array (
 					'id_produk' => $produk['id'],
@@ -185,7 +144,7 @@ class Pesanan extends MX_Controller {
 			$this->db->insert_batch('penjualan_detail', $detail);
 		}
 		
-		redirect(site_url('penjualan/pesanan'));
+		redirect(site_url('penjualan/pesanan/ubah/' . $id_penjualan));
 	}
 	
 	public function update()
@@ -201,10 +160,10 @@ class Pesanan extends MX_Controller {
 			
 			if ($produk['qty'] > 0) {
 				
-				$qty = $produk['qty'];
+				$qty = str_replace('.', '', $produk['qty']);
 				$harga_jual = str_replace('.', '', $produk['harga_jual']);
 				$diskon = str_replace('.', '', $produk['diskon']);
-				$sub_total = $produk['qty'] * ($harga_jual - $diskon);
+				$sub_total = $qty * ($harga_jual - $diskon);
 				
 				$detail[] = array (
 					'id_penjualan' => $id_penjualan,
@@ -238,10 +197,10 @@ class Pesanan extends MX_Controller {
 			$this->db->insert_batch('penjualan_detail', $detail);
 		}
 		
-		redirect(site_url('penjualan/pesanan'));
+		redirect($this->agent->referrer());
 	}
 
-	public function cetak($id, $tipe)
+	public function cetak($id, $tipe = 'penawaran')
 	{
 		$this->load->library('pdf');
 		$header = $this->db->query(

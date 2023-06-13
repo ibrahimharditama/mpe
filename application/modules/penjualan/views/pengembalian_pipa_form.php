@@ -109,14 +109,20 @@
             <i class="ti ti-save"></i> Simpan
         </button>
 
+        <a class="btn btn-outline-secondary ml-1" href="<?php echo site_url('penjualan/pengembalian-pipa') ?>">
+            <i class="ti ti-na"></i> Batalkan
+        </a>
+
+        <?php if($data['id'] != "" && $data['id'] != null): ?>
+            <a class="btn btn-outline-info ml-1" target="_blank" href="<?php echo site_url('penjualan/pengembalian-pipa/cetak/'. $data['id']) ?>" >
+                <i class="ti ti-printer"></i> Cetak
+            </a>
+        <?php endif; ?>
+
         <a class="btn btn-outline-info ml-1" id="do-bayar" style="display:none"
             data-toggle="modal" href="#modal-approve" data-id="<?= $data != null ? $data['id'] : ''; ?>">
             <i class="ti-thumb-up"></i>
             Approve
-        </a>
-
-        <a class="btn btn-outline-secondary ml-1" href="<?php echo site_url('penjualan/pengembalian-pipa') ?>">
-            <i class="ti ti-na"></i> Batalkan
         </a>
     </div>
 

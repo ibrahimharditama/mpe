@@ -37,8 +37,6 @@
                         <div class="col-sm-9">
 						<select class="select2 w-75" name="id_pelanggan"  id="id_pelanggan" data-placeholder="Pilih Pelanggan">
                             </select>
-                            <a class="btn btn-sm btn-warning btn-lookup" href="#"><i
-                                    class="ti ti-new-window"></i></a>
                             <?php if (isset($errors)) {
                                 echo $errors['id_pelanggan'];
                             } ?>
@@ -51,8 +49,6 @@
                             <select class="select2 w-75" name="id_faktur" data-placeholder="Pilih Nota Penjualan">
                                 <option value=""></option>
                             </select>
-                            <a class="btn btn-sm btn-warning btn-lookup" href="#"><i
-                                    class="ti ti-new-window"></i></a>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -82,21 +78,6 @@
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="col-5">
-                    <!-- <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">Alamat Pengiriman</label>
-                        <div class="col-sm-9">
-                            <textarea class="form-control" name="alamat"><?php echo $data == null ? '' : $data['alamat']; ?></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">Keterangan</label>
-                        <div class="col-sm-9">
-                            <textarea class="form-control" name="keterangan"><?php echo $data == null ? '' : $data['keterangan']; ?></textarea>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -182,14 +163,14 @@
             <i class="ti ti-save"></i> Simpan
         </button>
 
+        <a class="btn btn-outline-secondary ml-1" href="<?php echo site_url('penjualan/pengiriman'); ?>">
+            <i class="ti ti-na"></i> Batalkan
+        </a>
+
         <a class="btn btn-outline-info ml-1" id="do-bayar" style="display:none"
             data-toggle="modal" href="#modal-approve" data-id="<?= $data != null ? $data['id'] : ''; ?>">
             <i class="ti-thumb-up"></i>
             Approve
-        </a>
-
-        <a class="btn btn-outline-secondary ml-1" href="<?php echo site_url('penjualan/pengiriman'); ?>">
-            <i class="ti ti-na"></i> Batalkan
         </a>
     </div>
 
