@@ -4,7 +4,7 @@
 	<div class="col-12">
 
 		<div class="togle-datatable-inv mb-3">
-			Toggle column: <a href="javascript:void(0);" class="toggle-vis" data-column="2" >No. Transaksi</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="3">Tgl</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="4">Tgl. Kirim</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="5">Pelanggan</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="6">Qty Pesan</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="7">Qty Kirim</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="8">Total</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="9">Yg Buat</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="10">Yg Ubah</a>
+			Toggle column: <a href="javascript:void(0);" class="toggle-vis" data-column="2" >No. Transaksi</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="3">Tgl</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="4">Tgl. Kirim</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="5">Pelanggan</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="6">Qty Pesan</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="7">Qty Kirim</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="8">Total</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="9">Yg Buat</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="10">Yg Ubah</a>
 		</div>
 
 		<div class="table-responsive">
@@ -111,6 +111,12 @@
 
 	$('a.toggle-vis').on('click', function (e) {
         e.preventDefault();
+
+		if($(this).hasClass('text-dark')){
+			$(this).removeClass('text-dark')
+		} else {
+			$(this).addClass('text-dark');
+		}
  
         // Get the column API object
         var column = datatable.column($(this).attr('data-column'));
