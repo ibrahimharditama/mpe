@@ -28,7 +28,7 @@ class Penerimaan extends MX_Controller {
 								, IFNULL(e.no_transaksi, '') AS no_pembelian
 								, IFNULL(e.tgl, '') AS tgl_pembelian
 								, IFNULL(e.qty_pesan, 0) AS qty_pesan
-								, IFNULL(x.keterangan, '') AS keterangan_pay
+								, CONCAT(a.keterangan, ' ', IFNULL(x.keterangan, '')) AS keterangan_pay
 							FROM penerimaan AS a
 							LEFT JOIN pengguna AS b ON a.created_by = b.id
 							LEFT JOIN pengguna AS c ON a.updated_by = c.id
