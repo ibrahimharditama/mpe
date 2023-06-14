@@ -35,7 +35,7 @@ class Penerimaan extends MX_Controller {
 							JOIN supplier AS d ON a.id_supplier = d.id
 							LEFT JOIN pembelian AS e ON a.id_pembelian = e.id
 							LEFT JOIN (
-								SELECT id_pembelian, GROUP_CONCAT(CONCAT(r.no_rekening, ' (', r.bank, ') - Rp', p.nominal, ' ', p.keterangan) SEPARATOR ' | ') AS keterangan
+								SELECT id_pembelian, GROUP_CONCAT(CONCAT(r.no_rekening, ' (', r.bank, ') - Rp', FORMAT(p.nominal,0), ' ', p.keterangan) SEPARATOR ' | ') AS keterangan
 								FROM pembayaran_beli p 
 								JOIN rekening r ON r.id = p.rek_pembayaran 
 								WHERE p.row_status = 1 
@@ -314,16 +314,20 @@ class Penerimaan extends MX_Controller {
 	{
 		$this->db->delete('jstok', ['jenis_trx' => 'pembelian', 'id_header' => $id_penerimaan]);
 
-		$src = $this->db
-					->from('penerimaan_detail')
-					->where('row_status', 1)
-					->where('id_penerimaan', $id_penerimaan)
-					->order_by('id')
-					->get();
-			
+		$src = $this->db->query("SELECT fd.*, p.id_tipe
+								FROM penerimaan_detail fd 
+								LEFT JOIN ref_produk p ON p.id = fd.id_produk
+								WHERE fd.row_status = 1 
+									AND fd.id_penerimaan = $id_penerimaan
+								ORDER BY fd.id
+							");	
+
 		$jstok = array();
 		
 		foreach ($src->result() as $row) {
+
+			if($row->id_tipe == 21) continue;
+
 			$jstok[] = array (
 				'no_referensi' => $no_transaksi,
 				'tgl' => $tgl,
@@ -336,7 +340,7 @@ class Penerimaan extends MX_Controller {
 			);
 		}
 		
-		$this->db->insert_batch('jstok', $jstok);
+		if(count($jstok)) $this->db->insert_batch('jstok', $jstok);
 	}
 
 	private function _upd_pembelian($id_pembelian) 
@@ -420,7 +424,7 @@ class Penerimaan extends MX_Controller {
 
 	public function hapus_pembayaran()
 	{
-		$id = $this->input->get('id');
+		$id = $this->input->post('id');
 		$data['row_status'] = 0;
 		$result = $this->db->update('pembayaran_beli', $data, array('id' => $id));
 		header('Content-Type: application/json');

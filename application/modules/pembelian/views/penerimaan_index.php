@@ -4,7 +4,7 @@
 	<div class="col-12">
 
 		<div class="togle-datatable-inv mb-3">
-			Toggle column: <a href="javascript:void(0);" class="toggle-vis" data-column="2" >No. Transaksi</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="3">Tgl. Terima</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="4">No. Pembelian</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="5">Tgl. Pembelian</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="6">Supplier</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="7">Keterangan</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="8">Total</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="9">Qty Pesan</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="10">Qty Terima</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="11">Yg Buat</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="12">Yg Ubah</a>
+			Toggle column: <a href="javascript:void(0);" class="toggle-vis" data-column="2" >No. Transaksi</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="3">Tgl. Terima</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="4">No. Pembelian</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="5">Tgl. Pembelian</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="6">Supplier</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="7">Keterangan</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="8">Total</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="9">Qty Pesan</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="10">Qty Terima</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="11">Yg Buat</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="12">Yg Ubah</a>
 		</div>
 
 		<div class="table-responsive">
@@ -77,11 +77,15 @@
 			{ data: 'tgl' },
 			{ 
 				data: 'no_pembelian', 
+				visible: false,
 				render: function (data, type, row, meta) {
 					return buttonUpdate(site_url + 'pembelian/pesanan/ubah/' + row.id_pembelian, data);
 				}
 			},
-			{ data: 'tgl_pembelian' },
+			{ 
+				data: 'tgl_pembelian', 
+				visible: false 
+			},
 			{ data: 'supplier' },
 			{ data: 'keterangan_pay' },
 			{ 

@@ -718,10 +718,10 @@
             $('.nominal_byr').each( function(i, v) {
                 totalbayar += parseInt(v.value.split('.').join());
             })
-
-            $('.input-total-bayar').val(totalbayar);
-            count_total();
         }
+
+        $('.input-total-bayar').val(totalbayar);
+        count_total();
     }
 
 
@@ -810,7 +810,7 @@
     function delTr(obj) {
         $row = $(obj).parent().parent();
         $id = $row.find('input[class="id_byr"]').val();
-        $.get(
+        $.post(
             site_url + 'pembelian/penerimaan/hapus-pembayaran', {
                 id: $id
             },
