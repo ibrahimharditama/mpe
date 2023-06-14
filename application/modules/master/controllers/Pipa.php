@@ -203,7 +203,8 @@ class Pipa extends MX_Controller {
 			if($id != null && $id != ''){
 				$this->db->where('id !=', $id);
 			}
-
+		
+		$this->db->where('row_status', 1);
 		$this->db->where('kode', $kode);
 		$this->db->from('ref_produk');
 
