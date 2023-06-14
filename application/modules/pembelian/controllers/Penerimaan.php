@@ -35,7 +35,7 @@ class Penerimaan extends MX_Controller {
 							JOIN supplier AS d ON a.id_supplier = d.id
 							LEFT JOIN pembelian AS e ON a.id_pembelian = e.id
 							LEFT JOIN (
-								SELECT id_pembelian, GROUP_CONCAT(CONCAT(r.no_rekening, ' (', r.bank, ') - Rp', FORMAT(p.nominal,0), ' ', p.keterangan) SEPARATOR ' | ') AS keterangan
+								SELECT id_pembelian, GROUP_CONCAT(CONCAT(r.no_rekening, ' (', r.bank, ') - Rp', FORMAT(p.nominal,0), ' ', IFNULL(p.keterangan, '')) SEPARATOR ' | ') AS keterangan
 								FROM pembayaran_beli p 
 								JOIN rekening r ON r.id = p.rek_pembayaran 
 								WHERE p.row_status = 1 

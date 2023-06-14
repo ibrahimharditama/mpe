@@ -64,6 +64,7 @@ class Produk extends MX_Controller {
 				, f.nama AS jenis
 				, g.nama AS merek
 				,(CASE
+					WHEN a.id_tipe = 21 THEN 0
 					WHEN h.qty IS NULL THEN 0
 					ELSE h.qty
 				END)AS stok

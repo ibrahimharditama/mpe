@@ -35,7 +35,7 @@ class Faktur extends MX_Controller {
 							JOIN pelanggan AS d ON a.id_pelanggan = d.id
 							LEFT JOIN penjualan AS e ON a.id_penjualan = e.id
 							LEFT JOIN (
-								SELECT id_faktur, GROUP_CONCAT(CONCAT(r.no_rekening, ' (', r.bank, ') - Rp', FORMAT(p.nominal,0), ' ', p.keterangan) SEPARATOR ' | ') AS keterangan
+								SELECT id_faktur, GROUP_CONCAT(CONCAT(r.no_rekening, ' (', r.bank, ') - Rp', FORMAT(p.nominal,0), ' ', IFNULL(p.keterangan, '')) SEPARATOR ' | ') AS keterangan
 								FROM pembayaran_faktur p 
 								JOIN rekening r ON r.id = p.rek_pembayaran 
 								WHERE p.row_status = 1 
