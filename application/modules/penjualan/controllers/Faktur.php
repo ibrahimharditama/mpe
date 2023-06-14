@@ -439,7 +439,7 @@ class Faktur extends MX_Controller {
 		echo json_encode($src->row());
 	}
 
-	public function cetak($id, $tipe = 'faktur', $no_header, $is_rekening)
+	public function cetak($id, $tipe = 'faktur', $no_header = false, $is_rekening = true)
 	{
 		$this->load->library('pdf');
 		$header = $this->db->query("SELECT a.*,b.*, a.keterangan AS keterangan_faktur, 

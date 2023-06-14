@@ -94,7 +94,7 @@
                     <table>
                         <tr>
                             <td width="65%" class="v-top">
-                                <span class="table-footer">Keterangan : <?= $header->keterangan; ?></span>
+                                <span class="table-footer">Keterangan : <?= $header->keterangan_faktur; ?></span>
                             </td>
                             <td width="35%" class="v-top">
                                 <table>
