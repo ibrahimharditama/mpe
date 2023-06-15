@@ -67,7 +67,7 @@
                     <td><?= $no++; ?></td>
                     <td class="t-right"><?= number_format($dtDetail->qty); ?></td>
                     <td><?= $dtDetail->satuan; ?></td>
-                    <td><?= $dtDetail->nama; ?></td>
+                    <td><?= $dtDetail->uraian; ?></td>
                 </tr>
                 <?php $total_item += $dtDetail->qty; ?>
             <?php endforeach; ?>

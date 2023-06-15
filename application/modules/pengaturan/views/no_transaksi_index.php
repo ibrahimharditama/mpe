@@ -11,7 +11,7 @@
 
 		<table class="cell-border stripe order-column hover" id="datatable">
 			<thead>	
-				<tr>
+				<tr class="text-center">
 					<th width="10px">No.</th>
 					<th>Nama Transaksi</th>
 					<th>Format</th>
@@ -50,12 +50,18 @@ function init_datatable()
                 },
 			},
 			{ data: 'format' },
-			{ data: 'digit_serial' },
-			{ data: 'is_reset_serial' },
-			{ data: 'reset_serial' },
-			{ data: 'tahun_sekarang' },
-			{ data: 'bulan_sekarang' },
-			{ data: 'serial_berikutnya' }
+			{ data: 'digit_serial',className: 'dt-body-right', },
+			{ data: 'is_reset_serial',className: 'dt-body-right', },
+			{ data: 'reset_serial',className: 'dt-body-right', },
+			{ data: 'tahun_sekarang',className: 'dt-body-right', },
+			{ data: 'bulan_sekarang',className: 'dt-body-right', },
+			{ 
+				data: 'serial_berikutnya',
+				className: 'dt-body-right',
+				render: function (data, type, row, meta) {
+					return angka(data);
+				} 
+			}
 		]
 	});
 }

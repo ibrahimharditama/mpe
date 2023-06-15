@@ -187,7 +187,7 @@ class Options extends MX_Controller {
 	public function produk_nota($id_nota,$json= 0 ,$selected = '')
 	{
 		$src = $this->db
-			->select("a.*, CONCAT(a.kode, ' &middot; ', a.nama) AS kode_nama, b.nama AS satuan, c.qty")
+			->select("a.*, c.uraian AS uraian_produk, CONCAT(a.kode, ' &middot; ', a.nama) AS kode_nama, b.nama AS satuan, c.qty")
 			->from('ref_produk AS a')
 			->join('ref_lookup AS b', 'a.id_satuan = b.id')
 			->join('faktur_detail c','c.id_produk = a.id')

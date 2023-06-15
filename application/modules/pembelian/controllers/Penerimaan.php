@@ -28,19 +28,16 @@ class Penerimaan extends MX_Controller {
 								, IFNULL(e.no_transaksi, '') AS no_pembelian
 								, IFNULL(e.tgl, '') AS tgl_pembelian
 								, IFNULL(e.qty_pesan, 0) AS qty_pesan
-								, CONCAT(a.keterangan, ' ', IFNULL(x.keterangan, '')) AS keterangan_pay
+								, CONCAT(IFNULL(x.keterangan, ''), ' ', a.keterangan) AS keterangan_pay
 							FROM penerimaan AS a
 							LEFT JOIN pengguna AS b ON a.created_by = b.id
 							LEFT JOIN pengguna AS c ON a.updated_by = c.id
 							JOIN supplier AS d ON a.id_supplier = d.id
 							LEFT JOIN pembelian AS e ON a.id_pembelian = e.id
 							LEFT JOIN (
-								SELECT id_pembelian, GROUP_CONCAT(CONCAT(r.no_rekening, ' (', r.bank, ') - Rp', FORMAT(p.nominal,0), ' ', IFNULL(p.keterangan, '')) SEPARATOR ' | ') AS keterangan
-								FROM pembayaran_beli p 
-								JOIN rekening r ON r.id = p.rek_pembayaran 
-								WHERE p.row_status = 1 
+								SELECT id_pembelian, GROUP_CONCAT(keterangan) AS keterangan
+								FROM v_pembayaran_beli 
 								GROUP BY id_pembelian
-								ORDER BY tgl DESC
 							) x ON x.id_pembelian = a.id
 							WHERE a.row_status = 1) a");
 

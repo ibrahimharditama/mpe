@@ -67,7 +67,7 @@
             <?php foreach(array_slice($detail, $start, 10) as $dtDetail): ?>
                 <tr class="table-body">
                     <td><?= $no++; ?></td>
-                    <td><?= $dtDetail->nama; ?></td>
+                    <td><?= $dtDetail->uraian; ?></td>
                     <td class="t-right"><?= number_format($dtDetail->qty); ?></td>
                     <td><?= $dtDetail->satuan; ?></td>
                     <td class="t-right"><?= number_format($dtDetail->harga_satuan); ?></td>

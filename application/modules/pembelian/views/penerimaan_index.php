@@ -4,26 +4,37 @@
 	<div class="col-12">
 
 		<div class="togle-datatable-inv mb-3">
-			Toggle column: <a href="javascript:void(0);" class="toggle-vis" data-column="2" >No. Transaksi</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="3">Tgl. Terima</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="4">No. Pembelian</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="5">Tgl. Pembelian</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="6">Supplier</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="7">Keterangan</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="8">Total</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="9">Qty Pesan</a> - <a href="javascript:void(0);" class="toggle-vis" data-column="10">Qty Terima</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="11">Yg Buat</a> - <a href="javascript:void(0);" class="toggle-vis text-dark" data-column="12">Yg Ubah</a>
+			Toggle column: 
+			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="2" >No Transaksi</a>
+			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="3">Tanggal Terima</a>
+			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="4">No Pembelian</a>
+			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="5">Tanggal Pembelian</a>
+			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="6">Supplier</a>
+			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="7">Keterangan</a>
+			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="8">Total</a>
+			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="9">Jumlah Pesan</a>
+			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="10">Jumlah Terima</a>
+			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="11">User Buat</a>
+			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="12">User Ubah</a>
 		</div>
 
 		<div class="table-responsive">
 			<table class="cell-border stripe order-column hover" id="datatable">
 				<thead>	
-					<tr>
+					<tr class="text-center">
 						<th width="5px">No.</th>
 						<th width="5px"></th>
-						<th>No. Transaksi</th>
-						<th>Tgl. Terima</th>
-						<th>No. Pembelian</th>
-						<th>Tgl. Pembelian</th>
+						<th>No Transaksi</th>
+						<th>Tanggal Terima</th>
+						<th>No Pembelian</th>
+						<th>Tanggal Pembelian</th>
 						<th>Supplier</th>
 						<th>Keterangan</th>
 						<th>Total</th>
-						<th>Qty<br>Pesan</th>
-						<th>Qty<br>Terima</th>
-						<th>Yg Buat</th>
-						<th>Yg Ubah</th>
+						<th>Jumlah<br>Pesan</th>
+						<th>Jumlah<br>Terima</th>
+						<th>User Buat</th>
+						<th>User Ubah</th>
 					</tr>
 				</thead>
 				<tbody></tbody>
@@ -74,7 +85,12 @@
 					return buttonUpdate(site_url + 'pembelian/penerimaan/ubah/' + row.id, data);
 				}
 			},
-			{ data: 'tgl' },
+			{ 
+				data: 'tgl', 
+				render: function (data, type, row, meta) {
+                   return moment(data).format("DD-MM-YYYY");
+                }
+			},
 			{ 
 				data: 'no_pembelian', 
 				visible: false,
@@ -84,20 +100,23 @@
 			},
 			{ 
 				data: 'tgl_pembelian', 
-				visible: false 
+				visible: false,
+				render: function (data, type, row, meta) {
+                   return moment(data).format("DD-MM-YYYY");
+                }
 			},
 			{ data: 'supplier' },
 			{ data: 'keterangan_pay' },
 			{ 
 				data: 'grand_total',
-				className: 'dt-center',
+				className: 'dt-body-right',
 				render: function (data, type, row, meta) {
 					return angka(data);
 				} 
 			},
 			{ 
 				data: 'qty_pesan', 
-				className: 'dt-center',
+				className: 'dt-body-right',
 				visible: false,
 				render: function (data, type, row, meta) {
 					return angka(data);
@@ -105,7 +124,7 @@
 			},
 			{ 
 				data: 'qty_terima', 
-				className: 'dt-center',
+				className: 'dt-body-right',
 				render: function (data, type, row, meta) {
 					return angka(data);
 				}
@@ -125,10 +144,12 @@
 	$('a.toggle-vis').on('click', function (e) {
         e.preventDefault();
 
-		if($(this).hasClass('text-dark')){
-			$(this).removeClass('text-dark')
+		if($(this).hasClass('btn-warning')){
+			$(this).removeClass('btn-warning')
+			$(this).addClass('btn-danger');
 		} else {
-			$(this).addClass('text-dark');
+			$(this).removeClass('btn-danger')
+			$(this).addClass('btn-warning');
 		}
  
         // Get the column API object

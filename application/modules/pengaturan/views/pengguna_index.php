@@ -4,7 +4,7 @@
 	<div class="col-8">
 		<table class="cell-border stripe order-column hover" id="datatable">
 			<thead>	
-				<tr>
+				<tr class="text-center">
 					<th></th>
 					<th width="5px">No.</th>
 					<th>Nama Pengguna</th>

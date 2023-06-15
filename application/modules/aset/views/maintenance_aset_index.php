@@ -4,13 +4,13 @@
 	<div class="col-8">
 		<table class="cell-border stripe order-column hover" id="datatable">
 			<thead>	
-				<tr>
+				<tr class="text-center">
                     <th width="5px"></th>
 					<th width="5px">No.</th>
 					<th>Nama Unit</th>
 					<th>Model</th>
                     <th>Pegawai</th>
-                    <th>Tgl. Perawatan</th>
+                    <th>Tanggal Perawatan</th>
                     <th>Keterangan</th>
 				</tr>
 			</thead>

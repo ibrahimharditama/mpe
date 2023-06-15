@@ -112,6 +112,11 @@ class Rekening extends MX_Controller {
 	{
 		$rules = array (
 			array (
+				'field' => 'kode',
+				'label' => 'Kode',
+				'rules' => 'required|callback_check_kode',
+			),
+			array (
 				'field' => 'bank',
 				'label' => 'Bank',
 				'rules' => 'required',
@@ -132,7 +137,7 @@ class Rekening extends MX_Controller {
 		
 		if ($this->form_validation->run()) {
 			
-			$key = array('bank', 'no_rekening', 'nama');
+			$key = array('kode', 'bank', 'no_rekening', 'nama');
 			return post_data($key);
 		}
 		else {
@@ -148,6 +153,29 @@ class Rekening extends MX_Controller {
 			return null;
 		}
 	}
+
+	function check_kode($kode) { 
+		$id = $this->input->post('id');
+
+		if(isset($id))
+			if($id != null && $id != ''){
+				$this->db->where('id !=', $id);
+			}
+		
+		$this->db->where('row_status', 1);
+		$this->db->where('kode', $kode);
+		$this->db->from('rekening');
+
+		$result = $this->db->get()->num_rows();
+		
+        if($result == 0)
+            $response = true;
+        else {
+            $this->form_validation->set_message('check_kode', 'Kode sudah ada');
+            $response = false;
+        }
+        return $response;
+    }
 	
 	public function insert()
 	{

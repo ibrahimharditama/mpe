@@ -90,7 +90,7 @@
                         <th width="320px">Produk</th>
                         <th>Uraian</th>
                         <th>Satuan</th>
-                        <th>Qty</th>
+                        <th>Jumlah</th>
                         <th colspan="2"></th>
                     </tr>
                 </thead>
@@ -102,7 +102,7 @@
                             </select>
                         </td>
                         <td><input type="text" name="nota[0][uraian]" class="input-box input-nama"
-                                style="width:320px" readonly></td>
+                                style="width:320px"></td>
                         <td>
                             <input type="hidden" name="nota[0][id_satuan]" class="input-id-satuan">
                             <input type="text" name="nota[0][satuan]" class="input-box input-satuan"
@@ -127,7 +127,7 @@
                         <th width="320px">Produk</th>
                         <th>Uraian</th>
                         <th>Satuan</th>
-                        <th>Qty</th>
+                        <th>Jumlah</th>
                         <th colspan="2"></th>
                     </tr>
                 </thead>
@@ -166,6 +166,11 @@
         <a class="btn btn-outline-secondary ml-1" href="<?php echo site_url('penjualan/pengiriman'); ?>">
             <i class="ti ti-na"></i> Batalkan
         </a>
+        <?php if($data['id'] != "" && $data['id'] != null): ?>
+        <a class="btn btn-outline-info ml-1" target="_blank" href="<?php echo site_url('penjualan/pengiriman/cetak/' . $data['id']); ?>">
+            <i class="ti ti-printer"></i> Cetak
+        </a>
+        <?php endif; ?>
 
         <a class="btn btn-outline-info ml-1" id="do-bayar" style="display:none"
             data-toggle="modal" href="#modal-approve" data-id="<?= $data != null ? $data['id'] : ''; ?>">
@@ -310,7 +315,7 @@
         $new_row.find('.input-diskon').attr('name', 'nota[' + i + '][diskon]');
         if (data != null) {
             $new_row.find('.select-item-nota').val(data.id)//.trigger('change');
-            $new_row.find('.input-nama').val(data.nama);
+            $new_row.find('.input-nama').val(data.uraian_produk);
             $new_row.find('.input-id-satuan').val(data.id_satuan);
             $new_row.find('.input-satuan').val(data.satuan);
             $new_row.find('.input-harga-jual').val(data.harga_satuan);

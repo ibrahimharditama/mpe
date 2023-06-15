@@ -4,15 +4,15 @@
 	<div class="col-12">
 		<table class="cell-border stripe order-column hover" id="datatable">
 			<thead>	
-				<tr>
+				<tr class="text-center">
 					<th width="5px">No.</th>
 					<th>Nama Unit</th>
 					<th>Model</th>
-					<th>Tgl. Perolehan</th>
+					<th>Tanggal Perolehan</th>
                     <th>Usia Aset</th>
                     <th>Periode Maintenance</th>
                     <th>Nama Pegawai</th>
-                    <th>Tgl. Perawatan Terakhir</th>
+                    <th>Tanggal Perawatan Terakhir</th>
                     <th>Waktu Maintenance</th>
 				</tr>
 			</thead>

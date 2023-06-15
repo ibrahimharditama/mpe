@@ -57,12 +57,12 @@
 						<input type="text" class="form-control" name="no_telp" value="<?php if ($data != null) echo $data['no_telp']; ?>">
 					</div>
 				</div>
-				<div class="form-group row">
+				<!-- <div class="form-group row">
 					<label class="col-sm-4 col-form-label pr-0">No. HP</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="no_hp" value="<?php if ($data != null) echo $data['no_hp']; ?>">
+						<input type="text" class="form-control" name="no_hp" value="<?//php if ($data != null) echo $data['no_hp']; ?>">
 					</div>
-				</div>
+				</div> -->
 				<div class="form-group row">
 					<label class="col-sm-4 col-form-label pr-0">Email</label>
 					<div class="col-sm-8">

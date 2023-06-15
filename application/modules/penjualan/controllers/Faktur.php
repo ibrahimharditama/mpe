@@ -28,19 +28,16 @@ class Faktur extends MX_Controller {
 								, IFNULL(e.no_transaksi, '') AS no_pesanan
 								, IFNULL(e.tgl, '') AS tgl_pesanan
 								, IFNULL(e.qty_pesan, 0) AS qty_pesan
-								, CONCAT(a.keterangan, ' ', IFNULL(x.keterangan, '')) AS keterangan_pay
+								, CONCAT(IFNULL(x.keterangan, ''), ' ', a.keterangan) AS keterangan_pay
 							FROM faktur AS a
 							LEFT JOIN pengguna AS b ON a.created_by = b.id
 							LEFT JOIN pengguna AS c ON a.updated_by = c.id
 							JOIN pelanggan AS d ON a.id_pelanggan = d.id
 							LEFT JOIN penjualan AS e ON a.id_penjualan = e.id
 							LEFT JOIN (
-								SELECT id_faktur, GROUP_CONCAT(CONCAT(r.no_rekening, ' (', r.bank, ') - Rp', FORMAT(p.nominal,0), ' ', IFNULL(p.keterangan, '')) SEPARATOR ' | ') AS keterangan
-								FROM pembayaran_faktur p 
-								JOIN rekening r ON r.id = p.rek_pembayaran 
-								WHERE p.row_status = 1 
+								SELECT id_faktur, GROUP_CONCAT(keterangan) AS keterangan
+								FROM v_pembayaran_faktur 
 								GROUP BY id_faktur
-								ORDER BY tgl DESC
 							) x ON x.id_faktur = a.id
 							WHERE a.row_status = 1) a");
 

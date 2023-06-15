@@ -8,8 +8,8 @@
 					<th width="5px">No.</th>
                     <th width="5px"></th>
 					<th>Nama <?php echo ucfirst($kategori); ?></th>
-					<th>Yg Buat</th>
-					<th>Yg Ubah</th>
+					<th>User Buat</th>
+					<th>User Ubah</th>
 				</tr>
 			</thead>
 			<tbody></tbody>

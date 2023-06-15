@@ -13,21 +13,21 @@
             <div class="row">
                 <div class="col-5">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">No. Transaksi</label>
+                        <label class="col-sm-3 col-form-label pr-0">No Transaksi</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="no_transaksi" placeholder="Dibuat otomatis"
                                 value="<?php if ($data != null) echo $data['no_transaksi']; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">Tgl. Pesanan</label>
+                        <label class="col-sm-3 col-form-label pr-0">Tanggal Pesanan</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control datepicker" name="tgl"
                                 value="<?php echo $data != null ? $data['tgl'] : date('Y-m-d'); ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">Tgl. Kirim</label>
+                        <label class="col-sm-3 col-form-label pr-0">Tanggal Kirim</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control datepicker" name="tgl_kirim"
                                 value="<?php echo $data != null ? $data['tgl_kirim'] : date('Y-m-d'); ?>" readonly>
@@ -62,9 +62,9 @@
                     <tr>
                         <th width="320px">Produk</th>
                         <th>Uraian</th>
-                        <th>Qty</th>
+                        <th>Jumlah</th>
                         <th>Satuan</th>
-                        <th>Hrg Satuan (Rp)</th>
+                        <th>Harga Satuan (Rp)</th>
                         <th>Diskon (Rp)</th>
                         <th>Sub-Total (Rp)</th>
                         <th colspan="2"></th>

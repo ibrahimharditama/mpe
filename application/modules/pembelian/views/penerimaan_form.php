@@ -13,14 +13,14 @@
             <div class="row">
                 <div class="col-5">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">No. Transaksi</label>
+                        <label class="col-sm-3 col-form-label pr-0">No Transaksi</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="no_transaksi" placeholder="Dibuat otomatis"
                                 value="<?php if ($data != null) echo $data['no_transaksi']; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">Tgl. Tagihan</label>
+                        <label class="col-sm-3 col-form-label pr-0">Tanggal Tagihan</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control datepicker" name="tgl"
                                 value="<?php echo $data != null ? $data['tgl'] : date('Y-m-d'); ?>" readonly>
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">No. Pembelian</label>
+                        <label class="col-sm-3 col-form-label pr-0">No Pembelian</label>
                         <div class="col-sm-9">
 
                             <input type="text" class="form-control w-75" name="pembelian" value="<?php echo $data != null ? $data['pembelian'] : ''; ?>" readonly style="display: inline;">
@@ -71,9 +71,9 @@
                     <tr>
                         <th width="320px">Produk</th>
                         <th>Uraian</th>
-                        <th>Qty</th>
+                        <th>Jumlah</th>
                         <th>Satuan</th>
-                        <th>Hrg Satuan (Rp)</th>
+                        <th>Harga Satuan (Rp)</th>
                         <th>Diskon (Rp)</th>
                         <th>Sub-Total (Rp)</th>
                         <th colspan="2"></th>
@@ -530,14 +530,14 @@
                     },
                     {
                         "data": "qty_pesan",
-                        "className": "dt-center",
+                        "className": "dt-body-right",
 				"render": function (data, type, row, meta) {
 					return angka(data);
 				}
                     },
                     {
                         "data": "qty_kirim",
-                        "className": "dt-center",
+                        "className": "dt-body-right",
                         "render": function (data, type, row, meta) {
                             return angka(data);
                         }

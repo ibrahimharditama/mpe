@@ -125,7 +125,7 @@ class Pelanggan extends MX_Controller {
 		
 		if ($this->form_validation->run()) {
 			
-			$key = array('nama', 'alamat', 'kota', 'provinsi', 'kode_pos', 'no_telp', 'no_hp', 'email', 'bank', 'no_rekening', 'pemilik_rekening', 'npwp', 'keterangan');
+			$key = array('nama', 'alamat', 'kota', 'provinsi', 'kode_pos', 'no_telp', 'email', 'bank', 'no_rekening', 'pemilik_rekening', 'npwp', 'keterangan');
 			return post_data($key);
 		}
 		else {

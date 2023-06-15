@@ -18,12 +18,13 @@
                 <tr>
                     <th width="5px">No.</th>
                     <th width="40px"></th>
+                    <th>Kode</th>
                     <th>Bank</th>
                     <th>No Rekening</th> 
                     <th>Atas Nama</th>
                     <th>Rekening Faktur?</th>
-                    <th>Yg Buat</th>
-                    <th>Yg Ubah</th>
+                    <th>User Buat</th>
+                    <th>User Ubah</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -47,7 +48,7 @@ function init_datatable() {
         'ajax': '<?php echo site_url('/master/rekening/datatable'); ?>',
         'stateSave': true,
         'order': [
-            [2, 'asc']
+            [3, 'asc']
         ],
         'fixedHeader': true,
         'columns': [{
@@ -61,6 +62,9 @@ function init_datatable() {
                         '<a href="' + site_url + 'master/rekening/is_rekening_faktur/' + row.id +
                         '" class="btn btn-primary btn-circle btn-circle"><i class="ti-thumb-up"></i></a>';
                 }
+            },
+            {
+                data: 'kode'
             },
             {
                 data: 'bank'

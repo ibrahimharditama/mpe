@@ -35,20 +35,20 @@
     <div class="col-12">
         <table class="cell-border stripe order-column hover" id="datatable">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th width="5px">No.</th>
                     <th width="40px"></th>
                     <th>Kode</th>
                     <th>Tipe</th>
                     <th>Nama Item</th>
+                    <th>Stok</th>
                     <th>Satuan</th>
                     <th>Jenis</th>
                     <th>Merek</th>
                     <th>Harga Beli</th>
                     <th>Harga Jual</th>
-                    <th>Stok</th>
-                    <th>Yg Buat</th>
-                    <th>Yg Ubah</th>
+                    <th>User Buat</th>
+                    <th>User Ubah</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -140,6 +140,10 @@ function init_datatable(tipe) {
                 }
             },
             {
+                data: 'stok',
+                className: 'dt-body-right'
+            },
+            {
                 data: 'satuan'
             },
             {
@@ -154,10 +158,6 @@ function init_datatable(tipe) {
             },
             {
                 data: 'harga_jual',
-                className: 'dt-body-right'
-            },
-            {
-                data: 'stok',
                 className: 'dt-body-right'
             },
             {

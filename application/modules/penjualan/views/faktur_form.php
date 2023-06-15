@@ -13,14 +13,14 @@
             <div class="row">
                 <div class="col-5">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">No. Transaksi</label>
+                        <label class="col-sm-3 col-form-label pr-0">No Transaksi</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="no_transaksi" placeholder="Dibuat otomatis"
                                 value="<?php if ($data != null) echo $data['no_transaksi']; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">Tgl. Nota</label>
+                        <label class="col-sm-3 col-form-label pr-0">Tanggal Nota</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="tgl"
                                 value="<?php echo $data != null ? $data['tgl'] : date('Y-m-d'); ?>" readonly>
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">No. Pesanan</label>
+                        <label class="col-sm-3 col-form-label pr-0">No Pesanan</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control w-75" name="penjualan" value="<?php echo $data != null ? $data['penjualan'] : ''; ?>" readonly style="display: inline;">
                             <input type="hidden" class="form-control" name="id_penjualan" value="<?php echo $data != null ? $data['id_penjualan'] : ''; ?>">
@@ -68,9 +68,9 @@
                     <tr>
                         <th width="320px">Produk</th>
                         <th>Uraian</th>
-                        <th>Qty</th>
+                        <th>Jumlah</th>
                         <th>Satuan</th>
-                        <th>Hrg Satuan (Rp)</th>
+                        <th>Harga Satuan (Rp)</th>
                         <th>Diskon (Rp)</th>
                         <th>Sub-Total (Rp)</th>
                         <th colspan="2"></th>
@@ -210,10 +210,10 @@
                         <table class="table table-sm table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
-                                    <th>No. Transaksi</th>
-                                    <th>Tgl. Bayar</th>
-                                    <th>Rek. Bayar</th>
+                                    <th>No</th>
+                                    <th>No Transaksi</th>
+                                    <th>Tanggal Bayar</th>
+                                    <th>Rekening Bayar</th>
                                     <th>Nominal</th>
                                     <th>Keterangan</th>
                                     <th colspan="2" align="center">Aksi</th>
@@ -227,19 +227,19 @@
                         <form method="post" id="frm-pembayaran"
                             action="<?php echo site_url("penjualan/faktur/pembayaran"); ?>">
                             <div class="form-group">
-                                <label>No. Transaksi</label>
+                                <label>No Transaksi</label>
                                 <input type="hidden" name="id_pembayaran" id="id_pembayaran" value="">
                                 <input type="hidden" name="id_faktur" id="id_faktur" value="<?php if ($data != null) echo $data['id']; ?>">
                                 <input type="text" class="form-control" placeholder="Dibuat otomatis" id="no_pembayaran"
                                     value="" readonly>
                             </div>
                             <div class="form-group">
-                                <label>Tgl. Pembayaran</label>
+                                <label>Tanggal Pembayaran</label>
                                 <input type="text" class="form-control input-bayar datepicker" name="tgl_pembayaran"
                                     id="tgl_pembayaran" value="<?=date("Y-m-d");?>" readonly>
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-12"><label>Rek. Pembayaran</label></div>
+                                <div class="col-sm-12"><label>Rekening Pembayaran</label></div>
                                 <div class="col-sm-12">
                                     <select name="rek_pembayaran" class="input-bayar" data-placeholder="Pilih Rekening"
                                         id="rek_pembayaran" data-message="<b>Rekening</b> harus diisi.">
@@ -388,10 +388,10 @@
 					<table class="cell-border stripe order-column hover" id="datatable-penjualan" style="width: 100%">
 						<thead>
 							<tr>
-								<th>No. Transaksi</th>
-								<th>Tgl</th>
-								<th>Qty Pesan</th>
-                                <th>Qty Kirim</th>
+								<th>No Transaksi</th>
+								<th>Tanggal</th>
+								<th>Jumlah Pesan</th>
+                                <th>Jumlah Kirim</th>
                                 <th>Total</th>
 							</tr>
 						</thead>
@@ -594,14 +594,14 @@
                     },
                     {
                         "data": "qty_pesan",
-                        "className": "dt-center",
+                        "className": "dt-body-right",
                         "render": function (data, type, row, meta) {
                             return angka(data);
                         }
                     },
                     {
                         "data": "qty_kirim",
-                        "className": "dt-center",
+                        "className": "dt-body-right",
                         "render": function (data, type, row, meta) {
                             return angka(data);
                         }

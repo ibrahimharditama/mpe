@@ -4,7 +4,7 @@
     <input type="hidden" name="id" value="<?= $data != null ? $data['id'] : ''; ?>">
 
     <div class="row m-0">
-        <div class="col-8">
+        <div class="col-10">
             <?php if ($this->session->flashdata('post_status') == 'ok'): ?>
             <div class="alert alert-success">Data berhasil disimpan.</div>
             <?php elseif ($this->session->flashdata('post_status') == 'approve'): ?>
@@ -14,16 +14,16 @@
 
         <div class="col-12">
             <div class="row">
-                <div class="col-4">
+                <div class="col-5">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">No. Transaksi</label>
+                        <label class="col-sm-3 col-form-label pr-0">No Transaksi</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" name="no_transaksi" placeholder="Dibuat otomatis"
                                 value="<?php if ($data != null) echo $data['no_transaksi']; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">Tgl. Pengembalian</label>
+                        <label class="col-sm-3 col-form-label pr-0">Tanggal Pengembalian</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control datepicker" name="tgl"
                                 value="<?php echo $data != null ? $data['tgl'] : date('Y-m-d'); ?>" readonly>
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">No. Pengiriman</label>
+                        <label class="col-sm-3 col-form-label pr-0">No Pengiriman</label>
                         <div class="col-sm-8">
                             <select class="select2 w-100 id_pengiriman" name="id_pengiriman"
                                 data-placeholder="Pilih No. Pengiriman">
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-5">
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label pr-0">Keterangan</label>
                         <div class="col-sm-8">
@@ -57,10 +57,12 @@
             <table class="table-cell table-item">
                 <thead>
                     <tr>
-                        <th width="430px">Produk</th>
-                        <th width="100px">Satuan</th>
-                        <th width="180px">Qty Dibawa</th>
-                        <th width="180px">Qty Dikembalikan</th>
+                        <th width="450px">Produk</th>
+                        <th width="150px">Satuan</th>
+                        <th width="150px">Jumlah Dibawa</th>
+                        <th width="150px">Jumlah Dikembalikan</th>
+                        <th width="150px">Jumlah Terpakai</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,8 +82,11 @@
                                 value="<?= $row['qty_bawa']; ?>">
                             <input type="text" name="produk[qty_kembali][]" class="control-number w-100 input-qty"
                                 value="<?= $row['qty_kembali']; ?>">
-                            <span class="err_qty_kembali"></span>
                         </td>
+                        <td align="right">
+                            <span class="ml-2 mr-2 control-number qty-terpakai"><?= $row['qty_bawa'] - $row['qty_kembali']; ?></span>
+                        </td>
+                        <td align="center"><a href="#" class="btn btn-danger btn-ico btn-row-del" tabindex="-1">x</a></td>
                     </tr>
 
                     <?php endforeach; ?>
@@ -90,13 +95,21 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="2" class="border-bottom-none border-left-none"></td>
+                        <td class="border-bottom-none border-left-none"></td>
                         <td class="pr-2 semi-bold" align="right">Total</td>
                         <td>
-                            <input type="text" name="qty" class="control-number input-total w-100 semi-bold"
-                                value="<?= $data != null ? $data['qty'] : 0; ?>" readonly>
+                            <input type="text" class="control-number input-total-bawa w-100 semi-bold"
+                                value="0" readonly>
                         </td>
-                        <td colspan="2"></td>
+                        <td>
+                            <input type="text" name="qty" class="control-number input-total w-100 semi-bold"
+                                value="0" readonly>
+                        </td>
+                        <td>
+                            <input type="text" class="control-number input-total-terpakai w-100 semi-bold"
+                                value="0" readonly>
+                        </td>
+                        <td></td>
                     </tr>
 
                 </tfoot>
@@ -171,6 +184,10 @@ $('.id_pengiriman').on('select2:select', function() {
                                 <input type="text" name="produk[qty_kembali][]" class="control-number w-100 input-qty" value="0">
                                 <span class="err_qty_kembali"></span>
                             </td>
+                            <td align="right">
+                                <span class="ml-2 mr-2 control-number qty-terpakai">0</span>
+                            </td>
+                            <td align="center"><a href="#" class="btn btn-danger btn-ico btn-row-del" tabindex="-1">x</a></td>
                         </tr>`;
 
 
@@ -189,9 +206,13 @@ $('.id_pengiriman').on('select2:clearing', function() {
 });
 
 function qty() {
-    var total = 0;
+    var total_bawa = 0;
+    var total_kembali = 0;
+    var total_pakai = 0
+
     var $list_qty_bawa = $('.input-qty-bawa');
     var $list_qty = $('.input-qty');
+    var $list_qty_terpakai = $('.qty-terpakai');
 
     $.each($list_qty, function(i, o) {
         var qty_bawa = parseInt($($list_qty_bawa[i]).val());
@@ -208,10 +229,15 @@ function qty() {
             $($list_qty[i]).val(0);
         }
 
-        total += qty;
+        total_bawa += qty_bawa;
+        total_kembali += qty
+        total_pakai += qty_bawa - qty;
+        $($list_qty_terpakai[i]).html(qty_bawa - qty);
     });
 
-    $('.input-total').val(total);
+    $('.input-total-bawa').val(total_bawa);
+    $('.input-total').val(total_kembali);
+    $('.input-total-terpakai').val(total_pakai);
 
 }
 
@@ -219,42 +245,52 @@ $("#form").submit(function(e) {
     e.preventDefault();
     var me = $(this);
 
-    $.ajax({
-        url: me.attr('action'),
-        type: 'post',
-        data: me.serialize(),
-        dataType: 'json',
-        beforeSend: function() {
-            $('button[type=submit]').attr('disabled', 'disabled');
-        },
-        success: function(response) {
-            console.log(response);
+    var num_rows = $('.table-item > tbody').find('tr').length;
 
-            if (response['code'] == 200) {
-                window.location.href = response['url'];
+    if(num_rows > 0) {
+
+        $.ajax({
+            url: me.attr('action'),
+            type: 'post',
+            data: me.serialize(),
+            dataType: 'json',
+            beforeSend: function() {
+                $('button[type=submit]').attr('disabled', 'disabled');
+            },
+            success: function(response) {
+                console.log(response);
+
+                if (response['code'] == 200) {
+                    window.location.href = response['url'];
+                }
+
+                if (response['code'] == 400) {
+                    var error = response['data'];
+                    var $err_qty_kembali = $('.err_qty_kembali');
+
+                    $(".err_tgl").html(error['tgl']);
+                    $(".err_id_pengiriman").html(error['id_pengiriman']);
+
+                    $(".err_qty_kembali").each(function(i, o) {
+                        $($err_qty_kembali[i]).html(error['produk[qty_kembali][' + i + ']'])
+                    });
+
+
+                }
+
+                $('button[type=submit]').attr('disabled', false);
+
             }
+        })
 
-            if (response['code'] == 400) {
-                var error = response['data'];
-                var $err_qty_kembali = $('.err_qty_kembali');
-
-                $(".err_tgl").html(error['tgl']);
-                $(".err_id_pengiriman").html(error['id_pengiriman']);
-
-                $(".err_qty_kembali").each(function(i, o) {
-                    $($err_qty_kembali[i]).html(error['produk[qty_kembali][' + i + ']'])
-                });
-
-
-            }
-
-            $('button[type=submit]').attr('disabled', false);
-
-        }
-    })
+    } else {
+        alert("Produk tidak ada yang di pilih");
+    }
 })
 
 $().ready(function() {
+    qty();
+
     var id_pengembalian = '<?php echo $data == null ? '0' : $data['id']; ?>';
     var is_approve = '<?php echo $data == null ? "0" :  $data['is_approve']; ?>';
 
@@ -274,6 +310,19 @@ $().ready(function() {
     $(document).on('keyup', '.input-qty', function(e) {
         qty();
     });
+
+    $(document).on('click', '.btn-row-del', function(e) {
+        e.preventDefault();
+
+        var num_rows = $('.table-item > tbody').find('tr').length;
+
+        console.log(num_rows);
+
+        var $row = $(this).closest('tr');
+
+       $row.remove();
+       qty();
+    })
 });
 $('#modal-approve').on('show.bs.modal', function (event) {
 	var button = $(event.relatedTarget);

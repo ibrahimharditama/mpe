@@ -12,6 +12,17 @@
 	<div class="row">
 			<div class="col-6">
 				<div class="form-group row">
+					<label class="col-sm-4 col-form-label pr-0"><span class="text-danger">*</span> Kode </label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" name="kode" value="<?php if ($data != null) echo $data['kode']; ?>">
+						<?php if (isset($errors)) echo $errors['kode']; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<div class="form-group row">
 					<label class="col-sm-4 col-form-label pr-0"><span class="text-danger">*</span> Nama Bank </label>
 					<div class="col-sm-8">
 						<input type="text" class="form-control" name="bank" value="<?php if ($data != null) echo $data['bank']; ?>">

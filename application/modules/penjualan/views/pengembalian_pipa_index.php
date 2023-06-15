@@ -7,16 +7,16 @@
         <?php endif; ?>
 		<table class="cell-border stripe order-column hover" id="datatable">
 			<thead>	
-				<tr>
+				<tr class="text-center">
                     <th width="40px"></th>
-					<th width="5px">No.</th>
-                    <th width="150px">No. Transaksi</th>
-                    <th width="100px">Tgl.</th>
-                    <th width="150px">No. Pengiriman</th>
-                    <th width="50px">Qty</th>
+					<th width="5px">No</th>
+                    <th width="150px">No Transaksi</th>
+                    <th width="100px">Tanggal</th>
+                    <th width="150px">No Pengiriman</th>
+                    <th width="50px">Jumlah</th>
                     <th>Keterangan</th>
-                    <th>Yg Buat</th>
-                    <th>Yg Ubah</th>
+                    <th>User Buat</th>
+                    <th>User Ubah</th>
 				</tr>
 			</thead>
 			<tbody></tbody>
@@ -95,7 +95,10 @@
                 }
             },
             {
-                "data": "tgl"
+                "data": "tgl",
+                render: function (data, type, row, meta) {
+                   return moment(data).format("DD-MM-YYYY");
+                } 
             },
             {
                 "data": "no_pengiriman",

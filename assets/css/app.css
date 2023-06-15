@@ -190,6 +190,23 @@ select.form-control {
 .btn-primary:hover {
 	background: #3a66bf !important;
 }
+.btn-warning {
+	background: #FFEA00 !important;
+	border-color: #FFEA00;
+}
+.btn-warning:hover {
+	border-color: #ffe600;
+	background: #ffe600 !important;
+}
+.btn-outline-warning{
+	border-color: #FFEA00;
+	color: #212529;
+}
+.btn-outline-warning:hover{
+	background: #FFEA00 !important;
+	border-color: #FFEA00;
+	color: #212529;
+}
 .btn.btn-action {
 	font-size: 11px !important;
 	font-weight: normal;

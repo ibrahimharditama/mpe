@@ -11,17 +11,17 @@
 
         <table class="cell-border stripe order-column hover" id="datatable">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th width="5px">No.</th>
                     <th width="5px"></th>
                     <th>Kode</th>
                     <th>Nama Supplier</th>
                     <th>Alamat</th>
                     <th>No. Telp.</th>
-                    <th>No. HP</th>
+                    <!-- <th>No. HP</th> -->
                     <th>Email</th>
-                    <th>Yg Buat</th>
-                    <th>Yg Ubah</th>
+                    <th>User Buat</th>
+                    <th>User Ubah</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -73,9 +73,9 @@ function init_datatable() {
             {
                 data: 'no_telp'
             },
-            {
-                data: 'no_hp'
-            },
+            // {
+            //     data: 'no_hp'
+            // },
             {
                 data: 'email'
             },

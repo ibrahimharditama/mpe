@@ -7,18 +7,18 @@
         <?php endif; ?>
         <table class="cell-border stripe order-column hover" id="datatable">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th width="5px">No.</th>
                     <th width="5px"></th>
-                    <th>No. Transaksi</th>
-                    <th>Tgl.</th>
+                    <th>No Transaksi</th>
+                    <th>Tanggal</th>
                     <th>Pelanggan</th>
-                    <th>Qty<br>Kirim</th>
+                    <th>Jumlah<br>Kirim</th>
                     <th>Supir</th>
                     <th>Kenek</th>
                     <th>Teknisi</th>
-                    <th>Yg Buat</th>
-                    <th>Yg Ubah</th>
+                    <th>User Buat</th>
+                    <th>User Ubah</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -70,11 +70,16 @@
 					return buttonUpdate(site_url + 'penjualan/pengiriman/ubah/' + row.id, data);
 				}
 			},
-			{ "data": "tgl" },
+			{ 
+                "data": "tgl", 
+                render: function (data, type, row, meta) {
+                   return moment(data).format("DD-MM-YYYY");
+                } 
+            },
 			{ "data": "pelanggan" },
 			{ 
 				"data": "qty_semua", 
-				"className": "dt-center", 
+				"className": "dt-body-right", 
 				"render": function (data, type, row, meta) {
 					return angka(data);
 				}
@@ -84,11 +89,9 @@
             { "data": "teknisi" },
 			{ 
 				"data": "yg_buat", 
-				"visible": false, 
             },
 			{ 
 				"data": "yg_ubah",
-				"visible": false, 
 			},
         ],
         
