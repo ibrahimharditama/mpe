@@ -226,13 +226,25 @@ class Options extends MX_Controller {
 
 	public function pengiriman_penjualan($selected = '')
 	{
-		$src = $this->db
-			->select("p.id, CONCAT(p.no_transaksi, ' &middot; ', pl.nama) AS kode")
-			->from('pengiriman AS p')
-			->join('pelanggan AS pl', 'pl.id = p.id_pelanggan') 
-			->where('p.row_status', 1)
-			->order_by('p.id')
-			->get();
+		$src = $this->db->query("SELECT p.id, CONCAT(p.no_transaksi, ' &middot; ', pl.nama) AS kode
+								FROM pengiriman p 
+								JOIN pelanggan pl ON pl.id = p.id_pelanggan
+								WHERE p.row_status = 1 
+									AND (p.id NOT IN (
+											SELECT id_pengiriman 
+											FROM pengembalian_pipa 
+											WHERE row_status = 1 
+												AND is_approve = 1 
+											GROUP BY id_pengiriman) OR p.id = '$selected')
+								ORDER BY p.id");
+
+		// $src = $this->db
+		// 	->select("p.id, CONCAT(p.no_transaksi, ' &middot; ', pl.nama) AS kode")
+		// 	->from('pengiriman AS p')
+		// 	->join('pelanggan AS pl', 'pl.id = p.id_pelanggan') 
+		// 	->where('p.row_status', 1)
+		// 	->order_by('p.id')
+		// 	->get();
 		
 		return options($src, 'id', $selected, 'kode');
 	}

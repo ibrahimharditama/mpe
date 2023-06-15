@@ -207,14 +207,14 @@ class Pengiriman extends MX_Controller {
 		$key = array('tgl', 'id_pelanggan','id_faktur','alamat', 'keterangan');
 		$data = post_data($key);
 
-		$count_kirim = "SELECT SUM(qty_nota) AS total from pengiriman where id_faktur = '".$data['id_faktur']."'";
-		$total_kirim = $this->db->query($count_kirim)->row('total');
-		$total_all_kirim = $total_kirim+$qty_nota;
-		$qty_kirim = $this->db->query("SELECT qty_kirim from faktur where id = '".$data['id_faktur']."'")->row('qty_kirim');
-		if($qty_kirim <= $total_all_kirim){
-			$dtFaktur['is_kirim'] = 1;
-			$this->db->update('faktur', $dtFaktur, array('id' => $data['id_faktur']));
-		}
+		// $count_kirim = "SELECT SUM(qty_nota) AS total from pengiriman where id_faktur = '".$data['id_faktur']."'";
+		// $total_kirim = $this->db->query($count_kirim)->row('total');
+		// $total_all_kirim = $total_kirim+$qty_nota;
+		// $qty_kirim = $this->db->query("SELECT qty_kirim from faktur where id = '".$data['id_faktur']."'")->row('qty_kirim');
+		// if($qty_kirim <= $total_all_kirim){
+		// 	$dtFaktur['is_kirim'] = 1;
+		// 	$this->db->update('faktur', $dtFaktur, array('id' => $data['id_faktur']));
+		// }
 
 		$data['no_transaksi'] = new_number_pengiriman($data['id_faktur']);
 		$data['created_by'] = user_session('id');
@@ -279,7 +279,8 @@ class Pengiriman extends MX_Controller {
 		if(count($pengiriman_person_payload) > 0) {
 			$this->db->insert_batch('pengiriman_person',$pengiriman_person_payload);
 		}
-		
+
+		$cek = $this->_upd_faktur($data['id_faktur'], '-');
 		
 		redirect(site_url('penjualan/pengiriman/ubah/' . $id_pengiriman ));
 	}
@@ -310,6 +311,38 @@ class Pengiriman extends MX_Controller {
 			}
 			if(count($insert) > 0) $this->db->insert_batch('jstok', $insert);
 		}
+	}
+
+	private function _upd_faktur($id_faktur, $id_faktur_sebelumnya) 
+	{
+		$data = [$id_faktur, $id_faktur_sebelumnya];
+
+		for ($i=0; $i < count($data); $i++) { 
+
+			if($data[$i] != '-') {
+				$qty_faktur = $this->db->query("SELECT IFNULL(SUM(fd.qty), 0) AS qty_faktur
+											FROM faktur_detail fd 
+											JOIN ref_produk p ON p.id = fd.id_produk AND p.id_tipe != 21 
+											WHERE fd.id_faktur = $data[$i] 
+												AND fd.row_status = 1")->row();
+
+				$qty_kirim = $this->db->query("SELECT IFNULL(SUM(ppd.qty), 0) AS qty_kirim
+											FROM pengiriman_detail_nota ppd 
+											JOIN pengiriman p ON p.id = ppd.id_pengiriman 
+											JOIN ref_produk pr ON pr.id = ppd.id_produk AND pr.id_tipe != 21
+											WHERE p.id_faktur = $data[$i]  
+												AND ppd.row_status = 1")->row();
+
+				if($qty_kirim->qty_kirim >=  $qty_faktur->qty_faktur) {
+					$this->db->update('faktur', ['is_kirim' => 1], ['id' => $data[$i]]);
+				} else {
+					$this->db->update('faktur', ['is_kirim' => 0], ['id' => $data[$i]]);
+				}
+			}
+		}
+
+		return $data;
+		
 	}
 
 	public function update()
@@ -422,6 +455,8 @@ class Pengiriman extends MX_Controller {
 		if(count($pengiriman_person_payload) > 0) {
 			$this->db->insert_batch('pengiriman_person',$pengiriman_person_payload);
 		}
+
+		$this->_upd_faktur($data['id_faktur'], $input['id_faktur_sebelumnya']);
 		
 		redirect($this->agent->referrer());
 	}
