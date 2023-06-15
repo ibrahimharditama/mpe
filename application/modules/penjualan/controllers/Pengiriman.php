@@ -280,7 +280,7 @@ class Pengiriman extends MX_Controller {
 			$this->db->insert_batch('pengiriman_person',$pengiriman_person_payload);
 		}
 
-		$cek = $this->_upd_faktur($data['id_faktur'], '-');
+		$this->_upd_faktur($data['id_faktur'], '-');
 		
 		redirect(site_url('penjualan/pengiriman/ubah/' . $id_pengiriman ));
 	}
@@ -340,8 +340,6 @@ class Pengiriman extends MX_Controller {
 				}
 			}
 		}
-
-		return $data;
 		
 	}
 
