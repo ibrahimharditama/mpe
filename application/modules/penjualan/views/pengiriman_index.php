@@ -5,7 +5,15 @@
         <?php if ($this->session->flashdata('post_status') == 'approve'): ?>
         <div class="alert alert-success">Stok berhasil di kurangi.</div>
         <?php endif; ?>
-        <table class="cell-border stripe order-column hover" id="datatable">
+
+        <?php if ($this->session->flashdata('delete_status') == 'ok'): ?>
+        <div class="alert alert-success">Data berhasil dihapus.</div>
+        <?php elseif ($this->session->flashdata('delete_status') == 'err'): ?>
+        <div class="alert alert-danger">Data tidak dapat dihapus karena masih digunakan!</div>
+        <?php endif; ?>
+        
+        <div class="table-responsive">
+        <table class="cell-border stripe order-column hover nowrap" id="datatable">
             <thead>
                 <tr class="text-center">
                     <th width="5px">No.</th>
@@ -23,6 +31,7 @@
             </thead>
             <tbody></tbody>
         </table>
+        </div>
     </div>
 </div>
 
@@ -61,7 +70,7 @@
                 "sortable": false, 
                 "searchable": false,
                 "render": function(data, type, row, meta) {
-                    return '<a target="_blank" href="' + site_url + 'penjualan/pengiriman/cetak/' + row.id+'"><img src="<?php echo base_url(); ?>assets/img/printer.png"></a>';
+                    return buttonDelete(site_url + 'penjualan/pengiriman/delete/' + row.id + '/' + row.id_faktur)+'&nbsp;<a target="_blank" href="' + site_url + 'penjualan/pengiriman/cetak/' + row.id+'"><img src="<?php echo base_url(); ?>assets/img/printer.png"></a>';
                 }
             },
 			{

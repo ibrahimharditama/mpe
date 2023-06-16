@@ -552,4 +552,7 @@ $config['fk'] = array (
 		'pengiriman.id_pelanggan',
 		'penjualan.id_pelanggan',
 	),	
+	'pengiriman' => array (
+		'pengembalian_pipa.id_pengiriman'
+	),
 );

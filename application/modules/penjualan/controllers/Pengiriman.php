@@ -20,7 +20,7 @@ class Pengiriman extends MX_Controller {
 	public function datatable()
 	{
 
-		$this->datatables->select("id, no_transaksi, tgl, pelanggan, qty_semua, yg_buat, yg_ubah, supir, kenek, teknisi")
+		$this->datatables->select("id, no_transaksi, tgl, id_faktur, pelanggan, qty_semua, yg_buat, yg_ubah, supir, kenek, teknisi")
                     ->from("(SELECT a.*
 							, (a.qty_pesan + a.qty_nota) as qty_semua
 							, UPPER(b.username) AS yg_buat
@@ -510,6 +510,44 @@ class Pengiriman extends MX_Controller {
 		);
 		$this->session->set_flashdata('post_status', 'approve');
 		echo json_encode($res);
+	}
+
+	public function delete($id, $id_faktur)
+	{
+		if ( ! $this->agent->referrer()) {
+			show_404();
+		}
+
+		$src = $this->db
+			->from('pengiriman')
+			->where('row_status', 1)
+			->where('id', $id)
+			->get();
+
+		if ($src->num_rows() == 0) {
+			show_404();
+		}
+
+		$this->load->helper('delete');
+		
+		if (check_fk('pengiriman', $id)) {
+			
+			db_update('faktur', ['is_kirim' => 0], ['id' => $id_faktur, 'row_status' => 1]);
+			db_delete('pengiriman', ['id' => $id]);
+			db_delete('pengiriman_detail', ['id_pengiriman' => $id]);
+			db_delete('pengiriman_detail_nota', ['id_pengiriman' => $id]);
+			db_delete('jstok', ['jenis_trx' => 'pengiriman', 'id_header' => $id, 'row_status' => 1]);
+
+			
+			$status = 'ok';
+		}
+		else {
+			$status = 'err';
+		}
+
+		$this->session->set_flashdata('delete_status', $status);
+		
+		redirect($this->agent->referrer());
 	}
 
 }
