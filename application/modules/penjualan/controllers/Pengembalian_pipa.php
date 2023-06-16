@@ -290,7 +290,7 @@ class Pengembalian_pipa extends MX_Controller {
 			$this->db->update('pengembalian_pipa', $dtApprove, array('id' => $id));
 			$data = $src_data->row();
 			$detail = $this->db->get_where('pengembalian_pipa_detail', ['id_pengembalian_pipa' => $id, 'row_status' => 1])->result();
-			db_delete('jstok', ['id_header' => $data->id]);
+			db_delete('jstok', ['id_header' => $data->id, 'jenis_trx' => 'pengembalian_pipa', 'row_status' => 1]);
 
 			$insert = array();
 			foreach ($detail as $row) {
