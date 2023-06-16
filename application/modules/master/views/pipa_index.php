@@ -32,7 +32,6 @@
                     <th>Merek</th>
                     <th>Harga Beli</th>
                     <th>Harga Jual</th>
-                    <th>Stok</th>
                     <th>User Buat</th>
                     <th>User Ubah</th>
                 </tr>
@@ -140,10 +139,6 @@ function init_datatable() {
             },
             {
                 data: 'harga_jual',
-                className: 'dt-body-right'
-            },
-            {
-                data: 'stok',
                 className: 'dt-body-right'
             },
             {

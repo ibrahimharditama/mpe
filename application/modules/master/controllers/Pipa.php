@@ -37,7 +37,7 @@ class Pipa extends MX_Controller {
 			JOIN ref_lookup AS e ON a.id_satuan = e.id
 			JOIN ref_lookup AS f ON a.id_jenis = f.id
 			JOIN ref_lookup AS g ON a.id_merek = g.id
-			LEFT JOIN (SELECT a.id_produk,sum(a.qty) as qty FROM jstok a GROUP BY a.id_produk) h ON a.id = h.id_produk
+			LEFT JOIN (SELECT a.id_produk,sum(a.qty) as qty FROM jstok a Where a.row_status = 1 GROUP BY a.id_produk) h ON a.id = h.id_produk
 			WHERE
 				a.row_status = 1
 				AND a.id_tipe = 22
