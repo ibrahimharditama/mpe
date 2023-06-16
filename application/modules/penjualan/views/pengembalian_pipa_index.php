@@ -64,6 +64,7 @@
             data: function(d) {
             }
         },
+        pageLength: 50,
         serverSide: true,
         order: [[3, 'desc'],[2, 'desc']],
         language: {

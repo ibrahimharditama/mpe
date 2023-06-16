@@ -57,6 +57,7 @@
             data: function(d) {
             }
         },
+		pageLength: 50,
         serverSide: true,
         order: [[2, 'desc']],
         language: {

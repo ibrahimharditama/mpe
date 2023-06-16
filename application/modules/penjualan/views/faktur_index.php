@@ -60,6 +60,7 @@
         },
         serverSide: true,
         order: [[2, 'desc']],
+		pageLength: 50,
         language: {
             searchPlaceholder: 'Search...',
             sSearch: '',
