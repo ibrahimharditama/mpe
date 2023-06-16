@@ -185,7 +185,7 @@ class Pengembalian_pipa extends MX_Controller {
 
 			$data = $response['data'];		
 			$src_no_trx = $this->db->get_where('pengiriman', ['id' => $data['data']['id_pengiriman']])->row()->no_transaksi;
-			$data['data']['no_transaksi'] = str_replace('P', 'RP', $src_no_trx);
+			$data['data']['no_transaksi'] = str_replace('P-A', 'RP-', $src_no_trx);
 
 			$id = db_insert('pengembalian_pipa', $data['data']);
 
