@@ -19,6 +19,15 @@ class Pengiriman extends MX_Controller {
 	
 	public function datatable()
 	{
+		$input = $this->input->get();
+		$where = "";
+
+		if(isset($input['datahari']))
+			if($input['datahari'] != '' && $input['datahari'] != null && $input['datahari'] != 'all') {
+				$tambah = $input['datahari'];
+				$pastdate = date('Y-m-d', strtotime("-$tambah day", strtotime(date('Y-m-d'))));
+				$where .= " AND a.tgl >= '". $pastdate. "' ";
+			}
 
 		$this->datatables->select("id, no_transaksi, tgl, id_faktur, pelanggan, qty_semua, yg_buat, yg_ubah, supir, kenek, teknisi, is_approve")
                     ->from("(SELECT a.*
@@ -54,7 +63,7 @@ class Pengiriman extends MX_Controller {
 								WHERE pp.row_status = 1 AND pp.tipe = 'teknisi'
 								GROUP BY pp.id_pengiriman
 							) t ON t.id_pengiriman = a.id
-							WHERE a.row_status = 1) a");
+							WHERE a.row_status = 1 $where) a");
 
         $result = json_decode($this->datatables->generate());
 

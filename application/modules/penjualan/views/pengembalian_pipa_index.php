@@ -5,6 +5,19 @@
         <?php if ($this->session->flashdata('post_status') == 'ok'): ?>
             <div class="alert alert-success">Data berhasil disimpan.</div>
         <?php endif; ?>
+
+        <div class="togle-datatable-inv mb-3">
+			Tampilkan data selama: 
+			<select id="data-hari">
+				<option value="3">3</option>
+				<option value="7">7</option>
+				<option value="30">30</option>
+				<option value="60">60</option>
+				<option value="all">Semua</option>
+			</select>
+			hari terakhir
+		</div>
+
 		<table class="cell-border stripe order-column hover" id="datatable">
 			<thead>	
 				<tr class="text-center">
@@ -66,6 +79,7 @@
             url: site_url + 'penjualan/pengembalian-pipa/datatable',
             dataSrc: 'datatable.data',
             data: function(d) {
+				d.datahari = $('#data-hari').val()
             }
         },
         pageLength: 50,
@@ -140,25 +154,29 @@
         
     });
 
-$('#modal-approve').on('show.bs.modal', function (event) {
-	var button = $(event.relatedTarget);
-	$('#approve_id').val(button.data('id'));
-});
+    $('#modal-approve').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        $('#approve_id').val(button.data('id'));
+    });
 
-function ajaxApprove(filename) {
-	$.ajax({
-		type: 'POST',
-		data: {id: $('#approve_id').val()},
-		url: filename,
-		success: function (data) {
-			$('#modal-approve').modal('hide');
-            window.location.reload();
-		},
-		error: function (xhr, status, error) {
-			alert(xhr.responseText);
-		}
-	});
-}
+    function ajaxApprove(filename) {
+        $.ajax({
+            type: 'POST',
+            data: {id: $('#approve_id').val()},
+            url: filename,
+            success: function (data) {
+                $('#modal-approve').modal('hide');
+                window.location.reload();
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    }
+
+    $('#data-hari').on('change', function() {
+		datatable.clear().draw();
+	})
 
 
 </script>

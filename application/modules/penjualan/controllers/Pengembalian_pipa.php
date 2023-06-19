@@ -19,6 +19,16 @@ class Pengembalian_pipa extends MX_Controller {
 
     public function datatable()
 	{
+		$input = $this->input->get();
+		$where = "";
+
+		if(isset($input['datahari']))
+			if($input['datahari'] != '' && $input['datahari'] != null && $input['datahari'] != 'all') {
+				$tambah = $input['datahari'];
+				$pastdate = date('Y-m-d', strtotime("-$tambah day", strtotime(date('Y-m-d'))));
+				$where .= " AND pp.tgl >= '". $pastdate. "' ";
+			}
+
 		$this->datatables->select("id, tgl, id_pengiriman, no_transaksi, no_pengiriman, qty, keterangan,is_approve, 
 								created_by, updated_by, supir, kenek, teknisi")
                     ->from("(SELECT pp.id, pp.tgl, pp.id_pengiriman, pp.no_transaksi, p.no_transaksi AS no_pengiriman, 
@@ -51,7 +61,7 @@ class Pengembalian_pipa extends MX_Controller {
 								WHERE pp.row_status = 1 AND pp.tipe = 'teknisi'
 								GROUP BY pp.id_pengiriman
 							) t ON t.id_pengiriman =  pp.id_pengiriman
-							WHERE pp.row_status = 1) a");
+							WHERE pp.row_status = 1 $where) a");
 
         $result = json_decode($this->datatables->generate());
 

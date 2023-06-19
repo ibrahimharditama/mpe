@@ -70,7 +70,7 @@ table td {
 }
 
 .fw-400 {
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .f-verdana {
@@ -124,11 +124,11 @@ table td {
 .table-body>td {
     font-size: 9pt;
     font-family: "Verdana";
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .table-footer>td {
     font-size: 9pt;
     font-family: "Verdana";
-    font-weight: 400;
+    font-weight: 500;
 }

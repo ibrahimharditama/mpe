@@ -94,7 +94,7 @@
             <tr>
                 <td width="73%">
                     <table>
-                        <tr>
+                        <tr class="table-footer">
                             <td width="65%" class="v-top">
                                 <span class="table-footer"><?= terbilang($header->grand_total); ?></span>
                             </td>

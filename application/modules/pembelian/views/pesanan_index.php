@@ -3,7 +3,7 @@
 <div class="row m-0">
 	<div class="col-12">
 
-		<div class="togle-datatable-inv mb-3">
+		<div class="togle-datatable-inv mb-2">
 			Toggle column: 
 			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="2">No Transaksi</a> 
 			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="3">Tanggal</a> 
@@ -14,6 +14,17 @@
 			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="8">Total</a> 
 			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="9">User Buat</a> 
 			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="10">User Ubah</a>
+		</div>
+		<div class="togle-datatable-inv mb-3">
+			Tampilkan data selama: 
+			<select id="data-hari">
+				<option value="3">3</option>
+				<option value="7">7</option>
+				<option value="30">30</option>
+				<option value="60">60</option>
+				<option value="all">Semua</option>
+			</select>
+			hari terakhir
 		</div>
 		
 		<div class="table-responsive">
@@ -52,6 +63,7 @@
             url: site_url + 'pembelian/pesanan/datatable',
             dataSrc: 'datatable.data',
             data: function(d) {
+				d.datahari = $('#data-hari').val()
             }
         },
 		pageLength: 50,
@@ -148,4 +160,8 @@
         // Toggle the visibility
         column.visible(!column.visible());
     });
+
+	$('#data-hari').on('change', function() {
+		datatable.clear().draw();
+	})
 </script>

@@ -19,6 +19,17 @@ class Pesanan extends MX_Controller {
 	
 	public function datatable()
 	{
+		$input = $this->input->get();
+		$where = "";
+
+		if(isset($input['datahari']))
+			if($input['datahari'] != '' && $input['datahari'] != null && $input['datahari'] != 'all') {
+				$tambah = $input['datahari'];
+				$pastdate = date('Y-m-d', strtotime("-$tambah day", strtotime(date('Y-m-d'))));
+				$where .= " AND a.tgl >= '". $pastdate. "' ";
+			}
+
+
 		$this->datatables->select("id, no_transaksi, tgl, tgl_kirim, qty_pesan, qty_kirim, grand_total, yg_buat, yg_ubah, supplier")
                     ->from("(SELECT a.id, a.no_transaksi, a.tgl, a.tgl_kirim, a.qty_pesan, a.qty_kirim, a.grand_total,
 							UPPER(b.username) AS yg_buat,
@@ -28,7 +39,7 @@ class Pesanan extends MX_Controller {
 							LEFT JOIN pengguna AS b ON a.created_by = b.id
 							LEFT JOIN pengguna AS c ON a.updated_by = c.id
 							JOIN supplier AS d ON a.id_supplier = d.id
-							WHERE a.row_status = 1) a");
+							WHERE a.row_status = 1 $where) a");
 
         $result = json_decode($this->datatables->generate());
 

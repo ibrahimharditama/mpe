@@ -11,6 +11,18 @@
         <?php elseif ($this->session->flashdata('delete_status') == 'err'): ?>
         <div class="alert alert-danger">Data tidak dapat dihapus karena masih digunakan!</div>
         <?php endif; ?>
+
+        <div class="togle-datatable-inv mb-3">
+			Tampilkan data selama: 
+			<select id="data-hari">
+				<option value="3">3</option>
+				<option value="7">7</option>
+				<option value="30">30</option>
+				<option value="60">60</option>
+				<option value="all">Semua</option>
+			</select>
+			hari terakhir
+		</div>
         
         <div class="table-responsive">
         <table class="cell-border stripe order-column hover nowrap" id="datatable">
@@ -48,6 +60,7 @@
             url: site_url + 'penjualan/pengiriman/datatable',
             dataSrc: 'datatable.data',
             data: function(d) {
+                d.datahari = $('#data-hari').val()
             }
         },
         pageLength: 50,
@@ -113,4 +126,8 @@
         ],
         
     });
+
+    $('#data-hari').on('change', function() {
+		datatable.clear().draw();
+	})
 </script>
