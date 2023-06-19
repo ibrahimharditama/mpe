@@ -5,7 +5,7 @@
 
 <h1 class="my-header">Form Pesanan Pembelian</h1>
 
-<form method="post" action="<?php echo $action_url; ?>">
+<form method="post" action="<?php echo $action_url; ?>" id="form">
 <input type="hidden" name="id" value="<?php if ($data != null) echo $data['id']; ?>">
 
 <div class="row m-0">
@@ -387,6 +387,19 @@
 		$('[name=id_supplier]').val(selected.id);
         $("#modal-supplier").modal('hide');
     });
+
+	$("#form").submit(function(e) {
+        e.preventDefault();
+        var id_supplier = $('input[name=id_supplier]').val();
+
+        if(id_supplier != '' && id_supplier != null) {
+            $("#form")[0].submit();
+        } else {
+            alert("Supplier belum dipilih");
+        }
+
+        
+    })
 
 
 </script>
