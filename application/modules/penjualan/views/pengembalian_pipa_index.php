@@ -74,7 +74,7 @@
 <script>
 
 
-    $('#datatable').DataTable({
+    datatable = $('#datatable').DataTable({
         ajax: {
             url: site_url + 'penjualan/pengembalian-pipa/datatable',
             dataSrc: 'datatable.data',

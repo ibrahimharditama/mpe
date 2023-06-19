@@ -55,7 +55,7 @@
 </div>
 
 <script>
-    $('#datatable').DataTable({
+    datatable = $('#datatable').DataTable({
         ajax: {
             url: site_url + 'penjualan/pengiriman/datatable',
             dataSrc: 'datatable.data',
