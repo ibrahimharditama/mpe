@@ -20,7 +20,7 @@ class Pengiriman extends MX_Controller {
 	public function datatable()
 	{
 
-		$this->datatables->select("id, no_transaksi, tgl, id_faktur, pelanggan, qty_semua, yg_buat, yg_ubah, supir, kenek, teknisi")
+		$this->datatables->select("id, no_transaksi, tgl, id_faktur, pelanggan, qty_semua, yg_buat, yg_ubah, supir, kenek, teknisi, is_approve")
                     ->from("(SELECT a.*
 							, (a.qty_pesan + a.qty_nota) as qty_semua
 							, UPPER(b.username) AS yg_buat

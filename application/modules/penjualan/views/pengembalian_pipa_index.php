@@ -14,6 +14,10 @@
                     <th width="100px">Tanggal</th>
                     <th width="150px">No Pengiriman</th>
                     <th width="50px">Jumlah</th>
+                    <th>Status</th>
+                    <th>Supir</th>
+                    <th>Kenek</th>
+                    <th>Teknisi</th>
                     <th>Keterangan</th>
                     <th>User Buat</th>
                     <th>User Ubah</th>
@@ -114,6 +118,15 @@
                     return $.number(data, 0, ',', '.');
                 }
             },
+            { 
+                "data": "is_approve" ,
+				"render": function (data, type, row, meta) {
+					return data == 1 ? "APPROVED" : "";
+				}
+            },
+            { "data": "supir" },
+            { "data": "kenek" },
+            { "data": "teknisi" },
             {
                 "data": "keterangan"
             },

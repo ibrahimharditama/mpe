@@ -22,6 +22,7 @@
                     <th>Tanggal</th>
                     <th>Pelanggan</th>
                     <th>Jumlah<br>Kirim</th>
+                    <th>Status</th>
                     <th>Supir</th>
                     <th>Kenek</th>
                     <th>Teknisi</th>
@@ -94,6 +95,12 @@
 					return angka(data);
 				}
 			},
+            { 
+                "data": "is_approve" ,
+				"render": function (data, type, row, meta) {
+					return data == 1 ? "APPROVED" : "";
+				}
+            },
             { "data": "supir" },
             { "data": "kenek" },
             { "data": "teknisi" },

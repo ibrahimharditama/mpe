@@ -19,13 +19,38 @@ class Pengembalian_pipa extends MX_Controller {
 
     public function datatable()
 	{
-		$this->datatables->select("id, tgl, id_pengiriman, no_transaksi, no_pengiriman, qty, keterangan,is_approve, created_by, updated_by")
+		$this->datatables->select("id, tgl, id_pengiriman, no_transaksi, no_pengiriman, qty, keterangan,is_approve, 
+								created_by, updated_by, supir, kenek, teknisi")
                     ->from("(SELECT pp.id, pp.tgl, pp.id_pengiriman, pp.no_transaksi, p.no_transaksi AS no_pengiriman, 
 							pp.qty, pp.keterangan,pp.is_approve, IFNULL(b.nama, '') AS created_by, IFNULL(c.nama, '') AS updated_by 
+							, IFNULL(s.pegawai, '') AS supir
+							, IFNULL(k.pegawai, '') AS kenek
+							, IFNULL(t.pegawai, '') AS teknisi
 							FROM pengembalian_pipa pp 
 							JOIN pengiriman p ON p.id = pp.id_pengiriman AND p.row_status = 1 
 							LEFT JOIN pengguna AS b ON pp.created_by = b.id
 							LEFT JOIN pengguna AS c ON pp.updated_by = c.id
+							LEFT JOIN (
+								SELECT pp.id_pengiriman, GROUP_CONCAT(p.nama  SEPARATOR ' , ') AS pegawai
+								FROM pengiriman_person pp 
+								JOIN pengguna p ON p.id = pp.id_pengguna 
+								WHERE pp.row_status = 1 AND pp.tipe = 'supir'
+								GROUP BY pp.id_pengiriman
+							) s ON s.id_pengiriman =  pp.id_pengiriman
+							LEFT JOIN (
+								SELECT pp.id_pengiriman, GROUP_CONCAT(p.nama  SEPARATOR ' , ') AS pegawai
+								FROM pengiriman_person pp 
+								JOIN pengguna p ON p.id = pp.id_pengguna 
+								WHERE pp.row_status = 1 AND pp.tipe = 'kenek'
+								GROUP BY pp.id_pengiriman
+							) k ON k.id_pengiriman =  pp.id_pengiriman
+							LEFT JOIN (
+								SELECT pp.id_pengiriman, GROUP_CONCAT(p.nama  SEPARATOR ' , ') AS pegawai
+								FROM pengiriman_person pp 
+								JOIN pengguna p ON p.id = pp.id_pengguna 
+								WHERE pp.row_status = 1 AND pp.tipe = 'teknisi'
+								GROUP BY pp.id_pengiriman
+							) t ON t.id_pengiriman =  pp.id_pengiriman
 							WHERE pp.row_status = 1) a");
 
         $result = json_decode($this->datatables->generate());
