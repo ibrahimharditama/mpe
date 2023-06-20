@@ -224,6 +224,11 @@ class Pipa extends MX_Controller {
 		$data = $this->_form_data();
 		
 		if ($data != null) {
+			$is_qty_editable = $this->input->post('is_qty_editable');
+			if(isset($is_qty_editable)) {
+				$data['is_qty_editable'] = 1;
+			}
+
 			$data['created_by'] = user_session('id');
 			$this->db->insert('ref_produk', $data);
 			$this->session->set_flashdata('post_status', 'inserted');
@@ -240,6 +245,12 @@ class Pipa extends MX_Controller {
 		$id = $this->input->post('id');
 		
 		if ($data != null) {
+			$is_qty_editable = $this->input->post('is_qty_editable');
+			$data['is_qty_editable'] = 0;
+			if(isset($is_qty_editable)) {
+				$data['is_qty_editable'] = 1;
+			}
+
 			$data['updated_by'] = user_session('id');
 			$this->db->update('ref_produk', $data, array('id' => $id));
 			$this->session->set_flashdata('post_status', 'updated');

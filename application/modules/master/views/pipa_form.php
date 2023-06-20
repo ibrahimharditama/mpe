@@ -86,6 +86,13 @@
 						<textarea class="form-control" name="keterangan"><?php echo $data == null ? '' : $data['keterangan']; ?></textarea>
 					</div>
 				</div>
+				<div class="form-group row">
+					<label class="col-sm-5 col-form-label pr-0"></label>
+					<div class="col-sm-7">
+						<input type="checkbox" class="form-check-input" id="check-reset" name="is_qty_editable" value="1" <?php echo isset($data['is_qty_editable']) && $data['is_qty_editable'] == 1 ? 'checked' : ''; ?>>
+						<label class="form-check-label" for="check-reset">Apakah qty di aplikasi mobile bisa di edit?</label>
+					</div>
+				</div>
 			</div>
 			<div class="col-6">
 				
@@ -99,7 +106,7 @@
 		<i class="ti ti-save"></i> Simpan
 	</button>
 	
-	<a class="btn btn-outline-secondary ml-1" href="<?php echo site_url('master/produk') ?>">
+	<a class="btn btn-outline-secondary ml-1" href="<?php echo site_url('master/pipa') ?>">
 		<i class="ti ti-na"></i> Batalkan
 	</a>
 </div>
