@@ -75,7 +75,7 @@
                         <td>
                             <select class="select2 w-100 select-item" name="produk[0][id]" data-placeholder="">
                                 <option value=""></option>
-                                <?php echo modules::run('options/produk', '', 20); ?>
+                                <?php echo modules::run('options/produk', ''); ?>
                             </select>
                         </td>
                         <td><input type="text" name="produk[0][uraian]" class="input-box input-nama"

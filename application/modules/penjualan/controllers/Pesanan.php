@@ -213,7 +213,7 @@ class Pesanan extends MX_Controller {
 	{
 		$this->load->library('pdf');
 		$header = $this->db->query(
-			"SELECT a.*,b.* FROM penjualan a JOIN pelanggan b ON a.id_pelanggan = b.id WHERE a.id = $id"
+			"SELECT a.*,b.*, a.keterangan AS keterangan_faktur FROM penjualan a JOIN pelanggan b ON a.id_pelanggan = b.id WHERE a.id = $id"
 		)->row();
 		$details = $this->db->query(
 			"SELECT a.*,b.* FROM penjualan_detail a JOIN ref_produk b ON a.id_produk = b.id WHERE a.id_penjualan = $id"

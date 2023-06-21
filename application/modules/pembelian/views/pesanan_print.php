@@ -96,7 +96,8 @@
                     <table>
                         <tr class="table-footer">
                             <td width="65%" class="v-top">
-                                <span class="table-footer"><?= terbilang($header->grand_total); ?></span>
+                                <span class="table-footer"><?= terbilang($header->grand_total); ?></span> <br><br>
+                                <span class="table-footer"><?= $header->keterangan_pembelian; ?></span>
                             </td>
                             <td width="35%" class="v-top">
                                 <table>

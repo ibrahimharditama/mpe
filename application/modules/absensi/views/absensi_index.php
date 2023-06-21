@@ -86,17 +86,17 @@
 									if ($v != 'nama') {
 										if ($value == '1') {
 											$total += 1;
-											$absen = '<a href="javascript:void(0)" class="text-success tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)">1</a>';
+											$absen = '<a href="javascript:void(0)" class="font-weight-bold text-success tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)">1</a>';
 										} else {
-											$absen = '<a href="javascript:void(0)" class="text-danger tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)">A</a>';
+											$absen = '<a href="javascript:void(0)" class="font-weight-bold text-danger tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)">A</a>';
 										}
 										
 									}
 								?>
 
-								<td class="<?= $colorcell; ?>"><?= $v == 'nama' ? $value : $absen; ?></td>
+								<td class="font-weight-bold <?= $colorcell; ?>"><?= $v == 'nama' ? $value : $absen; ?></td>
 							<?php endforeach; ?>
-							<td class="totalAbsen_<?= $id_pengguna; ?>"><?= $total; ?></td>
+							<td class="font-weight-bold totalAbsen_<?= $id_pengguna; ?>"><?= $total; ?></td>
 						</tr>
 					
 
