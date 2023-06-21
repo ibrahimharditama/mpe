@@ -32,12 +32,14 @@ class Absensi extends MX_Controller {
 		$interval = DateInterval::createFromDateString('1 day');
 		$period = new DatePeriod($startDate, $interval, $endDate->modify('+1 day'));
 
-		$header = ['Pegawai'];
+		$headerhari = [''];
+		$header = [];
 		$cal = [];
 		$sql = "SELECT x.id_pengguna, x.nama";
 
 		foreach ($period as $dt) {
-			$header[] = $dt->format('j');
+			$headerhari[] = days_indo($dt->format('D'));
+			$header[] = $dt->format('Y-m-d');
 			$cal[] = array(
 				'tgl' => $dt->format('Y-m-d')
 			);
@@ -48,7 +50,7 @@ class Absensi extends MX_Controller {
 		$sql .= "FROM (
 					SELECT k.tgl, p.id AS id_pengguna, p.nama
 					FROM kalender k 
-					JOIN pengguna p
+					JOIN pengguna p 
 					WHERE p.row_status = 1
 				) x 
 				LEFT JOIN absensi a ON a.tgl = x.tgl AND a.id_pengguna = x.id_pengguna
@@ -60,9 +62,19 @@ class Absensi extends MX_Controller {
 
 		$src = $this->db->query($sql)->result();
 
+
+		#hari libur
+		$src_libur = $this->db->query("SELECT tgl FROM tanggal WHERE date_format(tgl, '%Y-%m') = '". $date. "' ")->result();
+		$libur = [];
+		foreach ($src_libur as $key => $value) {
+			$libur[] = $value->tgl;
+		}
+
 		$data = array(
-			'header' =>  $header,
+			'headerhari' => $headerhari,
+			'header' => $header,
 			'body' => $src,
+			'libur' => $libur,
 		);
 
 		return $data;
@@ -98,6 +110,23 @@ class Absensi extends MX_Controller {
 		}
 
 		echo 'ok';
+	}
+
+	public function ins_libur() 
+	{
+		$input = $this->input->post();
+		$tgl = $input['tgl'];
+		$is_libur = $input['is_libur'] == 'no' ? true : false;
+
+		if($is_libur) {
+			$this->db->insert('tanggal', ['tgl' => $tgl, 'keterangan' => 'hari libur']);
+		} else {
+			$this->db->delete('tanggal', ['tgl' => $tgl]);
+		}
+
+		echo json_encode($is_libur);
+
+
 	}
 
 	

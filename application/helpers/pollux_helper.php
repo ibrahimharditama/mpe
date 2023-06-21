@@ -27,7 +27,11 @@ function get_menu_akses($key = '')
 	$modules    = $ci->uri->segment(1);
 	$controller = $ci->uri->segment(2);
 
-	$uri = "/".$modules."/".$controller;
+	$uri = "/".$modules;
+
+	if($controller != null && $controller != '') {
+		$uri = $uri."/".$controller;
+	}
 
 	$src = $ci->db->query("SELECT r.* 
 							FROM `pengguna_grup_menu` r 
@@ -461,4 +465,18 @@ function terbilang($nilai) {
 		$hasil = trim(penyebut($nilai));
 	}     		
 	return $hasil." rupiah";
+}
+
+function days_indo($string)
+{
+	$string = strtolower($string);
+	switch ($string) {
+		case 'mon': return 'sen';
+		case 'tue': return 'sel';
+		case 'wed': return 'rab';
+		case 'thu': return 'kam';
+		case 'fri': return 'jum';
+		case 'sat': return 'sab';
+		case 'sun': return 'min';
+	}
 }
