@@ -16,7 +16,7 @@
 			Tampilkan data selama: 
 			<select id="data-hari">
 				<option value="3">3</option>
-				<option value="7">7</option>
+				<option value="7" selected>7</option>
 				<option value="30">30</option>
 				<option value="60">60</option>
 				<option value="all">Semua</option>
@@ -35,6 +35,7 @@
                     <th>Pelanggan</th>
                     <th>Jumlah<br>Kirim</th>
                     <th>Status</th>
+                    <th>Status Pengembalian</th>
                     <th>Supir</th>
                     <th>Kenek</th>
                     <th>Teknisi</th>
@@ -114,6 +115,7 @@
 					return data == 1 ? "APPROVED" : "";
 				}
             },
+            { "data": "status_kembali" },
             { "data": "supir" },
             { "data": "kenek" },
             { "data": "teknisi" },

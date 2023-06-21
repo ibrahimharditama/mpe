@@ -23,7 +23,7 @@
 					<tr class="table-secondary font-weight-bold">
 						<?php foreach ($data['headerhari'] as $h => $headerhari): ?>
 
-							<th class="font-weight-bold verticaltext"><?= strtoupper($headerhari); ?></th>
+							<th class="font-weight-bold"><?= strtoupper($headerhari); ?></th>
 
 						<?php endforeach; ?>
 						<th class="font-weight-bold"></th>
@@ -80,7 +80,6 @@
 
 									$id_pengguna = $row->id_pengguna;
 									$dataAbsen = $id_pengguna.'#'.$value.'#'.$v;
-									$absen = '<a href="javascript:void(0)" class="text-danger tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)">A</a>';
 
 									if ($v == 'id_pengguna') continue; 
 
@@ -88,8 +87,9 @@
 										if ($value == '1') {
 											$total += 1;
 											$absen = '<a href="javascript:void(0)" class="text-success tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)">1</a>';
+										} else {
+											$absen = '<a href="javascript:void(0)" class="text-danger tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)">A</a>';
 										}
-										if ($value == '0') $absen = '<a href="javascript:void(0)" class="text-primary tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)"><i class="ti-thumb-up"><i></a>';
 										
 									}
 								?>
@@ -129,10 +129,7 @@
 		var data = absen.split('#');
 
 		var id_pengguna = data[0];
-		var status = data[1];
-		if(data[1] != '-') {
-			status = data[1] == '1' ? 0 : 1;
-		}
+		var status = data[1] == '1' ? 0 : 1;
 		var tgl = data[2];
 
 		$.post(site_url + 'absensi/approve', {
@@ -145,7 +142,7 @@
 			var totalAbsen = parseInt(total.html());
 			var html = '';
 			var clas = '';
-			if(status == 1 || status == '-'){
+			if(status == 1){
 				totalAbsen += 1;
 				clas = 'text-success';
 				html = '1'
@@ -156,8 +153,8 @@
 
 			} else {
 				totalAbsen -= 1;
-				clas = 'text-primary';
-				html = '<i class="ti-thumb-up"><i>'
+				clas = 'text-danger';
+				html = 'A'
 			}
 
 			total.html(totalAbsen);

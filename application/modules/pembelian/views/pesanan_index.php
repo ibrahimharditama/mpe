@@ -19,7 +19,7 @@
 			Tampilkan data selama: 
 			<select id="data-hari">
 				<option value="3">3</option>
-				<option value="7">7</option>
+				<option value="7" selected>7</option>
 				<option value="30">30</option>
 				<option value="60">60</option>
 				<option value="all">Semua</option>

@@ -30,7 +30,7 @@ class Faktur extends MX_Controller {
 			}
 
 		$this->datatables->select("id, no_transaksi, tgl, id_penjualan, no_pesanan, tgl_pesanan, pelanggan, keterangan_pay, 
-								grand_total, qty_pesan, qty_kirim, yg_buat, yg_ubah")
+								grand_total, qty_pesan, qty_kirim, yg_buat, yg_ubah, status")
                     ->from("(SELECT a.*
 								, UPPER(b.username) AS yg_buat
 								, UPPER(c.username) AS yg_ubah
@@ -39,6 +39,10 @@ class Faktur extends MX_Controller {
 								, IFNULL(e.tgl, '') AS tgl_pesanan
 								, IFNULL(e.qty_pesan, 0) AS qty_pesan
 								, CONCAT(IFNULL(x.keterangan, ''), ' ', a.keterangan) AS keterangan_pay
+								, CASE 
+									WHEN x.keterangan LIKE 'OK/LN%' THEN 'LUNAS' 
+									ELSE '' 
+								  END AS status
 							FROM faktur AS a
 							LEFT JOIN pengguna AS b ON a.created_by = b.id
 							LEFT JOIN pengguna AS c ON a.updated_by = c.id

@@ -467,16 +467,35 @@ function terbilang($nilai) {
 	return $hasil." rupiah";
 }
 
-function days_indo($string)
+function days_indo($string, $digit = 3)
 {
 	$string = strtolower($string);
 	switch ($string) {
-		case 'mon': return 'sen';
-		case 'tue': return 'sel';
-		case 'wed': return 'rab';
-		case 'thu': return 'kam';
-		case 'fri': return 'jum';
-		case 'sat': return 'sab';
-		case 'sun': return 'min';
+		case 'mon': return $digit == 1 ? 's' : 'sen';
+		case 'tue': return $digit == 1 ? 's' : 'sel';
+		case 'wed': return $digit == 1 ? 'r' : 'rab';
+		case 'thu': return $digit == 1 ? 'k' : 'kam';
+		case 'fri': return $digit == 1 ? 'j' : 'jum';
+		case 'sat': return $digit == 1 ? 's' : 'sab';
+		case 'sun': return $digit == 1 ? 'm' : 'min';
+	}
+}
+
+function num_to_month($num)
+{
+	$num = (int) $num;
+	switch ($num) {
+		case 1: return 'Januari';
+		case 2: return 'Februari';
+		case 3: return 'Maret';
+		case 4: return 'April';
+		case 5: return 'Mei';
+		case 6: return 'Juni';
+		case 7: return 'Juli';
+		case 8: return 'Agustus';
+		case 9: return 'September';
+		case 10: return 'Oktober';
+		case 11: return 'November';
+		case 12: return 'Desember';
 	}
 }

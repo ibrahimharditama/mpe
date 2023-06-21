@@ -29,7 +29,7 @@ class Pengiriman extends MX_Controller {
 				$where .= " AND a.tgl >= '". $pastdate. "' ";
 			}
 
-		$this->datatables->select("id, no_transaksi, tgl, id_faktur, pelanggan, qty_semua, yg_buat, yg_ubah, supir, kenek, teknisi, is_approve")
+		$this->datatables->select("id, no_transaksi, tgl, id_faktur, pelanggan, qty_semua, yg_buat, yg_ubah, supir, kenek, teknisi, is_approve, status_kembali")
                     ->from("(SELECT a.*
 							, (a.qty_pesan + a.qty_nota) as qty_semua
 							, UPPER(b.username) AS yg_buat
@@ -38,10 +38,27 @@ class Pengiriman extends MX_Controller {
 							, IFNULL(s.pegawai, '') AS supir
 							, IFNULL(k.pegawai, '') AS kenek
 							, IFNULL(t.pegawai, '') AS teknisi
+							, CASE 
+								WHEN x.id_pengiriman IS NOT NULL THEN 'Sudah Dikembalikan'
+								WHEN y.id_pengiriman IS NOT NULL THEN 'Belum Dikembalikan' 
+								ELSE '' 
+							  END AS status_kembali
 							FROM pengiriman AS a
 							LEFT JOIN pengguna AS b ON a.created_by = b.id
 							LEFT JOIN pengguna AS c ON a.updated_by = c.id
 							JOIN pelanggan AS d ON a.id_pelanggan = d.id 
+							LEFT JOIN (
+								SELECT id_pengiriman 
+								FROM pengembalian_pipa 
+								WHERE row_status = 1 
+								GROUP BY id_pengiriman
+							) AS x ON x.id_pengiriman = a.id 
+							LEFT JOIN (
+								SELECT id_pengiriman
+								FROM pengiriman_detail 
+								WHERE row_status = 1 
+								GROUP BY id_pengiriman
+							) AS y ON y.id_pengiriman = a.id
 							LEFT JOIN (
 								SELECT pp.id_pengiriman, GROUP_CONCAT(p.nama  SEPARATOR ' , ') AS pegawai
 								FROM pengiriman_person pp 

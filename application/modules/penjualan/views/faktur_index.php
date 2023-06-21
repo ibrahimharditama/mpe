@@ -7,21 +7,22 @@
 			Toggle column: 
 			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="2" >No Transaksi</a> 
 			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="3">Tanggal Nota</a> 
-			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis text-dark" data-column="4">No Pesanan</a> 
-			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis text-dark" data-column="5">Tanggal Pesanan</a> 
+			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="4">No Pesanan</a> 
+			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="5">Tanggal Pesanan</a> 
 			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="6">Pelanggan</a> 
 			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="7">Keterangan</a> 
 			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="8">Total</a> 
-			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis text-dark" data-column="9">Jumlah Pesan</a> 
-			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="10">Jumlah Kirim</a> 
-			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis text-dark" data-column="11">User Buat</a> 
-			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis text-dark" data-column="12">User Ubah</a>
+			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="9">Status</a> 
+			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="10">Jumlah Pesan</a> 
+			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="11">Jumlah Kirim</a> 
+			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="12">User Buat</a> 
+			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="13">User Ubah</a>
 		</div>
 		<div class="togle-datatable-inv mb-3">
 			Tampilkan data selama: 
 			<select id="data-hari">
 				<option value="3">3</option>
-				<option value="7">7</option>
+				<option value="7" selected>7</option>
 				<option value="30">30</option>
 				<option value="all">Semua</option>
 			</select>
@@ -41,6 +42,7 @@
 						<th>Pelanggan</th>
 						<th>Keterangan</th>
 						<th>Total</th>
+						<th>Status</th>
 						<th>Jumlah<br>Pesan</th>
 						<th>Jumlah<br>Kirim</th>
 						<th>User Buat</th>
@@ -127,6 +129,7 @@
 					return angka(data);
 				} 
 			},
+			{ data: 'status' },
 			{ 
 				data: 'qty_pesan', 
 				className: 'dt-body-right',

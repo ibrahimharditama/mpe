@@ -10,7 +10,7 @@
 			Tampilkan data selama: 
 			<select id="data-hari">
 				<option value="3">3</option>
-				<option value="7">7</option>
+				<option value="7" selected>7</option>
 				<option value="30">30</option>
 				<option value="60">60</option>
 				<option value="all">Semua</option>
@@ -26,6 +26,7 @@
                     <th width="150px">No Transaksi</th>
                     <th width="100px">Tanggal</th>
                     <th width="150px">No Pengiriman</th>
+                    <th>Pelanggan</th>
                     <th width="50px">Jumlah</th>
                     <th>Status</th>
                     <th>Supir</th>
@@ -125,6 +126,7 @@
                     return `<a href="` + site_url + `penjualan/pengiriman/ubah/` + row.id_pengiriman + `" target="_blank">`+ data +`</a>`;
                 }
             },
+            {"data": "pelanggan"},
             {
                 "data": "qty",
                 "class": 'dt-body-right',

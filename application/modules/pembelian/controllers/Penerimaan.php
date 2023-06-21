@@ -31,7 +31,7 @@ class Penerimaan extends MX_Controller {
 			}
 
 		$this->datatables->select("id, no_transaksi, tgl, supplier, id_pembelian, no_pembelian, tgl_pembelian, qty_pesan, 
-								qty_terima, yg_buat, yg_ubah, keterangan_pay, grand_total")
+								qty_terima, yg_buat, yg_ubah, keterangan_pay, grand_total, status")
                     ->from("(SELECT a.*
 								, UPPER(b.username) AS yg_buat
 								, UPPER(c.username) AS yg_ubah
@@ -40,6 +40,10 @@ class Penerimaan extends MX_Controller {
 								, IFNULL(e.tgl, '') AS tgl_pembelian
 								, IFNULL(e.qty_pesan, 0) AS qty_pesan
 								, CONCAT(IFNULL(x.keterangan, ''), ' ', a.keterangan) AS keterangan_pay
+								, CASE 
+									WHEN x.keterangan LIKE 'OK/LN%' THEN 'LUNAS' 
+									ELSE '' 
+								  END AS status
 							FROM penerimaan AS a
 							LEFT JOIN pengguna AS b ON a.created_by = b.id
 							LEFT JOIN pengguna AS c ON a.updated_by = c.id
