@@ -36,7 +36,7 @@ class Pengembalian_pipa extends MX_Controller {
 							, IFNULL(s.pegawai, '') AS supir
 							, IFNULL(k.pegawai, '') AS kenek
 							, IFNULL(t.pegawai, '') AS teknisi
-							, CONCAT(d.kode, ' &middot; ', d.nama) AS pelanggan
+							, d.nama AS pelanggan
 							FROM pengembalian_pipa pp 
 							JOIN pengiriman p ON p.id = pp.id_pengiriman AND p.row_status = 1 
 							LEFT JOIN pelanggan AS d ON p.id_pelanggan = d.id 

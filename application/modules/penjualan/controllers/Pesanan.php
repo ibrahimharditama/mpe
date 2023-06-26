@@ -33,7 +33,7 @@ class Pesanan extends MX_Controller {
                     ->from("(SELECT a.*
 							, UPPER(b.username) AS yg_buat
 							, UPPER(c.username) AS yg_ubah
-							, CONCAT(d.kode, ' &middot; ', d.nama) AS pelanggan
+							, d.nama AS pelanggan
 							FROM penjualan AS a
 							LEFT JOIN pengguna AS b ON a.created_by = b.id
 							LEFT JOIN pengguna AS c ON a.updated_by = c.id

@@ -34,31 +34,19 @@ class Absensi extends MX_Controller {
 
 		$headerhari = [''];
 		$header = [];
-		$cal = [];
-		$sql = "SELECT x.id_pengguna, x.nama";
+		$sql = "SELECT x.id AS id_pengguna, x.nama";
 
 		foreach ($period as $dt) {
 			$headerhari[] = days_indo($dt->format('D'), 1);
 			$header[] = $dt->format('Y-m-d');
-			$cal[] = array(
-				'tgl' => $dt->format('Y-m-d')
-			);
 
-			$sql .= ", MAX(CASE WHEN x.tgl = '".$dt->format('Y-m-d')."' THEN IFNULL(a.`status`, 0) END) AS '".$dt->format('Y-m-d')."'";
+			$sql .= ", MAX(IF(a.tgl = '".$dt->format('Y-m-d')."' AND a.`status` IS NOT NULL, a.`status`, '-')) AS '".$dt->format('Y-m-d')."'";
 		}
 
-		$sql .= "FROM (
-					SELECT k.tgl, p.id AS id_pengguna, p.nama
-					FROM kalender k 
-					JOIN pengguna p 
-					WHERE p.row_status = 1
-				) x 
-				LEFT JOIN absensi a ON a.tgl = x.tgl AND a.id_pengguna = x.id_pengguna
-				GROUP BY x.id_pengguna, x.nama
+		$sql .= "FROM pengguna x
+				LEFT JOIN absensi a ON a.id_pengguna = x.id AND a.row_status = 1
+				GROUP BY x.id, x.nama
 				ORDER BY x.nama";
-
-		$this->db->truncate('kalender');
-		$this->db->insert_batch('kalender', $cal);
 
 		$src = $this->db->query($sql)->result();
 
@@ -90,14 +78,9 @@ class Absensi extends MX_Controller {
 			'approved_by'=> user_session('id')
 		);
 
-		$where = array(
-			'id_pengguna' => $input['id_pengguna'],
-			'tgl' => $input['tgl'],
-		);
 
-		$src = $this->db->get_where('absensi', $where);
+		if($input['status'] == '-') {
 
-		if($src->num_rows() == 0) {
 			$data['id_pengguna'] = $input['id_pengguna'];
 			$data['tgl'] = $input['tgl'];
 			$data['masuk'] = '08:00:59';
@@ -105,31 +88,15 @@ class Absensi extends MX_Controller {
 			$data['created_by'] = user_session('id');
 
 			$this->db->insert('absensi', $data);
+
 		} else {
+
 			$this->db->update('absensi', $data, [
 				'id_pengguna' => $input['id_pengguna'],
 				'tgl' => $input['tgl'],
 			]);
+
 		}
-
-		// if($input['status'] == '-') {
-
-		// 	$data['id_pengguna'] = $input['id_pengguna'];
-		// 	$data['tgl'] = $input['tgl'];
-		// 	$data['masuk'] = '08:00:59';
-		// 	$data['created_at'] = date('Y-m-d H:i:s');
-		// 	$data['created_by'] = user_session('id');
-
-		// 	$this->db->insert('absensi', $data);
-
-		// } else {
-
-		// 	$this->db->update('absensi', $data, [
-		// 		'id_pengguna' => $input['id_pengguna'],
-		// 		'tgl' => $input['tgl'],
-		// 	]);
-
-		// }
 
 		echo 'ok';
 	}
@@ -153,65 +120,64 @@ class Absensi extends MX_Controller {
 
 	public function test()
 	{
+		$id_pengguna = 1;
 		$date = 2023;
-		// $start = date('Y-01-01', strtotime($date.'-01-01'));
-		// $end = date('Y-12-31', strtotime($date.'-12-31'));
+		
+		$src = $this->db->query("SELECT v.tanggal, IFNULL(a.`status`,0) AS absen
+								FROM (
+									SELECT ADDDATE('1970-01-01', t4.i*10000 + t3.i*1000 + t2.i*100 + t1.i*10 + t0.i) AS tanggal 
+									FROM 
+										(SELECT 0 i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) t0,
+										(SELECT 0 i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) t1,
+										(SELECT 0 i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) t2,
+										(SELECT 0 i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) t3,
+										(SELECT 0 i UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9) t4
+								) v 
+								LEFT JOIN absensi a ON a.tgl = v.tanggal 
+									AND a.row_status = 1 
+									AND a.id_pengguna = $id_pengguna
+								WHERE YEAR(v.tanggal) = $date
+								")->result();
 
-		// $startDate = new DateTime($start);
-		// $endDate = new DateTime($end);
+		$src_libur = $this->db->query("SELECT tgl FROM tanggal WHERE year(tgl) = '". $date. "' ")->result();
+		$hr_libur = [];
+		foreach ($src_libur as $key => $value) {
+			$hr_libur[] = $value->tgl;
+		}
+								
+		$data = array();
 
-		// $interval = DateInterval::createFromDateString('1 day');
-		// $period = new DatePeriod($startDate, $interval, $endDate->modify('+1 day'));
+		for ($i=1; $i <= 12 ; $i++) { 
+			$bulan = strtolower(num_to_month($i));
+			$data[$bulan]['total_hari'] = 0;
+			$data[$bulan]['total_hadir'] = 0;
+		}
+		
+		foreach ($src as $row) {
+			$bulan = strtolower(num_to_month(date('n', strtotime($row->tanggal))));
 
-		// $src_libur = $this->db->query("SELECT tgl 
-		// 							FROM tanggal 
-		// 							WHERE date_format(tgl, '%Y') = '". $date. "' 
-		// 							ORDER BY tgl")->result();
-
-		// $libur = [];
-		// foreach ($src_libur as $key => $value) {
-		// 	$libur[] = $value->tgl;
-		// }
-
-		// $data = [];
-		// foreach ($period as $dt) {
-		// 	$data[$dt->format('n')][$dt->format('j')] = $dt->format('j');
-		// }
-
-		$absensi = $this->db->query("SELECT id_pengguna, DATE_FORMAT(tgl,'%c') AS periode, SUM(status) AS total_masuk 
-									FROM `absensi` 
-									WHERE row_status = 1 
-										AND DATE_FORMAT(tgl,'%Y') = $date 
-										AND id_pengguna = 1
-									GROUP BY id_pengguna, DATE_FORMAT(tgl,'%c')")->result_array();
-
-
-		$data = []; 
-		for ($i=1; $i <= 12; $i++) { 
-			$data[$i] = array(
-				'nama' => num_to_month($i),
-				'sum_absensi' => array(
-					'masuk' => 10,
-					'alpha' => 12,
-				),
-			);
-
-			$date = 2023;
-			$start = date('Y-01-01', strtotime($date.'-01-01'));
-			$end = date('Y-12-31', strtotime($date.'-12-31'));
-
-			$startDate = new DateTime($start);
-			$endDate = new DateTime($end);
-
-			$interval = DateInterval::createFromDateString('1 day');
-			$period = new DatePeriod($startDate, $interval, $endDate->modify('+1 day'));
-
-			foreach ($period as $dt) {
-				$data[$i]['data'][$dt->format('j')] = [];
-
-				
+			#total hari kerja dikurangi hari minggu dan hari libur
+			if(date('N',strtotime($row->tanggal)) != 7) {
+				$data[$bulan]['total_hari'] += ($ke = array_search($row->tanggal, $hr_libur)) !== FALSE ? 0 : 1;
 			}
-		} 
+
+			#total kehadiran
+			$data[$bulan]['total_hadir'] += $row->absen;
+
+			#status kehadiran
+			$status = $row->absen == 1 ? 'MASUK' : 'ALPHA';
+
+			if($row->absen == 0) {
+				if(date('N',strtotime($row->tanggal)) == 7) $status = 'LIBUR';
+				if(($ke = array_search($row->tanggal, $hr_libur)) !== FALSE) $status = 'LIBUR';
+			}
+
+
+			$data[$bulan]['absensi'][] = array(
+				'tanggal' => $row->tanggal,
+				'status' => $status,
+			);
+		}
 
 		print_r($data);
 	}

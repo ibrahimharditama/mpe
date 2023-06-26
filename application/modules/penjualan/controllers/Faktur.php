@@ -34,7 +34,7 @@ class Faktur extends MX_Controller {
                     ->from("(SELECT a.*
 								, UPPER(b.username) AS yg_buat
 								, UPPER(c.username) AS yg_ubah
-								, CONCAT(d.kode, ' &middot; ', d.nama) AS pelanggan
+								, d.nama AS pelanggan
 								, IFNULL(e.no_transaksi, '') AS no_pesanan
 								, IFNULL(e.tgl, '') AS tgl_pesanan
 								, IFNULL(e.qty_pesan, 0) AS qty_pesan

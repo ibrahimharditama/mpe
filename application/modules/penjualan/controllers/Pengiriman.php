@@ -34,7 +34,7 @@ class Pengiriman extends MX_Controller {
 							, (a.qty_pesan + a.qty_nota) as qty_semua
 							, UPPER(b.username) AS yg_buat
 							, UPPER(c.username) AS yg_ubah
-							, CONCAT(d.kode, ' &middot; ', d.nama) AS pelanggan
+							, d.nama AS pelanggan
 							, IFNULL(s.pegawai, '') AS supir
 							, IFNULL(k.pegawai, '') AS kenek
 							, IFNULL(t.pegawai, '') AS teknisi

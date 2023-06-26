@@ -35,7 +35,7 @@ class Penerimaan extends MX_Controller {
                     ->from("(SELECT a.*
 								, UPPER(b.username) AS yg_buat
 								, UPPER(c.username) AS yg_ubah
-								, CONCAT(d.kode, ' &middot; ', d.nama) AS supplier
+								, d.nama AS supplier
 								, IFNULL(e.no_transaksi, '') AS no_pembelian
 								, IFNULL(e.tgl, '') AS tgl_pembelian
 								, IFNULL(e.qty_pesan, 0) AS qty_pesan
