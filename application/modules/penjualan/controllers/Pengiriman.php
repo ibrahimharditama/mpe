@@ -80,7 +80,7 @@ class Pengiriman extends MX_Controller {
 								WHERE pp.row_status = 1 AND pp.tipe = 'teknisi'
 								GROUP BY pp.id_pengiriman
 							) t ON t.id_pengiriman = a.id
-							WHERE a.row_status = 1 $where) a");
+							WHERE a.row_status = 1 AND a.status = 1 $where) a");
 
         $result = json_decode($this->datatables->generate());
 
