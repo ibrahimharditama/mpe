@@ -45,6 +45,7 @@ class Absensi extends MX_Controller {
 
 		$sql .= "FROM pengguna x
 				LEFT JOIN absensi a ON a.id_pengguna = x.id AND a.row_status = 1
+				WHERE x.row_status = 1 AND x.id_pengguna_grup != 1
 				GROUP BY x.id, x.nama
 				ORDER BY x.nama";
 

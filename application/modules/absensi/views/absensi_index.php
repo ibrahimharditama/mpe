@@ -61,7 +61,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($data['body'] as $b => $row): ?>
+					<?php $total_tanggal = array(); foreach ($data['body'] as $b => $row): ?>
 						<tr>
 							<?php $total = 0; foreach ($row as $v => $value): ?>
 								
@@ -80,13 +80,23 @@
 
 									$id_pengguna = $row->id_pengguna;
 									$dataAbsen = $id_pengguna.'#'.$value.'#'.$v;
-									$absen = '<a href="javascript:void(0)" class="text-danger tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)">A</a>';
+
+									$absen = '<a href="javascript:void(0)" class="text-dark tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)"><i class="ti-help"><i></a>';
+
+									if(strtotime($v) <= time()) {
+										$absen = '<a href="javascript:void(0)" class="text-danger tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)">A</a>';
+									}
 
 									if ($v == 'id_pengguna') continue; 
 
 									if ($v != 'nama') {
+
+										@$total_tanggal[$v] += 0;
+
 										if ($value == '1') {
 											$total += 1;
+											@$total_tanggal[$v] += 1;
+
 											$absen = '<a href="javascript:void(0)" class="font-weight-bold text-success tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)">1</a>';
 										}
 
@@ -102,6 +112,13 @@
 					
 
 					<?php endforeach; ?>
+					<tr>
+						<td class="font-weight-bold">Total</td>
+						<?php $ttl_tgl = 0; foreach ($total_tanggal as $tanggal => $tgl): $ttl_tgl += $tgl; ?>
+							<td class="font-weight-bold totalTanggal totalTanggal_<?= $tanggal; ?>"><?= $tgl; ?></td>
+						<?php endforeach; ?>
+						<td class="font-weight-bold totalAll"><?= $ttl_tgl; ?></td>
+					</tr>
 				</tbody>
 			</table>
 
@@ -144,10 +161,13 @@
 
 			var total = $('.totalAbsen_' + id_pengguna);
 			var totalAbsen = parseInt(total.html());
+			var totalTgl = $('.totalTanggal_' + tgl);
+			var totalTanggal = parseInt(totalTgl.html());
 			var html = '';
 			var clas = '';
 			if(status == 1 || status == '-'){
 				totalAbsen += 1;
+				totalTanggal += 1;
 				clas = 'text-success';
 				html = '1'
 
@@ -157,15 +177,25 @@
 
 			} else {
 				totalAbsen -= 1;
+				totalTanggal -= 1;
 				clas = 'text-primary';
 				html = '<i class="ti-thumb-up"><i>'
 			}
 
+			
 			total.html(totalAbsen);
+			totalTgl.html(totalTanggal);
 
 			$(ini).attr('class', clas);
 			$(ini).attr('data-absen', id_pengguna + '#' + status + '#' + tgl);
 			$(ini).html(html);
+
+			var totalAll = 0;
+			$('.totalTanggal').each(function() {
+				totalAll += parseInt($(this).html());
+			})
+
+			$('.totalAll').html(totalAll);
 		});
 	}
 
