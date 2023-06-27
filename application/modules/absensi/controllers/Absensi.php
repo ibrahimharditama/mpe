@@ -73,30 +73,31 @@ class Absensi extends MX_Controller {
 	{
 		$input = $this->input->post();
 
-		$data = array(
-			'status' => $input['status'] != '-' ? $input['status'] : 1,
-			'approved_at' => date('Y-m-d H:i:s'),
-			'approved_by'=> user_session('id')
-		);
+		
 
-
-		if($input['status'] == '-') {
-
-			$data['id_pengguna'] = $input['id_pengguna'];
-			$data['tgl'] = $input['tgl'];
-			$data['masuk'] = '08:00:59';
-			$data['created_at'] = date('Y-m-d H:i:s');
-			$data['created_by'] = user_session('id');
-
-			$this->db->insert('absensi', $data);
-
+		if($input['status'] == '1') {
+			$this->db->delete('absensi', ['id_pengguna' => $input['id_pengguna'], 'tgl' => $input['tgl']]);
 		} else {
+			$data = array(
+				'status' => 1,
+				'approved_at' => date('Y-m-d H:i:s'),
+				'approved_by'=> user_session('id')
+			);
 
-			$this->db->update('absensi', $data, [
-				'id_pengguna' => $input['id_pengguna'],
-				'tgl' => $input['tgl'],
-			]);
+			if($input['status'] == '-') {
+				$data['id_pengguna'] = $input['id_pengguna'];
+				$data['tgl'] = $input['tgl'];
+				$data['masuk'] = '08:00:59';
+				$data['created_at'] = date('Y-m-d H:i:s');
+				$data['created_by'] = user_session('id');
 
+				$this->db->insert('absensi', $data);
+			} else {
+				$this->db->update('absensi', $data, [
+					'id_pengguna' => $input['id_pengguna'],
+					'tgl' => $input['tgl'],
+				]);
+			}
 		}
 
 		echo 'ok';

@@ -81,7 +81,7 @@
 									$id_pengguna = $row->id_pengguna;
 									$dataAbsen = $id_pengguna.'#'.$value.'#'.$v;
 
-									$absen = '<a href="javascript:void(0)" class="text-dark tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)"><i class="ti-help"><i></a>';
+									$absen = '<i class="ti-help"><i>';
 
 									if(strtotime($v) <= time()) {
 										$absen = '<a href="javascript:void(0)" class="text-danger tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)">A</a>';
@@ -97,7 +97,7 @@
 											$total += 1;
 											@$total_tanggal[$v] += 1;
 
-											$absen = '<a href="javascript:void(0)" class="font-weight-bold text-success tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)">1</a>';
+											$absen = '<a href="javascript:void(0)" class="text-success tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)">1</a>';
 										}
 
 										if ($value == '0') $absen = '<a href="javascript:void(0)" class="text-primary tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)"><i class="ti-thumb-up"><i></a>';
@@ -146,11 +146,12 @@
 		var absen = $(ini).attr('data-absen');
 		var data = absen.split('#');
 
+		// status "-" -> 1 insert | kode "1"
+		// status "0" -> 1 update | kode "1"
+		// status "1" -> - delete | kode "A"
+
 		var id_pengguna = data[0];
 		var status = data[1];
-		if(data[1] != '-') {
-			status = data[1] == '1' ? 0 : 1;
-		}
 		var tgl = data[2];
 
 		$.post(site_url + 'absensi/approve', {
@@ -165,21 +166,19 @@
 			var totalTanggal = parseInt(totalTgl.html());
 			var html = '';
 			var clas = '';
-			if(status == 1 || status == '-'){
+
+			if(status == '-' || status == '0') {
 				totalAbsen += 1;
 				totalTanggal += 1;
 				clas = 'text-success';
-				html = '1'
-
-				if(status == '-') {
-					status = 1;
-				}
-
+				html = '1';
+				status = '1';
 			} else {
 				totalAbsen -= 1;
 				totalTanggal -= 1;
-				clas = 'text-primary';
-				html = '<i class="ti-thumb-up"><i>'
+				clas = 'text-danger';
+				html = 'A'
+				status = '-';
 			}
 
 			
