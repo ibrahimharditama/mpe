@@ -13,10 +13,11 @@
 			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="7">Keterangan</a> 
 			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="8">Total</a> 
 			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="9">Status</a> 
-			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="10">Jumlah Pesan</a> 
-			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="11">Jumlah Kirim</a> 
-			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="12">User Buat</a> 
-			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="13">User Ubah</a>
+			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="10">Status Pengiriman</a> 
+			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="11">Jumlah Pesan</a> 
+			<a href="javascript:void(0);" class="btn btn-warning ml-1 toggle-vis" data-column="12">Jumlah Kirim</a> 
+			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="13">User Buat</a> 
+			<a href="javascript:void(0);" class="btn btn-danger ml-1 toggle-vis" data-column="14">User Ubah</a>
 		</div>
 		<div class="togle-datatable-inv mb-3">
 			Tampilkan data selama: 
@@ -43,6 +44,7 @@
 						<th>Keterangan</th>
 						<th>Total</th>
 						<th>Status</th>
+						<th>Status Pengiriman</th>
 						<th>Jumlah<br>Pesan</th>
 						<th>Jumlah<br>Kirim</th>
 						<th>User Buat</th>
@@ -130,6 +132,7 @@
 				} 
 			},
 			{ data: 'status' },
+			{ data: 'status_pengiriman' },
 			{ 
 				data: 'qty_pesan', 
 				className: 'dt-body-right',

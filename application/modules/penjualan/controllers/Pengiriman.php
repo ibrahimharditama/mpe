@@ -39,9 +39,9 @@ class Pengiriman extends MX_Controller {
 							, IFNULL(k.pegawai, '') AS kenek
 							, IFNULL(t.pegawai, '') AS teknisi
 							, CASE 
-								WHEN x.id_pengiriman IS NOT NULL THEN 'Sudah Dikembalikan'
-								WHEN y.id_pengiriman IS NOT NULL THEN 'Belum Dikembalikan' 
-								ELSE '' 
+								WHEN x.id_pengiriman IS NOT NULL THEN 'Sudah'
+								WHEN y.id_pengiriman IS NOT NULL THEN 'Belum' 
+								ELSE 'Tidak Ada' 
 							  END AS status_kembali
 							FROM pengiriman AS a
 							LEFT JOIN pengguna AS b ON a.created_by = b.id

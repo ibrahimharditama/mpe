@@ -30,7 +30,7 @@ class Faktur extends MX_Controller {
 			}
 
 		$this->datatables->select("id, no_transaksi, tgl, id_penjualan, no_pesanan, tgl_pesanan, pelanggan, keterangan_pay, 
-								grand_total, qty_pesan, qty_kirim, yg_buat, yg_ubah, status")
+								grand_total, qty_pesan, qty_kirim, yg_buat, yg_ubah, status, status_pengiriman")
                     ->from("(SELECT a.*
 								, UPPER(b.username) AS yg_buat
 								, UPPER(c.username) AS yg_ubah
@@ -41,8 +41,12 @@ class Faktur extends MX_Controller {
 								, CONCAT(IFNULL(x.keterangan, ''), ' ', a.keterangan) AS keterangan_pay
 								, CASE 
 									WHEN x.keterangan LIKE 'OK/LN%' THEN 'LUNAS' 
-									ELSE '' 
+									ELSE 'BELUM' 
 								  END AS status
+								, CASE 
+									WHEN y.id_faktur IS NOT NULL THEN 'DELIVERED' 
+									ELSE 'NO DELIVERED' 
+								  END AS status_pengiriman
 							FROM faktur AS a
 							LEFT JOIN pengguna AS b ON a.created_by = b.id
 							LEFT JOIN pengguna AS c ON a.updated_by = c.id
@@ -53,6 +57,12 @@ class Faktur extends MX_Controller {
 								FROM v_pembayaran_faktur 
 								GROUP BY id_faktur
 							) x ON x.id_faktur = a.id
+							LEFT JOIN (
+								SELECT id_faktur 
+								FROM pengiriman 
+								WHERE row_status = 1 AND status = 1 
+								GROUP BY id_faktur
+							) y ON y.id_faktur = a.id
 							WHERE a.row_status = 1 $where) a");
 
         $result = json_decode($this->datatables->generate());
