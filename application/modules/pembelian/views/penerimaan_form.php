@@ -7,6 +7,7 @@
 
 <form method="post" action="<?php echo $action_url; ?>" id="form">
     <input type="hidden" name="id" value="<?php if ($data != null) echo $data['id']; ?>">
+    <input type="hidden" name="is_upd_harga_beli" value="0">
 
     <div class="row m-0">
         <div class="col-12">
@@ -97,9 +98,14 @@
                             <input type="text" name="produk[0][satuan]" class="input-box input-satuan"
                                 style="width:100px">
                         </td>
-                        <td><input type="text" name="produk[0][harga_beli]"
+                        <td>
+                            <input type="hidden" name="produk[0][harga_beli_awal]"
+                                class="input-box control-number input-count input-harga-beli-awal" style="width:110px"
+                                value="0">
+                            <input type="text" name="produk[0][harga_beli]"
                                 class="input-box control-number input-count input-harga-beli" style="width:110px"
-                                value="0"></td>
+                                value="0">
+                        </td>
                         <td><input type="text" name="produk[0][diskon]"
                                 class="input-box control-number input-count input-diskon" style="width:110px" value="0">
                         </td>
@@ -401,6 +407,7 @@
             $row.find('.input-id-satuan').val(id_satuan);
             $row.find('.input-satuan').val(satuan);
             $row.find('.input-harga-beli').val(harga_beli);
+            $row.find('.input-harga-beli-awal').val(harga_beli);
         });
 
         $(document).on('keyup', '.input-count', function(e) {
@@ -631,6 +638,7 @@
         $new_row.find('.input-id-satuan').attr('name', 'produk[' + i + '][id_satuan]');
         $new_row.find('.input-satuan').attr('name', 'produk[' + i + '][satuan]');
         $new_row.find('.input-harga-beli').attr('name', 'produk[' + i + '][harga_beli]');
+        $new_row.find('.input-harga-beli-awal').attr('name', 'produk[' + i + '][harga_beli_awal]');
         $new_row.find('.input-qty').attr('name', 'produk[' + i + '][qty]');
         $new_row.find('.input-diskon').attr('name', 'produk[' + i + '][diskon]');
 
@@ -640,6 +648,7 @@
             $new_row.find('.input-id-satuan').val(data.id_satuan);
             $new_row.find('.input-satuan').val(data.satuan);
             $new_row.find('.input-harga-beli').val(data.harga_satuan);
+            $new_row.find('.input-harga-beli-awal').val(data.harga_satuan_awal);
             $new_row.find('.input-qty').val(data.qty);
             $new_row.find('.input-diskon').val(data.diskon);
 
@@ -853,9 +862,24 @@
     $("#form").submit(function(e) {
         e.preventDefault();
         var id_supplier = $('input[name=id_supplier]').val();
+        $('input[name=is_upd_harga_beli]').val(0);
 
         if(id_supplier != '' && id_supplier != null) {
-            $("#form")[0].submit();
+            
+            var is_upd_hargabeli = $(".input-harga-beli-awal").filter(function( index ) {
+                            return $(this).val() != $('.input-harga-beli').eq(index).val();
+                        }).length;
+
+            if(is_upd_hargabeli > 0) {
+                if(confirm('Apakah Harga Pokok akan di ubah pada master data?')) {
+                    $('input[name=is_upd_harga_beli]').val(1);
+                    $("#form")[0].submit();
+                } else {
+                    $("#form")[0].submit();
+                }
+            } else {
+                $("#form")[0].submit();
+            }
         } else {
             alert("Supplier belum dipilih");
         }

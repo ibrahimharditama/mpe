@@ -115,9 +115,11 @@ class Penerimaan extends MX_Controller {
 	public function js_detail($id)
 	{
 		$src = $this->db
-			->from('penerimaan_detail')
-			->where('row_status', 1)
-			->where('id_penerimaan', $id)
+			->select('p.*, rp.harga_beli AS harga_satuan_awal')
+			->from('penerimaan_detail p')
+			->join('ref_produk rp', 'rp.id = p.id_produk')
+			->where('p.row_status', 1)
+			->where('p.id_penerimaan', $id)
 			->get();
 		
 		header('Content-Type: text/javascript');
@@ -153,10 +155,12 @@ class Penerimaan extends MX_Controller {
 					->get();
 		
 		$src_detail = $this->db
-					->from('pembelian_detail')
-					->where('row_status', 1)
-					->where('id_pembelian', $id_pembelian)
-					->order_by('id')
+					->select('p.*, rp.harga_beli AS harga_satuan_awal')
+					->from('pembelian_detail p')
+					->join('ref_produk rp', 'rp.id = p.id_produk')
+					->where('p.row_status', 1)
+					->where('p.id_pembelian', $id_pembelian)
+					->order_by('p.id')
 					->get();
 
 		$data = (object) array(
@@ -171,7 +175,9 @@ class Penerimaan extends MX_Controller {
 	public function insert()
 	{
 		$list_produk = $this->input->post('produk');
+		$is_upd_harga_beli = $this->input->post('is_upd_harga_beli');
 		
+		$upd_master_produk = array();
 		$detail = array();
 		$qty_terima = 0;
 		$total = 0;
@@ -195,6 +201,16 @@ class Penerimaan extends MX_Controller {
 					'diskon' => $diskon,
 					'sub_total' => $sub_total,
 				);
+
+				if($is_upd_harga_beli == 1) {
+
+					if($produk['harga_beli'] != $produk['harga_beli_awal']) {
+						$upd_master_produk[] = array(
+							'id' => $produk['id'],
+							'harga_beli' => $harga_beli,
+						);
+					}
+				}
 				
 				$qty_terima += $qty;
 				$total += $sub_total;
@@ -231,6 +247,12 @@ class Penerimaan extends MX_Controller {
 			if(isset($data['id_pembelian']) && $data['id_pembelian'] != null && $data['id_pembelian'] != '') {
 				$this->_upd_pembelian($data['id_pembelian']);
 			}
+
+			# UPDATE HARGA BELI MASTER PRODUK
+
+			if(count($upd_master_produk) > 0){
+				$this->db->update_batch('ref_produk', $upd_master_produk, 'id');
+			}
 		}
 		
 		redirect(site_url('pembelian/penerimaan/ubah/' . $id_penerimaan));
@@ -241,7 +263,9 @@ class Penerimaan extends MX_Controller {
 		$id_penerimaan = $this->input->post('id');
 		$id_pembelian_sebelumnya = $this->input->post('id_pembelian_sebelumnya');
 		$list_produk = $this->input->post('produk');
+		$is_upd_harga_beli = $this->input->post('is_upd_harga_beli');
 		
+		$upd_master_produk = array();
 		$detail = array();
 		$qty_terima = 0;
 		$total = 0;
@@ -265,6 +289,16 @@ class Penerimaan extends MX_Controller {
 					'diskon' => $diskon,
 					'sub_total' => $sub_total,
 				);
+
+				if($is_upd_harga_beli == 1) {
+
+					if($produk['harga_beli'] != $produk['harga_beli_awal']) {
+						$upd_master_produk[] = array(
+							'id' => $produk['id'],
+							'harga_beli' => $harga_beli,
+						);
+					}
+				}
 				
 				$qty_terima += $qty;
 				$total += $sub_total;
@@ -317,6 +351,12 @@ class Penerimaan extends MX_Controller {
 				WHERE id = '{$id_pembelian_sebelumnya}'
 			";
 			$this->db->query($sql);
+
+			# UPDATE HARGA BELI MASTER PRODUK
+
+			if(count($upd_master_produk) > 0){
+				$this->db->update_batch('ref_produk', $upd_master_produk, 'id');
+			}
 		}
 		
 		redirect($this->agent->referrer());
