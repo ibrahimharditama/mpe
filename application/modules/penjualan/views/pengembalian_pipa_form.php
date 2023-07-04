@@ -2,6 +2,7 @@
 
 <form method="post" action="<?= $action_url; ?>" id="form">
     <input type="hidden" name="id" value="<?= $data != null ? $data['id'] : ''; ?>">
+    <input type="hidden" name="is_approve" value="<?= $data != null ? $data['is_approve'] : 0; ?>">
 
     <div class="row m-0">
         <div class="col-10">
@@ -299,7 +300,7 @@ $().ready(function() {
     }
 
     if(is_approve == 1){
-        $("#simpan").css("display", "none");
+        //$("#simpan").css("display", "none");
         $("#do-bayar").css("display", "none");
     }
 

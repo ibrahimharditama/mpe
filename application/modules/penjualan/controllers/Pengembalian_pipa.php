@@ -258,6 +258,7 @@ class Pengembalian_pipa extends MX_Controller {
 	{
 		$response = $this->_form_data();
 		$id = $this->input->post('id');
+		$is_approve = $this->input->post('is_approve');
 		$response['url'] = base_url().'penjualan/pengembalian-pipa/ubah/'. $id;
 		
 		if ($response['code'] == 200) {
@@ -283,6 +284,10 @@ class Pengembalian_pipa extends MX_Controller {
 					);
 				}
 				$this->db->insert_batch('pengembalian_pipa_detail', $detail);
+			}
+
+			if($is_approve == 1) {
+				$this->insert_delete_stok($id);
 			}
 
 			//$this->insert_delete_stok($id);

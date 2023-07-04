@@ -335,6 +335,9 @@ class Pengiriman extends MX_Controller {
 					'created_by' => user_session('id'),
 				);
 			}
+
+			db_delete('jstok', ['jenis_trx' => 'pengiriman', 'id_header' => $id, 'row_status' => 1]);
+
 			if(count($insert) > 0) $this->db->insert_batch('jstok', $insert);
 		}
 	}
@@ -376,6 +379,7 @@ class Pengiriman extends MX_Controller {
 		$id_pengiriman = $this->input->post('id');
 		$list_produk = $this->input->post('produk');
 		$list_produk_nota = $this->input->post('nota');
+		$is_approve = $this->input->post('is_approve');
 		
 		$detail = array();
 		$detail_nota = array();
@@ -481,6 +485,27 @@ class Pengiriman extends MX_Controller {
 		}
 
 		$this->_upd_faktur($data['id_faktur'], $input['id_faktur_sebelumnya']);
+
+		
+		if($is_approve == 1) {
+			// jika sudah di approve maka langsung masukan ke JSTOK
+			$this->insert_jstok($id_pengiriman);
+
+			// menghapus pengembalian pipa
+			$src_pengembalian = $this->db->get_where('pengembalian_pipa', ['id_pengiriman' => $id_pengiriman, 'row_status' => 1]);
+
+			if($src_pengembalian->num_rows() > 0) {
+				$data_pengembalian = $src_pengembalian->result();
+
+				foreach ($data_pengembalian as $pengembalian) {
+					db_delete('pengembalian_pipa', ['id' => $pengembalian->id]);
+					db_delete('pengembalian_pipa_detail', ['id_pengembalian_pipa' => $pengembalian->id]);
+					db_delete('jstok', ['jenis_trx' => 'pengembalian_pipa', 'id_header' => $pengembalian->id, 'row_status' => 1]);
+				}
+			}
+
+			
+		}
 		
 		redirect($this->agent->referrer());
 	}

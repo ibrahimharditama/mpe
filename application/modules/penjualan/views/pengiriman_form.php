@@ -5,8 +5,9 @@
 
 <h1 class="my-header">Form Pengiriman</h1>
 
-<form method="post" action="<?php echo $action_url; ?>">
+<form method="post" action="<?php echo $action_url; ?>" id="form">
     <input type="hidden" name="id" value="<?php if ($data != null) {echo $data['id'];} ?>">
+    <input type="hidden" name="is_approve" value="<?php if ($data != null) {echo $data['is_approve'];} ?>">
     <div class="row m-0">
         <div class="col-12">
             
@@ -159,7 +160,7 @@
     </div>
 
     <div class="actionbar fixed-bottom">
-        <button type="submit" class="btn btn-primary" id="simpan">
+        <button class="btn btn-primary" id="simpan">
             <i class="ti ti-save"></i> Simpan
         </button>
 
@@ -515,7 +516,7 @@
 	    var nama_pelanggan = '<?php echo $data == null ? "0" :  $data['kode_nama']; ?>';
 	    var is_approve = '<?php echo $data == null ? "0" :  $data['is_approve']; ?>';
         if(is_approve == 1){
-            $("#simpan").css("display", "none");
+            //$("#simpan").css("display", "none");
             $("#do-bayar").css("display", "none");
         }
         // load_faktur();
@@ -794,5 +795,21 @@
             }
         });
     }
+
+    $("#form").submit(function(e) {
+        e.preventDefault();
+        var is_approve = $('input[name=is_approve]').val();
+
+        if(is_approve == 1) {
+            if(confirm('Transaksi ini sudah di approve. Jika mengubahnya maka semua pengembalian pipa yang berkaitan dengan transaksi ini akan terhapus. Apakah anda yakin?')) {
+                $("#form")[0].submit();
+            }
+            
+        } else {
+            $("#form")[0].submit();
+        }
+
+        
+    })
 
 </script>
