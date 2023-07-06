@@ -81,7 +81,7 @@
 									$id_pengguna = $row->id_pengguna;
 									$dataAbsen = $id_pengguna.'#'.$value.'#'.$v;
 
-									$absen = '<i class="ti-help"><i>';
+									$absen = '<a href="javascript:void(0)" class="text-dark tgl-'.$v.'"><i class="ti-help"><i></a>';
 
 									if(strtotime($v) <= time()) {
 										$absen = '<a href="javascript:void(0)" class="text-danger tgl-'.$v.'" data-tgl="'.$v.'" data-absen="'.$dataAbsen.'" onclick="absen(this)">A</a>';

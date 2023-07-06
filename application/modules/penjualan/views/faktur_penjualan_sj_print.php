@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Verdana:wght@400;700&family=Trebuchet%20MS:wght@400;700&family=Arimo:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/print.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/print_sj.css">
     
 </head>
 
@@ -41,9 +41,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="fw-bold f-arial f-size-9"  colspan="2" style="padding-left: 38%;padding-right: 5%">
-                                Kepada Yth : <span class="fw-400 f-verdana f-size-9"><?= $header->nama; ?></span><br>
-                                <span class="fw-400 f-verdana f-size-9">
+                            <td class="fw-bold f-arial f-size-10"  colspan="2" style="padding-left: 38%;padding-right: 5%">
+                                Kepada Yth : <span class="fw-400 f-verdana f-size-10"><?= $header->nama; ?></span><br>
+                                <span class="fw-400 f-verdana f-size-10">
                                     <?= $header->alamat; ?> <br>
                                     <?= $header->no_telp; ?>
                                 </span>
@@ -94,7 +94,7 @@
                     <table>
                         <tr>
                             <td width="65%" class="v-top">
-                                <span class="table-footer">Keterangan : <?= $header->keterangan_faktur; ?></span>
+                                <span class="f-verdana f-size-10 fw-400">Keterangan : <?= $header->keterangan_faktur; ?></span>
                             </td>
                             <td width="35%" class="v-top">
                                 <table>
