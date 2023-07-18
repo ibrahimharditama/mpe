@@ -81,13 +81,14 @@ class Kartustok extends MX_Controller {
 
     public function ajax_detail($id_produk, $periode)
     {
-        $src = $this->db->query("(SELECT 0 AS id, '' AS no_transaksi, '' AS tgl, '' AS dept, 'Saldo Awal' AS keterangan, '' AS masuk, 
+        $src = $this->db->query("(SELECT 0 AS id, 0 AS id_header, '' AS no_transaksi, '' AS tgl, '' AS dept, 
+                                    'Saldo Awal' AS keterangan, '' AS masuk, 
                                     '' AS keluar,  
                                     IFNULL((SELECT SUM(qty) AS stokawal
                                         FROM jstok 
                                         WHERE row_status = 1 AND id_produk = $id_produk AND DATE_FORMAT(tgl, '%Y-%m') < '$periode'), 0) AS qty)
                                 UNION 
-                                (SELECT id, no_referensi AS no_transaksi, tgl, '' AS dept, jenis_trx AS keterangan, 
+                                (SELECT id, id_header, no_referensi AS no_transaksi, tgl, '' AS dept, jenis_trx AS keterangan, 
                                     IF(qty > 0, qty, 0) AS masuk, 
                                     ABS(IF(qty < 0, qty, 0)) AS keluar, 
                                     qty
@@ -98,8 +99,27 @@ class Kartustok extends MX_Controller {
         $total = 0;
         foreach ($src as $row) {
             $total += $row->qty;
+
+            $link = $row->no_transaksi;
+
+            if($row->keterangan == 'pembelian') {
+                $link = '<a href="'.base_url('pembelian/penerimaan/ubah/'.$row->id_header).'" target="_blank">'.$row->no_transaksi.'</a>';
+            }
+
+            if($row->keterangan == 'penjualan') {
+                $link = '<a href="'.base_url('penjualan/faktur/ubah/'.$row->id_header).'" target="_blank">'.$row->no_transaksi.'</a>';
+            }
+
+            if($row->keterangan == 'pengiriman') {
+                $link = '<a href="'.base_url('penjualan/pengiriman/ubah/'.$row->id_header).'" target="_blank">'.$row->no_transaksi.'</a>';
+            }
+
+            if($row->keterangan == 'pengembalian_pipa') {
+                $link = '<a href="'.base_url('penjualan/pengembalian-pipa/ubah/'.$row->id_header).'" target="_blank">'.$row->no_transaksi.'</a>';
+            }
+
             $data[] = array(
-                'no_transaksi' => $row->no_transaksi,
+                'no_transaksi' => $link,
                 'tgl' => $row->tgl,
                 'dept' => $row->dept,
                 'keterangan' => ucwords(str_replace('_', ' ', $row->keterangan)),

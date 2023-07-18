@@ -74,11 +74,11 @@ table td {
 }
 
 .f-verdana {
-    font-family: "Arimo";
+    font-family: "Verdana";
 }
 
 .f-trebuchet {
-    font-family: "Arimo";
+    font-family: "Trebuchet MS";
 }
 
 .f-arial {
@@ -117,18 +117,18 @@ table td {
     border-bottom: 4px double black;
     border-top: 1px solid black;
     font-size: 9pt;
-    font-family: "Arimo";
+    font-family: "Verdana";
     font-weight: bold;
 }
 
 .table-body>td {
     font-size: 9pt;
-    font-family: "Arimo";
+    font-family: "Verdana";
     font-weight: 500;
 }
 
 .table-footer>td {
     font-size: 9pt;
-    font-family: "Arimo";
+    font-family: "Verdana";
     font-weight: 500;
 }

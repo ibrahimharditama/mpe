@@ -229,6 +229,12 @@ class Options extends MX_Controller {
 		$src = $this->db->query("SELECT p.id, CONCAT(p.no_transaksi, ' &middot; ', pl.nama) AS kode
 								FROM pengiriman p 
 								JOIN pelanggan pl ON pl.id = p.id_pelanggan
+								JOIN (
+									SELECT id_pengiriman
+									FROM pengiriman_detail 
+									WHERE row_status = 1 
+									GROUP BY id_pengiriman
+								) AS y ON y.id_pengiriman = p.id
 								WHERE p.row_status = 1 
 									AND (p.id NOT IN (
 											SELECT id_pengiriman 

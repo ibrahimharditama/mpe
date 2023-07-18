@@ -35,7 +35,7 @@
                     <th>Pelanggan</th>
                     <th>Jumlah<br>Kirim</th>
                     <th>Status</th>
-                    <th>Status Pengembalian</th>
+                    <th>Pengembalian</th>
                     <th>Supir</th>
                     <th>Kenek</th>
                     <th>Teknisi</th>
@@ -112,7 +112,7 @@
             { 
                 "data": "is_approve" ,
 				"render": function (data, type, row, meta) {
-					return data == 1 ? "APPROVED" : "";
+					return data == 1 ? "APPROVED" : "NO APPROVED";
 				}
             },
             { "data": "status_kembali" },
