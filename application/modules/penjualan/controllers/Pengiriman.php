@@ -512,13 +512,11 @@ class Pengiriman extends MX_Controller {
 
 	public function ajax_open_faktur()
 	{
-		$id_pelanggan = $this->input->post('id_pelanggan');
 		$id_faktur = $this->input->post('id_faktur');
 
 		$src = $this->db->query("SELECT id, no_transaksi, tgl 
 								FROM faktur 
 								WHERE row_status = 1 
-									AND id_pelanggan = $id_pelanggan
 									AND (is_kirim = 0 OR id = $id_faktur) 
 								ORDER BY no_transaksi
 							");
@@ -599,6 +597,16 @@ class Pengiriman extends MX_Controller {
 		$this->session->set_flashdata('delete_status', $status);
 		
 		redirect($this->agent->referrer());
+	}
+
+	public function ajax_get_pelanggan($id_faktur)
+	{
+		$src = $this->db->query("SELECT f.id_pelanggan, p.nama AS nama_pelanggan
+								FROM faktur f 
+								JOIN pelanggan p ON p.id = f.id_pelanggan
+								WHERE f.id = $id_faktur")->row();	
+								
+		echo json_encode($src);
 	}
 
 }

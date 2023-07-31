@@ -34,21 +34,22 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-sm-3 col-form-label pr-0"><span class="text-danger">*</span> Pelanggan</label>
+                        <div class="col-sm-9">
+						<select class="select2 w-75" name="id_pelanggan"  id="id_pelanggan" data-placeholder="Pilih Pelanggan">
+                            </select>
+                            <?php if (isset($errors)) {
+                                echo $errors['id_pelanggan'];
+                            } ?>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-sm-3 col-form-label pr-0">No. Nota</label>
                         <div class="col-sm-9">
                             <input type="hidden" name="id_faktur_sebelumnya" value="<?php echo $data == null ? '' : $data['id_faktur']; ?>">
                             <select class="select2 w-75" name="id_faktur" data-placeholder="Pilih Nota Penjualan">
                                 <option value=""></option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label pr-0">Pelanggan</label>
-                        <div class="col-sm-7">
-                            <input type="hidden" class="form-control" name="id_pelanggan" id="id_pelanggan"
-                                value="<?php $data != null ? $data['id_pelanggan'] : ''; ?>">
-                            <input type="text" class="form-control" id="pelanggan" placeholder="Pelanggan" readonly>
-                            <?php if (isset($errors)) echo $errors['id_pelanggan']; ?>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -413,6 +414,8 @@
         $('[name=id_faktur]').select2({ allowClear: true });
         $('[name=id_faktur]').find('[value!=""]').remove();
 
+        var id_pelanggan = $('[name=id_pelanggan]').val();
+
         if (id_faktur != 0) {
             $("#do-bayar").css("display", "inline");
         }
@@ -423,6 +426,7 @@
 
         $.post(
             site_url + 'penjualan/pengiriman/ajax-open-faktur', {
+                id_pelanggan: id_pelanggan,
                 id_faktur: id_faktur
             },
             function(response) {
@@ -433,10 +437,11 @@
                     $('[name=id_faktur]').append(option).trigger('change');
                 });
 
+                // $('[name=id_faktur]').data('placeholder', 'Pilih Pesanan').select2({ allowClear: true });
+
                 $('[name=id_faktur]').val(id_faktur).trigger('change');
 				is_ready = true;
                 first_load = 0;
-                load_pelanggan(id_faktur);
 				load_produk_nota(id_faktur,init_details);
 
 				id_faktur = '0';
@@ -506,13 +511,6 @@
 		}
 	}
 
-    function load_pelanggan(id_faktur) {
-        $.getJSON( site_url + 'penjualan/pengiriman/ajax_get_pelanggan/' + id_faktur, function(result) {
-            $("#id_pelanggan").val(result.id_pelanggan);
-            $("#pelanggan").val(result.nama_pelanggan);
-        })
-    }
-
     $().ready(function() {
         var id_pelanggan = '<?php echo $data == null ? "0" :  $data['id_pelanggan']; ?>';
 	    var nama_pelanggan = '<?php echo $data == null ? "0" :  $data['kode_nama']; ?>';
@@ -538,10 +536,13 @@
 				first.find('.select2').val('').trigger('change');
 				first.find('input[type=text]').val('');
 				if(val == "") return;
-                load_pelanggan(val);
 				load_produk_nota(val,init_awal_details);
 			}
 		});
+
+        $(document).on('change', '[name=id_pelanggan]', function() {
+            load_pesanan();
+        });
 
         $(document).on('click', '.btn-row-add', function(e) {
             e.preventDefault();
@@ -640,7 +641,28 @@
             ajaxLoadPembayaran(site_url + 'penjualan/faktur/ajax-load-pembayaran', $("#id_faktur")
             .val());
         });
-        
+        $('#id_pelanggan').select2({
+            allowClear: true
+        });
+
+        $('#id_pelanggan').select2({
+            placeholder: "Pilih Pelangan",
+            ajax: {
+                url: site_url + "options/data-pelanggan",
+                dataType: 'json',
+                data: function (params) {
+                    var query = {
+                        nama: params.term
+                    }
+                    return query;
+                },
+                processResults: function (data, page) {
+                    return {
+                        results: data
+                    };
+                },
+            }
+        });
         if($("input[name='id']").val() !== ""){
             $('#id_pelanggan').append('<option value='+id_pelanggan+'>'+nama_pelanggan+'</option>');
         }
