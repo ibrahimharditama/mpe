@@ -197,7 +197,7 @@ class Pengiriman extends MX_Controller {
 			
 			if ($produk['qty'] > 0) {
 				
-				$qty = $produk['qty'];
+				$qty = str_replace('.', '', $produk['qty']);
 				
 				$detail[] = array (
 					'id_produk' => $produk['id'],
@@ -215,7 +215,7 @@ class Pengiriman extends MX_Controller {
 			
 			if ($produk['qty'] > 0) {
 				
-				$qty = $produk['qty'];
+				$qty = str_replace('.', '', $produk['qty']);
 				
 				$detail_nota[] = array (
 					'id_produk' => $produk['id'],
@@ -390,7 +390,7 @@ class Pengiriman extends MX_Controller {
 			
 			if ($produk['qty'] > 0) {
 				
-				$qty = $produk['qty'];
+				$qty = str_replace('.', '', $produk['qty']);
 				
 				$detail[] = array (
 					'id_pengiriman' => $id_pengiriman,
@@ -409,7 +409,7 @@ class Pengiriman extends MX_Controller {
 			
 			if ($produk['qty'] > 0) {
 				
-				$qty = $produk['qty'];
+				$qty = str_replace('.', '', $produk['qty']);
 				
 				$detail_nota[] = array (
 					'id_pengiriman' => $id_pengiriman,
