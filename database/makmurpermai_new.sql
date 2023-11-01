@@ -11,11 +11,126 @@
  Target Server Version : 100420
  File Encoding         : 65001
 
- Date: 24/03/2023 14:12:02
+ Date: 01/11/2023 09:58:35
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for absensi
+-- ----------------------------
+DROP TABLE IF EXISTS `absensi`;
+CREATE TABLE `absensi`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_pengguna` int NOT NULL,
+  `tgl` date NOT NULL,
+  `masuk` time NULL DEFAULT NULL,
+  `keluar` time NULL DEFAULT NULL,
+  `status` int NOT NULL DEFAULT 0,
+  `row_status` tinyint NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp,
+  `created_by` int NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` int NULL DEFAULT NULL,
+  `approved_at` timestamp NULL DEFAULT NULL,
+  `approved_by` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `absensi_id_pengguna`(`id_pengguna`) USING BTREE,
+  CONSTRAINT `fk_absensi_id_pengguna` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE = InnoDB AUTO_INCREMENT = 120 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of absensi
+-- ----------------------------
+INSERT INTO `absensi` VALUES (17, 1, '2023-05-01', '11:31:13', '00:00:00', 1, 1, '2023-05-02 09:39:33', NULL, '2023-05-16 01:31:57', NULL, '2023-05-16 01:31:57', 1);
+INSERT INTO `absensi` VALUES (18, 10, '2023-05-02', '11:31:13', '00:00:00', 1, 1, '2023-05-02 09:39:33', NULL, '2023-06-26 10:16:46', NULL, '2023-06-26 10:16:46', 1);
+INSERT INTO `absensi` VALUES (19, 1, '2023-05-03', '11:31:13', '00:00:00', 1, 1, '2023-05-02 09:39:33', NULL, '2023-05-16 01:28:13', NULL, '2023-05-16 01:28:13', 1);
+INSERT INTO `absensi` VALUES (20, 1, '2023-05-04', '11:31:13', '00:00:00', 1, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:59:03', NULL, '2023-05-03 23:59:03', 1);
+INSERT INTO `absensi` VALUES (21, 1, '2023-05-05', '11:31:13', '00:00:00', 1, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:58:16', NULL, '2023-05-03 23:58:16', 1);
+INSERT INTO `absensi` VALUES (22, 1, '2023-05-06', '11:31:13', '00:00:00', 1, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:58:16', NULL, '2023-05-03 23:58:16', 1);
+INSERT INTO `absensi` VALUES (23, 1, '2023-05-07', '11:31:13', '00:00:00', 1, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:58:18', NULL, '2023-05-03 23:58:18', 1);
+INSERT INTO `absensi` VALUES (24, 1, '2023-05-08', '11:31:13', '00:00:00', 1, 1, '2023-05-02 09:39:33', NULL, '2023-05-10 18:02:21', NULL, '2023-05-10 18:02:21', 1);
+INSERT INTO `absensi` VALUES (25, 1, '2023-05-09', '11:31:13', '00:00:00', 1, 1, '2023-05-02 09:39:33', NULL, '2023-06-26 10:16:38', NULL, '2023-06-26 10:16:38', 1);
+INSERT INTO `absensi` VALUES (26, 1, '2023-05-10', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:45', 1);
+INSERT INTO `absensi` VALUES (27, 1, '2023-05-11', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:46', 1);
+INSERT INTO `absensi` VALUES (28, 1, '2023-05-12', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:47', 1);
+INSERT INTO `absensi` VALUES (29, 1, '2023-05-13', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:48', 1);
+INSERT INTO `absensi` VALUES (30, 1, '2023-05-14', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:48', 1);
+INSERT INTO `absensi` VALUES (31, 1, '2023-05-15', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:50', 1);
+INSERT INTO `absensi` VALUES (32, 1, '2023-05-16', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:50', 1);
+INSERT INTO `absensi` VALUES (33, 1, '2023-05-17', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:51', 1);
+INSERT INTO `absensi` VALUES (34, 1, '2023-05-18', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:52', 1);
+INSERT INTO `absensi` VALUES (35, 1, '2023-05-19', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:53', 1);
+INSERT INTO `absensi` VALUES (36, 1, '2023-05-20', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:53', 1);
+INSERT INTO `absensi` VALUES (37, 1, '2023-05-21', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:54', 1);
+INSERT INTO `absensi` VALUES (38, 1, '2023-05-22', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:55', 1);
+INSERT INTO `absensi` VALUES (39, 1, '2023-05-23', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:56', 1);
+INSERT INTO `absensi` VALUES (40, 1, '2023-05-24', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:45', NULL, '2023-05-03 23:21:56', 1);
+INSERT INTO `absensi` VALUES (41, 1, '2023-05-25', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:53', NULL, '2023-05-03 23:21:57', 1);
+INSERT INTO `absensi` VALUES (42, 1, '2023-05-26', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:53', NULL, '2023-05-03 23:21:58', 1);
+INSERT INTO `absensi` VALUES (43, 1, '2023-05-27', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:53', NULL, '2023-05-03 23:21:58', 1);
+INSERT INTO `absensi` VALUES (44, 1, '2023-05-28', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:53', NULL, '2023-05-03 23:21:59', 1);
+INSERT INTO `absensi` VALUES (45, 1, '2023-05-29', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:53', NULL, '2023-05-03 23:22:00', 1);
+INSERT INTO `absensi` VALUES (46, 1, '2023-05-30', '11:31:13', '00:00:00', 0, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:57:53', NULL, '2023-05-03 23:22:00', 1);
+INSERT INTO `absensi` VALUES (47, 1, '2023-05-31', '11:31:13', '00:00:00', 1, 1, '2023-05-02 09:39:33', NULL, '2023-05-03 23:59:21', NULL, '2023-05-03 23:59:21', 1);
+INSERT INTO `absensi` VALUES (48, 1, '2023-05-02', '01:42:43', NULL, 1, 1, '2023-05-16 01:42:43', 1, '2023-06-26 10:16:36', NULL, '2023-06-26 10:16:36', 1);
+INSERT INTO `absensi` VALUES (49, 10, '2023-05-03', '01:42:59', NULL, 1, 1, '2023-05-16 01:42:59', 1, '2023-06-26 10:16:46', NULL, '2023-06-26 10:16:46', 1);
+INSERT INTO `absensi` VALUES (50, 10, '2023-05-04', '01:43:17', NULL, 1, 1, '2023-05-16 01:43:17', 1, '2023-06-26 10:16:47', NULL, '2023-06-26 10:16:47', 1);
+INSERT INTO `absensi` VALUES (51, 10, '2023-05-31', '01:43:27', NULL, 1, 1, '2023-05-16 01:43:27', 1, '2023-05-16 01:43:32', NULL, '2023-05-16 01:43:32', 1);
+INSERT INTO `absensi` VALUES (52, 10, '2023-05-30', '01:43:33', NULL, 1, 1, '2023-05-16 01:43:33', 1, NULL, NULL, '2023-05-16 01:43:33', 1);
+INSERT INTO `absensi` VALUES (53, 10, '2023-05-29', '01:43:34', NULL, 1, 1, '2023-05-16 01:43:34', 1, NULL, NULL, '2023-05-16 01:43:34', 1);
+INSERT INTO `absensi` VALUES (54, 10, '2023-05-28', '01:43:34', NULL, 1, 1, '2023-05-16 01:43:34', 1, NULL, NULL, '2023-05-16 01:43:34', 1);
+INSERT INTO `absensi` VALUES (55, 10, '2023-05-27', '01:43:35', NULL, 1, 1, '2023-05-16 01:43:35', 1, NULL, NULL, '2023-05-16 01:43:35', 1);
+INSERT INTO `absensi` VALUES (56, 10, '2023-05-26', '01:43:36', NULL, 1, 1, '2023-05-16 01:43:36', 1, NULL, NULL, '2023-05-16 01:43:36', 1);
+INSERT INTO `absensi` VALUES (57, 10, '2023-05-25', '01:43:36', NULL, 1, 1, '2023-05-16 01:43:36', 1, NULL, NULL, '2023-05-16 01:43:36', 1);
+INSERT INTO `absensi` VALUES (58, 10, '2023-05-01', '08:00:59', NULL, 1, 1, '2023-05-16 01:44:30', 1, NULL, NULL, '2023-05-16 01:44:30', 1);
+INSERT INTO `absensi` VALUES (59, 10, '2023-05-05', '08:00:59', NULL, 1, 1, '2023-05-16 01:45:23', 1, '2023-06-26 10:16:48', NULL, '2023-06-26 10:16:48', 1);
+INSERT INTO `absensi` VALUES (60, 1, '2023-06-01', '08:00:59', NULL, 1, 1, '2023-06-20 15:55:13', 1, NULL, NULL, '2023-06-20 15:55:13', 1);
+INSERT INTO `absensi` VALUES (61, 1, '2023-06-02', '08:00:59', NULL, 1, 1, '2023-06-20 16:20:47', 1, '2023-06-20 16:20:53', NULL, '2023-06-20 16:20:53', 1);
+INSERT INTO `absensi` VALUES (62, 1, '2023-06-03', '08:00:59', NULL, 1, 1, '2023-06-20 16:36:26', 1, '2023-06-26 10:13:37', NULL, '2023-06-26 10:13:37', 1);
+INSERT INTO `absensi` VALUES (63, 1, '2023-06-05', '08:00:59', NULL, 0, 1, '2023-06-20 16:36:46', 1, '2023-06-26 10:16:07', NULL, '2023-06-26 10:16:07', 1);
+INSERT INTO `absensi` VALUES (64, 10, '2023-05-06', '08:00:59', NULL, 1, 1, '2023-06-21 14:50:45', 1, '2023-06-26 10:16:48', NULL, '2023-06-26 10:16:48', 1);
+INSERT INTO `absensi` VALUES (65, 1, '2023-06-30', '08:00:59', NULL, 1, 1, '2023-06-21 15:37:29', 1, '2023-06-21 15:40:53', NULL, '2023-06-21 15:40:53', 1);
+INSERT INTO `absensi` VALUES (66, 1, '2023-06-29', '08:00:59', NULL, 1, 1, '2023-06-21 15:40:56', 1, NULL, NULL, '2023-06-21 15:40:56', 1);
+INSERT INTO `absensi` VALUES (68, 10, '2023-06-30', '08:00:59', NULL, 1, 1, '2023-06-21 15:42:04', 1, NULL, NULL, '2023-06-21 15:42:04', 1);
+INSERT INTO `absensi` VALUES (70, 11, '2023-06-25', '08:00:59', NULL, 1, 1, '2023-06-21 15:42:07', 1, NULL, NULL, '2023-06-21 15:42:07', 1);
+INSERT INTO `absensi` VALUES (71, 11, '2023-06-24', '08:00:59', NULL, 1, 1, '2023-06-21 15:42:09', 1, NULL, NULL, '2023-06-21 15:42:09', 1);
+INSERT INTO `absensi` VALUES (72, 11, '2023-06-23', '08:00:59', NULL, 1, 1, '2023-06-21 15:42:11', 1, NULL, NULL, '2023-06-21 15:42:11', 1);
+INSERT INTO `absensi` VALUES (73, 11, '2023-06-18', '08:00:59', NULL, 1, 1, '2023-06-21 15:42:13', 1, NULL, NULL, '2023-06-21 15:42:13', 1);
+INSERT INTO `absensi` VALUES (74, 11, '2023-06-21', '08:00:59', NULL, 1, 1, '2023-06-21 15:42:19', 1, NULL, NULL, '2023-06-21 15:42:19', 1);
+INSERT INTO `absensi` VALUES (75, 12, '2023-06-30', '08:00:59', NULL, 1, 1, '2023-06-21 15:42:31', 1, NULL, NULL, '2023-06-21 15:42:31', 1);
+INSERT INTO `absensi` VALUES (76, 10, '2023-06-05', '08:00:59', NULL, 1, 1, '2023-06-25 15:48:19', 1, NULL, NULL, '2023-06-25 15:48:19', 1);
+INSERT INTO `absensi` VALUES (77, 1, '2023-06-06', '08:00:59', NULL, 1, 1, '2023-06-26 10:13:07', 1, '2023-06-26 10:15:28', NULL, '2023-06-26 10:15:28', 1);
+INSERT INTO `absensi` VALUES (78, 10, '2023-06-03', '08:00:59', NULL, 1, 1, '2023-06-26 10:13:38', 1, '2023-06-27 10:49:24', NULL, '2023-06-27 10:49:24', 1);
+INSERT INTO `absensi` VALUES (79, 10, '2023-06-06', '08:00:59', NULL, 1, 1, '2023-06-26 10:13:56', 1, '2023-06-26 10:14:04', NULL, '2023-06-26 10:14:04', 1);
+INSERT INTO `absensi` VALUES (80, 11, '2023-06-14', '08:00:59', NULL, 0, 1, '2023-06-26 10:14:09', 1, '2023-06-26 10:14:12', NULL, '2023-06-26 10:14:12', 1);
+INSERT INTO `absensi` VALUES (81, 1, '2023-06-11', '08:00:59', NULL, 1, 1, '2023-06-26 10:14:21', 1, '2023-06-26 10:14:31', NULL, '2023-06-26 10:14:31', 1);
+INSERT INTO `absensi` VALUES (82, 1, '2023-06-07', '08:00:59', NULL, 1, 1, '2023-06-26 10:14:46', 1, NULL, NULL, '2023-06-26 10:14:46', 1);
+INSERT INTO `absensi` VALUES (83, 10, '2023-06-01', '08:00:59', NULL, 1, 1, '2023-06-27 10:07:25', 1, NULL, NULL, '2023-06-27 10:07:25', 1);
+INSERT INTO `absensi` VALUES (84, 10, '2023-06-02', '08:00:59', NULL, 1, 1, '2023-06-27 10:27:22', 1, NULL, NULL, '2023-06-27 10:27:22', 1);
+INSERT INTO `absensi` VALUES (85, 10, '2023-06-04', '08:00:59', NULL, 1, 1, '2023-06-27 10:38:01', 1, '2023-06-27 10:48:48', NULL, '2023-06-27 10:48:48', 1);
+INSERT INTO `absensi` VALUES (88, 12, '2023-06-01', '08:00:59', NULL, 1, 1, '2023-06-27 10:38:51', 1, NULL, NULL, '2023-06-27 10:38:51', 1);
+INSERT INTO `absensi` VALUES (89, 12, '2023-06-03', '08:00:59', NULL, 1, 1, '2023-06-27 10:38:59', 1, NULL, NULL, '2023-06-27 10:38:59', 1);
+INSERT INTO `absensi` VALUES (90, 12, '2023-06-02', '08:00:59', NULL, 1, 1, '2023-06-27 10:39:01', 1, NULL, NULL, '2023-06-27 10:39:01', 1);
+INSERT INTO `absensi` VALUES (92, 10, '2023-06-08', '08:00:59', NULL, 1, 1, '2023-06-27 10:51:15', 1, NULL, NULL, '2023-06-27 10:51:15', 1);
+INSERT INTO `absensi` VALUES (93, 10, '2023-06-09', '08:00:59', NULL, 1, 1, '2023-06-27 10:51:38', 1, NULL, NULL, '2023-06-27 10:51:38', 1);
+INSERT INTO `absensi` VALUES (94, 10, '2023-06-10', '08:00:59', NULL, 1, 1, '2023-06-27 10:51:41', 1, NULL, NULL, '2023-06-27 10:51:41', 1);
+INSERT INTO `absensi` VALUES (95, 10, '2023-06-11', '08:00:59', NULL, 1, 1, '2023-06-27 10:52:08', 1, NULL, NULL, '2023-06-27 10:52:08', 1);
+INSERT INTO `absensi` VALUES (96, 10, '2023-06-12', '08:00:59', NULL, 1, 1, '2023-06-27 10:52:16', 1, NULL, NULL, '2023-06-27 10:52:16', 1);
+INSERT INTO `absensi` VALUES (97, 10, '2023-06-13', '08:00:59', NULL, 1, 1, '2023-06-27 10:52:18', 1, NULL, NULL, '2023-06-27 10:52:18', 1);
+INSERT INTO `absensi` VALUES (98, 10, '2023-06-14', '08:00:59', NULL, 1, 1, '2023-06-27 10:52:20', 1, NULL, NULL, '2023-06-27 10:52:20', 1);
+INSERT INTO `absensi` VALUES (99, 11, '2023-06-03', '08:00:59', NULL, 1, 1, '2023-06-27 10:52:40', 1, NULL, NULL, '2023-06-27 10:52:40', 1);
+INSERT INTO `absensi` VALUES (100, 11, '2023-06-04', '08:00:59', NULL, 1, 1, '2023-06-27 10:52:55', 1, NULL, NULL, '2023-06-27 10:52:55', 1);
+INSERT INTO `absensi` VALUES (101, 11, '2023-06-05', '08:00:59', NULL, 1, 1, '2023-06-27 10:54:05', 1, NULL, NULL, '2023-06-27 10:54:05', 1);
+INSERT INTO `absensi` VALUES (102, 11, '2023-06-06', '08:00:59', NULL, 1, 1, '2023-06-27 10:54:07', 1, NULL, NULL, '2023-06-27 10:54:07', 1);
+INSERT INTO `absensi` VALUES (103, 12, '2023-06-06', '08:00:59', NULL, 1, 1, '2023-06-27 10:54:09', 1, NULL, NULL, '2023-06-27 10:54:09', 1);
+INSERT INTO `absensi` VALUES (106, 12, '2023-06-08', '08:00:59', NULL, 0, 1, '2023-06-27 10:54:14', 1, '2023-06-27 10:54:20', NULL, '2023-06-27 10:54:20', 1);
+INSERT INTO `absensi` VALUES (107, 11, '2023-06-08', '08:00:59', NULL, 0, 1, '2023-06-27 10:54:16', 1, '2023-06-27 10:54:16', NULL, '2023-06-27 10:54:16', 1);
+INSERT INTO `absensi` VALUES (109, 12, '2023-06-28', '08:00:59', NULL, 0, 1, '2023-06-27 11:11:32', 1, '2023-06-27 11:11:34', NULL, '2023-06-27 11:11:34', 1);
+INSERT INTO `absensi` VALUES (110, 12, '2023-06-05', '08:00:59', NULL, 1, 1, '2023-06-27 15:14:01', 1, NULL, NULL, '2023-06-27 15:14:01', 1);
+INSERT INTO `absensi` VALUES (111, 10, '2023-07-01', '08:00:59', NULL, 1, 1, '2023-06-27 15:17:43', 1, NULL, NULL, '2023-06-27 15:17:43', 1);
+INSERT INTO `absensi` VALUES (118, 11, '2023-06-26', '08:00:59', NULL, 1, 1, '2023-06-27 15:23:44', 1, NULL, NULL, '2023-06-27 15:23:44', 1);
 
 -- ----------------------------
 -- Table structure for asset
@@ -37,11 +152,15 @@ CREATE TABLE `asset`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `asset_id_pegawai`(`id_pegawai`) USING BTREE,
   CONSTRAINT `fk_asset_id_pegawai` FOREIGN KEY (`id_pegawai`) REFERENCES `pengguna` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of asset
 -- ----------------------------
+INSERT INTO `asset` VALUES (12, 10, 'test', '124', '2023-02-01', 1, 'BULAN', 1, '2023-03-29 15:46:50', 1, NULL, NULL);
+INSERT INTO `asset` VALUES (13, 10, 'test 2', 'test 2', '2023-05-06', 1, 'BULAN', 1, '2023-05-06 01:29:21', 1, NULL, NULL);
+INSERT INTO `asset` VALUES (14, 10, 'Test 3', 'Test 3', '2022-11-01', 2, 'MINGGU', 1, '2023-05-06 01:48:10', 1, NULL, NULL);
+INSERT INTO `asset` VALUES (15, 10, 'Test 4', 'Test 4', '2017-01-03', 3, 'BULAN', 1, '2023-05-06 01:53:37', 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for asset_maintenance
@@ -60,11 +179,17 @@ CREATE TABLE `asset_maintenance`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `am_id_asset`(`id_asset`) USING BTREE,
   CONSTRAINT `fk_am_id_asset` FOREIGN KEY (`id_asset`) REFERENCES `asset` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of asset_maintenance
 -- ----------------------------
+INSERT INTO `asset_maintenance` VALUES (15, 12, '2023-03-29', 'Test', 1, '2023-03-29 15:46:50', 1, '2023-05-06 02:13:58', NULL);
+INSERT INTO `asset_maintenance` VALUES (16, 13, '2023-05-06', 'asddddd', 1, '2023-05-06 01:29:21', 1, '2023-05-10 10:43:34', 1);
+INSERT INTO `asset_maintenance` VALUES (17, 14, '2023-05-06', NULL, 1, '2023-05-06 01:48:10', 1, NULL, NULL);
+INSERT INTO `asset_maintenance` VALUES (18, 15, '2023-05-02', NULL, 1, '2023-05-06 01:53:37', 1, NULL, NULL);
+INSERT INTO `asset_maintenance` VALUES (19, 12, '2023-05-06', 'Test 2', 1, '2023-05-06 02:14:20', 1, NULL, NULL);
+INSERT INTO `asset_maintenance` VALUES (20, 13, '2023-05-10', 'aaasdasdad', 1, '2023-05-10 10:43:26', 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for faktur
@@ -81,22 +206,32 @@ CREATE TABLE `faktur`  (
   `total` int NOT NULL,
   `diskon_faktur` int NOT NULL,
   `biaya_lain` int NOT NULL,
+  `keterangan_biaya_lain` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `grand_total` int NOT NULL,
   `uang_muka` int NULL DEFAULT 0,
   `rek_pembayaran_dp` int NULL DEFAULT NULL,
   `dp` int NOT NULL,
   `sisa_tagihan` int NOT NULL,
   `row_status` tinyint NOT NULL DEFAULT 1,
+  `is_kirim` int NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp,
   `created_by` int NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of faktur
 -- ----------------------------
+INSERT INTO `faktur` VALUES (23, 'A2306-003', '2023-06-13', 2735, '16', 'Test', 12, 690000, 0, 50000, 'Biaya Kirim', 740000, 0, NULL, 0, 0, 1, 1, '2023-06-13 12:27:44', 1, '2023-06-13 13:27:58', 1);
+INSERT INTO `faktur` VALUES (24, 'A2306-004', '2023-06-13', 6332, '', '', 2, 140000, 0, 0, '', 140000, 0, NULL, 0, 0, 1, 1, '2023-06-13 12:37:17', 1, '2023-06-20 10:17:12', 1);
+INSERT INTO `faktur` VALUES (25, 'A2306-005', '2023-06-14', 585, '', '', 1, 300000, 0, 0, '', 300000, 0, NULL, 0, 0, 1, 1, '2023-06-14 14:38:17', 1, '2023-06-19 16:35:07', 1);
+INSERT INTO `faktur` VALUES (26, 'A2306-006', '2023-06-15', 2735, '', 'test', 2, 2600000, 0, 0, '', 2600000, 0, NULL, 0, 0, 1, 1, '2023-06-15 15:45:44', 1, '2023-06-20 10:22:05', 1);
+INSERT INTO `faktur` VALUES (27, 'A2306-007', '2023-06-19', 585, '', '', 9, 12125010, 0, 0, '', 12125010, 0, NULL, 0, 0, 1, 1, '2023-06-19 09:28:20', 1, '2023-06-20 10:32:19', 1);
+INSERT INTO `faktur` VALUES (28, 'A2306-008', '2023-06-20', 6332, '', '', 30, 55368960, 0, 0, '', 55368960, 0, NULL, 0, 0, 1, 1, '2023-06-20 11:04:22', 1, '2023-08-01 00:31:27', 1);
+INSERT INTO `faktur` VALUES (29, 'A2306-009', '2023-06-20', 2791, '', '', 2, 4000000, 0, 0, '', 4000000, 0, NULL, 0, 0, 1, 0, '2023-06-20 11:04:45', 1, NULL, NULL);
+INSERT INTO `faktur` VALUES (30, 'A2307-001', '2023-07-04', 585, '', '', 3, 5775000, 0, 0, '', 5775000, 0, NULL, 0, 0, 1, 1, '2023-07-04 11:25:45', 1, '2023-07-04 11:32:57', NULL);
 
 -- ----------------------------
 -- Table structure for faktur_detail
@@ -119,11 +254,25 @@ CREATE TABLE `faktur_detail`  (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 94 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of faktur_detail
 -- ----------------------------
+INSERT INTO `faktur_detail` VALUES (67, 23, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 10, 70000, 5000, 650000, 1, '2023-06-13 12:30:43', NULL, NULL, NULL);
+INSERT INTO `faktur_detail` VALUES (68, 23, 1366, 'Duct Tape', 17, 'roll', 2, 20000, 0, 40000, 1, '2023-06-13 12:30:43', NULL, NULL, NULL);
+INSERT INTO `faktur_detail` VALUES (69, 24, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 2, 70000, 0, 140000, 1, '2023-06-13 12:37:17', NULL, NULL, NULL);
+INSERT INTO `faktur_detail` VALUES (81, 25, 499, 'Pasang AC 0.5-1 PK fucc', 9, 'set', 1, 300000, 0, 300000, 1, '2023-06-15 10:32:46', NULL, NULL, NULL);
+INSERT INTO `faktur_detail` VALUES (82, 26, 499, 'Pasang AC 0.5-1 PK', 9, 'set', 1, 300000, 0, 300000, 1, '2023-06-15 15:45:44', NULL, NULL, NULL);
+INSERT INTO `faktur_detail` VALUES (83, 26, 526, 'Ac Split AQUA 1PK', 16, 'unit', 1, 2300000, 0, 2300000, 1, '2023-06-15 15:45:44', NULL, NULL, NULL);
+INSERT INTO `faktur_detail` VALUES (85, 27, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 1, 10, 0, 10, 1, '2023-06-19 15:19:39', NULL, NULL, NULL);
+INSERT INTO `faktur_detail` VALUES (86, 27, 516, 'Kulkas 1 Pintu Aqua AQR 190', 16, 'unit', 5, 1000000, 0, 5000000, 1, '2023-06-19 15:19:39', NULL, NULL, NULL);
+INSERT INTO `faktur_detail` VALUES (87, 27, 525, 'Ac Split AQUA 3/4 PK', 16, 'unit', 3, 2375000, 0, 7125000, 1, '2023-06-19 15:19:39', NULL, NULL, NULL);
+INSERT INTO `faktur_detail` VALUES (89, 29, 726, 'Kulkas Side By Side Hitachi RS80GPGD', 16, 'unit', 2, 2000000, 0, 4000000, 1, '2023-06-20 11:04:45', NULL, NULL, NULL);
+INSERT INTO `faktur_detail` VALUES (90, 30, 253, 'AC Split AQUA 1/2 pk', 2, 'pcs', 2, 2750000, 0, 5500000, 1, '2023-07-04 11:25:45', NULL, NULL, NULL);
+INSERT INTO `faktur_detail` VALUES (91, 30, 604, 'Rice Cooker Cosmos CRJ101', 16, 'unit', 1, 275000, 0, 275000, 1, '2023-07-04 11:25:45', NULL, NULL, NULL);
+INSERT INTO `faktur_detail` VALUES (92, 28, 603, 'Dispenser Portable Cosmos', 16, 'unit', 10, 1500000, 0, 15000000, 1, '2023-08-01 00:09:48', NULL, NULL, NULL);
+INSERT INTO `faktur_detail` VALUES (93, 28, 895, 'Chest Freezer Modena 100L', 16, 'unit', 20, 2018448, 0, 40368960, 1, '2023-08-01 00:09:48', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for jstok
@@ -144,11 +293,117 @@ CREATE TABLE `jstok`  (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 214 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of jstok
 -- ----------------------------
+INSERT INTO `jstok` VALUES (116, '', '2023-06-12', 'pembelian', 2, 5, 21, 59, 1, '2023-06-13 00:05:58', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (117, '', '2023-06-12', 'pembelian', 1348, 2, 21, 60, 1, '2023-06-13 00:05:58', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (135, 'A2306-003', '2023-06-13', 'penjualan', 2, -10, 23, 67, 1, '2023-06-13 12:30:43', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (136, 'A2306-003', '2023-06-13', 'penjualan', 1366, -2, 23, 68, 1, '2023-06-13 12:30:43', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (137, 'A2306-004', '2023-06-13', 'penjualan', 2, -2, 24, 69, 0, '2023-06-13 12:37:17', 1, '2023-06-13 13:38:43', 1);
+INSERT INTO `jstok` VALUES (138, 'P-A2306-003-001', '2023-06-13', 'pengiriman', 6, -110, 27, 46, 0, '2023-06-13 13:36:23', 1, '2023-06-15 16:06:00', 1);
+INSERT INTO `jstok` VALUES (139, 'RP-A2306-003-001', '2023-06-13', 'pengembalian_pipa', 6, 10, 24, 40, 1, '2023-06-13 13:38:43', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (146, 'P-A2306-004-001', '2023-06-15', 'pengiriman', 7, -100, 28, 47, 0, '2023-06-15 10:19:53', 1, '2023-06-15 17:15:36', 1);
+INSERT INTO `jstok` VALUES (147, 'RP-A2306-004-001', '2023-06-15', 'pengembalian_pipa', 7, 10, 25, 41, 0, '2023-06-15 10:22:07', 1, '2023-06-15 10:54:38', 1);
+INSERT INTO `jstok` VALUES (148, 'A2306-006', '2023-06-15', 'penjualan', 526, -1, 26, 83, 1, '2023-06-15 15:45:44', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (149, 'RP-A2306-006-001', '2023-06-15', 'pengembalian_pipa', 6, 10, 27, 43, 1, '2023-06-15 16:06:00', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (151, 'BILL2306-004', '2023-06-19', 'pembelian', 6, 1, 23, 67, 1, '2023-06-19 09:32:34', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (152, 'A2306-007', '2023-06-19', 'penjualan', 2, -1, 27, 85, 1, '2023-06-19 15:19:39', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (153, 'A2306-007', '2023-06-19', 'penjualan', 516, -5, 27, 86, 1, '2023-06-19 15:19:39', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (154, 'A2306-007', '2023-06-19', 'penjualan', 525, -3, 27, 87, 1, '2023-06-19 15:19:39', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (155, '', '2023-06-19', 'stok', 7, 100, 21, 59, 1, '2023-06-19 16:33:22', NULL, NULL, NULL);
+INSERT INTO `jstok` VALUES (156, 'P-A2306-006-002', '2023-06-20', 'pengiriman', 6, -2, 36, 57, 1, '2023-06-20 10:22:38', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (157, 'RP-2306-006-002', '2023-06-20', 'pengembalian_pipa', 6, 1, 28, 44, 1, '2023-06-20 10:23:41', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (158, 'P-A2306-007-002', '2023-06-20', 'pengiriman', 7, -100, 37, 60, 1, '2023-06-20 10:35:30', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (159, 'P-A2306-007-002', '2023-06-20', 'pengiriman', 6, -5, 37, 61, 1, '2023-06-20 10:35:30', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (160, 'RP-A2306-007-002', '2023-06-20', 'pengembalian_pipa', 7, 50, 29, 46, 1, '2023-06-20 10:48:43', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (162, 'A2306-009', '2023-06-20', 'penjualan', 726, -2, 29, 89, 1, '2023-06-20 11:04:45', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (171, 'BILL2306-005', '2023-06-27', 'pembelian', 6, 1, 24, 76, 1, '2023-06-27 14:43:39', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (172, 'BILL2306-005', '2023-06-27', 'pembelian', 1338, 10, 24, 77, 1, '2023-06-27 14:43:39', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (174, 'BILL2306-006', '2023-06-27', 'pembelian', 2, 10, 25, 79, 1, '2023-06-27 14:44:56', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (175, 'BILL2306-007', '2023-06-27', 'pembelian', 2, 10, 26, 80, 1, '2023-06-27 14:46:23', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (176, 'BILL2306-008', '2023-06-27', 'pembelian', 2, 10, 27, 81, 1, '2023-06-27 14:48:10', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (177, 'BILL2306-009', '2023-06-27', 'pembelian', 2, 15, 28, 82, 1, '2023-06-27 14:48:50', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (178, 'A2307-001', '2023-07-04', 'penjualan', 253, -2, 30, 90, 1, '2023-07-04 11:25:45', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (179, 'A2307-001', '2023-07-04', 'penjualan', 604, -1, 30, 91, 1, '2023-07-04 11:25:45', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (180, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 6, -10, 38, 62, 0, '2023-07-04 11:27:32', 1, '2023-07-04 11:32:57', 1);
+INSERT INTO `jstok` VALUES (181, 'RP-2307-001-001', '2023-07-04', 'pengembalian_pipa', 6, 2, 30, 48, 0, '2023-07-04 11:30:21', 1, '2023-07-04 12:02:41', 1);
+INSERT INTO `jstok` VALUES (182, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 6, -10, 38, 63, 0, '2023-07-04 11:32:57', 1, '2023-07-04 12:21:34', 1);
+INSERT INTO `jstok` VALUES (183, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 7, -50, 38, 64, 0, '2023-07-04 11:32:57', 1, '2023-07-04 12:21:34', 1);
+INSERT INTO `jstok` VALUES (184, 'RP-2307-001-001', '2023-07-04', 'pengembalian_pipa', 6, 2, 30, 49, 0, '2023-07-04 12:02:41', 1, '2023-07-04 12:37:37', 1);
+INSERT INTO `jstok` VALUES (185, 'RP-2307-001-001', '2023-07-04', 'pengembalian_pipa', 7, 10, 30, 50, 0, '2023-07-04 12:02:41', 1, '2023-07-04 12:37:37', 1);
+INSERT INTO `jstok` VALUES (186, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 6, -10, 38, 65, 0, '2023-07-04 12:21:34', 1, '2023-07-04 12:21:48', 1);
+INSERT INTO `jstok` VALUES (187, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 7, -50, 38, 66, 0, '2023-07-04 12:21:34', 1, '2023-07-04 12:21:48', 1);
+INSERT INTO `jstok` VALUES (188, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 6, -10, 38, 67, 0, '2023-07-04 12:21:48', 1, '2023-07-04 12:37:37', 1);
+INSERT INTO `jstok` VALUES (189, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 7, -50, 38, 68, 0, '2023-07-04 12:21:48', 1, '2023-07-04 12:37:37', 1);
+INSERT INTO `jstok` VALUES (190, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 8, -2, 38, 69, 0, '2023-07-04 12:21:48', 1, '2023-07-04 12:37:37', 1);
+INSERT INTO `jstok` VALUES (191, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 6, -10, 38, 70, 0, '2023-07-04 12:37:37', 1, '2023-07-04 12:41:33', 1);
+INSERT INTO `jstok` VALUES (192, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 7, -50, 38, 71, 0, '2023-07-04 12:37:37', 1, '2023-07-04 12:41:33', 1);
+INSERT INTO `jstok` VALUES (193, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 8, -2, 38, 72, 0, '2023-07-04 12:37:37', 1, '2023-07-04 12:41:33', 1);
+INSERT INTO `jstok` VALUES (194, 'RP-2307-001-001', '2023-07-04', 'pengembalian_pipa', 6, 2, 31, 51, 0, '2023-07-04 12:39:42', 1, '2023-07-04 12:41:33', 1);
+INSERT INTO `jstok` VALUES (195, 'RP-2307-001-001', '2023-07-04', 'pengembalian_pipa', 7, 10, 31, 52, 0, '2023-07-04 12:39:42', 1, '2023-07-04 12:41:33', 1);
+INSERT INTO `jstok` VALUES (196, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 6, -10, 38, 73, 0, '2023-07-04 12:41:33', 1, '2023-07-04 12:45:04', 1);
+INSERT INTO `jstok` VALUES (197, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 7, -50, 38, 74, 0, '2023-07-04 12:41:33', 1, '2023-07-04 12:45:04', 1);
+INSERT INTO `jstok` VALUES (198, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 8, -2, 38, 75, 0, '2023-07-04 12:41:33', 1, '2023-07-04 12:45:04', 1);
+INSERT INTO `jstok` VALUES (199, 'RP-2307-001-001', '2023-07-04', 'pengembalian_pipa', 6, 2, 32, 54, 0, '2023-07-04 12:42:33', 1, '2023-07-04 12:42:57', 1);
+INSERT INTO `jstok` VALUES (200, 'RP-2307-001-001', '2023-07-04', 'pengembalian_pipa', 7, 10, 32, 55, 0, '2023-07-04 12:42:33', 1, '2023-07-04 12:42:57', 1);
+INSERT INTO `jstok` VALUES (201, 'RP-2307-001-001', '2023-07-04', 'pengembalian_pipa', 6, 2, 32, 57, 0, '2023-07-04 12:42:57', 1, '2023-07-04 12:43:11', 1);
+INSERT INTO `jstok` VALUES (202, 'RP-2307-001-001', '2023-07-04', 'pengembalian_pipa', 7, 9, 32, 58, 0, '2023-07-04 12:42:57', 1, '2023-07-04 12:43:11', 1);
+INSERT INTO `jstok` VALUES (203, 'RP-2307-001-001', '2023-07-04', 'pengembalian_pipa', 6, 1, 32, 60, 0, '2023-07-04 12:43:11', 1, '2023-07-04 12:45:04', 1);
+INSERT INTO `jstok` VALUES (204, 'RP-2307-001-001', '2023-07-04', 'pengembalian_pipa', 7, 9, 32, 61, 0, '2023-07-04 12:43:11', 1, '2023-07-04 12:45:04', 1);
+INSERT INTO `jstok` VALUES (205, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 6, -10, 38, 76, 1, '2023-07-04 12:45:04', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (206, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 7, -50, 38, 77, 1, '2023-07-04 12:45:04', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (207, 'P-A2307-001-001', '2023-07-04', 'pengiriman', 8, -2, 38, 78, 1, '2023-07-04 12:45:04', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (208, 'RP-2307-001-001', '2023-07-04', 'pengembalian_pipa', 6, 1, 33, 63, 1, '2023-07-04 12:45:46', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (209, 'RP-2307-001-001', '2023-07-04', 'pengembalian_pipa', 7, 10, 33, 64, 1, '2023-07-04 12:45:46', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (210, 'A2306-008', '2023-06-20', 'penjualan', 603, -10, 28, 92, 1, '2023-08-01 00:09:48', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (211, 'A2306-008', '2023-06-20', 'penjualan', 895, -20, 28, 93, 1, '2023-08-01 00:09:48', 1, NULL, NULL);
+INSERT INTO `jstok` VALUES (212, 'P-A2306-008-001', '2023-08-01', 'pengiriman', 6, -7, 39, 79, 0, '2023-08-01 00:32:02', 1, '2023-08-01 00:32:50', 1);
+INSERT INTO `jstok` VALUES (213, 'P-A2306-008-001', '2023-08-01', 'pengiriman', 6, -7, 39, 80, 1, '2023-08-01 00:32:50', 1, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for kalender
+-- ----------------------------
+DROP TABLE IF EXISTS `kalender`;
+CREATE TABLE `kalender`  (
+  `tgl` date NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of kalender
+-- ----------------------------
+INSERT INTO `kalender` VALUES ('2023-06-01');
+INSERT INTO `kalender` VALUES ('2023-06-02');
+INSERT INTO `kalender` VALUES ('2023-06-03');
+INSERT INTO `kalender` VALUES ('2023-06-04');
+INSERT INTO `kalender` VALUES ('2023-06-05');
+INSERT INTO `kalender` VALUES ('2023-06-06');
+INSERT INTO `kalender` VALUES ('2023-06-07');
+INSERT INTO `kalender` VALUES ('2023-06-08');
+INSERT INTO `kalender` VALUES ('2023-06-09');
+INSERT INTO `kalender` VALUES ('2023-06-10');
+INSERT INTO `kalender` VALUES ('2023-06-11');
+INSERT INTO `kalender` VALUES ('2023-06-12');
+INSERT INTO `kalender` VALUES ('2023-06-13');
+INSERT INTO `kalender` VALUES ('2023-06-14');
+INSERT INTO `kalender` VALUES ('2023-06-15');
+INSERT INTO `kalender` VALUES ('2023-06-16');
+INSERT INTO `kalender` VALUES ('2023-06-17');
+INSERT INTO `kalender` VALUES ('2023-06-18');
+INSERT INTO `kalender` VALUES ('2023-06-19');
+INSERT INTO `kalender` VALUES ('2023-06-20');
+INSERT INTO `kalender` VALUES ('2023-06-21');
+INSERT INTO `kalender` VALUES ('2023-06-22');
+INSERT INTO `kalender` VALUES ('2023-06-23');
+INSERT INTO `kalender` VALUES ('2023-06-24');
+INSERT INTO `kalender` VALUES ('2023-06-25');
+INSERT INTO `kalender` VALUES ('2023-06-26');
+INSERT INTO `kalender` VALUES ('2023-06-27');
+INSERT INTO `kalender` VALUES ('2023-06-28');
+INSERT INTO `kalender` VALUES ('2023-06-29');
+INSERT INTO `kalender` VALUES ('2023-06-30');
 
 -- ----------------------------
 -- Table structure for menu
@@ -171,7 +426,7 @@ CREATE TABLE `menu`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `id_induk`(`id_induk`) USING BTREE,
   CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`id_induk`) REFERENCES `menu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of menu
@@ -194,16 +449,18 @@ INSERT INTO `menu` VALUES (15, 'pembelian', '', 'Pesanan Pembelian', '/pembelian
 INSERT INTO `menu` VALUES (16, 'penerimaan', '', 'Tagihan Pembelian', '/pembelian/penerimaan', 2, 202, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, NULL, NULL);
 INSERT INTO `menu` VALUES (17, 'penjualan', '', 'Pesanan Penjualan', '/penjualan/pesanan', 3, 301, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, NULL, NULL);
 INSERT INTO `menu` VALUES (18, 'invoice', '', 'Nota Penjualan', '/penjualan/faktur', 3, 302, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, NULL, NULL);
-INSERT INTO `menu` VALUES (19, 'pengiriman', '', 'Pengiriman', '/penjualan/pengiriman', 3, 303, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, NULL, NULL);
-INSERT INTO `menu` VALUES (20, 'pengembalianpipa', '', 'Pengembalian Pipa', '/penjualan/pengembalian-pipa', 3, 304, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, NULL, NULL);
+INSERT INTO `menu` VALUES (19, 'pengiriman', '', 'Pengiriman', '/penjualan/pengiriman', 3, 303, 'c,r,u,d,a', 1, '2023-03-24 11:39:59', NULL, '2023-04-12 20:04:42', NULL);
+INSERT INTO `menu` VALUES (20, 'pengembalianpipa', '', 'Pengembalian Pipa', '/penjualan/pengembalian-pipa', 3, 304, 'c,r,u,d,a', 1, '2023-03-24 11:39:59', NULL, '2023-03-29 17:45:44', NULL);
 INSERT INTO `menu` VALUES (21, 'hutang', '', 'Laporan Hutang', '/laporan/hutang', 4, 401, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, NULL, NULL);
 INSERT INTO `menu` VALUES (22, 'piutang', '', 'Laporan Piutang', '/laporan/piutang', 4, 402, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, NULL, NULL);
 INSERT INTO `menu` VALUES (23, 'kartustok', '', 'Kartu Stok', '/laporan/kartustok', 4, 403, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, NULL, NULL);
 INSERT INTO `menu` VALUES (24, 'user', '', 'Pegawai & Pengguna', '/pengaturan/pengguna', 5, 501, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, NULL, NULL);
-INSERT INTO `menu` VALUES (25, 'perusahaan', '', 'Data Perusahaan', '/pengaturan/perusahaan', 5, 502, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, NULL, NULL);
-INSERT INTO `menu` VALUES (26, 'notransaksi', '', 'Setting No. Transaksi', '/pengaturan/no-transaksi', 5, 503, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, NULL, NULL);
+INSERT INTO `menu` VALUES (25, 'perusahaan', '', 'Data Perusahaan', '/pengaturan/perusahaan', 5, 503, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, '2023-03-28 17:30:48', NULL);
+INSERT INTO `menu` VALUES (26, 'notransaksi', '', 'Setting No. Transaksi', '/pengaturan/no-transaksi', 5, 504, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, '2023-03-28 17:30:50', NULL);
 INSERT INTO `menu` VALUES (27, 'daftaraset', '', 'Daftar Aset', '/aset/daftaraset', 6, 601, 'r', 1, '2023-03-24 11:39:59', NULL, NULL, NULL);
 INSERT INTO `menu` VALUES (28, 'maintenanceaset', '', 'Maintenance Aset', '/aset/maintenanceaset', 6, 602, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, NULL, NULL);
+INSERT INTO `menu` VALUES (31, 'penggunagrup', '', 'Pengguna Grup', '/pengaturan/pengguna-grup', 5, 502, 'c,r,u,d', 1, '2023-03-24 11:39:59', NULL, '2023-03-29 12:49:25', NULL);
+INSERT INTO `menu` VALUES (32, NULL, 'time', 'Absensi', '/absensi', NULL, 600, 'r,a', 1, '2023-04-05 15:19:36', NULL, '2023-06-21 09:44:30', NULL);
 
 -- ----------------------------
 -- Table structure for no_transaksi
@@ -234,10 +491,10 @@ CREATE TABLE `no_transaksi`  (
 INSERT INTO `no_transaksi` VALUES (1, 'supplier', 'Supplier', 'S#SERIAL#', 4, 0, 'tahunan', '2023', '03', 15, 1, '2022-12-27 20:17:17', NULL, '2023-03-12 12:36:44', 1);
 INSERT INTO `no_transaksi` VALUES (2, 'pelanggan', 'Pelanggan', 'P#SERIAL#', 4, 0, 'tahunan', '2023', '02', 4, 1, '2022-12-28 08:03:12', NULL, '2023-02-13 00:26:44', NULL);
 INSERT INTO `no_transaksi` VALUES (3, 'produk', 'Item', 'ITM#SERIAL#', 4, 0, 'tahunan', '2023', '02', 3, 1, '2022-12-28 08:04:00', NULL, '2023-03-20 03:38:18', 1);
-INSERT INTO `no_transaksi` VALUES (4, 'penjualan', 'Pesanan Penjualan', 'SO#Y2##SERIAL#', 4, 1, 'tahunan', '2023', '03', 12, 1, '2022-12-28 08:17:51', NULL, '2023-03-21 13:39:02', NULL);
-INSERT INTO `no_transaksi` VALUES (5, 'pembelian', 'Pesanan Pembelian', 'PO#Y2##M#-#SERIAL#', 3, 1, 'bulanan', '2023', '03', 5, 1, '2023-01-25 10:04:21', NULL, '2023-03-12 14:59:13', NULL);
-INSERT INTO `no_transaksi` VALUES (6, 'tagihan', 'Tagihan Pembelian', 'BILL#Y2##M#-#SERIAL#', 3, 1, 'bulanan', '2023', '03', 8, 1, '2023-02-21 21:52:58', NULL, '2023-03-22 01:23:42', NULL);
-INSERT INTO `no_transaksi` VALUES (7, 'faktur', 'Nota Penjualan', 'A#Y2##M#-#SERIAL#', 3, 1, 'bulanan', '2023', '03', 5, 1, '2023-02-28 21:43:25', NULL, '2023-03-22 01:20:41', NULL);
+INSERT INTO `no_transaksi` VALUES (4, 'penjualan', 'Pesanan Penjualan', 'SO#Y2##SERIAL#', 4, 1, 'tahunan', '2023', '06', 17, 1, '2022-12-28 08:17:51', NULL, '2023-06-19 09:30:21', NULL);
+INSERT INTO `no_transaksi` VALUES (5, 'pembelian', 'Pesanan Pembelian', 'PO#Y2##M#-#SERIAL#', 3, 1, 'bulanan', '2023', '06', 5, 1, '2023-01-25 10:04:21', NULL, '2023-06-27 14:45:56', NULL);
+INSERT INTO `no_transaksi` VALUES (6, 'tagihan', 'Tagihan Pembelian', 'BILL#Y2##M#-#SERIAL#', 3, 1, 'bulanan', '2023', '06', 10, 1, '2023-02-21 21:52:58', NULL, '2023-06-27 14:48:50', NULL);
+INSERT INTO `no_transaksi` VALUES (7, 'faktur', 'Nota Penjualan', 'A#Y2##M#-#SERIAL#', 3, 1, 'bulanan', '2023', '07', 2, 1, '2023-02-28 21:43:25', NULL, '2023-07-04 11:25:45', NULL);
 INSERT INTO `no_transaksi` VALUES (8, 'pembayaran_pembelian', 'Pembayaran Pembelian', 'P-BILL#Y2##M#-#SERIAL#', 3, 1, 'bulanan', '2023', '03', 30, 1, '2023-02-21 21:52:58', NULL, '2023-03-14 11:08:28', NULL);
 
 -- ----------------------------
@@ -295,7 +552,7 @@ CREATE TABLE `pelanggan`  (
 -- ----------------------------
 -- Records of pelanggan
 -- ----------------------------
-INSERT INTO `pelanggan` VALUES (1, 'FRANSISCA', 'FRANSISCA', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-24 13:12:24', NULL, NULL, NULL);
+INSERT INTO `pelanggan` VALUES (1, 'FRANSISCA', 'FRANSISCA', 'TEST', '', '', '', '123123123', '', '', NULL, '', '', '', '', '', 1, '2023-03-24 13:12:24', NULL, '2023-04-27 03:45:37', 1);
 INSERT INTO `pelanggan` VALUES (2, 'Pauli', 'Pauli Rusli Bp', 'Casa Grande Tower Chianti Unit 1705', '', '', '', '0856.9787.8393', '0856.9787.8393', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-24 13:12:24', NULL, NULL, NULL);
 INSERT INTO `pelanggan` VALUES (3, 'PL.MARLIANA', 'Marliana', 'kelapa lilin 2 ng 4 No. 16', '', '', '', '0812.9269.800', '0812.9269.800', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-24 13:12:24', NULL, NULL, NULL);
 INSERT INTO `pelanggan` VALUES (4, 'PL_MUS', 'Mega Utama Snack PT', 'Jl.Sukamulya RT25/06 Desa Anggadita Kec Klari Karawang', '', '', '', '0267-431495+431496+0815.9982.835', '0267-431495+431496+0815.9982.835', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-24 13:12:24', NULL, NULL, NULL);
@@ -3824,7 +4081,7 @@ INSERT INTO `pelanggan` VALUES (3526, 'PL03670', 'Frans Bp.', 'Gading Elok Utara
 INSERT INTO `pelanggan` VALUES (3527, 'PL03673', 'Nulur Bp.', 'Pasar Impres RT06 Kontrakan Marjuki', '', '', '', '0896.3538.5689', '0896.3538.5689', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-24 13:12:31', NULL, NULL, NULL);
 INSERT INTO `pelanggan` VALUES (3528, 'PL03675', 'Ayu Ibu', 'Gading Mas Timur I4 No. 6 Belakang Don Bosco', '', '', '', '4585.5452', '4585.5452', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-24 13:12:31', NULL, NULL, NULL);
 INSERT INTO `pelanggan` VALUES (3529, 'PL03676', 'Lim Paulus Bp.', 'Kelapa Puan Timur 3 Blok ND 4 No. 33', '', '', '', '0812.8260.909', '0812.8260.909', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-24 13:12:31', NULL, NULL, NULL);
-INSERT INTO `pelanggan` VALUES (3530, 'PL03677', '(Rosita Ibu)', 'Jl.Pulo kambing 2 No.26, Kawasan Inds. Pulo Gadung', '', '', '', '460.5545', '460.5545', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-24 13:12:31', NULL, NULL, NULL);
+INSERT INTO `pelanggan` VALUES (3530, 'PL03677', '(Rosita Ibu)', 'Jl.Pulo kambing 2 No.26, Kawasan Inds. Pulo Gadung', '', '', '', '460.5545', '460.5545', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2023-03-24 13:12:31', NULL, '2023-03-29 17:34:40', 1);
 INSERT INTO `pelanggan` VALUES (3531, 'PL03679', 'Basuki Bp.', 'Jl Mimosa Raya Blok D2 No. 20/Sunter Indah 3 Blok KC 2 No. 16', '', '', '', '0816.1973.517', '0816.1973.517', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-24 13:12:31', NULL, NULL, NULL);
 INSERT INTO `pelanggan` VALUES (3532, 'PL0368', 'Tio Bp', 'Gading Nirwana I Blok PF 17 No.20Kelapa Gading', '', '', '', '08198929349', '08198929349', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-24 13:12:31', NULL, NULL, NULL);
 INSERT INTO `pelanggan` VALUES (3533, 'PL03680', 'Adrian Zulkarnain Bp.', 'APT Summit Tower Everest 2 No 9C', '', '', '', '0816.5096.02', '0816.5096.02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-03-24 13:12:31', NULL, NULL, NULL);
@@ -8137,14 +8394,23 @@ CREATE TABLE `pembayaran_beli`  (
   `tgl` date NOT NULL,
   `rek_pembayaran` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `nominal` int NULL DEFAULT NULL,
+  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `row_status` tinyint NOT NULL DEFAULT 1,
   `created_by` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pembayaran_beli
 -- ----------------------------
+INSERT INTO `pembayaran_beli` VALUES (31, 21, 'P-BILL2306-002-1', '2023-06-12', '3', 500000, 'test', 0, 1);
+INSERT INTO `pembayaran_beli` VALUES (32, 21, 'P-BILL2306-002-2', '2023-06-12', '3', 500000, 'test', 0, 1);
+INSERT INTO `pembayaran_beli` VALUES (33, 21, 'P-BILL2306-002-4', '2023-06-12', '3', 300000, 'test 300 upd', 0, 1);
+INSERT INTO `pembayaran_beli` VALUES (34, 22, 'P-BILL2306-003-1', '2023-06-13', '3', 350000, 'pelunasan', 0, 1);
+INSERT INTO `pembayaran_beli` VALUES (35, 22, 'P-BILL2306-003-4', '2023-06-13', '3', 300000, 'asd', 1, 1);
+INSERT INTO `pembayaran_beli` VALUES (36, 22, 'P-BILL2306-003-3', '2023-06-13', '3', 100000, 'test', 0, 1);
+INSERT INTO `pembayaran_beli` VALUES (37, 21, 'P-BILL2306-002-4', '2023-06-15', '3', 1000000, 'OK/LN', 1, 1);
+INSERT INTO `pembayaran_beli` VALUES (38, 21, 'P-BILL2306-002-5', '2023-06-15', '2', 2000000, 'sip', 1, 1);
 
 -- ----------------------------
 -- Table structure for pembayaran_faktur
@@ -8157,14 +8423,19 @@ CREATE TABLE `pembayaran_faktur`  (
   `tgl` date NOT NULL,
   `rek_pembayaran` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `nominal` int NULL DEFAULT NULL,
+  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `row_status` tinyint NOT NULL DEFAULT 1,
   `created_by` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pembayaran_faktur
 -- ----------------------------
+INSERT INTO `pembayaran_faktur` VALUES (14, 23, 'P-A2306-003-1', '2023-06-13', '3', 500000, NULL, 1, 1);
+INSERT INTO `pembayaran_faktur` VALUES (15, 24, 'P-A2306-004-2', '2023-06-13', '3', 140000, 'lunas', 1, 1);
+INSERT INTO `pembayaran_faktur` VALUES (16, 23, 'P-A2306-003-2', '2023-06-15', '1', 240000, 'test', 1, 1);
+INSERT INTO `pembayaran_faktur` VALUES (17, 27, 'P-A2306-007-2', '2023-06-19', '3', 10, 'asd', 0, 1);
 
 -- ----------------------------
 -- Table structure for pembelian
@@ -8189,11 +8460,14 @@ CREATE TABLE `pembelian`  (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pembelian
 -- ----------------------------
+INSERT INTO `pembelian` VALUES (14, 'PO2306-002', '2023-06-12', '2023-06-12', 60, '', 12, 8, 5700000, 700000, 100000, 5100000, 1, '2023-06-12 23:17:48', 1, '2023-06-14 15:07:51', NULL);
+INSERT INTO `pembelian` VALUES (15, 'PO2306-003', '2023-06-19', '2023-06-19', 101, 'asdasdas', 1, 1, 9600, 0, 0, 9600, 1, '2023-06-19 09:31:46', 1, '2023-06-21 16:41:59', 1);
+INSERT INTO `pembelian` VALUES (16, 'PO2306-004', '2023-06-27', '2023-06-27', 101, '', 10, 10, 1500000, 0, 0, 1500000, 1, '2023-06-27 14:45:56', 1, '2023-06-27 14:46:23', NULL);
 
 -- ----------------------------
 -- Table structure for pembelian_detail
@@ -8216,11 +8490,15 @@ CREATE TABLE `pembelian_detail`  (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pembelian_detail
 -- ----------------------------
+INSERT INTO `pembelian_detail` VALUES (30, 14, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 10, 75000, 5000, 700000, 1, '2023-06-12 23:17:48', NULL, NULL, NULL);
+INSERT INTO `pembelian_detail` VALUES (31, 14, 1348, 'Rice Cooker Winn Gas', 16, 'unit', 2, 2873900, 373900, 5000000, 1, '2023-06-12 23:17:48', NULL, NULL, NULL);
+INSERT INTO `pembelian_detail` VALUES (33, 15, 6, '1003', 1, 'meter', 1, 9600, 0, 9600, 1, '2023-06-21 16:41:59', NULL, NULL, NULL);
+INSERT INTO `pembelian_detail` VALUES (34, 16, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 10, 150000, 0, 1500000, 1, '2023-06-27 14:45:56', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for penerimaan
@@ -8237,6 +8515,7 @@ CREATE TABLE `penerimaan`  (
   `total` int NOT NULL,
   `diskon_faktur` int NOT NULL,
   `biaya_lain` int NOT NULL,
+  `keterangan_biaya_lain` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `grand_total` int NOT NULL,
   `uang_muka` int NULL DEFAULT NULL,
   `rek_pembayaran_dp` int NULL DEFAULT NULL,
@@ -8247,11 +8526,19 @@ CREATE TABLE `penerimaan`  (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of penerimaan
 -- ----------------------------
+INSERT INTO `penerimaan` VALUES (21, 'BILL2306-002', '2023-06-12', 60, '14', 'test', 7, 5350000, 700000, 100000, 'biaya kirim', 4750000, NULL, NULL, NULL, 1, '2023-06-12 23:19:36', 1, '2023-06-13 13:53:40', 1);
+INSERT INTO `penerimaan` VALUES (22, 'BILL2306-003', '2023-06-13', 60, '14', 'test', 1, 300000, 0, 0, '', 300000, NULL, NULL, NULL, 1, '2023-06-13 00:07:23', 1, '2023-06-14 15:07:51', 1);
+INSERT INTO `penerimaan` VALUES (23, 'BILL2306-004', '2023-06-19', 101, '15', '', 1, 9600, 0, 0, '', 9600, NULL, NULL, NULL, 1, '2023-06-19 09:32:34', 1, NULL, NULL);
+INSERT INTO `penerimaan` VALUES (24, 'BILL2306-005', '2023-06-27', 101, '', '', 11, 1612000, 0, 0, '', 1612000, NULL, NULL, NULL, 1, '2023-06-27 14:40:23', 1, '2023-06-27 14:41:52', 1);
+INSERT INTO `penerimaan` VALUES (25, 'BILL2306-006', '2023-06-27', 101, '', '', 10, 1000000, 0, 0, '', 1000000, NULL, NULL, NULL, 1, '2023-06-27 14:44:10', 1, '2023-06-27 14:44:56', 1);
+INSERT INTO `penerimaan` VALUES (26, 'BILL2306-007', '2023-06-27', 101, '16', '', 10, 1500000, 0, 0, '', 1500000, NULL, NULL, NULL, 1, '2023-06-27 14:46:23', 1, NULL, NULL);
+INSERT INTO `penerimaan` VALUES (27, 'BILL2306-008', '2023-06-27', 101, '', '', 10, 1500000, 0, 0, '', 1500000, NULL, NULL, NULL, 1, '2023-06-27 14:48:10', 1, NULL, NULL);
+INSERT INTO `penerimaan` VALUES (28, 'BILL2306-009', '2023-06-27', 101, '', '', 15, 2550000, 0, 0, '', 2550000, NULL, NULL, NULL, 1, '2023-06-27 14:48:50', 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for penerimaan_detail
@@ -8274,11 +8561,21 @@ CREATE TABLE `penerimaan_detail`  (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 83 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of penerimaan_detail
 -- ----------------------------
+INSERT INTO `penerimaan_detail` VALUES (59, 21, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 5, 75000, 5000, 350000, 1, '2023-06-13 00:05:58', NULL, NULL, NULL);
+INSERT INTO `penerimaan_detail` VALUES (60, 21, 1348, 'Rice Cooker Winn Gas', 16, 'unit', 2, 2873900, 373900, 5000000, 1, '2023-06-13 00:05:58', NULL, NULL, NULL);
+INSERT INTO `penerimaan_detail` VALUES (66, 22, 499, 'Pasang AC 0.5-1 PK', 9, 'set', 1, 300000, 0, 300000, 1, '2023-06-14 15:07:51', NULL, NULL, NULL);
+INSERT INTO `penerimaan_detail` VALUES (67, 23, 6, '1003', 1, 'meter', 1, 9600, 0, 9600, 1, '2023-06-19 09:32:34', NULL, NULL, NULL);
+INSERT INTO `penerimaan_detail` VALUES (76, 24, 6, '1003', 1, 'meter', 1, 12000, 0, 12000, 1, '2023-06-27 14:43:39', NULL, NULL, NULL);
+INSERT INTO `penerimaan_detail` VALUES (77, 24, 1338, 'Antena', 16, 'unit', 10, 160000, 0, 1600000, 1, '2023-06-27 14:43:39', NULL, NULL, NULL);
+INSERT INTO `penerimaan_detail` VALUES (79, 25, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 10, 100000, 0, 1000000, 1, '2023-06-27 14:44:56', NULL, NULL, NULL);
+INSERT INTO `penerimaan_detail` VALUES (80, 26, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 10, 150000, 0, 1500000, 1, '2023-06-27 14:46:23', NULL, NULL, NULL);
+INSERT INTO `penerimaan_detail` VALUES (81, 27, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 10, 150000, 0, 1500000, 1, '2023-06-27 14:48:10', NULL, NULL, NULL);
+INSERT INTO `penerimaan_detail` VALUES (82, 28, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 15, 170000, 0, 2550000, 1, '2023-06-27 14:48:50', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for pengembalian_pipa
@@ -8292,6 +8589,7 @@ CREATE TABLE `pengembalian_pipa`  (
   `qty` int NULL DEFAULT NULL,
   `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `row_status` tinyint NOT NULL DEFAULT 1,
+  `is_approve` int NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp,
   `created_by` int NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -8299,11 +8597,21 @@ CREATE TABLE `pengembalian_pipa`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `pp_id_pengiriman`(`id_pengiriman`) USING BTREE,
   CONSTRAINT `fk_pp_id_pengiriman` FOREIGN KEY (`id_pengiriman`) REFERENCES `pengiriman` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pengembalian_pipa
 -- ----------------------------
+INSERT INTO `pengembalian_pipa` VALUES (24, 'RP-A2306-003-001', '2023-06-13', 27, 10, '', 1, 1, '2023-06-13 13:36:46', 1, '2023-06-13 13:38:43', NULL);
+INSERT INTO `pengembalian_pipa` VALUES (25, 'RP-A2306-004-001', '2023-06-15', 28, 10, '', 0, 1, '2023-06-15 10:21:58', 1, '2023-06-15 10:54:38', 1);
+INSERT INTO `pengembalian_pipa` VALUES (26, 'RP-A2306-003-001', '2023-06-15', 27, 10, '', 1, 0, '2023-06-15 10:50:59', 1, NULL, NULL);
+INSERT INTO `pengembalian_pipa` VALUES (27, 'RP-A2306-006-001', '2023-06-15', 33, 10, 'test', 1, 1, '2023-06-15 16:05:37', 1, '2023-06-15 16:06:00', NULL);
+INSERT INTO `pengembalian_pipa` VALUES (28, 'RP-2306-006-002', '2023-06-20', 36, 1, NULL, 1, 1, '2023-06-20 10:23:19', 1, '2023-06-20 10:23:41', NULL);
+INSERT INTO `pengembalian_pipa` VALUES (29, 'RP-A2306-007-002', '2023-06-20', 37, 50, NULL, 1, 1, '2023-06-20 10:37:39', 1, '2023-06-20 10:48:43', NULL);
+INSERT INTO `pengembalian_pipa` VALUES (30, 'RP-2307-001-001', '2023-07-04', 38, 12, '', 0, 1, '2023-07-04 11:30:17', 1, '2023-07-04 12:37:37', 1);
+INSERT INTO `pengembalian_pipa` VALUES (31, 'RP-2307-001-001', '2023-07-04', 38, 12, '', 0, 1, '2023-07-04 12:39:35', 1, '2023-07-04 12:41:33', 1);
+INSERT INTO `pengembalian_pipa` VALUES (32, 'RP-2307-001-001', '2023-07-04', 38, 10, '', 0, 1, '2023-07-04 12:42:13', 1, '2023-07-04 12:45:04', 1);
+INSERT INTO `pengembalian_pipa` VALUES (33, 'RP-2307-001-001', '2023-07-04', 38, 11, '', 1, 1, '2023-07-04 12:45:39', 1, '2023-07-04 12:45:46', NULL);
 
 -- ----------------------------
 -- Table structure for pengembalian_pipa_detail
@@ -8328,11 +8636,36 @@ CREATE TABLE `pengembalian_pipa_detail`  (
   INDEX `ppd_id_satuan`(`id_satuan`) USING BTREE,
   CONSTRAINT `fk_ppd_id_pengembalian_pipa` FOREIGN KEY (`id_pengembalian_pipa`) REFERENCES `pengembalian_pipa` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `fk_ppd_id_produk` FOREIGN KEY (`id_produk`) REFERENCES `ref_produk` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 66 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pengembalian_pipa_detail
 -- ----------------------------
+INSERT INTO `pengembalian_pipa_detail` VALUES (40, 24, 6, 1, 'meter', 110, 10, 1, '2023-06-13 13:36:46', 1, NULL, NULL);
+INSERT INTO `pengembalian_pipa_detail` VALUES (41, 25, 7, 1, 'meter', 100, 10, 0, '2023-06-15 10:21:58', 1, '2023-06-15 10:54:38', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (42, 26, 6, 1, 'meter', 110, 10, 1, '2023-06-15 10:50:59', 1, NULL, NULL);
+INSERT INTO `pengembalian_pipa_detail` VALUES (43, 27, 6, 1, 'meter', 100, 10, 1, '2023-06-15 16:05:37', 1, NULL, NULL);
+INSERT INTO `pengembalian_pipa_detail` VALUES (44, 28, 6, 1, 'meter', 2, 1, 1, '2023-06-20 10:23:19', 1, NULL, NULL);
+INSERT INTO `pengembalian_pipa_detail` VALUES (46, 29, 7, 1, 'meter', 100, 50, 1, '2023-06-20 10:48:07', 1, NULL, NULL);
+INSERT INTO `pengembalian_pipa_detail` VALUES (47, 29, 6, 1, 'meter', 5, 0, 1, '2023-06-20 10:48:07', 1, NULL, NULL);
+INSERT INTO `pengembalian_pipa_detail` VALUES (48, 30, 6, 1, 'meter', 10, 2, 0, '2023-07-04 11:30:17', 1, '2023-07-04 12:02:41', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (49, 30, 6, 1, 'meter', 10, 2, 0, '2023-07-04 12:02:41', 1, '2023-07-04 12:37:37', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (50, 30, 7, 1, 'meter', 50, 10, 0, '2023-07-04 12:02:41', 1, '2023-07-04 12:37:37', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (51, 31, 6, 1, 'meter', 10, 2, 0, '2023-07-04 12:39:35', 1, '2023-07-04 12:41:33', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (52, 31, 7, 1, 'meter', 50, 10, 0, '2023-07-04 12:39:35', 1, '2023-07-04 12:41:33', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (53, 31, 8, 1, 'meter', 2, 0, 0, '2023-07-04 12:39:35', 1, '2023-07-04 12:41:33', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (54, 32, 6, 1, 'meter', 10, 2, 0, '2023-07-04 12:42:13', 1, '2023-07-04 12:42:57', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (55, 32, 7, 1, 'meter', 50, 10, 0, '2023-07-04 12:42:13', 1, '2023-07-04 12:42:57', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (56, 32, 8, 1, 'meter', 2, 0, 0, '2023-07-04 12:42:13', 1, '2023-07-04 12:42:57', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (57, 32, 6, 1, 'meter', 10, 2, 0, '2023-07-04 12:42:57', 1, '2023-07-04 12:43:11', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (58, 32, 7, 1, 'meter', 50, 9, 0, '2023-07-04 12:42:57', 1, '2023-07-04 12:43:11', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (59, 32, 8, 1, 'meter', 2, 0, 0, '2023-07-04 12:42:57', 1, '2023-07-04 12:43:11', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (60, 32, 6, 1, 'meter', 10, 1, 0, '2023-07-04 12:43:11', 1, '2023-07-04 12:45:04', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (61, 32, 7, 1, 'meter', 50, 9, 0, '2023-07-04 12:43:11', 1, '2023-07-04 12:45:04', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (62, 32, 8, 1, 'meter', 2, 0, 0, '2023-07-04 12:43:11', 1, '2023-07-04 12:45:04', 1);
+INSERT INTO `pengembalian_pipa_detail` VALUES (63, 33, 6, 1, 'meter', 10, 1, 1, '2023-07-04 12:45:39', 1, NULL, NULL);
+INSERT INTO `pengembalian_pipa_detail` VALUES (64, 33, 7, 1, 'meter', 50, 10, 1, '2023-07-04 12:45:39', 1, NULL, NULL);
+INSERT INTO `pengembalian_pipa_detail` VALUES (65, 33, 8, 1, 'meter', 2, 0, 1, '2023-07-04 12:45:39', 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for pengguna
@@ -8355,12 +8688,15 @@ CREATE TABLE `pengguna`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `id_pengguna_grup`(`id_pengguna_grup`) USING BTREE,
   CONSTRAINT `pengguna_ibfk_1` FOREIGN KEY (`id_pengguna_grup`) REFERENCES `pengguna_grup` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pengguna
 -- ----------------------------
 INSERT INTO `pengguna` VALUES (1, 'Pollux Integra', 26, 'admin@polluxintegra.co.id', 'd3f37ce179332a0f3c1c40237655658b', 'pollux', 1, 0, 1, '2022-09-05 11:58:06', NULL, '2023-03-15 11:48:27', NULL);
+INSERT INTO `pengguna` VALUES (10, 'Tukang', 24, 'tukang@gmail.com', 'd3f37ce179332a0f3c1c40237655658b', 'tukang', 2, 0, 1, '2023-03-29 13:03:30', 1, '2023-05-03 21:54:48', NULL);
+INSERT INTO `pengguna` VALUES (11, 'Tukang 1', 24, 'a@gmail.com', 'd3f37ce179332a0f3c1c40237655658b', 'tukang1', 2, 0, 1, '2023-06-20 11:02:53', 1, NULL, NULL);
+INSERT INTO `pengguna` VALUES (12, 'Tukang 2', 24, 'tukang2@gmail.com', 'd3f37ce179332a0f3c1c40237655658b', 'tukang2', 2, 0, 1, '2023-06-20 11:03:29', 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for pengguna_cookie
@@ -8400,12 +8736,13 @@ CREATE TABLE `pengguna_grup`  (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pengguna_grup
 -- ----------------------------
 INSERT INTO `pengguna_grup` VALUES (1, 'Superadmin', 1, 1, '2022-09-05 11:57:20', NULL, '2022-12-27 15:23:35', 1);
+INSERT INTO `pengguna_grup` VALUES (2, 'Supir, Kenek, Teknisi', 2, 1, '2023-03-29 13:02:09', 1, '2023-06-20 11:02:02', 1);
 
 -- ----------------------------
 -- Table structure for pengguna_grup_menu
@@ -8426,39 +8763,44 @@ CREATE TABLE `pengguna_grup_menu`  (
   INDEX `id_menu`(`id_menu`) USING BTREE,
   CONSTRAINT `pengguna_grup_menu_ibfk_1` FOREIGN KEY (`id_pengguna_grup`) REFERENCES `pengguna_grup` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pengguna_grup_menu_ibfk_2` FOREIGN KEY (`id_menu`) REFERENCES `menu` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 158 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pengguna_grup_menu
 -- ----------------------------
-INSERT INTO `pengguna_grup_menu` VALUES (1, 1, 1, 'r', 1, '2023-03-24 11:43:43', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (2, 1, 2, 'r', 1, '2023-03-24 11:43:43', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (3, 1, 3, 'r', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (4, 1, 4, 'r', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (5, 1, 5, 'r', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (6, 1, 6, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (7, 1, 7, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (8, 1, 8, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (9, 1, 9, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (10, 1, 10, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (11, 1, 11, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (12, 1, 12, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (13, 1, 13, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (14, 1, 14, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (15, 1, 15, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (16, 1, 16, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (17, 1, 17, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (18, 1, 18, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (19, 1, 19, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (20, 1, 20, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (21, 1, 21, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (22, 1, 22, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (23, 1, 23, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (24, 1, 24, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (25, 1, 25, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (26, 1, 26, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (27, 1, 27, 'r', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
-INSERT INTO `pengguna_grup_menu` VALUES (28, 1, 28, 'c,r,u,d', 1, '2023-03-24 11:43:44', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (95, 2, 3, 'r', 1, '2023-06-20 11:02:02', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (96, 2, 19, 'r,c,u', 1, '2023-06-20 11:02:02', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (97, 2, 20, 'r,c,u', 1, '2023-06-20 11:02:02', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (128, 1, 1, 'r', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (129, 1, 7, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (130, 1, 8, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (131, 1, 9, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (132, 1, 10, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (133, 1, 11, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (134, 1, 12, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (135, 1, 13, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (136, 1, 14, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (137, 1, 2, 'r', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (138, 1, 15, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (139, 1, 16, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (140, 1, 3, 'r', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (141, 1, 17, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (142, 1, 18, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (143, 1, 19, 'r,c,u,d,a', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (144, 1, 20, 'r,c,u,d,a', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (145, 1, 6, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (146, 1, 27, 'r', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (147, 1, 28, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (148, 1, 4, 'r', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (149, 1, 21, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (150, 1, 22, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (151, 1, 23, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (152, 1, 5, 'r', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (153, 1, 24, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (154, 1, 31, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (155, 1, 25, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (156, 1, 26, 'r,c,u,d', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
+INSERT INTO `pengguna_grup_menu` VALUES (157, 1, 32, 'r,a', 1, '2023-06-21 09:43:57', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for pengiriman
@@ -8470,21 +8812,37 @@ CREATE TABLE `pengiriman`  (
   `tgl` date NOT NULL,
   `id_pelanggan` int NOT NULL,
   `id_faktur` int NOT NULL,
-  `alamat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `alamat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `status` int NOT NULL DEFAULT 1,
   `row_status` tinyint NOT NULL DEFAULT 1,
+  `is_approve` int NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp,
   `created_by` int NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   `qty_pesan` int NULL DEFAULT NULL,
   `qty_nota` int NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `pengiriman_id_pelanggan`(`id_pelanggan`) USING BTREE,
+  INDEX `pengiriman_id_faktur`(`id_faktur`) USING BTREE,
+  CONSTRAINT `fk_pengiriman_id_faktur` FOREIGN KEY (`id_faktur`) REFERENCES `faktur` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pengiriman_id_pelanggan` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pengiriman
 -- ----------------------------
+INSERT INTO `pengiriman` VALUES (27, 'P-A2306-003-001', '2023-05-16', 2735, 23, '', '', 1, 1, 1, '2023-06-13 13:27:58', 1, '2023-06-20 14:25:16', NULL, 110, 12);
+INSERT INTO `pengiriman` VALUES (28, 'P-A2306-004-001', '2023-06-15', 6332, 24, '', '', 1, 0, 1, '2023-06-15 10:19:44', 1, '2023-06-15 17:15:36', 1, 100, 2);
+INSERT INTO `pengiriman` VALUES (29, 'P-A2306-005-001', '2023-06-15', 585, 25, '', '', 1, 0, 0, '2023-06-15 10:47:16', 1, '2023-06-15 17:15:31', 1, 110, 1);
+INSERT INTO `pengiriman` VALUES (33, 'P-A2306-006-001', '2023-06-15', 2735, 26, '', '', 1, 0, 0, '2023-06-15 16:01:11', 1, '2023-06-15 17:09:28', 1, 100, 1);
+INSERT INTO `pengiriman` VALUES (34, 'P-A2306-005-003', '2023-06-19', 585, 25, 'MP', NULL, 1, 1, 0, '2023-06-19 16:35:06', 1, '2023-06-19 16:40:47', 1, 111, 1);
+INSERT INTO `pengiriman` VALUES (35, 'P-A2306-004-002', '2023-06-20', 6332, 24, 'Lavon 2, Margonite 8 No. 5Cikupa', NULL, 1, 1, 1, '2023-06-20 10:17:12', 1, '2023-06-20 10:17:56', NULL, 0, 2);
+INSERT INTO `pengiriman` VALUES (36, 'P-A2306-006-002', '2023-06-20', 2735, 26, 'Kelapa Lilin 10 Blok NI 9 No. 12A', 'test', 1, 1, 1, '2023-06-20 10:22:05', 1, '2023-06-20 10:22:38', NULL, 2, 2);
+INSERT INTO `pengiriman` VALUES (37, 'P-A2306-007-002', '2023-06-20', 585, 27, 'MP', NULL, 1, 1, 1, '2023-06-20 10:32:19', 1, '2023-06-20 10:35:30', 1, 105, 9);
+INSERT INTO `pengiriman` VALUES (38, 'P-A2307-001-001', '2023-07-04', 585, 30, '', '', 1, 1, 1, '2023-07-04 11:27:05', 1, '2023-07-04 12:21:48', 1, 62, 3);
+INSERT INTO `pengiriman` VALUES (39, 'P-A2306-008-001', '2023-08-01', 6332, 28, '', '', 1, 1, 1, '2023-08-01 00:31:27', 1, '2023-08-01 00:32:50', 1, 7, 30);
 
 -- ----------------------------
 -- Table structure for pengiriman_detail
@@ -8497,20 +8855,33 @@ CREATE TABLE `pengiriman_detail`  (
   `id_satuan` int NOT NULL,
   `satuan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `qty` int NOT NULL,
-  `harga_satuan` int NOT NULL,
+  `harga_satuan` int NOT NULL DEFAULT 0,
   `uraian` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `sub_total` int NOT NULL,
+  `sub_total` int NOT NULL DEFAULT 0,
   `row_status` tinyint NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp,
   `created_by` int NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 81 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pengiriman_detail
 -- ----------------------------
+INSERT INTO `pengiriman_detail` VALUES (46, 27, 6, 1, 'meter', 110, 0, '1003', 0, 1, '2023-06-13 13:27:58', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail` VALUES (47, 28, 7, 1, 'meter', 100, 0, '1004', 0, 0, '2023-06-15 10:19:44', NULL, '2023-06-15 17:15:36', 1);
+INSERT INTO `pengiriman_detail` VALUES (48, 29, 11, 1, 'meter', 110, 0, '1008', 0, 0, '2023-06-15 10:47:16', NULL, '2023-06-15 17:15:31', 1);
+INSERT INTO `pengiriman_detail` VALUES (52, 33, 6, 1, 'meter', 100, 0, '1003', 0, 0, '2023-06-15 16:01:11', NULL, '2023-06-15 17:09:28', 1);
+INSERT INTO `pengiriman_detail` VALUES (55, 34, 7, 1, 'meter', 100, 0, '1004 - 1004', 0, 1, '2023-06-19 16:40:47', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail` VALUES (56, 34, 6, 1, 'meter', 11, 0, '1003 - 1003', 0, 1, '2023-06-19 16:40:47', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail` VALUES (57, 36, 6, 1, 'meter', 2, 0, '1003 - 1003', 0, 1, '2023-06-20 10:22:05', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail` VALUES (60, 37, 7, 1, 'meter', 100, 0, '1004 - 1004', 0, 1, '2023-06-20 10:34:23', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail` VALUES (61, 37, 6, 1, 'meter', 5, 0, '1003 - 1003', 0, 1, '2023-06-20 10:34:23', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail` VALUES (76, 38, 6, 1, 'meter', 10, 0, '1003', 0, 1, '2023-07-04 12:45:04', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail` VALUES (77, 38, 7, 1, 'meter', 50, 0, '1004', 0, 1, '2023-07-04 12:45:04', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail` VALUES (78, 38, 8, 1, 'meter', 2, 0, '1005', 0, 1, '2023-07-04 12:45:04', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail` VALUES (80, 39, 6, 1, 'meter', 7, 0, '1003', 0, 1, '2023-08-01 00:32:50', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for pengiriman_detail_nota
@@ -8524,20 +8895,84 @@ CREATE TABLE `pengiriman_detail_nota`  (
   `id_satuan` int NOT NULL,
   `satuan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `qty` int NOT NULL,
-  `harga_satuan` int NOT NULL,
-  `diskon` int NOT NULL,
-  `sub_total` int NOT NULL,
+  `harga_satuan` int NOT NULL DEFAULT 0,
+  `diskon` int NOT NULL DEFAULT 0,
+  `sub_total` int NOT NULL DEFAULT 0,
   `row_status` tinyint NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp,
   `created_by` int NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 85 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pengiriman_detail_nota
 -- ----------------------------
+INSERT INTO `pengiriman_detail_nota` VALUES (44, 27, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 10, 0, 0, 0, 1, '2023-06-13 13:27:58', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail_nota` VALUES (45, 27, 1366, 'Duct Tape', 17, 'roll', 2, 0, 0, 0, 1, '2023-06-13 13:27:58', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail_nota` VALUES (46, 28, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 2, 0, 0, 0, 0, '2023-06-15 10:19:44', NULL, '2023-06-15 17:15:36', 1);
+INSERT INTO `pengiriman_detail_nota` VALUES (47, 29, 499, 'Pasang AC 0.5-1 PK fucc', 9, 'set', 1, 0, 0, 0, 0, '2023-06-15 10:47:16', NULL, '2023-06-15 17:15:31', 1);
+INSERT INTO `pengiriman_detail_nota` VALUES (56, 33, 526, 'Ac Split AQUA 1PK', 16, 'unit', 1, 0, 0, 0, 0, '2023-06-15 16:01:11', NULL, '2023-06-15 17:09:28', 1);
+INSERT INTO `pengiriman_detail_nota` VALUES (58, 34, 499, 'Pasang AC 0.5-1 PK', 9, 'set', 1, 0, 0, 0, 1, '2023-06-19 16:40:47', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail_nota` VALUES (59, 35, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 2, 0, 0, 0, 1, '2023-06-20 10:17:12', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail_nota` VALUES (60, 36, 499, 'Pasang AC 0.5-1 PK', 9, 'set', 1, 0, 0, 0, 1, '2023-06-20 10:22:05', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail_nota` VALUES (61, 36, 526, 'Ac Split AQUA 1PK', 16, 'unit', 1, 0, 0, 0, 1, '2023-06-20 10:22:05', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail_nota` VALUES (65, 37, 2, 'PIPA FREON 2.5-3PK', 1, 'meter', 1, 0, 0, 0, 1, '2023-06-20 10:34:23', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail_nota` VALUES (66, 37, 516, 'Kulkas 1 Pintu Aqua AQR 190', 16, 'unit', 5, 0, 0, 0, 1, '2023-06-20 10:34:23', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail_nota` VALUES (67, 37, 525, 'Ac Split AQUA 3/4 PK', 16, 'unit', 3, 0, 0, 0, 1, '2023-06-20 10:34:23', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail_nota` VALUES (79, 38, 253, 'AC Split AQUA 1/2 pk', 2, 'pcs', 2, 0, 0, 0, 1, '2023-07-04 12:45:04', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail_nota` VALUES (80, 38, 604, 'Rice Cooker Cosmos CRJ101', 16, 'unit', 1, 0, 0, 0, 1, '2023-07-04 12:45:04', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail_nota` VALUES (83, 39, 603, 'Dispenser Portable Cosmos', 16, 'unit', 10, 0, 0, 0, 1, '2023-08-01 00:32:50', NULL, NULL, NULL);
+INSERT INTO `pengiriman_detail_nota` VALUES (84, 39, 895, 'Chest Freezer Modena 100L', 16, 'unit', 20, 0, 0, 0, 1, '2023-08-01 00:32:50', NULL, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for pengiriman_person
+-- ----------------------------
+DROP TABLE IF EXISTS `pengiriman_person`;
+CREATE TABLE `pengiriman_person`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_pengiriman` int NOT NULL,
+  `id_pengguna` int NOT NULL,
+  `tipe` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'supir , kenek , teknisi',
+  `keterangan` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `row_status` tinyint NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp,
+  `created_by` int NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `pgp_id_pengiriman`(`id_pengiriman`) USING BTREE,
+  INDEX `pgp_id_pengguna`(`id_pengguna`) USING BTREE,
+  CONSTRAINT `fk_pgp_id_pengguna` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pgp_id_pengiriman` FOREIGN KEY (`id_pengiriman`) REFERENCES `pengiriman` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE = InnoDB AUTO_INCREMENT = 124 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of pengiriman_person
+-- ----------------------------
+INSERT INTO `pengiriman_person` VALUES (87, 27, 1, 'supir', NULL, 1, '2023-06-13 13:27:58', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (88, 27, 10, 'kenek', NULL, 1, '2023-06-13 13:27:58', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (89, 27, 10, 'teknisi', NULL, 1, '2023-06-13 13:27:58', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (90, 28, 1, 'supir', NULL, 1, '2023-06-15 10:19:44', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (91, 28, 1, 'kenek', NULL, 1, '2023-06-15 10:19:44', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (92, 28, 1, 'teknisi', NULL, 1, '2023-06-15 10:19:44', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (93, 29, 1, 'supir', NULL, 1, '2023-06-15 10:47:16', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (94, 29, 10, 'kenek', NULL, 1, '2023-06-15 10:47:16', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (95, 29, 1, 'teknisi', NULL, 1, '2023-06-15 10:47:16', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (99, 34, 1, 'supir', NULL, 1, '2023-06-19 16:40:47', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (100, 34, 10, 'kenek', NULL, 1, '2023-06-19 16:40:47', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (101, 34, 10, 'teknisi', NULL, 1, '2023-06-19 16:40:47', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (102, 35, 1, 'supir', NULL, 1, '2023-06-20 10:17:12', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (103, 36, 1, 'supir', NULL, 1, '2023-06-20 10:22:05', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (107, 37, 1, 'supir', NULL, 1, '2023-06-20 10:34:23', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (108, 37, 1, 'kenek', NULL, 1, '2023-06-20 10:34:23', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (109, 37, 10, 'teknisi', NULL, 1, '2023-06-20 10:34:23', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (110, 37, 1, 'teknisi', NULL, 1, '2023-06-15 10:47:16', NULL, '2023-06-20 11:35:28', NULL);
+INSERT INTO `pengiriman_person` VALUES (117, 38, 1, 'supir', NULL, 1, '2023-07-04 12:45:04', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (121, 39, 1, 'supir', NULL, 1, '2023-08-01 00:32:50', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (122, 39, 10, 'kenek', NULL, 1, '2023-08-01 00:32:50', NULL, NULL, NULL);
+INSERT INTO `pengiriman_person` VALUES (123, 39, 10, 'teknisi', NULL, 1, '2023-08-01 00:32:50', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for penjualan
@@ -8562,11 +8997,13 @@ CREATE TABLE `penjualan`  (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of penjualan
 -- ----------------------------
+INSERT INTO `penjualan` VALUES (16, 'SO230015', '2023-06-13', '2023-06-13', 2735, 'Test', 12, 12, 690000, 0, 50000, 740000, 1, '2023-06-13 12:24:50', 1, '2023-06-13 12:30:43', 1);
+INSERT INTO `penjualan` VALUES (17, 'SO230016', '2023-06-19', '2023-06-19', 585, 'asdasdas', 1, 0, 10, 0, 0, 10, 1, '2023-06-19 09:30:21', 1, '2023-06-21 16:44:59', 1);
 
 -- ----------------------------
 -- Table structure for penjualan_detail
@@ -8589,11 +9026,14 @@ CREATE TABLE `penjualan_detail`  (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of penjualan_detail
 -- ----------------------------
+INSERT INTO `penjualan_detail` VALUES (39, 16, 2, 'PIPA FREON 2.5-3PK fuxk', 1, 'meter', 10, 70000, 5000, 650000, 1, '2023-06-15 10:32:09', NULL, NULL, NULL);
+INSERT INTO `penjualan_detail` VALUES (40, 16, 1366, 'Duct Tape', 17, 'roll', 2, 20000, 0, 40000, 1, '2023-06-15 10:32:09', NULL, NULL, NULL);
+INSERT INTO `penjualan_detail` VALUES (42, 17, 476, 'Tangga 2M', 2, 'pcs', 1, 10, 0, 10, 1, '2023-06-21 16:44:59', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for profil
@@ -8617,7 +9057,7 @@ CREATE TABLE `profil`  (
 -- ----------------------------
 -- Records of profil
 -- ----------------------------
-INSERT INTO `profil` VALUES (1, 'MAKMUR PERMAI ELEKTRONIK', 'Jl. Boulevard Timur Raya Blok NE1 No. 40\r\nKel. Pegangsaan Dua, Kec. Kelapa Gading\r\nKota Jakarta Utara, DKI Jakarta', '0821-1002-0020', 'info@yasacatering.co.id', 'https://toko-makmur-permai.business.site', 1, '2022-12-27 16:38:14', NULL, '2023-01-25 09:44:45', NULL);
+INSERT INTO `profil` VALUES (1, 'MAKMUR PERMAI', 'Boulevard Timur Blok NE1 No. 40<br>Telp:453.0095 4584.2138 4584.2139<br>Fax: 453.0093', '0821-1002-0020', '', '', 1, '2022-12-27 16:38:14', NULL, '2023-03-28 00:44:18', NULL);
 
 -- ----------------------------
 -- Table structure for ref_lookup
@@ -8809,6 +9249,7 @@ CREATE TABLE `ref_produk`  (
   `id_merek` int NOT NULL,
   `harga_beli` int NOT NULL,
   `harga_jual` int NOT NULL,
+  `is_qty_editable` int NOT NULL DEFAULT 0,
   `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `row_status` tinyint NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp,
@@ -8816,1407 +9257,1408 @@ CREATE TABLE `ref_produk`  (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1397 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1398 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ref_produk
 -- ----------------------------
-INSERT INTO `ref_produk` VALUES (1, '003', 20, 'AC SPLIT DAIKIN 2PK', 16, 27, 40, 0, 0, NULL, 0, '2023-02-21 20:32:27', 1, '2023-03-11 11:15:50', NULL);
-INSERT INTO `ref_produk` VALUES (2, '004', 20, 'PIPA FREON 2.5-3PK', 1, 27, 40, 0, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (3, '005', 20, 'UCHIDA 2PK', 16, 28, 40, 0, 0, NULL, 0, '2023-02-21 20:32:27', 1, '2023-03-11 11:13:32', NULL);
-INSERT INTO `ref_produk` VALUES (4, '1001', 22, '1001', 1, 29, 41, 9600, 0, NULL, 0, '2023-02-21 20:32:27', 1, '2023-03-11 11:13:46', NULL);
-INSERT INTO `ref_produk` VALUES (5, '1002', 22, '1002', 1, 29, 41, 9600, 0, NULL, 0, '2023-02-21 20:32:27', 1, '2023-03-11 11:13:57', NULL);
-INSERT INTO `ref_produk` VALUES (6, '1003', 22, '1003', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (7, '1004', 22, '1004', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (8, '1005', 22, '1005', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (9, '1006', 22, '1006', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (10, '1007', 22, '1007', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (11, '1008', 22, '1008', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (12, '1009', 22, '1009', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (13, '1010', 22, '1010', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (14, '1011', 22, '1011', 1, 29, 41, 9800, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (15, '1012', 22, '1012', 1, 29, 41, 9800, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (16, '1013', 22, '1013', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (17, '1014', 22, '1014', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (18, '1015', 22, '1015', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (19, '1016', 22, '1016', 1, 29, 41, 9800, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (20, '1017', 22, '1017', 1, 29, 41, 9800, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (21, '1018', 22, '1018', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (22, '1019', 22, '1019', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (23, '1020', 22, '1020', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (24, '1021', 22, '1021', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (25, '1022', 22, '1022', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
-INSERT INTO `ref_produk` VALUES (26, '1023', 22, '1023', 1, 29, 41, 9800, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (27, '1024', 22, '1024', 1, 29, 41, 9800, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (28, '1025', 22, '1025', 1, 29, 41, 9800, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (29, '1026', 22, '1026', 1, 29, 41, 9800, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (30, '1027', 22, '1027', 1, 29, 41, 9800, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (31, '1028', 22, '1028', 1, 29, 42, 9600, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (32, '1029', 22, '1029', 1, 29, 42, 9800, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (33, '1030', 22, '1030', 1, 29, 42, 9800, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (34, '1031', 22, '1031', 1, 29, 41, 9800, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (35, '1032', 22, '1032', 1, 29, 41, 9800, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (36, '1033', 22, '1033', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (37, '1034', 22, '1034', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (38, '1035', 22, '1035', 1, 29, 41, 9600, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (39, '3001', 22, '3001', 1, 30, 41, 14200, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (40, '3002', 22, '3002', 1, 30, 41, 14200, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (41, '3003', 22, '3003', 1, 30, 41, 14200, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (42, '3004', 22, '3004', 1, 30, 41, 15200, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (43, '3005', 22, '3005', 1, 30, 41, 15200, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (44, '3006', 22, '3006', 1, 30, 41, 15200, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (45, '3007', 22, '3007', 1, 30, 41, 14900, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (46, '3008', 22, '3008', 1, 30, 41, 15200, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (47, '3009', 22, '3009', 1, 30, 41, 15700, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (48, '3010', 22, '3010', 1, 30, 41, 15700, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (49, '3011', 22, '3011', 1, 30, 41, 9900, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (50, '3012', 22, '3012', 1, 30, 41, 15000, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (51, '3013', 22, '3013', 1, 30, 41, 15000, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (52, '3014', 22, '3014', 1, 30, 41, 10540, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (53, '3015', 22, '3015', 1, 30, 41, 8600, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (54, '3016', 22, '3016', 1, 30, 41, 8600, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (55, '3017', 22, '3017', 1, 30, 41, 15000, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (56, '3018', 22, '3018', 1, 30, 41, 10540, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (57, '4001', 22, '4001', 1, 31, 41, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (58, '4002', 22, '4002', 1, 31, 41, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (59, '4003', 22, '4003', 1, 31, 41, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (60, '4004', 22, '4004', 1, 31, 41, 13400, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (61, '6501', 22, '6501', 1, 27, 42, 59167, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (62, '6502', 22, '6502', 1, 27, 42, 59167, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (63, '6503', 22, '6503', 1, 27, 42, 59167, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (64, '6504', 22, '6504', 1, 27, 42, 59167, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (65, '6505', 22, '6505', 1, 27, 42, 51667, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (66, '6506', 22, '6506 KEMBLA', 1, 27, 43, 55000, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
-INSERT INTO `ref_produk` VALUES (67, '6507', 22, '6507', 1, 27, 44, 56666, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (68, '6508', 22, '6508', 1, 27, 44, 53334, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (69, '6509', 22, '6509', 1, 27, 44, 59167, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (70, '6510', 22, '6510', 1, 27, 44, 56666, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (71, '6511', 22, '6511', 1, 27, 44, 59167, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (72, '6512', 22, '6512', 1, 27, 42, 51667, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (73, '6513', 22, '6513', 1, 27, 44, 38334, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (74, '6514', 22, '6514', 1, 27, 44, 59167, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (75, '6515', 22, '6515', 1, 27, 44, 59167, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (76, '6516', 22, '6516', 1, 27, 42, 53334, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (77, '6517', 22, '6517', 1, 27, 44, 59167, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (78, '6518', 22, '6518', 1, 27, 44, 59167, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (79, '6519', 22, '6519', 1, 27, 44, 59167, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (80, '6520', 22, '6520', 1, 27, 44, 56666, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (81, '6521', 22, '6521', 1, 27, 44, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (82, '6522', 22, '6522', 1, 27, 44, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (83, '6523', 22, '6523', 1, 27, 44, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (84, '6524', 22, '6524', 1, 27, 44, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (85, '6527', 22, '6527', 1, 27, 44, 75000, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (86, '6532', 22, '6532', 1, 27, 42, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (87, '6539', 22, '6539', 1, 27, 42, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (88, '6542', 22, '6542', 1, 27, 42, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (89, '6543', 22, '6543', 1, 27, 42, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (90, '6701', 22, '6701', 1, 27, 45, 56666, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (91, '6702', 22, '6702', 1, 27, 45, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (92, '6703', 22, '6703', 1, 27, 45, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (93, '6704', 22, '6704', 1, 27, 44, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (94, '6705', 22, '6705', 1, 27, 45, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (95, '6706', 22, '6706', 1, 27, 44, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (96, '6707', 22, '6707', 1, 27, 44, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (97, '6708', 22, '6708', 1, 27, 44, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (98, '6709', 22, '6709', 1, 27, 45, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (99, '6710', 22, '6710', 1, 27, 45, 55000, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (100, '6711', 22, '6711', 1, 27, 45, 53333, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (101, '6712', 22, '6712', 1, 27, 45, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (102, '6713', 22, '6713', 1, 27, 45, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (103, '6714', 22, '6714', 1, 27, 45, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (104, '6715', 22, '6715', 1, 27, 45, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
-INSERT INTO `ref_produk` VALUES (105, '6716', 22, '6716', 1, 27, 45, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (106, '6717', 22, '6717', 1, 27, 45, 53334, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (107, '6718', 22, '6718', 1, 27, 45, 40000, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (108, '6801', 22, '6801', 1, 27, 44, 59167, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (109, '6802', 22, '6802', 1, 27, 44, 59167, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (110, '6803', 22, '6803', 1, 27, 44, 59167, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (111, '6804', 22, '6804', 1, 27, 44, 59167, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (112, '6805', 22, '6805', 1, 27, 44, 59167, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (113, '6806', 22, '6806', 1, 27, 44, 59167, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (114, '6901', 22, '6901', 1, 27, 46, 71666, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (115, '7501', 22, '7501', 1, 28, 44, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (116, '7502', 22, '7502', 1, 28, 42, 65334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (117, '7503', 22, '7503', 1, 28, 42, 66667, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (118, '7504', 22, '7504', 1, 28, 44, 74334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (119, '7505', 22, '7505', 1, 28, 42, 66667, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (120, '7506', 22, '7506', 1, 28, 44, 57334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (121, '7507', 22, '7507', 1, 28, 42, 65334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (122, '7508', 22, '7508', 1, 28, 42, 65334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (123, '7509', 22, '7509', 1, 28, 42, 63334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (124, '7510', 22, '7510', 1, 28, 44, 63334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (125, '7511', 22, '7511', 1, 28, 43, 74334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (126, '7515', 22, '7515', 1, 28, 45, 68334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (127, '7519', 22, '7519', 1, 28, 42, 68334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (128, '7701', 22, '7701', 1, 28, 45, 65000, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (129, '7702', 22, '7702', 1, 28, 45, 65000, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (130, '7703', 22, '7703', 1, 28, 45, 74334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (131, '7704', 22, '7704', 1, 28, 45, 65334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (132, '7705', 22, '7705', 1, 28, 45, 65334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (133, '7706', 22, '7706', 1, 28, 45, 65000, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (134, '7707', 22, '7707', 1, 28, 45, 65000, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (135, '7708', 22, '7708', 1, 28, 45, 74334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (136, '7709', 22, '7709', 1, 28, 45, 68334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (137, '7710', 22, '7710', 1, 28, 45, 48334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
-INSERT INTO `ref_produk` VALUES (138, '7711', 22, '7711', 1, 28, 45, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (139, '7712', 22, '7712', 1, 28, 45, 50000, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (140, '7713', 22, '7713', 1, 28, 45, 66667, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (141, '7714', 22, '7714', 1, 28, 45, 66667, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (142, '7715', 22, '7715', 1, 28, 45, 74334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (143, '7716', 22, '7716', 1, 28, 45, 65333, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (144, '7717', 22, '7717', 1, 28, 45, 74334, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (145, '7718', 22, '7718', 1, 28, 44, 66667, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (146, '7719', 22, '7719', 1, 28, 45, 66667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (147, '7720', 22, '7720', 1, 28, 44, 66667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (148, '7721', 22, '7721', 1, 28, 44, 66667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (149, '7722', 22, '7722', 1, 28, 44, 66667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (150, '7723', 22, '7723', 1, 28, 44, 74334, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (151, '7724', 22, '7724', 1, 28, 44, 66667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (152, '7725', 22, '7725', 1, 28, 44, 66667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (153, '7726', 22, '7726', 1, 28, 44, 66667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (154, '7727', 22, '7727', 1, 28, 45, 65000, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (155, '7728', 22, '7728', 1, 28, 45, 65000, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (156, '7729', 22, '7729', 1, 28, 45, 65000, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (157, '7730', 22, '7730', 1, 28, 45, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (158, '7731', 22, '7731', 1, 28, 45, 71666, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (159, '7732', 22, '7732', 1, 28, 42, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (160, '7801', 22, '7801', 1, 28, 46, 71666, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
-INSERT INTO `ref_produk` VALUES (161, '7802', 22, '7802', 1, 28, 46, 71666, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (162, '7803', 22, '7803', 1, 28, 46, 71666, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (163, '7804', 22, '7804', 1, 28, 46, 71666, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (164, '7805', 22, '7805', 1, 28, 46, 71666, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (165, '7806', 22, '7806', 1, 28, 46, 71666, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (166, '7807', 22, '7807', 1, 28, 46, 71666, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (167, '7808', 22, '7808', 1, 28, 46, 71666, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (168, '7809', 22, '7809', 1, 28, 46, 71666, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (169, '7810', 22, '7810', 1, 28, 46, 71666, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (170, '7811', 22, '7811', 1, 28, 46, 71666, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (171, '7901', 22, '7901', 1, 28, 44, 66667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (172, '7902', 22, '7902', 1, 28, 44, 66667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (173, '7903', 22, '7903', 1, 28, 44, 66667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (174, '7904', 22, '7904', 1, 28, 44, 66667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (175, '7905', 22, '7905', 1, 28, 44, 66667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (176, '8148', 22, '8148', 1, 32, 42, 96667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (177, '8165', 22, '8165', 1, 32, 42, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (178, '8501', 22, '8501', 1, 32, 42, 96667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (179, '8502', 22, '8502 HODA', 1, 32, 42, 96667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (180, '8503', 22, '8503', 1, 32, 42, 96667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (181, '8504', 22, '8504', 1, 32, 42, 96667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (182, '8505', 22, '8505', 1, 32, 42, 81667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (183, '8506', 22, '8506', 1, 32, 42, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (184, '8507', 22, '8507', 1, 32, 44, 100000, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (185, '8508', 22, '8508', 1, 32, 42, 81667, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (186, '8509', 22, '8509', 1, 32, 47, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (187, '8510', 22, '8510', 1, 32, 42, 60000, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (188, '8511', 22, '8511', 1, 32, 42, 73334, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (189, '8512', 22, '8512', 1, 32, 42, 58334, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (190, '8513', 22, '8513', 1, 32, 42, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (191, '8514', 22, '8514', 1, 32, 42, 58334, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (192, '8515', 22, '8515', 1, 32, 42, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (193, '8516', 22, '8516', 1, 32, 42, 58334, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:07', NULL);
-INSERT INTO `ref_produk` VALUES (194, '8517', 22, '8517', 1, 32, 42, 58334, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (195, '8518', 22, '8518', 1, 32, 45, 58334, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (196, '8519', 22, '8519', 1, 32, 42, 73334, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (197, '8520', 22, '8520', 1, 32, 42, 73334, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (198, '8521', 22, '8521', 1, 32, 42, 73334, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (199, '9501', 22, '9501', 1, 33, 47, 80000, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (200, '9502', 22, '9502', 1, 33, 42, 106667, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (201, '9503', 22, '9503', 1, 33, 47, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (202, '9504', 22, '9504 HODA', 1, 33, 44, 86667, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (203, '9505', 22, '9505', 1, 33, 47, 103334, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (204, '9506', 22, '9506', 1, 33, 42, 115000, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (205, '9507', 22, '9507', 1, 33, 42, 106667, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (206, '9508', 22, '9508', 1, 33, 45, 97667, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (207, '9509', 22, '9509', 1, 33, 45, 73334, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (208, '9601', 22, '9601', 1, 33, 45, 91667, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (209, '9602', 22, '9602', 1, 33, 45, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (210, '9801', 22, '9801', 1, 33, 43, 124734, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (211, '9802', 22, '9802', 1, 33, 43, 124734, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (212, '9803', 22, '9803', 1, 33, 43, 124734, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (213, '9804', 22, '9804', 1, 33, 43, 124734, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (214, 'ACC.KRANMINI', 22, 'KRAN MINI MIXER', 2, 34, 40, 180000, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (215, 'ACC.SELANG', 22, 'Selang Shower', 2, 34, 40, 94000, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (216, 'ACC.Sock', 22, 'Sock WH', 2, 34, 40, 20000, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (217, 'BAUT', 22, 'BAUT', 2, 35, 40, 5500, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (218, 'BRK.PUTIHB', 22, 'BRACKET PUTIH BESAR', 9, 36, 40, 80000, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (219, 'BRK.PUTIHK', 22, 'BRACKET PUTIH KECIL', 9, 36, 40, 32000, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (220, 'BRK.TOYO', 22, 'BRACKET TOYO', 9, 36, 40, 36000, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (221, 'DUCTTAPE', 22, 'DUCTTAPE', 17, 37, 40, 4063, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
-INSERT INTO `ref_produk` VALUES (222, 'DUCTTAPE LEM', 22, 'Duct Tape Lem', 17, 37, 42, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
-INSERT INTO `ref_produk` VALUES (223, 'FLEXIBLE WH', 22, 'FLEXIBLE WH', 2, 38, 40, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
-INSERT INTO `ref_produk` VALUES (224, 'HAMAFLEX', 22, 'HAMAFLEX', 48, 39, 40, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
-INSERT INTO `ref_produk` VALUES (225, 'KABEL HITAM', 22, 'KABEL HITAM', 17, 30, 41, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
-INSERT INTO `ref_produk` VALUES (226, 'KBL.LG', 22, 'KBL.LG', 1, 29, 41, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
-INSERT INTO `ref_produk` VALUES (227, 'Knee', 22, 'Knee WH', 2, 34, 40, 25000, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
-INSERT INTO `ref_produk` VALUES (228, 'PPA.FLEXIBLE', 22, 'PPA FLEXIBLE', 1, 38, 40, 700, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
-INSERT INTO `ref_produk` VALUES (229, 'dryer', 22, 'Dryer Midea', 2, 29, 40, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
-INSERT INTO `ref_produk` VALUES (230, 'KBL.3*1.5mtr', 20, 'Kabel 3*1.5', 1, 64, 152, 0, 23000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (231, 'KBL.3.*2.5', 20, 'Kabel NYM 3*2.5', 1, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (232, 'PPF.1/2*3/4', 20, 'Pipa AC 1/2*3/4', 1, 64, 152, 0, 149500, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (233, 'INS.PIPAMTR', 21, 'Instalasi Pipa Air', 1, 87, 152, 0, 300000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (234, 'PSG.PVC', 21, 'Pasang Pipa Air PVC', 1, 87, 152, 10450, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (235, 'PPA.FLEXIBLE', 22, 'Pipa Air Flexible', 1, 88, 115, 0, 10000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (236, 'PPF.1/4*1/2', 22, 'Pipa Freon 1.5-2 PK', 1, 89, 115, 0, 105000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (237, 'PPF.1/4*3/8', 22, 'Pipa Freon 0.5-1 pk', 1, 89, 115, 0, 95000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (238, 'PPF.3/8*5/8Mtr', 22, 'Pipa Freon 3 pk', 1, 89, 115, 0, 125000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (239, 'ppf.HD1/4*5/8', 22, 'Pipa Freon 2.5 pk', 1, 89, 115, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (240, 'ACC.HAMAFLEX', 20, 'Hamaflex', 1, 53, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (241, 'ACC.TERPAL', 20, 'Terpal', 1, 53, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (242, 'DUCTING', 20, 'Ducting Viu + Jasa + Bahan-bahan', 1, 53, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (243, 'SELANG GAS', 20, 'Selang Gas', 1, 64, 152, 0, 55000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (244, 'JAS.KBL', 21, 'Kabel Listrik', 1, 73, 152, 0, 23000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (245, 'PSG.INSMTR', 21, 'Pasang Instalasi Pipa AC', 1, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (246, 'PPA.PVC', 22, 'Pipa Drain', 1, 88, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (247, 'PPF.1/4+5/8', 22, 'Pipa Freon 2.5PK', 1, 89, 152, 0, 145000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (248, 'PPF.5PK', 22, 'Pipa Freon 5PK', 1, 89, 152, 0, 150000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (249, 'ppf.10PK', 22, 'Pipa Freon 10PK + Insulation', 1, 89, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (250, 'AQUA.343', 20, 'Kulkas Aqua 343', 2, 4, 104, 5475000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (251, 'AQUA.383', 20, 'Kulkas 2 pintu Aqua 383', 2, 4, 104, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (252, 'AQUA.AQR181', 20, 'Kulkas 1 Pintu Aqua AQR 181', 2, 4, 104, 1525000, 1875000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (253, 'AQUA.IN05', 20, 'AC Split AQUA 1/2 pk', 2, 52, 104, 2535000, 2750000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (254, 'AQUA.IN18', 20, 'AC Split AQUA 2pk', 2, 52, 104, 5200000, 2750000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (255, 'AQUA.32\"', 20, 'LED AQUA 32\"', 2, 80, 104, 1600000, 2000000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (256, 'ARI.15RS', 20, 'Water Heater Ariston AN2 15RS', 2, 102, 136, 2104000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (257, 'AUX.IN1/2PK', 20, 'AC Split AUX 1.5 PK', 2, 52, 117, 3800000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (258, 'DLL.Kursi', 21, 'FlyCatcher 2 Lampu', 2, 87, 117, 40267, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (259, 'BEKO.GNO5001', 20, 'Kulkas Side By Side BEKO', 2, 4, 105, 6699000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (260, 'BEKO.RDNO600E50VBS', 20, 'Kulkas Beko', 2, 4, 105, 5486250, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (261, 'BEKO.BTLA7008', 20, 'Mesin Cuci 1 Tabung Beko 7 Kg', 2, 81, 105, 2179596, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (262, 'BEKO.BTLA8008', 20, 'Mesin Cuci 1 Tabung Beko 8 Kg', 2, 81, 105, 2286400, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (263, 'BEKO.WCV7612', 20, 'Front Loading BEKO 7 kg', 2, 81, 105, 3307999, 3308000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (264, 'BEKO.WCV8612', 20, 'Front Loading BEKO 8 kg', 2, 81, 105, 3592999, 3593000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (265, 'CHA.KF71', 20, 'Floor Standing ChangHong 3 pk', 2, 68, 118, 8145000, 8500000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (266, 'CKE.AUTOFAN20\"', 20, 'Auto Fan CKE 20\"', 2, 75, 138, 895815, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (267, 'CKE.WFNS24', 20, 'Wall Fan CKE 24\"', 2, 75, 138, 1850000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (268, 'COCA.32\"', 20, 'Coocaa 32S3', 2, 80, 139, 1689000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (269, 'COS.RICEBOX', 20, 'Rice Box Cosmos 38KG', 2, 64, 140, 350300, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (270, 'COS.16WFCR', 20, 'Wall Fan Cosmos 16\" Remote', 2, 75, 140, 241400, 375000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (271, 'COS.CIC996', 20, 'Kompor Induction Cosmos CIC996', 2, 76, 140, 630800, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (272, 'DAI.SCNQ30', 20, 'AC Cassette Daikin 3.5pk', 2, 51, 6, 25650000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (273, 'DAI.FTKC50NVM4', 20, 'Ac Split Daikin Inverter 2 Pk', 2, 52, 6, 9200000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (274, 'DAI.STC60NV', 20, 'AC Split Daikin 2.5pk STC60NV', 2, 52, 6, 9689000, 8234582, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (275, 'DAI.STP15', 20, 'AC Split Daikin Malaysia 0.5pk', 2, 52, 6, 2684000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (276, 'DAI.STP25', 20, 'AC Split Daikin Malaysia 1pk', 2, 52, 6, 2975000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (277, 'DEN.MSNCUCI', 20, 'Mesin Cuci Mini Denpoo', 2, 81, 6, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (278, 'DEN.DDK1101', 20, 'Dispenser Denpoo DDK1101', 2, 63, 142, 580000, 710000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (279, 'DLL.CREDENZA', 20, 'Tas Ransel Polo USB', 2, 64, 143, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (280, 'DLL.KASUR', 20, 'Botol Spray 500ml', 2, 64, 143, 7297, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (281, 'DLL.KURSIHIDROLIK', 20, 'Kursi Bulat Hidrolik', 2, 64, 143, 200000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (282, 'DLL.MEJA', 20, 'Kemoceng Microfiber', 2, 64, 143, 235000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (283, 'DLL.RANJANG', 20, 'Keranjang plastik sinpo', 2, 64, 143, 101000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (284, 'DLL.STEKER', 20, 'Steker AC', 2, 64, 143, 0, 35000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (285, 'WINN.GASKOMPOR', 20, 'Kompor Winn Gas', 2, 76, 143, 575300, 700000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (286, 'ELE.COOKER', 20, 'Cooker Hood Electrolux', 2, 61, 106, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (287, 'FLIFE.OVEN', 20, 'Oven Flife', 2, 86, 144, 616810, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (288, 'GEA.LP12*2', 20, 'Dispenser Juice GEA LP12*2', 2, 63, 107, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (289, 'GEA.Neptune', 20, 'Dispenser GEA Galon Atas', 2, 63, 107, 1184925, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (290, 'GEA.GC388', 20, 'Upright Chiller GEA GC388', 2, 69, 107, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (291, 'GEA.GF-24DC', 20, 'Freezer GEA GF-24DC', 2, 69, 107, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (292, 'GEA.LSD86', 20, 'Freezer GEA LSD 86', 2, 69, 107, 6900000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (293, 'GEA.B-20', 20, 'Mixer Getra 20 liter', 2, 84, 107, 8025000, 8025000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (294, 'GEA.1050F', 20, 'Showcase GEA 1050F', 2, 94, 107, 20400000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (295, 'GEA.EXPO800AH', 20, 'Showcase GEA Expo 800AH', 2, 94, 107, 11990000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (296, 'GEA.Expo 230', 20, 'Showcase GEA EXPO 26FC', 2, 94, 107, 2904000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (297, 'GREE.DUCT2.5PK', 20, 'AC Split Duct Gree 3pk', 2, 51, 116, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (298, 'GRE.18F1', 20, 'AC Split Inverter Gree 2pk', 2, 52, 116, 8960000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (299, 'HAI.HPU48', 20, 'Floor Standing Haier 5 pk', 2, 68, 119, 13847280, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (300, 'HIT.WTP300GX', 20, 'Pompa Air Hitachi WTP300', 2, 90, 108, 1992000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (301, 'SHI.228BIT', 20, 'Pompa Boaster Shimizu 228 BIT', 2, 90, 108, 780600, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (302, 'DLL.UNO1081', 20, 'Meja UNO UOD 1081', 2, 64, 146, 2352000, 2352000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (303, 'IMP.OD-06BT', 20, 'Meja Importa OD-06BT', 2, 64, 146, 2352000, 2352000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (304, 'IMP.SC-04BT', 20, 'Lemari Importa SC04MS', 2, 64, 146, 1311780, 1583435, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (305, 'KDK.35GSC', 20, 'Industrial KDK 35GSC', 2, 75, 147, 3336900, 3600000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (306, 'KEN.KZ01', 20, 'Bracket LED 19-32\"', 2, 58, 148, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (307, 'KEN.KZ12', 20, 'Bracket LED Kenzo KZ 12', 2, 58, 148, 158110, 158110, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (308, 'KEN.KZ20', 20, 'Bracket LED Kenzo KZ 20', 2, 58, 148, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (309, 'KEN.KZ25', 20, 'Bracket LED Kenzo KZ 25', 2, 58, 148, 116400, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (310, 'KEN.KZ62', 20, 'Bracket LED Gantung', 2, 58, 148, 300000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (311, 'KEN.KZ70', 20, 'Bracket Monitor Kenzo KZ 70', 2, 58, 148, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (312, 'LG.GCB369', 20, 'Kulkas LG GCB 369', 2, 4, 12, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (313, 'LG .DH3140', 20, 'Home Theater LG', 2, 64, 12, 3250000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (314, 'LG .50LB582T', 20, 'LED LG 50\"', 2, 80, 12, 5525000, 7000000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (315, 'LG.49LJ510T', 20, 'LED LG 50\"', 2, 80, 12, 6700000, 9950000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (316, 'LG.65OLED', 20, 'LED TV LG Oled 65\" CX', 2, 80, 12, 26000000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (317, 'LG.86UN8100', 20, 'LED TV LG 86UN7100', 2, 80, 12, 43605000, 43605000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (318, 'LG.FV1285', 20, 'Front Loading LG 1285S5w', 2, 81, 12, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (319, 'LG.T2109VSAL', 20, 'Mesin Cuci 1 Tabung LG 9 KG', 2, 81, 12, 5725000, 3170149, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (320, 'MAS.CEF25', 20, 'Exhaust Fan Maspion CEF25', 2, 67, 150, 218600, 285000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (321, 'MAS.PW455', 20, 'Kipas Angin Maspion PW455', 2, 75, 150, 423000, 445000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (322, 'MAS.SF20\"', 20, 'Stand Fan Maspion 20\"', 2, 75, 150, 582100, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (323, 'MIDEA.CHOPPER', 20, 'Midea 3000 Series', 2, 60, 120, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (324, 'MIY.PFAP501', 20, 'Chopper Miyako PF AP 501', 2, 57, 151, 229300, 325000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (325, 'MIY.WD185', 20, 'Dispenser Portable Miyako WD 185', 2, 63, 151, 115800, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (326, 'MIY.TOASTER', 20, 'Toaster Miyako', 2, 100, 151, 212100, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (327, 'MOD.RX9622', 20, 'Cooker Hood Modena RX9632', 2, 61, 110, 2850000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (328, 'MOD.Frame', 20, 'Frame Modena', 2, 64, 110, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (329, 'MOD.KT0550', 20, 'Kran Modena KT0550', 2, 64, 110, 708000, 771000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (330, 'MOD.ED650', 20, 'Dryer Modena', 2, 65, 110, 5056241, 4290000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (331, 'MOD.CT7960', 20, 'Kompor Modena CT7960', 2, 76, 110, 9180000, 9180000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (332, 'MOD.BI1725', 20, 'Built In Induction Modena BI 1725', 2, 77, 110, 6648000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (333, 'MOD.PI1314', 20, 'Induction Portable Modena PI1314', 2, 77, 110, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (334, 'MOD. BW6435', 20, 'Wine Cellar Modena CW2045', 2, 94, 110, 13380000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (335, 'DOU.NEPEL', 20, 'Double Nepel', 2, 53, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (336, 'NON.BRKLED14-24', 20, 'Braket LED 14-24\"', 2, 58, 152, 51667, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (337, 'ALBA.LC506', 20, 'Locker Alba LC-506', 2, 64, 152, 1891440, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (338, 'CASSIO.KL820', 20, 'Label Printing Cassio KL820', 2, 64, 152, 852700, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (339, 'CHI.MND', 20, 'Kursi Kuliah Chitose MND', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (340, 'COVID.SWAB', 20, 'Swab Covid', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (341, 'CTS.YAMATOAA', 20, 'Kursi Chitose Yamato AA', 2, 64, 152, 310349, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (342, 'DIBN.DS20', 20, 'Brankas Daichiban DS20', 2, 64, 152, 3099250, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (343, 'DLL.ALBASDG206', 20, 'Lemari Arsip Alba SDG206', 2, 64, 152, 3438600, 3558000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (344, 'DLL.B44C', 20, 'Filling Cabinet Elite B4-4C', 2, 64, 152, 2608500, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (345, 'DLL.CHUBB31\"3LACI', 20, 'Fire File Chubb 3 Laci', 2, 64, 152, 21092480, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (346, 'DLL.CHUBB31\"4LACI', 20, 'Fire File Chubb 4 Laci', 2, 64, 152, 25670000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (347, 'DLL.COLOKAN', 20, 'Colokan Kaki Tiga Standard', 2, 64, 152, 0, 25000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (348, 'DLL.CUTTERPIPE', 20, 'Cutter Pipe Tanaka', 2, 64, 152, 0, 155000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (349, 'DLL.ELBOW', 20, 'Elbow 1\"', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (350, 'DLL.ELBOW1/2', 20, 'Elbow 1/2\"', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (351, 'DLL.EMBER', 20, 'Ember Plastik Kecil', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (352, 'DLL.FLARING TOOL', 20, 'Flaring Tool Valu', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (353, 'DLL.FUTURA405', 20, 'Kursi Futura 405', 2, 64, 152, 424650, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (354, 'DLL.GARPU', 20, 'Garpu Stainless Tebal', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (355, 'DLL.HDMI', 20, 'Kabel HDMI', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (356, 'DLL.HICOOK', 20, 'Gas Hi Cook', 2, 64, 152, 0, 35000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (357, 'DLL.INDACHI 54S', 20, 'Kursi Indachi PS-54s', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (358, 'DLL.INDACHI3021', 20, 'Kursi Indachi D-3021', 2, 64, 152, 575646, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (359, 'DLL.INSECTKILLER', 20, 'Insect Killer', 2, 64, 152, 325000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (360, 'DLL.JACK', 20, 'Jack Connector Male', 2, 64, 152, 0, 8000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (361, 'DLL.JOHNSON', 20, 'Sabun Mandi Johnsons Baby', 2, 64, 152, 38000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (362, 'DLL.JOYKOLM02', 20, 'Mesin Laminating Joyko LM-02', 2, 64, 152, 950000, 1050000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (363, 'DLL.KAIN', 20, 'Kain Microfibre', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (364, 'DLL.KANEBO', 20, 'Kanebo Aion', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (365, 'DLL.KAPASITORAC', 20, 'Kapasitor AC', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (366, 'DLL.KIT', 20, 'Sabun Cuci Mobil KIT 800ml', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (367, 'DLL.KITPOLISH', 20, 'KIT Polish Glass', 2, 64, 152, 0, 49000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (368, 'DLL.KITSEMIR', 20, 'Semir Ban KIT 300ml', 2, 64, 152, 0, 49000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (369, 'DLL.KITSHAMPO', 20, 'Shampoo Mobil KIT 300ml', 2, 64, 152, 0, 49000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (370, 'DLL.KLEM', 20, 'KLEM Pipa 1.5\"', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (371, 'DLL.KLEMPVC', 20, 'Klem PVC 1\"', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (372, 'DLL.KOZUREKL9', 20, 'Loker Kozure KL 9W', 2, 64, 152, 2799000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (373, 'DLL.KUAS', 20, 'Kuas 4\"', 2, 64, 152, 0, 49000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (374, 'DLL.KUNCI-L', 20, 'Kunci L Tekiro', 2, 64, 152, 0, 125000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (375, 'DLL.KUNCIINGGRIS', 20, 'Kunci Inggris Tekiro 12\"', 2, 64, 152, 0, 155000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (376, 'DLL.KURSIBULAT', 20, 'Kursi Bulat Lion Star', 2, 64, 152, 48900, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (377, 'DLL.KURSIPOLARIS', 20, 'Kursi Bulat Polaris', 2, 64, 152, 139150, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (378, 'DLL.L-BOW1/2\"', 20, 'L-Bow 1/2', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (379, 'DLL.L-BOW3/4\"', 20, 'L-Bow 3/4', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (380, 'DLL.LBOW3/8', 20, 'L-Bow 3/8', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (381, 'DLL.LBOW5/8', 20, 'L-Bow 5/8', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (382, 'DLL.LORI300KG', 20, 'Lori Lipat 300Kg', 2, 64, 152, 562400, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (383, 'DLL.MANGKOK', 20, 'Mangkok Keramik', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (384, 'DLL.MEJAGOSOKAN', 20, 'Meja Setrika', 2, 64, 152, 0, 385000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (385, 'DLL.OXIMETER', 20, 'Oximeter ChoiceMMed', 2, 64, 152, 342400, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (386, 'DLL.PIRING', 20, 'Piring Keramik', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (387, 'DLL.PLASTIKSERVIS2PK', 20, 'Plastik Service AC 2pk', 2, 64, 152, 33000, 74000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (388, 'DLL.PTC', 20, 'PTC 3pin', 2, 64, 152, 0, 25000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (389, 'DLL.RAKSEPATU', 20, 'Rak Sepatu Plastik', 2, 64, 152, 27000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (390, 'DLL.REMOTE', 20, 'Remote AC', 2, 64, 152, 145000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (391, 'DLL.Reparasi', 20, 'Reparasi + Ganti Busa', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (392, 'DLL.SAPUKCL', 20, 'Sapu Kecil Mobil', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (393, 'DLL.SCOTCH', 20, 'Scotch Brite Basic', 2, 64, 152, 0, 6000, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (394, 'DLL.SENDOK', 20, 'Sendok Stainless Tebal', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (395, 'DLL.SENDOKTEH', 20, 'Sendok Teh Stainless Tebal', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (396, 'DLL.SIKATPLASTIK', 20, 'Sikat plastik', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (397, 'DLL.SOK', 20, 'Sok', 2, 64, 152, 6000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (398, 'DLL.STB', 20, 'Set Top Box Matrix', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (399, 'DLL.T', 20, 'Bahan Bangunan', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (400, 'DLL.TEE', 20, 'Tee 1\"', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (401, 'DLL.TEE1/2', 20, 'Tee 1/2\"', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (402, 'DLL.TMBGNMN', 20, 'Timbangan Manual 2kg', 2, 64, 152, 33000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (403, 'DLL.TMPTSMPH', 20, 'Tempat Sampah Mobil', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (404, 'DLL.TUTUPGELAS', 20, 'Tutup Gelas Stainless', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (405, 'JIN.BULAT', 20, 'Heater Portable JinXing', 2, 64, 152, 772250, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (406, 'KMK.FR109', 20, 'Kursi Lab Kamiko 109FR', 2, 64, 152, 567050, 567500, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (407, 'KRB.KW05', 20, 'Trolley Krisbow', 2, 64, 152, 505000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (408, 'KZR.KL3W', 20, 'Kozure KL-3W', 2, 64, 152, 2939000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (409, 'NON.WATERKETTLE', 20, 'Water Kettle Stainless', 2, 64, 152, 450072, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (410, 'OMR.LF1Y', 20, 'Relay Omron 15A 110 VAC', 2, 64, 152, 280250, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (411, 'RDK.RODAKULKAS', 20, 'Roda Kulkas', 2, 64, 152, 103790, 175000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (412, 'RMT.CHANGHONGLED', 20, 'Remote LED  Changhong', 2, 64, 152, 0, 100000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (413, 'SHIN.133-1', 20, 'Kontainer Shinpo 133-1', 2, 64, 152, 32000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (414, 'STLH.RB420', 20, 'Stihl RB420', 2, 64, 152, 5500000, 5890000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (415, 'SUB.SB106', 20, 'Kursi Subaru SB106', 2, 64, 152, 891250, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (416, 'PSG.AC5', 21, 'Pasang Ac 5PK', 2, 87, 152, 0, 1000000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (417, 'BLA.AC', 20, 'Flushing AC', 2, 92, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (418, 'OXO.PANCI8L', 20, 'Panci Presto 8L', 2, 64, 153, 227700, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (419, 'PAN.331QPK', 20, 'Kulkas Panasonic 331Q', 2, 4, 8, 5725000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (420, 'PAN.DUCT4PK', 20, 'AC Split Duct Panasonic 4pk', 2, 51, 8, 23450000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (421, 'PAN.CSYN24PKP', 20, 'AC Split Panasonic 2.5 pk', 2, 52, 8, 8475000, 7800000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (422, 'PAN.PN09', 20, 'AC Split Panasonic PN9', 2, 52, 8, 3925000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (423, 'PAN.PN18', 20, 'AC Split Panasonic PN18', 2, 52, 8, 6250000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (424, 'PAN.ZN05WKP', 20, 'AC Split Panasonic 0.5pk', 2, 52, 8, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (425, 'PAN.ZN07WKP', 20, 'AC Split Panasonic 3/4pk', 2, 52, 8, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (426, 'PAN.49\"', 20, 'LED Panasonic 49\"', 2, 80, 8, 4165000, 2600000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (427, 'PAN.NAW125FCV1', 20, 'Mesin Cuci Panasonic 12.5kg', 2, 82, 8, 2725000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (428, 'PAN.NAW85BBZ1H', 20, 'Mesin Cuci 2 Tabung Panasonic 8 KG', 2, 82, 8, 1675000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (429, 'PHI.HD9306', 20, 'Kettle Philips HD9306', 2, 64, 155, 422600, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (430, 'PHI.HD3132', 20, 'Rice Cooker Philips HD3138', 2, 67, 155, 667900, 525000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (431, 'POL.PWC600', 20, 'Dispenser Polytron PWC600', 2, 63, 111, 1350000, 1350000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (432, 'POL.PTS2K25', 20, 'Speaker Polytron PTS2K25', 2, 64, 111, 2700000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (433, 'POL.STB700', 20, 'STB Polytron', 2, 64, 111, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (434, 'POL.230', 20, 'Showcase Polytron 230', 2, 94, 111, 3225000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (435, 'REGULATOR', 20, 'Regulator Gas', 2, 91, 156, 62500, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (436, 'REG.STANDFAN', 20, 'Stand Fan Regency 16\"', 2, 75, 157, 556000, 611111, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (437, 'REG.ZTST-20', 20, 'Stand Fan Regency 20\"', 2, 75, 157, 540000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (438, 'RH229B', 20, 'Cooker Hood Rinnai 90cm', 2, 61, 158, 1161383, 1300000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (439, 'RIN.RB772RO', 20, 'Built In Hob Rinnai RB772 RO', 2, 76, 158, 1703685, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (440, 'RIN.RH90', 20, 'Cooker Hood Rinnai 90 CM', 2, 76, 158, 1161383, 1150000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (441, 'RIN.RI524', 20, 'Kompor Gas Rinnai Grill Tengah', 2, 76, 158, 613008, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (442, 'RSA.CF310', 20, 'Chest Freezer RSA 300L', 2, 69, 112, 2835000, 3202941, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (443, 'RSA.CF460', 20, 'Chest Freezer RSA 460L', 2, 69, 112, 4610000, 5208309, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (444, 'SAM.RR18', 20, 'Kulkas 1 Pintu Samsung', 2, 4, 113, 1975000, 1975000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (445, 'SAM.RT43', 20, 'Kulkas Samsung RT43', 2, 4, 113, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (446, 'SAM.2.5PK', 20, 'AC Split Samsung 2.5 PK', 2, 52, 113, 3400000, 4400000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (447, 'SAM.48H5003', 20, 'LED Samsung 49\" SMART', 2, 80, 113, 4850000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (448, 'SAM.MONITOR19\"', 20, 'Monitor Samsung 19\"', 2, 80, 113, 1460000, 1650000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (449, 'SAM.UA98QN90', 20, 'LED TV Samsung 98QN90', 2, 80, 113, 89269210, 90590000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (450, 'SAM.MG23', 20, 'Microwave Samsung MG23', 2, 83, 113, 1354100, 1650000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (451, 'SAM.MG30T', 20, 'Microwave Grill Samsung 30L', 2, 83, 113, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (452, 'SKN.HWD734', 20, 'Dispenser Sanken HWDC 200', 2, 63, 159, 1545000, 1650000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (453, 'SKI.1090', 20, 'Exhaust Fan Sekai 1090', 2, 67, 161, 242800, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (454, 'SKI.EXPLAFON10\"', 20, 'Exhaust Fan Plafon Sekai 10\"', 2, 75, 161, 155000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (455, 'SKI.STDFAN18\"', 20, 'Stand Fan Sekai 18\"', 2, 75, 161, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (456, 'SKI.exhaustplafon', 20, 'Exhaust Fan Ceiling Sekai 12\"', 2, 75, 161, 189554, 205405, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (457, 'SHA.SJF90PMBK', 20, 'Kulkas Side By Side LG 257 CSFS', 2, 4, 7, 18450000, 19000000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (458, 'SHA.SJM180FSS', 20, 'Kulkas 1 Pintu Sharp SJX 185', 2, 4, 7, 1800000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (459, 'SHA.SJN192', 20, 'Kulkas 1 Pintu Sharp SJN192', 2, 4, 7, 1899000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (460, 'SHA.SJX165', 20, 'Kulkas Sharp 1 Pintu SJX165', 2, 4, 7, 1649000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (461, 'ShA.SJ316MGGR', 20, 'Kulkas 2 Pintu Sharp SJ 316 MGGR', 2, 4, 7, 3095000, 2700000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (462, 'SHA.AHAP7SSY', 20, 'AC Split Sharp 3/4pk Plasma', 2, 52, 7, 3270000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (463, 'SHA.XP13UHY', 20, 'AC Split Sharp J-Tech Inverter 1.5pk', 2, 52, 7, 6000000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (464, 'SHA.80MW', 20, 'Mesin Cuci 2 Tabung Sharp 80MW', 2, 82, 7, 1370000, 1650000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (465, 'SHA.90MW', 20, 'Mesin Cuci 2 Tabung Sharp 90MW', 2, 82, 7, 1550000, 1550000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (466, 'SHI.JET108', 20, 'Pompa Air Shimizu Jet Pump 500Watt', 2, 90, 162, 1990500, 3250000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (467, 'SPQ.DRYERGAS', 20, 'Dryer Listrik Whirlpool GAS 15kg', 2, 65, 163, 12750000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (468, 'SPQ.LES17', 20, 'Dryer Listrik Whirlpool Listrik 15kg', 2, 65, 163, 13500000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (469, 'SONY.65X80J', 20, 'LED TV Sony 65X80J', 2, 80, 163, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (470, 'BKS.AC', 20, 'AC BEKAS', 2, 51, 115, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (471, 'TV.10\"', 20, 'TV Portable 10\"', 2, 80, 115, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (472, 'TEF.SETRIKA', 20, 'Setrika Tefal', 2, 93, 165, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (473, 'TOS.DRYER8KG', 20, 'Dryer Toshiba 8kg', 2, 65, 11, 4300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (474, 'WAS.WD80EF', 20, 'Pompa Air Celup Wasser WD80EF', 2, 90, 167, 381500, 243647, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (475, 'XMI.LED55\"', 20, 'LED TV Xiao Mi 55\"', 2, 80, 168, 7900000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (476, 'ACC.BesiLion', 20, 'Tangga 2M', 2, 53, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (477, 'ACC.Karet Mounting', 20, 'Karet Mounting', 2, 53, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (478, 'ACC.Swab test', 20, 'Swab Test', 2, 53, 152, 0, 1000000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (479, 'ACC.SOKPEMANJANG', 20, 'Sok Pemanjang Water Heater', 2, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (480, 'LION', 20, 'Thermos Lion 12L', 2, 64, 152, 169000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (481, 'DLL.TV12\"', 20, 'Kursi Futura 747', 2, 80, 152, 380000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (482, 'BRK.STANDING', 20, 'Standing Bracket', 9, 58, 148, 1116667, 1785714, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (483, 'DLL.DinaSet', 20, 'Dina Set', 9, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (484, 'BKR.BKRPSG3', 21, 'Bongkar Pasang 5PK', 9, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (485, 'POL.1PK', 20, 'Ac Split Polytron 1 PK', 9, 52, 111, 2760000, 2635000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (486, 'RSA.VISION', 20, 'Showcase RSA AGATE 300', 9, 94, 112, 3694080, 3575000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (487, 'SKN.HWD85', 20, 'Dispenser Sanken HWD Z85', 9, 63, 159, 2320000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (488, 'TOS.10S3KS', 20, 'Ac Split Toshiba 1PK Thailand', 9, 52, 11, 3045000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (489, 'UCH.200CRD', 20, 'Freezer Uchida 200 Liter', 9, 69, 114, 2651000, 2900000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (490, 'UCH.168NOR', 20, 'Kulkas 2 Pintu Uchida 168NOR', 9, 78, 114, 1400000, 1016643, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (491, 'UCH.188GW', 20, 'Showcase Uchida 188 GW', 9, 94, 114, 2406000, 2163694, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (492, 'UCH.218RW', 20, 'Showcase Uchida 218 RW', 9, 94, 114, 2734195, 2825000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (493, 'UCH.MPW16', 20, 'AC Window 2Pk', 9, 103, 114, 3440000, 4000000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (494, 'CUCI.ACCASSETE', 20, 'Cuci Ac Cassete', 9, 62, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (495, 'BRK.AC', 20, 'Bracket AC', 9, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (496, 'FRE.R410', 20, 'Freon R410', 9, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (497, 'ISI.FREON', 21, 'Isi Freon  AC 1/2-1 PK', 9, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (498, 'ISI.FREON2', 21, 'Isi Freon  AC 1.5-2 PK', 9, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (499, 'PSG.AC', 21, 'Pasang AC 0.5-1 PK', 9, 87, 152, 0, 300000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (500, 'PSG.AC2', 21, 'Pasang AC 1.5-2 PK', 9, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (501, 'PSG.AC3PK', 21, 'Pasang AC 3PK', 9, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (502, 'PSG.BKRPSG', 21, 'Bongkar Pasang AC 0.5-1PK', 9, 87, 152, 0, 300000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (503, 'PSG.BKRPSG2', 21, 'Bongkar Pasang AC1.5-2PK', 9, 87, 152, 0, 300000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (504, 'PSG.BRK', 21, 'Pasang Bracket', 9, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (505, 'PSG.CAS', 21, 'Pasang Ac Cassete', 9, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (506, 'PSG.CH', 21, 'Pasang Cooker Hood', 9, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (507, 'PSG.Floor', 21, 'Pasang AC Floor Standing', 9, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (508, 'PSG.IN', 21, 'Pasang Indoor AC', 9, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (509, 'PSG.INS', 21, 'Pasang Instalasi Pipa AC', 9, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (510, 'PSG.OUT', 21, 'Pasang Outdoor AC', 9, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (511, 'PSG.STEKER', 21, 'Pasang Steker', 9, 87, 152, 0, 75000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (512, 'PSG.WH', 21, 'Pasang Water Heater', 9, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (513, 'PPF4+BRK1', 22, 'Pipa Freon 4m + Kabel 4m + Bracket', 9, 89, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (514, 'PPF5', 22, 'Pipa Freon 5m', 9, 89, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (515, 'PSG+PPF4', 22, 'Pasang + Pipa Freon 4m + Kabel 4m + Bracket', 9, 89, 152, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (516, 'AQU.AQRD190', 20, 'Kulkas 1 Pintu Aqua AQR 190', 16, 4, 104, 1660000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (517, 'AQUA.4PINTU', 20, 'Kulkas AQUA 4 Pintu', 16, 4, 104, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (518, 'AQUA.AQB180', 20, 'Showcase Aqua AQB180', 16, 4, 104, 2300000, 2500000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (519, 'AQUA.AQR191', 20, 'Kulkas 1 Pintu AQUA AQR190/1', 16, 4, 104, 1675000, 1875000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (520, 'AQUA.AQR240', 20, 'Kulkas 2 Pintu Aqua AQR 240', 16, 4, 104, 2350000, 2525000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (521, 'AQUA.AQR270', 20, 'Kulkas 2 Pintu Aqua', 16, 4, 104, 2665000, 2810101, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (522, 'AQUA.AQR275', 20, 'Kulkas 2 Pintu AQUA AQR275', 16, 4, 104, 3000000, 3300000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (523, 'AQUA.AQR370', 20, 'Kulkas 2 Pintu AQR370 INVERTER', 16, 4, 104, 4375000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (524, 'AQUA.AQRD50', 20, 'Kulkas Portable AQUA AQRD50', 16, 4, 104, 1300000, 1400000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (525, 'AQUA.3/4PK', 20, 'Ac Split AQUA 3/4 PK', 16, 52, 104, 2770000, 2375000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (526, 'AQUA.CR9ANS', 20, 'Ac Split AQUA 1PK', 16, 52, 104, 2450000, 2300000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (527, 'AQUA.150L', 20, 'Chest Freezer AQUA 150L', 16, 69, 104, 2285000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (528, 'AQUA.AQF420', 20, 'Chest Freezer AQUA 200L', 16, 69, 104, 2675000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (529, 'AQUA.AQF6L', 20, 'Freezer AQUA 6 RAK', 16, 69, 104, 2850000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (530, 'AQUA.AQFS4', 20, 'Freezer AQUA 4 RAK', 16, 69, 104, 2350000, 2300000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (531, 'AQUA.AQR251', 20, 'Kulkas 2 pintu AQUA', 16, 78, 104, 2375000, 2513368, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (532, 'AQUA.AQR261', 20, 'Kulkas 2 Pintu Aqua', 16, 78, 104, 2490000, 2400000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (533, 'AQUA.AQR88DD', 20, 'Mesin Cuci 1 Tabung AQUA 8 KG', 16, 81, 104, 2150000, 2450000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (534, 'AQUA.FQW700829QD', 20, 'Front Loading AQUA 7 KG', 16, 81, 104, 3515000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (535, 'AQUA.FQW850829CD', 20, 'Front Loading AQUA 8 KG', 16, 81, 104, 3900000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (536, 'SAN.AQW78DD', 20, 'Mesin Cuci 1 Tabung AQUA 7 KG', 16, 81, 104, 1825000, 2300000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (537, 'SAN.AQW98', 20, 'Mesin Cuci 1 Tabung AQUA 9 KG', 16, 81, 104, 2325000, 2500000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (538, 'AQUA.12KG', 20, 'Mesin Cuci 2 Tabung Aqua 12 KG', 16, 82, 104, 2025000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (539, 'AQUA.QW1080', 20, 'Mesin Cuci 2 Tabung Aqua 10 KG', 16, 82, 104, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (540, 'AQUA.QW780XT', 20, 'Mesin Cuci 2 Tabung Aqua 7 KG', 16, 82, 104, 1265000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (541, 'AQUA.QW880', 20, 'Mesin Cuci 2 Tabung Aqua 8 KG', 16, 82, 104, 1275000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (542, 'AQUA.QW980', 20, 'Mesin Cuci 2 Tabung Aqua 9 KG', 16, 82, 104, 1525000, 1450000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (543, 'AQUA.AEMS2612S', 20, 'Microwave Aqua', 16, 83, 104, 813600, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (544, 'ARI.AN10', 20, 'Water Heater Ariston 10L', 16, 102, 136, 1402579, 1632000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (545, 'ARI.AN15B', 20, 'Water Heater Ariston AN 15 B', 16, 102, 136, 1688596, 1850000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (546, 'ARI.AN2-30RS', 20, 'Water Heater Ariston AN2 30RS', 16, 102, 136, 2777658, 2750000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (547, 'ARI.AN215LUX', 20, 'Water Heater Ariston 15 LUX', 16, 102, 136, 2734000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (548, 'ARI.AN215R', 20, 'Water Heater Ariston AN 15R', 16, 102, 136, 1974612, 1850000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (549, 'ARI.AN2B15RS', 20, 'Water Heater Ariston AN2B 15L', 16, 102, 136, 1700000, 2307656, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (550, 'ARI.AN30LUX', 20, 'Water Heater Ariston 30 SLIM', 16, 102, 136, 3225000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (551, 'ARI.AN30R(5TAHUN)', 20, 'Water Heater Ariston 30 Liter', 16, 102, 136, 2585147, 2350000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (552, 'ARI.AN30RS', 20, 'Water Heater Ariston AN2 30B', 16, 102, 136, 2073618, 2750000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (553, 'ARI.CLC2422', 20, 'Water Heater Instan Ariston', 16, 102, 136, 1587600, 1909828, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (554, 'ARI.PROECO100', 20, 'Water Heater Ariston Pro Eco 100L', 16, 102, 136, 4620500, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (555, 'ARI.PROECO100H', 20, 'Water Heater Ariston Pro 1 Eco 100L', 16, 102, 136, 4620263, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (556, 'ARI.PROECO50', 20, 'Water Heater Ariston Pro Eco 50 Lt', 16, 102, 136, 3379530, 3000000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (557, 'ARI.PROECO80', 20, 'Water heater Ariston PRO ECO 80', 16, 102, 136, 4340000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (558, 'ARI.PROR100', 20, 'Water Heater Ariston Pro R 100 Lt', 16, 102, 136, 3213000, 3213000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (559, 'ARI.PROR50', 20, 'Water Heater Ariston Pro R 50 Lt', 16, 102, 136, 2900000, 2800000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (560, 'ARI.PROR80', 20, 'Water Heater Ariston Pro R 80 Lt', 16, 102, 136, 2916000, 2600000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (561, 'ART.AD10', 20, 'Dispenser Artugo AD 10', 16, 63, 137, 511875, 675000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (562, 'ART.AD20', 20, 'Dispenser Artugo AD 20 UV', 16, 63, 137, 760500, 925000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (563, 'ART.AD30', 20, 'Dispenser Artugo AD 30 Cabinet', 16, 63, 137, 979875, 1191826, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (564, 'ART.AD40', 20, 'Dispenser Artugo AD 40 Kulkas', 16, 63, 137, 1140750, 1387500, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (565, 'ART.300L', 20, 'Chest Freezer Artugo 300L', 16, 69, 137, 2780505, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (566, 'ART.600L', 20, 'Chest Freezer Artugo 600L', 16, 69, 137, 5844735, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (567, 'ART.CF101', 20, 'Chest Freezer Artugo CF101', 16, 69, 137, 1885000, 1645604, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (568, 'ART.CF151', 20, 'Chest Freezer Artugo CF151', 16, 69, 137, 1651065, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (569, 'ART.CF201', 20, 'Chest Freezer Artugo CF201', 16, 69, 137, 2405000, 1645604, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (570, 'AUX.AM9A4/SR', 20, 'Ac Portable GREE 1 PK', 16, 52, 117, 4000000, 3400000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (571, 'AUX.ASW24EA', 20, 'AC Split AUX 2.5 PK', 16, 52, 117, 4400000, 4400000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (572, 'AUX.IN1.5PK', 20, 'Ac Split AUX 1/2 PK', 16, 52, 117, 2240000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (573, 'AUX.IN1PK', 20, 'Ac Split AUX 1 PK', 16, 52, 117, 3880000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (574, 'AUX.IN2PK', 20, 'Ac Split AUX 2 PK', 16, 52, 117, 4775000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (575, 'AUX.PORT1.5PK', 20, 'Ac Portable AUX 1.5 PK', 16, 52, 117, 4455000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (576, 'AUX.PORT1PK', 20, 'Ac Portable AUX 1 PK', 16, 52, 117, 3880000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (577, 'AUX.FL3PK', 20, 'Ac Floor Standing AUX 3 PK', 16, 68, 117, 8800000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (578, 'BEKO.RDNT200', 20, 'Kulkas 2 Pintu Beko 200L', 16, 4, 105, 2816000, 2550000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (579, 'BEKO.RDNT231', 20, 'Kulkas 2 Pintu Beko 231L', 16, 4, 105, 3293259, 2950000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (580, 'BEKO.RDNT231BK', 20, 'Kulkas 2 Pintu Beko 231L BLACK', 16, 4, 105, 2920000, 3200000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (581, 'BEKO.RDNT271', 20, 'Kulkas 2 Pintu Beko 271L', 16, 4, 105, 3011985, 3200000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (582, 'BEKO.WTT80', 20, 'Mesin Cuci 2 Tabung Beko 8KG', 16, 82, 105, 1064000, 1064000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (583, 'BEKO.WTT90', 20, 'Mesin Cuci 2 Tabung Beko 9KG', 16, 82, 105, 1278000, 1278000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (584, 'BEKO.Microwave', 20, 'Microwave Beko 25332', 16, 83, 105, 2591000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (585, 'BEKO.Oven', 20, 'Oven Beko BIM22301X', 16, 86, 105, 3781000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (586, 'CHA.09J2', 20, 'Ac Split Changhong 1 PK', 16, 52, 118, 2750000, 2450000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (587, 'CHA.CS05J2', 20, 'Ac Split Changhong 1/2 PK', 16, 52, 118, 2425000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (588, 'CHA.CS07J1', 20, 'AC Split Changhong 3/4 PK', 16, 52, 118, 2475000, 2350000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (589, 'CHA.CS24J1', 20, 'AC Split Changhong 2.5 PK', 16, 52, 118, 5400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (590, 'CHA.CSC12NVB', 20, 'Ac Split Changhong 1.5 PK', 16, 52, 118, 3985000, 3100000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (591, 'CHA.CSC18J1', 20, 'Ac Split Changhong 2 PK', 16, 52, 118, 4850000, 4149397, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (592, 'CHA.CPC05EM', 20, 'Ac Portable Changhong 1/2PK', 16, 54, 118, 2400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (593, 'CHA.KF120LW', 20, 'Floor Standing Changhong 5PK', 16, 68, 118, 13750000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (594, 'CHA.24\"', 20, 'LED Changhong 24\"', 16, 80, 118, 1650000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (595, 'CHA.32LED', 20, 'LED Android TV Changhong 32\"', 16, 80, 118, 2280000, 2300000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (596, 'MID.STANDFAN', 20, 'Stand Fan Midea', 16, 80, 118, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (597, 'CKE.KTD12', 20, 'Exhaust Fan Plafon Sirocco CKE 8\"', 16, 75, 138, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (598, 'CKE.KTD18', 20, 'Exhaust Fan Plafon Sirocco CKE 10\"', 16, 75, 138, 421400, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (599, 'COO.40', 20, 'LED COOCAA 40\"', 16, 80, 139, 2450000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (600, 'COS.BLENDER', 20, 'Blender Cosmos', 16, 57, 140, 437500, 145530, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (601, 'COS.CHOPPER', 20, 'Chopper Cosmos', 16, 60, 140, 262500, 88299, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (602, 'COS.CWD5603', 20, 'Dispenser Cosmos CWD5603', 16, 63, 140, 482000, 585519, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (603, 'COS.PORTABLEDISPENSER', 20, 'Dispenser Portable Cosmos', 16, 63, 140, 144500, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (604, 'COS.CRJ101TS', 20, 'Rice Cooker Cosmos CRJ101', 16, 67, 140, 177755, 275000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (605, 'COS.CRJ323TS', 20, 'Rice Cooker Cosmos', 16, 67, 140, 227300, 250000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (606, 'COS.CRJ6021', 20, 'Rice Cooker Cosmos Harmond', 16, 67, 140, 308900, 242000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (607, 'COS.JUICER', 20, 'Juicer Cosmos', 16, 74, 140, 272700, 265400, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (608, 'COS.12CWF', 20, 'Wall Fan Cosmos 12\"', 16, 75, 140, 239500, 150000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (609, 'COS.16COCN', 20, 'Stand Fan Cosmos 12\" 2in1', 16, 75, 140, 186000, 400000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (610, 'COS.SF16\"', 20, 'Stand Fan Cosmos 16\"', 16, 75, 140, 184900, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (611, 'COS.WF16\"', 20, 'Wall Fan Cosmos 16\"', 16, 75, 140, 228400, 227500, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (612, 'COS.9926CRG', 20, 'Oven Toaster Cosmos', 16, 86, 140, 283689, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (613, 'COS.Setrika', 20, 'Setrika Cosmos', 16, 93, 140, 107000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (614, 'CYP.CHOPPER', 20, 'Chopper Mitochiba CH200', 16, 64, 141, 166600, 234656, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (615, 'CYP.GR0063', 20, 'Grinder Cyprus GR0063', 16, 64, 141, 199500, 199500, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (616, 'CYP.SC0066', 20, 'Slow Cooker Cyprus 1.5L', 16, 64, 141, 229600, 168312, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (617, 'CYP.TL0180', 20, 'Kettle Cyprus 1.2L', 16, 64, 141, 107000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (618, 'CYP.TL0198', 20, 'Kettle Cyprus 1.8L', 16, 64, 141, 180250, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (619, 'DAI.FHC18NUV', 20, 'AC Cassette Daikin 2PK', 16, 51, 6, 9205500, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (620, 'DAI.SCNQ18MV', 20, 'AC Cassete Daikin 2PK', 16, 51, 6, 16200000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (621, 'DAI.FCNQ42MY', 20, 'Ac Cassete Daikin 5PK', 16, 52, 6, 28525000, 26200000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (622, 'DAI.FDMNQ13WL', 20, 'Ac Split Duct Daikin 1.5PK', 16, 52, 6, 9100000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (623, 'DAI.FTKC15', 20, 'Ac Split Daikin Inverter 1/2PK', 16, 52, 6, 4400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (624, 'DAI.FTKC20NVM4', 20, 'Ac Split Daikin Inverter 3/4PK', 16, 52, 6, 4350000, 4850000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (625, 'DAI.FTKC25NVM4', 20, 'Ac Split Daikin Inverter 1 PK', 16, 52, 6, 5050000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (626, 'DAI.FTKC35NVM4', 20, 'Ac Split Daikin Inverter 1.5PK', 16, 52, 6, 6400000, 6500000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (627, 'DAI.FTKC60', 20, 'AC Split Daikin Inverter 2.5PK', 16, 52, 6, 12975000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (628, 'DAI.FTKV25NVM4', 20, 'Ac Split Daikin High Inverter 1 PK', 16, 52, 6, 5175000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (629, 'DAI.FTKV35', 20, 'Ac Split Daikin High Inverter 1.5PK', 16, 52, 6, 7453600, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (630, 'DAI.FTKV50', 20, 'Ac Split Daikin High Inverter 2PK', 16, 52, 6, 11112640, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (631, 'DAI.STC15NV', 20, 'Ac Split Daikin 1/2PK THAILAND', 16, 52, 6, 3850000, 3400000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (632, 'DAI.STC20NV', 20, 'Ac Split Daikin 3/4PK STC20NV', 16, 52, 6, 3925000, 3600000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (633, 'DAI.STC25NV', 20, 'Ac Split Daikin 1 PK STC25NV', 16, 52, 6, 4250000, 3650000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (634, 'DAI.STC35NV', 20, 'Ac Split Daikin 1.5PK STC35NV', 16, 52, 6, 5425000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (635, 'DAI.STC50NV', 20, 'Ac Split Daikin 2 PK STC50NV', 16, 52, 6, 7096000, 5752500, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (636, 'DAI.STKM25', 20, 'Ac Split Daikin Premium Inverter1 PK', 16, 52, 6, 7420000, 4545454, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (637, 'DAI.STKM35', 20, 'Ac Split Daikin Premium Inverter1.5 PK', 16, 52, 6, 9325000, 6500001, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (638, 'DAI.STV15BXV14', 20, 'Ac Split Daikin 1/2PK Malaysia', 16, 52, 6, 3150000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (639, 'DAI.STV20BXV14', 20, 'Ac Split Daikin 3/4PK Malaysia STV20BXV', 16, 52, 6, 3300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (640, 'DAI.STV25BXV14', 20, 'Ac Split Daikin 1 PK Malaysia', 16, 52, 6, 3925000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (641, 'DAI.STV35BXV14', 20, 'Ac Split Daikin 1.5PK Malaysia STV35BXV', 16, 52, 6, 4900000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (642, 'DAI.STV50BXV14', 20, 'Ac Split Daikin 2PK Malaysia STV50BXV', 16, 52, 6, 6556000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (643, 'DAI.STV60BXV', 20, 'AC Split Daikin 2,5PK', 16, 52, 6, 9250000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (644, 'SAM.AP', 20, 'Air Purifier Daikin MC30', 16, 56, 6, 1875000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (645, 'DAI.CAS4PKDEL', 20, 'Ac Cassete Daikin 4PK', 16, 59, 6, 24500000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (646, 'DAI.FCNQ30MY', 20, 'Ac Cassete Daikin 3,5PK', 16, 59, 6, 25252000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (647, 'DAI.FHC26NUV', 20, 'Ac Cassete Daikin 3PK', 16, 59, 6, 17550000, 16500000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (648, 'DAI.SCNQ13MV14', 20, 'Ac Cassete Daikin 1.5PK', 16, 59, 6, 10550186, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (649, 'DAI.SCNQ21', 20, 'AC Cassete Daikin 2,5 Pk', 16, 59, 6, 17050000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (650, 'DAI.FLOOR3PK', 20, 'AC Floor Standing Daikin 3PK', 16, 68, 6, 16400000, 15025780, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (651, 'DAI.FLOOR5PK', 20, 'AC Floor Standing Daikin 5PK', 16, 68, 6, 23425000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (652, 'DAI.INFLOOR4PK', 20, 'Ac Floor Standing Daikin 4PK', 16, 68, 6, 21129322, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (653, 'DAI.FBQ140DVI14', 20, 'Ac Split Duct Daikin 6 Pk', 16, 98, 6, 25418593, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (654, 'DAI.FDBNQ18MV', 20, 'AC Split Duct Daikin 2 pk', 16, 98, 6, 11350000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (655, 'DAI.FDBNQ21MV14', 20, 'Ac Split Duct Daikin 2.5PK', 16, 98, 6, 13254439, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (656, 'DAI.FDMNQ09MV', 20, 'Ac Split Duct Daikin 1 PK', 16, 98, 6, 7750000, 5831168, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (657, 'DAI.FDMNQ18', 20, 'Ac Split Duct Daikin 2PK', 16, 98, 6, 11400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (658, 'DAI.FDMNQ26', 20, 'Ac Split Duct Daikin 3PK', 16, 98, 6, 21300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (659, 'DAI.FDMNQ36MV', 20, 'Ac Split Duct Daikin 4PK', 16, 98, 6, 19250000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (660, 'DAI.FDMNQ42MY14', 20, 'Ac Split Duct Daikin 5 Pk', 16, 98, 6, 27281397, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (661, 'DEN.4KG', 20, 'Mesin Cuci Denpoo 4 KG', 16, 81, 143, 635000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (662, 'ELEC.5107SD', 20, 'Kulkas 3 Pintu Electrolux', 16, 4, 106, 11000000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (663, 'ELE.EDV600', 20, 'Dryer Electrolux 8 KG', 16, 65, 106, 7300000, 5350000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (664, 'ELEC.EJE300', 20, 'Juicer Electrolux', 16, 74, 106, 346600, 1125000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (665, 'ELE.ETB3200PE', 20, 'Kulkas 2 Pintu Electrolux', 16, 79, 106, 14875000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (666, 'ELE.EWF10751', 20, 'Mesin Cuci Front Loading Electrolux 7KG', 16, 81, 106, 5150000, 4900000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (667, 'ELE.EWF7555', 20, 'Mesin Cuci Front Loading Electrolux 8 KG', 16, 81, 106, 5050000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (668, 'ELEC.EWW14012', 20, 'Mesin Cuci Front Loading Electrolux 9024P5WB', 16, 81, 106, 9200000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (669, 'ELEC.3087', 20, 'Microwave Electrolux 3087', 16, 83, 106, 2750000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (670, 'GEA.4PINTU', 20, 'Kulkas 4 Pintu GEA', 16, 4, 107, 6999000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (671, 'GEA.EXPO50', 20, 'Showcase GEA EXPO 50', 16, 4, 107, 1889000, 1795200, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (672, 'GEA.MINIBAR', 20, 'Kulkas 1 Pintu Portable GEA RS 06 DR', 16, 4, 107, 1207680, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (673, 'GEA.XW400E', 20, 'Gea Noodle Maker', 16, 4, 107, 1870000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (674, 'GEA.POLARIS', 20, 'Dispenser GEA Galon Bawah POLARIS', 16, 63, 107, 2106225, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (675, 'GEA.STAR', 20, 'Dispenser GEA Galon Bawah STAR', 16, 63, 107, 2014650, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (676, 'GEA.Venus', 20, 'Dispenser GEA Galon Bawah HALLEY', 16, 63, 107, 1684980, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (677, 'GEA.COFFEETEA', 20, 'Coffee Tea Warmer', 16, 64, 107, 441320, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (678, 'GEA.DZ400', 20, 'Air PurifierPolytron PAP 125', 16, 64, 107, 1122000, 1300000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (679, 'GEA.Decanter', 20, 'Decanter GEA', 16, 64, 107, 149000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (680, 'GEA.WB10', 20, 'Water Boiler GEA WB10', 16, 64, 107, 900000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (681, 'GEA.WineCooler', 20, 'Wine Cooler GEA SC100Y', 16, 64, 107, 3179000, 3400000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (682, 'POL.PAP160', 20, 'Air PurifierPolytron PAP 160', 16, 64, 107, 3470000, 1300000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (683, 'GEA.AB-1200TX', 20, 'Chest Freezer GEA 1200L', 16, 69, 107, 9100000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (684, 'GEA.AB106', 20, 'Chest Freezer GEA 100L', 16, 69, 107, 2100000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (685, 'GEA.AB226', 20, 'Chest Freezer GEA 200L', 16, 69, 107, 2690000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (686, 'GEA.AB336', 20, 'Chest Freezer GEA 300L', 16, 69, 107, 3360000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (687, 'GEA.AB506T', 20, 'Chest Freezer GEA 500L', 16, 69, 107, 5363160, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (688, 'GEA.AB750', 20, 'Chest Freezer GEA 750L', 16, 69, 107, 8114100, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (689, 'GEA.AB900', 20, 'Chest Freezer GEA 900L', 16, 69, 107, 6682500, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (690, 'GEA.ABT375LT', 20, 'Chest Freezer GEA 400L AB396', 16, 69, 107, 4749800, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (691, 'GEA.CF750', 20, 'Chest Freezer GEA 600L', 16, 69, 107, 6793200, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (692, 'GEA.SD132P', 20, 'Chest Freezer Kaca GEA SD360', 16, 69, 107, 6302580, 2943332, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (693, 'GEA.GF73', 20, 'Under Counter Chiller GEA MRW6T2HH', 16, 71, 107, 12716000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (694, 'GEA.EXPO30FC', 20, 'Showcase GEA EXPO 30FC', 16, 94, 107, 3295000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (695, 'GEA.EXPO37FC', 20, 'Showcase GEA EXPO 37FC', 16, 94, 107, 3960000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (696, 'GEA.EXPO416', 20, 'Showcase GEA EXPO 382', 16, 94, 107, 5874000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (697, 'GEA.EXPO90', 20, 'Showcase GEA EXPO 90', 16, 94, 107, 2318800, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (698, 'Water Boiler Gea WB 30', 20, 'Water Boiler Gea WB 30', 16, 94, 107, 1028500, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (699, 'GEA.WB20', 20, 'Water Boiler GEA WB 20', 16, 102, 107, 748000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (700, 'GRE.24MOO', 20, 'Ac Split Gree 2.5 PK', 16, 52, 116, 6400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (701, 'GRE.GWC12F5', 20, 'AC Split Gree Inverter 1,5 Pk', 16, 52, 116, 5300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (702, 'GRE.GWC12MA', 20, 'AC Split Gree 1,5 Pk', 16, 52, 116, 4599000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (703, 'GRE.GWC18MOO', 20, 'Ac Split Gree 2 Pk', 16, 52, 116, 6189000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (704, 'GRE.GWC5MOO', 20, 'AC Split Gree 1/2  Pk', 16, 52, 116, 2899000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (705, 'GREE.GWC07MOO', 20, 'Ac Split Gree 3/4PK', 16, 52, 116, 3389000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (706, 'GREE.GWC09', 20, 'Ac Split Gree 1 PK', 16, 52, 116, 3509000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (707, 'GREE.FM1.25-12K', 20, 'Air Curtain Gree 120cm', 16, 54, 116, 2959000, 1900000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (708, 'GREE.GU50T', 20, 'Ac Cassete GREE 2PK', 16, 59, 116, 9926000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (709, 'GREE.GU71T', 20, 'Ac Cassete GREE 3PK', 16, 59, 116, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (710, 'GREE.FLOOR3PK', 20, 'Floor Standing Gree 3PK', 16, 68, 116, 11562000, 10199900, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (711, 'GREE.Floor5PK', 20, 'Ac Floor Standing GREE 5 PK', 16, 68, 116, 19180161, 17500000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (712, 'GREE.FM1.25-9K', 20, 'Air Curtain Gree 90cm', 16, 54, 145, 2599000, 1900000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (713, 'GRN.GV09LW', 20, 'Air Curtain Green Air GV 09 LW', 16, 54, 145, 1688625, 1900000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (714, 'GRN.GV12LW/SS', 20, 'Air Curtain Green Air GV 12 ES', 16, 54, 145, 2137500, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (715, 'GRN.GV150', 20, 'Air Curtain Green Air 150CM', 16, 54, 145, 1945125, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (716, 'HAI.HSU05GTO', 20, 'Ac Split Haier 1/2 PK', 16, 52, 119, 2300000, 2100000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (717, 'HAI.HSU07GTO', 20, 'Ac Split Haier 3/4PK', 16, 52, 119, 2350000, 2200000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (718, 'HAI.HSU09GTO', 20, 'Ac Split Haier 1 PK', 16, 52, 119, 2500000, 2600000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (719, 'HAI.HSU12LEK', 20, 'AC Split Haier 1,5PK', 16, 52, 119, 3400000, 3828148, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (720, 'HAI.HSU18GTO', 20, 'AC Split Haier 2PK', 16, 52, 119, 4500000, 4217142, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (721, 'HAI.HSU24GTR', 20, 'Ac Split Haier 2.5PK', 16, 52, 119, 5950000, 6496250, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (722, 'HAI.CAS3PK', 20, 'Ac Cassete Haier 5PK', 16, 59, 119, 15547760, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (723, 'HAI.HPU18C03', 20, 'Floor Standing Haier 2PK', 16, 68, 119, 5391760, 6000000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (724, 'HAI.INFL3PK', 20, 'Ac Floor Standing Mitsubishi 3PK', 16, 68, 119, 16750000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (725, 'HIT.RB41', 20, 'Kulkas 2 Pintu Hitach RB 41', 16, 4, 108, 28000000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (726, 'HIT.RS80PGD2-GBK', 20, 'Kulkas Side By Side Hitachi RS80GPGD', 16, 4, 108, 14500000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (727, 'HIT.RVG40PGD3-GBK', 20, 'Kulkas 2 Pintu Hitachi RV 40', 16, 4, 108, 6500000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (728, 'HIT.RVG45', 20, 'Kulkas 2 Pintu Hitachi RVG 45', 16, 4, 108, 6800000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (729, 'HIT.RZ40EGD9', 20, 'Kulkas 2 Pintu Hitachi RV 47', 16, 4, 108, 5950000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (730, 'HIT.RZ57EGD9', 20, 'Kulkas 2 Pintu Hitachi RVG 47', 16, 4, 108, 7150000, 7500000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (731, 'HIT.RZG40EGD1', 20, 'Kulkas 2 Pintu Hitachi RVG 70', 16, 4, 108, 11000000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (732, 'HIT.RZG45EGD1', 20, 'Kulkas 2 Pintu Hitachi RV 45', 16, 4, 108, 16600000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (733, 'HIT.RC', 20, 'Rice Cooker Hitachi', 16, 67, 108, 1500000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (734, 'HIT.WGP250', 20, 'Pompa Hitachi 250 Watt WTP250', 16, 90, 108, 2800000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (735, 'HIT.WTP150', 20, 'Pompa Boaster Shimizu 133 BIT', 16, 90, 108, 712300, 2000000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (736, 'KDK.15TGQ', 20, 'EXHAUST FAN PLAFON KDK 6\"', 16, 75, 147, 214032, 223479, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (737, 'KDK.20TGQ', 20, 'Exhaust Fan Plafon KDK 8\"', 16, 75, 147, 285670, 230000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (738, 'KDK.24CDQN', 20, 'Exhaust Fan KDK 24 CDQN', 16, 75, 147, 600100, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (739, 'KDK.25RQN5', 20, 'Exhaust Fan Dinding KDK 10\"', 16, 75, 147, 401996, 301640, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (740, 'KDK.25TGQ', 20, 'Exhaust Fan Plafon KDK 10\"', 16, 75, 147, 287316, 350000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (741, 'KDK.30RQN', 20, 'Exhaust Fan Dinding KDK 12\"', 16, 75, 147, 435400, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (742, 'KDK.45GTC', 20, 'Exhaust Fan KDK 40AAS', 16, 75, 147, 597000, 6600000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (743, 'KDK.WA30V', 20, 'Desk Fan KDK WA30V', 16, 75, 147, 252300, 252300, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (744, 'KDK.WB40L', 20, 'Wall Fan KDK WB40L', 16, 75, 147, 615800, 675000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (745, 'KDK.WG30X', 20, 'Kipas Angin Box Fan KDK', 16, 75, 147, 255100, 315000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (746, 'KDK.WM40X', 20, 'Stand Fan KDK WM40X', 16, 75, 147, 468100, 370900, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (747, 'KDK.WN40B', 20, 'Wall Fan KDK WN40', 16, 75, 147, 456100, 400000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (748, 'KDK.WR40U', 20, 'Auto Fan KDK WR40U', 16, 75, 147, 502800, 475000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (749, 'KDK.WZ56P', 20, 'Ceiling Fan KDK WZ56P', 16, 75, 147, 665000, 675000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (750, 'KEN.KZ05', 20, 'Bracket LED 40-55\"', 16, 58, 148, 111550, 485000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (751, 'KEN.KZ52', 20, 'Standing Bracket Kenzo', 16, 58, 148, 1150000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (752, 'KEN.KZBESAR', 20, 'Bracket LED 65-70\"', 16, 58, 148, 158110, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (753, 'KIR.WF16\"', 20, 'Exhaust Fan Maspion 16\"', 16, 75, 149, 458600, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (754, 'KIR.KBO190RA', 20, 'Oven Toaster Kirin 190RA', 16, 86, 149, 624600, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (755, 'KIR.KBO250', 20, 'Oven Toaster Kirin KBO250', 16, 86, 149, 662000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (756, 'KIR.KBO600RA/350', 20, 'Oven Kirin KBO 350 RA/KBO600', 16, 86, 149, 1350000, 1000000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (757, 'KIR.KBO90', 20, 'Oven Toaster Kirin KBO100', 16, 86, 149, 342000, 465000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (758, 'GN-M200SQBB', 20, 'Kulkas 2 Pintu LG 215SQMT', 16, 4, 12, 3290000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (759, 'LG .GNV185SQBB', 20, 'Kulkas 2 Pintu LG 195', 16, 4, 12, 3450000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (760, 'LG. GN-INV201SL', 20, 'Kulkas 1 Pintu LG GN-201SL', 16, 4, 12, 2650000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (761, 'LG.422SGCN', 20, 'Kulkas 2 Pintu LG 422SQCL', 16, 4, 12, 6450000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (762, 'LG.602SGCN', 20, 'Kulkas 2 Pintu LG 602HXHL', 16, 4, 12, 8140000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (763, 'LG.GCQ247CSBV', 20, 'Kulkas Side By Side Sharp SJIS-60MSL', 16, 4, 12, 8425000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (764, 'LG.GNB372SLCL', 20, 'Kulkas 2 Pintu  LG 392', 16, 4, 12, 6650000, 6900000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (765, 'LG.IN 12NLA', 20, 'AC Split LG 1.5 PK', 16, 52, 12, 4070000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (766, 'LG.IN09NLA', 20, 'Ac Split LG 1 PK', 16, 52, 12, 2785000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (767, 'LG.S05NLA', 20, 'AC Split LG 1/2 PK', 16, 52, 12, 2400000, 2712765, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (768, 'LG.S07NLA', 20, 'AC Split LG 3/4 PK', 16, 52, 12, 2630000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (769, 'LG.S18LFG', 20, 'AC Split LG 2 PK', 16, 52, 12, 5700000, 5485714, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (770, 'LG.DVD', 20, 'DVD LG', 16, 66, 12, 370000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (771, 'LG.304RL', 20, 'Freezer LG 6 RAK', 16, 69, 12, 2820000, 1775000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (772, 'LG. LED22\"', 20, 'LED LG 22\'\'', 16, 80, 12, 1375000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (773, 'LG.19LS3300', 20, 'LED LG 19\"', 16, 80, 12, 1300000, 1400000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (774, 'LG.20\" 20MT45A', 20, 'LED LG 20\"', 16, 80, 12, 1200000, 1300000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (775, 'LG.24\"', 20, 'LED LG 24\"', 16, 80, 12, 1550000, 1600000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (776, 'LG.32LN5100', 20, 'LED LG 32\"', 16, 80, 12, 1950000, 2700000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (777, 'LG.43\"', 20, 'LED Toshiba 43\"', 16, 80, 12, 4125000, 4300000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (778, 'LG.47LN5400', 20, 'LED LG 55\"', 16, 80, 12, 7300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (779, 'LG.60-75\"', 20, 'LED LG 60\"', 16, 80, 12, 10450000, 19000000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (780, 'LG.75', 20, 'LED LG 75\"', 16, 80, 12, 20400000, 23000000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (781, 'LG.LED21\" 21MT47A', 20, 'LED LG 28\"', 16, 80, 12, 3054000, 1800000, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (782, 'LG.LED43', 20, 'LED LG 43\"', 16, 80, 12, 3550000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (783, 'LG.LED65', 20, 'LED LG 65\"', 16, 80, 12, 10750000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (784, 'LG.LED70\"', 20, 'LED LG 70\"', 16, 80, 12, 15300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (785, 'LG.12HD', 20, 'Mesin Cuci 2 Tabung LG 14 KG', 16, 81, 12, 2800000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (786, 'LG.12KG', 20, 'Mesin Cuci 2 Tabung LG 12 KG', 16, 81, 12, 2975000, 4100000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (787, 'LG.13KG', 20, 'Mesin Cuci 1 Tabung LG 13 KG', 16, 81, 12, 4225000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (788, 'LG.1409H3E', 20, 'Mesin Cuci Front Loading LG', 16, 81, 12, 5450000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (789, 'LG.1T2311VS2M', 20, 'Mesin Cuci 1 Tabung LG 11 KG', 16, 81, 12, 4000000, 4600000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (790, 'LG.2318', 20, 'Mesin Cuci 1 Tabung LG 18KG', 16, 81, 12, 5900000, 5900000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (791, 'LG.WDP1208', 20, 'Mesin Cuci Front Loading LG 1450', 16, 81, 12, 4800000, 8800000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (792, 'LG.WFL2108', 20, 'Mesin Cuci 1 Tabung LG 8 KG', 16, 81, 12, 3150000, 2900000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (793, 'LG.WFL705TC', 20, 'Mesin Cuci 1 Tabung LG 7 KG', 16, 81, 12, 2400000, 2600000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (794, 'LG.P800N', 20, 'Mesin Cuci 2 tabung LG 9KG', 16, 82, 12, 2225000, 2000000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (795, 'LG.WP1460', 20, 'Mesin Cuci 2 Tabung LG 16 kg', 16, 82, 12, 3075000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (796, 'LG.WP850R', 20, 'Mesin Cuci 2 Tabung LG', 16, 82, 12, 2150000, 1725000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (797, 'LG .MS2042MD', 20, 'Microwave LG', 16, 83, 12, 1425000, 900000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (798, 'LG.MS2342D', 20, 'Microwave LG MS2342D 450W', 16, 83, 12, 1200000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (799, 'UCH.EX18PAS', 20, 'Dispenser Electrolux Galon Bawah', 16, 63, 150, 3250000, 111983, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (800, 'MAS.RC', 20, 'Rice Cooker Maspion', 16, 67, 150, 963300, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (801, 'MAS.167', 20, 'Stand Fan Maspion 18\"', 16, 75, 150, 435000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (802, 'MAS.MV250NEX', 20, 'Exhaust Fan Maspion MV 250', 16, 75, 150, 332681, 332681, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (803, 'MAS.MV300NEX', 20, 'Exhaust Fan Maspion MV 300', 16, 75, 150, 356877, 356877, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (804, 'MAS.WF16', 20, 'Wall Fan Maspion 16\"', 16, 75, 150, 261700, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (805, 'MAS.WF18', 20, 'Wall Fan Maspion 20\"', 16, 75, 150, 550706, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (806, 'MAS.S300', 20, 'Kompor Maspion', 16, 76, 150, 123500, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (807, 'MAS.HA110', 20, 'Setrika Maspion HA110', 16, 93, 150, 108000, 71173, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (808, 'MID.MSBC05CRI', 20, 'Indoor AC Split Midea 1/2pk', 16, 52, 120, 2576000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (809, 'MID.MSBC07CRNI', 20, 'Indoor Ac Split Midea 3/4PK', 16, 52, 120, 2750000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (810, 'MID.MSBC12CRNI', 20, 'Indoor Ac Split Midea 1.5PK', 16, 52, 120, 3700000, 3732550, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (811, 'MID.MSBC18CRNI', 20, 'Indoor Ac Split Midea 2PK', 16, 52, 120, 5460000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (812, 'MID.MSR09CRI', 20, 'Indoor Ac Split Midea 1 PK', 16, 52, 120, 3180000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (813, 'MID.POR1.5PK', 20, 'Ac Portable Midea 1.5 PK', 16, 52, 120, 3975000, 4300000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (814, 'MID.MPF09', 20, 'Ac Portable Midea 1PK', 16, 64, 120, 3770000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (815, 'MID.MSBC05CRO', 20, 'Outdoor Ac Split Midea 1/2 PK', 16, 85, 120, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (816, 'MID.MSBC07CRO', 20, 'Outdoor Ac Split Midea 3/4PK', 16, 85, 120, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (817, 'MID.MSBC09CRO', 20, 'Outdoor AC Split Midea 1 PK', 16, 85, 120, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (818, 'MID.MSBC12CRNO', 20, 'Outdoor Ac Split Midea 1.5PK', 16, 85, 120, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (819, 'MID.MSBC18CRO', 20, 'Outdoor Ac Split Midea 2PK', 16, 85, 120, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (820, 'MID.', 20, 'Water Heater Instan Midea', 16, 102, 120, 920000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (821, 'MIT.MRF47EH-SLW/BRW', 20, 'Kulkas 2 Pintu Mitsubishi MRF47', 16, 4, 109, 6800000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (822, 'MIT.MRF55EH-SLW/BRW', 20, 'Kulkas 2 Pintu Mitsubishi MRF55', 16, 4, 109, 5005000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (823, 'MIT.MRFV32J-OB-N', 20, 'Kulkas 2 Pintu Mitsubishi MRFV32', 16, 4, 109, 3500000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (824, 'MHI.SRK12', 20, 'Ac Split Mitsubishi Thailand 1.5PK', 16, 52, 109, 4900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (825, 'MHI.SRK5', 20, 'Ac Split Mitsubishi 0.5PK', 16, 52, 109, 3150000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (826, 'MHI.SRK9', 20, 'Ac Split Mitsubishi 1 PK', 16, 52, 109, 3900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (827, 'MIT.2PK', 20, 'Ac Split Mitsubishi 2 PK', 16, 52, 109, 6850000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (828, 'MIT.MSYJP13PF', 20, 'Ac Split Mitsubishi Elektrik 1.5PK INVERTER', 16, 52, 109, 6100000, 6100000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (829, 'Mitshubisi', 20, 'Mitshubisi 2 PK', 16, 52, 109, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (830, 'MIT.D12GUCY', 20, 'Desk Fan Mitsubishi 12\"', 16, 75, 109, 345000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (831, 'MIT.EX20RHKC5T', 20, 'Exhaust Fan Dinding Mitsubishi 8\"', 16, 75, 109, 316000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (832, 'MIT.EX20SC5T', 20, 'Exhaust Fan Plafon Mitsubishi 8\"', 16, 75, 109, 238300, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (833, 'MIT.EX25RHKC5T', 20, 'Exhaust Fan Dinding Mitsubishi 10\"', 16, 75, 109, 343000, 400000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (834, 'MIT.EX25SC5T', 20, 'Exhaust Fan Plafon Mitsubishi 10\"', 16, 75, 109, 263100, 278390, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (835, 'MIT.EX30RHKC5T', 20, 'Exhaust Fan Dinding Mitsubishi 12\"', 16, 75, 109, 380000, 450000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (836, 'MIT.R16GSRD', 20, 'Stand Fan Mitsubishi 2in1 16\" R16GS RD/GY', 16, 75, 109, 489500, 374300, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (837, 'MIT.R16GUCY', 20, 'Stand Fan Mitsubishi 16\"', 16, 75, 109, 660000, 558661, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (838, 'MIT.W16GSWH', 20, 'Wall Fan Mitsubishi 16\"', 16, 75, 109, 362800, 450000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (839, 'MIT.MRF42H-HS/SB', 20, 'Kulkas 2 Pintu Mitsubishi MRFV32', 16, 78, 109, 4250000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (840, 'MIT.MRF51H-HS/SB', 20, 'Kulkas 2 Pintu Mitsubishi MRF51', 16, 78, 109, 6837336, 6500000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (841, 'MIT.MRF62E', 20, 'Kulkas 2 Pintu Mitsubishi MRF62', 16, 78, 109, 8143344, 8814960, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (842, 'MIT.MRV50H-HS/SB', 20, 'Kulkas 3 Pintu Mitsubishi MRV50', 16, 79, 109, 8035470, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (843, 'SAN.PDH405', 20, 'Pompa Air Sanyo PDH 405', 16, 90, 109, 8472500, 7700000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (844, 'MIY.102GS', 20, 'Blender Miyako 102PL', 16, 57, 151, 218202, 250000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (845, 'MIY.BL101PL', 20, 'Blender Miyako 101PL', 16, 57, 151, 193800, 250000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (846, 'MIY.BL152GS', 20, 'Blender Miyako Bl 152 Gelas', 16, 57, 151, 290900, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (847, 'MIY.BL152PF/AP', 20, 'Blender Miyako BL 152 PF Plastik', 16, 57, 151, 237100, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (848, 'MIY.WD189', 20, 'Dispenser Portable Miyako WD 189 H', 16, 63, 151, 142500, 175000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (849, 'MIY.WD29EXC', 20, 'Dispenser Miyako Portable', 16, 63, 151, 505100, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (850, 'MIY.WDP300', 20, 'Dispenser Galon bawah Miyako WDP 300', 16, 63, 151, 905400, 758500, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (851, 'MIY.MCM528', 20, 'Rice Cooker Miyako 1.8L', 16, 67, 151, 211700, 275000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (852, 'MIY.RC0.6L', 20, 'Rice Cooker Miyako 0.6Liter', 16, 67, 151, 182200, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (853, 'MIY.RC5L', 20, 'Rice Cooker Miyako 171 6L', 16, 67, 151, 1169555, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (854, 'MIY.JUICER', 20, 'Juicer Miyako', 16, 74, 151, 285500, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (855, 'MIY.KAS1618B', 20, 'Stand Fan Miyako 16\"', 16, 75, 151, 245400, 250000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (856, 'MIY.KAS1689', 20, 'Wall Fan Miyako 16\"', 16, 75, 151, 227200, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (857, 'MIY.KG-11C', 20, 'Kompor Gas Miyako 1 Tungku', 16, 76, 151, 274100, 350000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (858, 'MIY.HM620', 20, 'Hand Mixer Miyako', 16, 84, 151, 144700, 144700, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (859, 'MIY.SM625', 20, 'Mixer Com Miyako SM-625', 16, 84, 151, 238000, 194900, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (860, 'MIY.EI1008M', 20, 'Setrika Miyako EI 1008', 16, 93, 151, 84500, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (861, 'MIY.MSC1850', 20, 'Slow Cooker Miyako MSC1850', 16, 97, 151, 220000, 450000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (862, 'MOD.RF2255', 20, 'Kulkas Modena RF 2255 S', 16, 4, 110, 9612000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (863, 'MOD.RF2551', 20, 'Kulkas Modena RF 2551 S', 16, 4, 110, 10662822, 11000000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (864, 'MOD.RF4540', 20, 'Kulkas Modena RF 4540 S', 16, 4, 110, 11520000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (865, 'MOD.SC1202', 20, 'Showcase Modena SC 1202', 16, 4, 110, 3800000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (866, 'MOD.BH9502', 20, 'Cooker Hood Modena 9502 V', 16, 61, 110, 1418140, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (867, 'MOD.BX6000', 20, 'Built In Cooker Hood BX6000', 16, 61, 110, 1496000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (868, 'MOD.CX6150', 20, 'Cooker Hood Modena CX6150', 16, 61, 110, 2775000, 1850000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (869, 'MOD.CX6300', 20, 'Cooker Hood Modena CX6300', 16, 61, 110, 2755500, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (870, 'MOD.CX9106', 20, 'Cooker Hood Modena CX9107', 16, 61, 110, 3495880, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (871, 'MOD.CX9150', 20, 'Cooker Hood Modena CX9150', 16, 61, 110, 2704360, 4700000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (872, 'MOD.CX9330', 20, 'Cooker Hood Modena CX9330', 16, 61, 110, 3096000, 3050000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (873, 'MOD.IX9150', 20, 'Cooker Hood Modena Island IX 9150', 16, 61, 110, 4422000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (874, 'MOD.IX9300', 20, 'Cooker Hood Modena IX9300', 16, 61, 110, 4290000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (875, 'MOD.PX6001', 20, 'Cooker Hood Modena 60cm', 16, 61, 110, 797317, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (876, 'MOD.PX7001', 20, 'Cooker Hood Modena PX7001', 16, 61, 110, 1085076, 2321215, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (877, 'MOD.PX9002', 20, 'Cooker Hood Modena PX 9002', 16, 61, 110, 1382940, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (878, 'MOD.RX7632', 20, 'Cooker Hood Modena RX7632', 16, 61, 110, 1944000, 1944000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (879, 'MOD.SX6001S', 20, 'Cooker Hood Modena SX6001S', 16, 61, 110, 916300, 800000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (880, 'MOD.SX6001SS', 20, 'Cooker Hood Modena SX6001SS', 16, 61, 110, 693000, 900000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (881, 'MOD.SX6501V', 20, 'Cooker Hood Modena SX6501V', 16, 61, 110, 906950, 1000000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (882, 'MOD.SX9001SL', 20, 'Cooker Hood Modena SX9001SL', 16, 61, 110, 1154300, 1225000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (883, 'MOD.SX9002S', 20, 'Cooker Hood Modena SX9002S', 16, 61, 110, 1188000, 1200000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (884, 'MOD.SX9502S', 20, 'Cooker Hood Modena SX 9502 S', 16, 61, 110, 2106000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (885, 'MOD.DD0310', 20, 'Dispenser Modena Galon Atas', 16, 63, 110, 1203867, 1466286, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (886, 'MOD.DD23', 20, 'Dispenser Modena DD 0370', 16, 63, 110, 1789000, 3153153, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (887, 'MOD.DD65L', 20, 'Dispenser Modena Galon Bawah DD 65L', 16, 63, 110, 2325000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (888, 'MOD.DD66L', 20, 'Dispenser Modena Galon Bawah DD 66 L', 16, 63, 110, 2061250, 2500000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (889, 'MOD.DD67S', 20, 'Dispenser Modena Galon Bawah DD 67 S', 16, 63, 110, 2448000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (890, 'MOD.DD75', 20, 'Dispenser Modena Galon Bawah DD 7302 L', 16, 63, 110, 2250000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (891, 'MOD.KS', 20, 'Kitchen Sink Modena', 16, 64, 110, 733040, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (892, 'MOD.WP600', 20, 'Dish Dryer Modena WP600', 16, 64, 110, 7900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (893, 'MOD.MD0207', 20, 'Chest Freezer Modena 200liter', 16, 69, 110, 2699000, 2386236, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (894, 'MOD.MD0303', 20, 'Chest Freezer Modena MD 0316', 16, 69, 110, 4200000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (895, 'MOD.MD10', 20, 'Chest Freezer Modena 100L', 16, 69, 110, 2261000, 2018448, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (896, 'MOD.MD37W', 20, 'Chest Freezer Modena MD 37W', 16, 69, 110, 5270000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (897, 'MOD.BH0325', 20, 'Built in Modena BH0325', 16, 76, 110, 1560240, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (898, 'MOD.BH0725', 20, 'Built In Modena BH0725', 16, 76, 110, 1386000, 1450000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (899, 'MOD.BH1325', 20, 'Built In Modena BH 1325', 16, 76, 110, 2030000, 883928, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (900, 'MOD.BH1326', 20, 'Built In Modena BH 1326', 16, 76, 110, 1485000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (901, 'MOD.BH1645', 20, 'Built In Modena BH1645', 16, 76, 110, 3232040, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (902, 'MOD.BH1725', 20, 'Built in Hob Modena 70Cm', 16, 76, 110, 2407734, 1900000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (903, 'MOD.BH1725LA', 20, 'Built In Modena BH 1725 LA', 16, 76, 110, 2749000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (904, 'MOD.BH1735', 20, 'Built In Modena BH 1735', 16, 76, 110, 2046000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (905, 'MOD.BH1948', 20, 'Built In Modena BH 1945', 16, 76, 110, 3816000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (906, 'MOD.BH2644', 20, 'Built in Hob BH2644', 16, 76, 110, 2244000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (907, 'MOD.FC8643', 20, 'Freestanding Cooker Modena', 16, 76, 110, 13276933, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (908, 'MOD.PC2721', 20, 'Kompor Gas Portable Modena PC2721', 16, 76, 110, 746000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (909, 'MOD.PI1310', 20, 'Built In Modena BH1315', 16, 76, 110, 1400000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (910, 'MOD.BO2733', 20, 'Built In Oven Modena BO 2733', 16, 77, 110, 6191316, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (911, 'MOD.WD1157', 20, 'Front Loading Modena WD1157', 16, 81, 110, 9000000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (912, 'MOD.WF1156', 20, 'Front Loading Modena WF1156', 16, 81, 110, 5047802, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (913, 'MOD.WF730', 20, 'Front Loading Modena WF730', 16, 81, 110, 5112000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (914, 'MOD.WF830', 20, 'Front Loading Modena WF830', 16, 81, 110, 5940000, 5940000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (915, 'MOD.MG2502', 20, 'Microwave Modena 2305', 16, 83, 110, 1199000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (916, 'MOD.BO2433', 20, 'Built In Oven Modena BO2663', 16, 86, 110, 7884000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (917, 'MOD.SC1130', 20, 'Showcase Modena SC1130', 16, 94, 110, 2296800, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (918, 'MOD.SC2920', 20, 'Showcase Modena SC2920', 16, 94, 110, 10230000, 9900000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (919, 'MOD.VM1410', 20, 'Showcase Modena VM1410', 16, 94, 110, 5181000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (920, 'MOD.KS5140', 20, 'Kitchen Sink KS 5140', 16, 96, 110, 2016000, 2016000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (921, 'MOD.VC1350', 20, 'Vacuum Cleaner Modena VC1350', 16, 101, 110, 829181, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (922, 'MOD.VC2050', 20, 'Vacuum Cleaner Modena VC3143', 16, 101, 110, 1169470, 1350000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (923, 'MOD.VC3213', 20, 'Vacuum Cleaner Modena VC 3213', 16, 101, 110, 786250, 807500, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (924, 'MOD.WH15B', 20, 'Water Heater Modena 15L', 16, 102, 110, 1600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (925, 'CUCI.AC', 20, 'Cuci AC', 16, 62, 152, 0, 75000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (926, 'DLL.BONGKAR', 20, 'Bongkar Barang', 16, 64, 152, 0, 50000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (927, 'LMBR.JASA', 20, 'Jasa Lembur', 16, 64, 152, 0, 500000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (928, 'PSG.BKRIN', 21, 'Bongkar Pasang Indoor AC', 16, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (929, 'PSG.BKROUT', 21, 'Bongkar Pasang Outdoor AC', 16, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (930, 'OXO.OX151', 20, 'Chopper Oxone OX 151', 16, 60, 153, 275300, 1514390, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (931, 'OXO.555', 20, 'Kompor Listrik Oxone OX-645', 16, 64, 153, 675000, 1600000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (932, 'OXO.MIXER', 20, 'Mixer Com Oxone X855', 16, 64, 153, 1844100, 2000000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (933, 'OXO.PRESTO', 20, 'Panci Presto Oxone 4L', 16, 64, 153, 250470, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (934, 'OXO.OX8830', 20, 'Oven Toaster Oxone OX 8830', 16, 86, 153, 1322100, 1038495, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (935, 'PAL.PH5RX', 20, 'Water Heater Gas Paloma', 16, 102, 154, 2672000, 2400000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (936, 'PAN.NR211Q', 20, 'Kulkas 2 Pintu Panasonic NRB 211Q Silver', 16, 4, 8, 3150000, 3000000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (937, 'PAN.NRA199', 20, 'Kulkas 1 Pintu Panasonic', 16, 4, 8, 1643360, 1700000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (938, 'PAN.NRAF179', 20, 'Kulkas 1 Pintu Panasonic NR AF 179', 16, 4, 8, 1850000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (939, 'PAN.NRB201Q', 20, 'Kulkas 2 Pintu Panasonic NRB 201Q', 16, 4, 8, 3455000, 2350000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (940, 'SHA.PORTBALEKULKAS', 20, 'Kulkas Portable Sharp', 16, 4, 8, 1375000, 1722222, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (941, 'PAN.CSLN05UKJ', 20, 'AC Split Panasonic 1/2 PK LN05UKJ', 16, 52, 8, 3200000, 3612903, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (942, 'PAN.CSLN07UKJ', 20, 'AC Split Panasonic 3/4 Pk LN07WKJ', 16, 52, 8, 3600000, 3793059, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (943, 'PAN.CSLN09UKJ', 20, 'AC Split Panasonic 1 PK LN09WKJ', 16, 52, 8, 3650000, 3700000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (944, 'PAN.CSLN12WKJ', 20, 'Ac Split Panasonic 1.5PK LN12WKJ', 16, 52, 8, 4668000, 4382257, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (945, 'PAN.CSS10PKP', 20, 'AC Split Panasonic Inveter 1 PK', 16, 52, 8, 3675000, 3750000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (946, 'PAN.CSS13PKP', 20, 'AC Split Panasonic Inverter 2,5Pk', 16, 52, 8, 5975000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (947, 'PAN.CSS18PKP', 20, 'AC Split Panasonic Inveter 2PK S18', 16, 52, 8, 8500000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (948, 'PAN.CSYN05TKJ', 20, 'AC Split Panasonic 1/2PK YN05', 16, 52, 8, 3000000, 3650000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (949, 'PAN.CSYN07TKJ', 20, 'AC Split Panasonic 3/4PK YN07', 16, 52, 8, 3175000, 3000000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (950, 'PAN.CSYN09TKJ', 20, 'AC Split Panasonic 1 PK YN09', 16, 52, 8, 3400000, 3525000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (951, 'PAN.CSYN18PKP', 20, 'AC Split Panasonic 2PK YN18', 16, 52, 8, 5825000, 6700000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (952, 'PAN.CUYN12PKP', 20, 'AC Split Panasonic 1,5 PK YN12', 16, 52, 8, 4350000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (953, 'PAN.KN05', 20, 'Ac Split Panasonic Low Watt 1/2 PK', 16, 52, 8, 3650000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (954, 'PAN.KN07', 20, 'Ac Split Panasonic Low Watt 3/4 PK', 16, 52, 8, 3200000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (955, 'PAN.KN09', 20, 'Ac Split Panasonic Low Watt 1 PK', 16, 52, 8, 3225000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (956, 'PAN.PN12', 20, 'AC Split Panasonic 1.5 PK PN12', 16, 52, 8, 4675000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (957, 'PAN.PU07', 20, 'AC Split Panasonic Inverter 3/4PK PU 7', 16, 52, 8, 5000000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (958, 'PAN.PU09', 20, 'Ac Split Inverter Panasonic1 PK  PU9', 16, 52, 8, 4800000, 5150000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (959, 'PAN.PU24XKJ', 20, 'AC Split Panasonic Inverter 2,5Pk', 16, 52, 8, 12975000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (960, 'PAN.XN09', 20, 'Ac Split Panasonic Low Watt + Ion 1PK XN09', 16, 52, 8, 4370000, 4370000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (961, 'PAN.FY10ESN', 20, 'Air Curtain Panasonic FY3509UI', 16, 54, 8, 7300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (962, 'PAN.FY3012', 20, 'Air Curtain Panasonic FY 3012', 16, 54, 8, 8000000, 11600000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (963, 'PAN.MX2062G', 20, 'Blender Panasonic MXXS1BSR', 16, 57, 8, 621790, 400000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (964, 'PAN.MXGX1462', 20, 'Blender Panasonic Gelas MX1462', 16, 57, 8, 375000, 400000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (965, 'PAN.MXSS40', 20, 'Blender Panasonic MXE 310 WSR', 16, 57, 8, 434200, 450000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (966, 'PAN.CAS2.5PK', 20, 'Ac Cassete Panasonic 2.5PK', 16, 59, 8, 14175000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (967, 'PAN.CSD28DBH5', 20, 'Ac Cassete Panasonic 3PK', 16, 59, 8, 17850000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (968, 'PAN.CSD34DB4H5', 20, 'Ac Cassete Panasonic 4PK', 16, 59, 8, 21100000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (969, 'PAN.CUCS-45FF', 20, 'AC Cassete Panasonic 5 Pk', 16, 59, 8, 22000000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (970, 'PAN.PV18DB', 20, 'Ac Cassete Panasonic 2PK', 16, 59, 8, 12850000, 13951219, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (971, 'PAN.MJL500', 20, 'Slow Juicer Panasonic', 16, 64, 8, 2492700, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (972, 'PAN.SRCEZ18', 20, 'Rice Cooker Panasonic CEZ18', 16, 67, 8, 481800, 700000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (973, 'PAN.SRDF181WSR', 20, 'Rice Cooker Panasonic DIGITAL SRDF181WSR', 16, 67, 8, 732000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (974, 'PAN.C18FF8', 20, 'Ac Floor Standing Panasonic 2PK', 16, 68, 8, 10400000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (975, 'PAN.CS45FFP8', 20, 'Ac Floor Standing Panasonic 5PK', 16, 68, 8, 23250000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (976, 'PAN.EHND11', 20, 'Hair Dryer Panasonic 600W', 16, 72, 8, 200000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (977, 'PAN.EQ405', 20, 'Auto Fan Panasonic EQ405', 16, 75, 8, 600039, 525000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (978, 'PAN.F-EY1511', 20, 'Ceiling Fan Panasonic EY1511', 16, 75, 8, 690000, 750000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (979, 'PAN.FEK306', 20, 'Desk Fan Panasonic 12\"', 16, 75, 8, 400400, 400000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (980, 'PAN.FEP404', 20, 'Stand Fan Panasonic 16\" FEP 404', 16, 75, 8, 610470, 550000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (981, 'PAN.FEP405', 20, 'Stand Fan Panasonic 16\" FEP 405', 16, 75, 8, 600039, 459093, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (982, 'PAN.FER303', 20, 'Box Fan Panasonic FER 303', 16, 75, 8, 367770, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (983, 'PAN.FES404', 20, 'Stand Fan Panasonic 16\" FES 404', 16, 75, 8, 599500, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (984, 'PAN.FEU309', 20, 'Wall Fan Panasonic 12\" FEU 309', 16, 75, 8, 374500, 425000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (985, 'PAN.FEU409', 20, 'Wall Fan Panasonic 16\" FEU 409', 16, 75, 8, 473642, 477804, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (986, 'PAN.FV15TGU', 20, 'Exhaust Fan Plafon Panasonic 6\" 15TGU', 16, 75, 8, 231000, 3600000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (987, 'PAN.FV20TGU3', 20, 'Exhaust Fan Plafon Panasonic 8\" 20TGU', 16, 75, 8, 286000, 280000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (988, 'PAN.FV25RUN5', 20, 'Exhaust Fan Dinding Panasonic 10\"', 16, 75, 8, 443919, 385000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (989, 'PAN.FV25TGU3', 20, 'Exhaust Fan Plafon Panasonic 10\" 25TGU', 16, 75, 8, 329966, 327464, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (990, 'PAN.FV30RUN5', 20, 'Exhaust Fan Dinding Panasonic 12\"', 16, 75, 8, 460674, 425000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (991, 'PAN.FV40AFU', 20, 'Exhaust Fan Dinding Panasonic 16\"', 16, 75, 8, 585600, 610000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (992, 'PAN.NRB228/208', 20, 'Kulkas 2 Pintu Panasonic NRBB 231', 16, 78, 8, 4300000, 4254229, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (993, 'PAN.NRB268', 20, 'Kulkas 2 Pintu Panasonic NRB 26 AN', 16, 78, 8, 2770000, 3400000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (994, 'PAN.24F305G', 20, 'LED Panasonic 22\"', 16, 80, 8, 1330000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (995, 'PAN.32F306G', 20, 'LED Panasonic 32\"', 16, 80, 8, 1900000, 2450000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (996, 'PAN.40F305G', 20, 'LED Panasonic 40\"', 16, 80, 8, 3305000, 3800000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (997, 'PAN.43F306G', 20, 'LED Panasonic 43\"', 16, 80, 8, 6280000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (998, 'PAN.LED55', 20, 'LED Panasonic 55\"', 16, 80, 8, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (999, 'PAN.1003', 20, 'Mesin Cuci 1 Tabung Panasonic 10 KG', 16, 81, 8, 4150000, 3050000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1000, 'PAN.128XB1WNE', 20, 'Mesin Cuci Front Loading Panasonic 8KG', 16, 81, 8, 4655000, 7300000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1001, 'PAN.NA127xb1wne', 20, 'Mesin Cuci Front Loading Panasonic 7KG', 16, 81, 8, 4150000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1002, 'PAN.NAF13KG', 20, 'Mesin Cuci 1 Tabung Panasonic 13 KG', 16, 81, 8, 4785000, 4785000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1003, 'PAN.NAF70B5', 20, 'Mesin Cuci 1 Tabung Panasonic 7KG NAF70B5', 16, 81, 8, 1400000, 2221025, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1004, 'PAN.NAF80B5WSG', 20, 'Mesin Cuci 1 Tabung Panasonic 8 Kg', 16, 81, 8, 2528900, 3053403, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1005, 'PAN.NAF95MB1WSG', 20, 'Mesin Cuci 1 Tabung Panasonic 9KG', 16, 81, 8, 2663111, 2200000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1006, 'PAN.NAW140FC1A', 20, 'Mesin Cuci 2 Tabung Panasonic 14 KG', 16, 82, 8, 2300000, 2600000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1007, 'PAN.NAW69BBZ1H', 20, 'Mesin Cuci 2 Tabung Panasonic 6 KG', 16, 82, 8, 1332155, 1800000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1008, 'PAN.NAW77FCW1A', 20, 'Mesin Cuci 2 Tabung Panasonic 7 KG', 16, 82, 8, 1345000, 1900000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1009, 'PAN.NAW95BBZ1H', 20, 'Mesin Cuci 2 Tabung Panasonic 9 KG', 16, 82, 8, 1800000, 1725000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1010, 'PAN.NN383BTTE', 20, 'Microwave Panasonic NNDF 383BTTE', 16, 83, 8, 4093080, 4555555, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1011, 'PAN.NNGD37', 20, 'Microwave Panasonic NN GD37', 16, 83, 8, 2338000, 1902002, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1012, 'PAN.NNGT35', 20, 'Microwave Panasonic NNGT35', 16, 83, 8, 1692000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1013, 'PAN.NNSM32', 20, 'Microwave Panasonic NN-SM32', 16, 83, 8, 1264300, 825000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1014, 'PAN.NNSM324', 20, 'Microwave Panasonic NN-ST34', 16, 83, 8, 1535350, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1015, 'PAN.NNST32HM', 20, 'Microwave Panasonic NN-ST32 DIGITAL', 16, 83, 8, 1581750, 1800000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1016, 'PAN.130JACK', 20, 'Pompa Air Panasonic 130JACK', 16, 90, 8, 580000, 675000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1017, 'PAN.GA130JAK', 20, 'Pompa Air Panasonic 130JAK', 16, 90, 8, 570900, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1018, 'PAN.GA200JAK', 20, 'Pompa Air Panasonic 200 Watt', 16, 90, 8, 813900, 788909, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1019, 'PAN.GF205HCX', 20, 'Pompa Air Tutup Tabung Panasonic 200W', 16, 90, 8, 2014155, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1020, 'PAN.GF255HCX', 20, 'Pompa Air Tutup Tabung Panasonic 250W', 16, 90, 8, 2633895, 2900000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1021, 'PAN.NI22AWT', 20, 'Setrika Panasonic NI 22 AWT', 16, 93, 8, 307000, 350000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1022, 'PAN.NI317T', 20, 'Setrika Panasonic 317T', 16, 93, 8, 205100, 241199, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1023, 'PAN.KXT505', 20, 'Telp Panasonic KXTS 885', 16, 99, 8, 205000, 300000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1024, 'PAN.TG110', 20, 'Telp Wireless Panasonic TGB 210', 16, 99, 8, 522000, 425000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1025, 'PAN.TG1611', 20, 'Telp Wireless Panasonic 1611', 16, 99, 8, 420000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1026, 'PAN.MCCG240', 20, 'Vacuum Cleaner Panasonic MCCG240', 16, 101, 8, 872600, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1027, 'PAN.MCCG300', 20, 'Vacuum Cleaner Panasonic MCCG300', 16, 101, 8, 822900, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1028, 'PAN.MCCG331', 20, 'Vacuum Cleaner Panasonic MCCG331', 16, 101, 8, 967700, 1100000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1029, 'PHI.HD9220', 20, 'Air Fryer Philips', 16, 55, 155, 1510700, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1030, 'PHI.HD2157', 20, 'Blender Philips HR2042', 16, 57, 155, 650000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1031, 'PHI.HR2001', 20, 'Blender Plastik HR2221', 16, 57, 155, 418800, 425000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1032, 'PHI.HR2056/57', 20, 'Blender Philips HR2056/57', 16, 57, 155, 296700, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1033, 'PHI.HR2061', 20, 'Blender Plastik HR 2061', 16, 57, 155, 311743, 311743, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1034, 'PHI.HR2071', 20, 'Blender Gelas HR 2071', 16, 57, 155, 425000, 100000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1035, 'PHI.HR2102', 20, 'Blender Philips HR2102', 16, 57, 155, 436050, 550000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1036, 'PHI.HR2108plastik', 20, 'Blender Philips HR2108', 16, 57, 155, 277965, 400000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1037, 'PHI.HR2115', 20, 'Blender Plastik Philips HR 2115', 16, 57, 155, 647834, 600000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1038, 'PHI.HR2116', 20, 'Blender Glass Tango HR2116', 16, 57, 155, 718884, 650000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1039, 'PHI.HR2553', 20, 'Hand Blender Philips', 16, 57, 155, 491100, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1040, 'PHI.HR2738', 20, 'Citrus Press HR2738', 16, 57, 155, 269325, 176486, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1041, 'PHI.HR2938', 20, 'Fruit Filter 2938', 16, 57, 155, 55574, 35386, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1042, 'PHI.HR2947', 20, 'Citrus Press HR2947', 16, 57, 155, 150053, 79157, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1043, 'PHI.HR2939', 20, 'Chopper Phillip HR2939', 16, 60, 155, 176129, 250000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1044, 'PHI.HD9140', 20, 'Steamer Philips GC 518', 16, 64, 155, 1108800, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1045, 'PHI.HR7627', 20, 'Food Processor Philips HD7310', 16, 64, 155, 800000, 1100000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1046, 'PHI.HD3119', 20, 'Rice Cooker Philips 2L HD3119', 16, 67, 155, 450000, 500000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1047, 'PHI.HD3126', 20, 'Rice Cooker Philips HD4515', 16, 67, 155, 694400, 484785, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1048, 'PHI.HD3129', 20, 'Rice Cooker Philip 1.8L HD3129', 16, 67, 155, 431400, 575000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1049, 'PHIL.HD3116', 20, 'Rice Cooker Philips 1L Basic Purple', 16, 67, 155, 426645, 410000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1050, 'PHI.HP4940', 20, 'Hair Dryer Philips BHD006', 16, 72, 155, 334700, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1051, 'PHI.HR1811', 20, 'Juicer Philps HR1811', 16, 74, 155, 712000, 381335, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1052, 'PHI.HR1823', 20, 'Juicer Philp 1855', 16, 74, 155, 1367000, 761077, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1053, 'PHI.32PHA4100', 20, 'LED Philips 32\"', 16, 80, 155, 1848750, 2100000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1054, 'PHI.HR1530', 20, 'Mixer Hand HR 1530', 16, 84, 155, 324077, 276911, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1055, 'PHI.HR1538', 20, 'Mixer Com Philip HR 1538', 16, 84, 155, 484369, 550000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1056, 'PHI.HR1559', 20, 'Mixer Com HR1559', 16, 84, 155, 564600, 480000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1057, 'PHI.HR1559/52', 20, 'Hand Mixer Philips HR1559/1552', 16, 84, 155, 359100, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1058, 'PHI.GC122', 20, 'Setrika Philips GC122', 16, 93, 155, 164615, 200000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1059, 'PHI.GC160', 20, 'Setrika Philips GC160', 16, 93, 155, 238545, 700000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1060, 'PHI.GC1905', 20, 'Steam Iron Philip GC1905', 16, 93, 155, 250000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1061, 'PHI.HD1172', 20, 'Setrika Philip HD 1172', 16, 93, 155, 248375, 250000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1062, 'PHI.HI115', 20, 'Setrika Philips GC1418', 16, 93, 155, 253936, 300000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1063, 'PHI.HI1173', 20, 'Setrika Philips HD1173', 16, 93, 155, 226398, 296400, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1064, 'PHI.HD2393', 20, 'Sandwich Toaster Philips HD2393', 16, 100, 155, 329175, 316563, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1065, 'PHI.HD4825', 20, 'Pop Up Toaster Philips HD4825', 16, 100, 155, 346300, 251957, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1066, 'POL.1 Pintu', 20, 'Kulkas 1 Pintu Polytron', 16, 4, 111, 1880000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1067, 'POL.16AM', 20, 'Kulkas 1 Pintu Poyitron 1 Pintu', 16, 4, 111, 1850000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1068, 'POL.0.5PK', 20, 'Ac Split Polytron 0.5 PK', 16, 52, 111, 2541000, 2325000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1069, 'POL.1.5PK', 20, 'Ac Split Polytron 1.5PK', 16, 52, 111, 3550000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1070, 'POL.PAC18VG', 20, 'Ac Split Polytron 2PK', 16, 52, 111, 5075000, 5400000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1071, 'POL.PWC776', 20, 'Dispenser Galon Bawah Polytron PWC776', 16, 63, 111, 1970000, 2500000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1072, 'POL.PWC778', 20, 'Dispenser Galon Bawah Polytron PWC778', 16, 63, 111, 2549000, 2300000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1073, 'POL.PR21LT', 20, 'Kulkas 2 Pintu Polytron', 16, 78, 111, 3275000, 2400000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1074, 'POL.LED32', 20, 'LED Polytron 32\" + Antena', 16, 80, 111, 64600, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1075, 'QUA.1TUNGKU', 20, 'Kompor Gas Quantum 1 Tungku', 16, 76, 156, 96300, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1076, 'QUA.QGC201DMPB', 20, 'Kompor Gas Quantum 2 Tungku', 16, 76, 156, 219700, 185500, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1077, 'REG.DLX10', 20, 'Floor Fan Regency 10\"', 16, 75, 157, 173750, 200000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1078, 'REG.DLX12', 20, 'Floor Fan Regency 12\"', 16, 75, 157, 250000, 275000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1079, 'REG.DLX14', 20, 'Floor Fan Regency 14\"', 16, 75, 157, 320000, 325000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1080, 'REG.DLX16', 20, 'Floor Fan Regency 16\"', 16, 75, 157, 345000, 350000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1081, 'REG.DLX18', 20, 'Floor Fan Regency 18\"', 16, 75, 157, 420000, 350000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1082, 'REG.DLX20\"', 20, 'Floor Fan Regency 20\"', 16, 75, 157, 450000, 500000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1083, 'REG.NSD16', 20, 'Desk Fan Regency 16\"', 16, 75, 157, 400000, 450000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1084, 'REG.TW16', 20, 'Wall Fan Regency 16\"', 16, 75, 157, 468000, 525000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1085, 'REG.TW20', 20, 'Wall Fan Regency 20\"', 16, 75, 157, 590000, 600000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1086, 'REG.TW51', 20, 'Stand Fan Regency 18\"', 16, 75, 157, 588000, 600000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1087, 'REG.ZTW18', 20, 'Wall Fan Regency 18\"', 16, 75, 157, 520000, 500000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1088, 'RIN.522CE', 20, 'Kompor Gas Rinnai 522 CE', 16, 75, 158, 341200, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1089, 'RIN.522E', 20, 'Kompor Gas Rinnai 522 E', 16, 75, 158, 341200, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1090, 'RIN.2RSP', 20, 'Kompor Gas Rinnai 2 Tungku RI-2RSP', 16, 76, 158, 1232300, 1300000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1091, 'RIN.301S', 20, 'Kompor Gas Rinnai 301S 1 tungku', 16, 76, 158, 152100, 175000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1092, 'RIN.302S', 20, 'Kompor Gas Rinnai 2 Tungku 302S', 16, 76, 158, 279600, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1093, 'RIN.511A', 20, 'Kompor Gas Rinnai 1 Tungku 511A', 16, 76, 158, 212211, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1094, 'RIN.511E', 20, 'Kompor Gas 1 Tungku Rinnai 511T', 16, 76, 158, 202208, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1095, 'RIN.522A', 20, 'Kompor Gas Rinnai 522A', 16, 76, 158, 329500, 300000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1096, 'RIN.522C', 20, 'Kompor Gas Rinnai 522C', 16, 76, 158, 302700, 300000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1097, 'RIN.522S', 20, 'Kompor Gas Rinnai 522 S', 16, 76, 158, 255900, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1098, 'RIN.602A', 20, 'Kompor Gas Rinnai 602A', 16, 76, 158, 423567, 1350000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1099, 'RIN.602AG', 20, 'Kompor Gas Rinnai 602AG', 16, 76, 158, 385400, 431949, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1100, 'RIN.602BGX', 20, 'Kompor Gas Rinnai 602BGX', 16, 76, 158, 435500, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1101, 'RIN.602E', 20, 'Kompor Gas Rinnai 602E', 16, 76, 158, 381300, 325000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1102, 'RIN.712A', 20, 'Kompor Gas Rinnai 712A', 16, 76, 158, 496000, 450000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1103, 'RIN.712BGX', 20, 'Kompor Gas Rinnai 712BGX', 16, 76, 158, 540900, 550000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1104, 'RIN.RB-712N{S}', 20, 'Kompor Gas Rinnai Dua Tungku 712 GA KACA', 16, 76, 158, 736500, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1105, 'RIN.RB-73SV{GB}', 20, 'Kompor Gas Rinnai 3 Tungku 73SV', 16, 76, 158, 2579752, 650000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1106, 'RIN.RB2EH-11F', 20, 'Built In Rinnai RB2EH', 16, 76, 158, 1623075, 1800000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1107, 'RIN.RB2GHC', 20, 'Built In Rinnai 2 Tungku Schott Glass', 16, 76, 158, 2579752, 2050000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1108, 'RIN.RB312NGB', 20, 'Built In Rinnai 1 Tungku RB 312', 16, 76, 158, 1508973, 1469277, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1109, 'RIN.RB3AG-BK', 20, 'Built In Rinnai RB 3SS-GB', 16, 76, 158, 3109374, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1110, 'RIN.RB712N-GB', 20, 'Built In Rinnai 712N-GB', 16, 76, 158, 1641585, 1900000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1111, 'RIN.RB713N-GB', 20, 'Built In Rinnai RB 713N-GB', 16, 76, 158, 2140378, 1900000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1112, 'RIN.RB72SV-GB', 20, 'Built In Rinnai 72SV-GB', 16, 76, 158, 1698173, 1600000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1113, 'RIN.RH60', 20, 'Cooker Hood Rinnai 60 CM', 16, 76, 158, 759428, 1000000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1114, 'RIN.RHC109GC', 20, 'Built In Rinnai RHC 109 GC', 16, 76, 158, 2969178, 3000000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1115, 'RIN.RHT319SSV', 20, 'Built In Rinnai RHT 319 SSV', 16, 76, 158, 1752275, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1116, 'RIN.RI202S', 20, 'Kompor Gas Rinnai 2 tungku RI 202 S', 16, 76, 158, 264500, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1117, 'RIN.RI300', 20, 'Kompor Gas Rinnai RI 300 High Pressure', 16, 76, 158, 564088, 650000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1118, 'RIN.RI4RSP', 20, 'Kompor Rinnai 4 tungku RI4RSP', 16, 76, 158, 1583200, 1027187, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1119, 'RIN.RI511C', 20, 'Kompor Gas Rinnai 1 Tungku RI511C', 16, 76, 158, 172283, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1120, 'RIN.RI603E', 20, 'Kompor Gas Rinnai RI 603E', 16, 76, 158, 482800, 400000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1121, 'RIN.RI712T', 20, 'Kompor Gas Rinnai 712T', 16, 76, 158, 559200, 550000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1122, 'RIN.REH30H', 20, 'Water Heater Listrik Rinnai 30L', 16, 102, 158, 1934132, 1308000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1123, 'RIN.REH50H', 20, 'Water Heater Rinnai REH 450 W', 16, 102, 158, 2587360, 2100000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1124, 'RIN.REH80', 20, 'Water Heater Rinnai 80L', 16, 102, 158, 2961000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1125, 'RIN.RES-EB015', 20, 'Water Heater Listrik Rinnai 15 L', 16, 102, 158, 1592352, 1700000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1126, 'RIN.RES-EC010', 20, 'Water Heater Listrik Rinnai 10L', 16, 102, 158, 1312118, 1300000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1127, 'RIN.REU5CFC', 20, 'Water heater Gas Rinnai REU 5 CFC', 16, 102, 158, 1316000, 1139757, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1128, 'RSA.AGATE200', 20, 'Showcase RSA AGATE 200', 16, 4, 112, 3072480, 2940000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1129, 'RSA.750L', 20, 'Chest Freezer RSA 600L', 16, 69, 112, 5884560, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1130, 'RSA.CF100', 20, 'Chest Freezer RSA 100L', 16, 69, 112, 1760000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1131, 'RSA.CF150', 20, 'Chest Freezer RSA 150L', 16, 69, 112, 2045000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1132, 'RSA.CF220', 20, 'Chest Freezer RSA 200L', 16, 69, 112, 2325000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1133, 'RSA.AGATE240', 20, 'Showcase RSA AGATE 240', 16, 94, 112, 3374400, 3275000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1134, 'RSA.OPAL', 20, 'Showcase RSA Opal', 16, 94, 112, 11246520, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1135, 'SAM.RS554NRUA1J', 20, 'Kulkas Side By Side Samsung', 16, 4, 113, 10250000, 14800000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1136, 'SAM.RT29FAR', 20, 'Kulkas 2 Pintu Samsung RT 29', 16, 4, 113, 5600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1137, 'SAM.RT32K', 20, 'Kulkas 2 Pintu Samsung RT 32K5032S8', 16, 4, 113, 5600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1138, 'SAM.RT35FAACDSA', 20, 'Kulkas 2 Pintu Samsung RT 38', 16, 4, 113, 5950000, 5096000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1139, 'SAM.RT38K', 20, 'Kulkas 2 Pintu Samsung RS62', 16, 4, 113, 5950000, 6000000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1140, 'SAM.RT38K5030B1', 20, 'Kulkas 2 Pintu Samsung RS38', 16, 4, 113, 5950000, 6000000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1141, 'SAM.AR12HCFS', 20, 'AC Split Samsung 1,5 PK', 16, 52, 113, 3900000, 3500000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1142, 'SAM.AR18HCFST', 20, 'AC Split Samsung 2 PK', 16, 52, 113, 4750000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1143, 'SAM.AS05TULN', 20, 'Indoor AC Split Samsung 1/2 PK', 16, 52, 113, 2350000, 1871000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1144, 'SAM.AS07TULN', 20, 'Indoor AC Split Samsung 3/4 PK', 16, 52, 113, 2300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1145, 'SAM.AS09HCFSTLAW', 20, 'AC Split Samsung 1 PK', 16, 52, 113, 2900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1146, 'SAM.UX60', 20, 'Air Purifier Samsung AX60', 16, 56, 113, 3275000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1147, 'SAM.SCD16709', 20, 'Dryer Samsung', 16, 72, 113, 4700000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1148, 'SAM.RT20FARW', 20, 'Kulkas 2 Pintu Samsung RT19', 16, 78, 113, 3595000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1149, 'SAM.RT22FAR', 20, 'Kulkas 2 pintu Samsung RT 22', 16, 78, 113, 4225000, 3300000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1150, 'SAM.RT25FARB', 20, 'Kulkas 2 Pintu Samsung RT25', 16, 78, 113, 4250000, 4600000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1151, 'SAM.RT2ASR', 20, 'Kulkas 2 Pintu Samsung', 16, 78, 113, 2400000, 2391916, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1152, 'SAM.24H4003', 20, 'LED Samsung 24\"', 16, 80, 113, 1625000, 1800000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1153, 'SAM.32FH4003', 20, 'LED Samsung 32\"', 16, 80, 113, 0, 2700000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1154, 'SAM.32N4300', 20, 'LED Samsung 32\"', 16, 80, 113, 2700000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1155, 'SAM.40H5003', 20, 'LED Samsung 40\"', 16, 80, 113, 2925000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1156, 'SAM.40J5250', 20, 'LED Samsung 43\" SMART TV', 16, 80, 113, 4300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1157, 'SAM.43K5002AK', 20, 'LED Samsung 43\"', 16, 80, 113, 3650000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1158, 'SAM.50\"', 20, 'LED Samsung 50\" Smart TV', 16, 80, 113, 6565000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1159, 'SAM.55\"', 20, 'LED Samsung 55\"', 16, 80, 113, 9099000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1160, 'SAM.55HU9000', 20, 'LED Samsung 75\"', 16, 80, 113, 17150000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1161, 'SAM.58\"', 20, 'LED Samsung 58\"', 16, 80, 113, 8600000, 2050000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1162, 'SAM.60\"', 20, 'LED Samsung 65\"', 16, 80, 113, 10600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1163, 'SAM.LED70', 20, 'LED Samsung 85\"', 16, 80, 113, 33500000, 10575000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1164, 'SAM.PS43E400', 20, 'LED Samsung 43\" SMART', 16, 80, 113, 4100000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1165, 'SAM.70H4000', 20, 'Mesin Cuci 1 Tabung Samsung 7KG', 16, 81, 113, 2399000, 2515895, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1166, 'SAM.WA11J5710', 20, 'Mesin Cuci 1 Tabung Samsung 10 KG', 16, 81, 113, 3625000, 5747126, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1167, 'SAM.WA12PA', 20, 'Mesin Cuci 1 Tabung Samsung 12 KG', 16, 81, 113, 2425000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1168, 'SAM.WA16F7', 20, 'Mesin Cuci 1 Tabung Samsung 14 KG', 16, 81, 113, 6000000, 9000000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1169, 'SAM.WA80H4000', 20, 'Mesin Cuci 1 Tabung Samsung 8 KG', 16, 81, 113, 2825000, 2731729, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1170, 'SAM.WA85H4000', 20, 'Mesin Cuci 1 Tabung Samsung 8.5 KG', 16, 81, 113, 3149000, 2731729, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1171, 'SAM.WD0854', 20, 'Mesin Cuci Front Loading Samsung', 16, 81, 113, 4550000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1172, 'SAM.WF956U4', 20, 'Mesin Cuci 1 Tabung Samsung 9 KG', 16, 81, 113, 6664000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1173, 'SAM.WW95H7410', 20, 'Mesin Cuci Front Loading Samsung', 16, 81, 113, 4300000, 9100000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1174, 'SKN.HWD530', 20, 'Dispenser Sanken HWD C523IC', 16, 63, 159, 1535000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1175, 'SKN.HWD6769', 20, 'Dispenser Sanken HWD 533', 16, 63, 159, 1374000, 1400000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1176, 'SKN.HWDC200', 20, 'Dispenser Sanken HWE67', 16, 63, 159, 2550000, 2450000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1177, 'SKN.HWDC520', 20, 'Dispenser Sanken HWD760', 16, 63, 159, 1530000, 1605000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1178, 'SKN.SJ120', 20, 'Rice Cooker Sanken 1L', 16, 67, 159, 386000, 350000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1179, 'SKN.SJ1999SP', 20, 'Rice Cooker Sanken 1.8L', 16, 67, 159, 466000, 475000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1180, 'SKN.FS800BK', 20, 'Stand Fan Sanken 16\"', 16, 75, 159, 315000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1181, 'SKN.SHOWCASE', 20, 'Showcase Sanken 279', 16, 94, 159, 3350000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1182, 'SAN.PDWH-130B', 22, 'Pompa Air Sanyo PDWH-130B', 16, 88, 160, 1110000, 1200000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1183, 'SAN.PH130B', 22, 'Pompa Air Sanyo 125Watt PH130', 16, 88, 160, 1400000, 1300000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1184, 'SAN.PDH200B', 20, 'Pompa Air Sanyo Sumur Dalem 200 Watt', 16, 90, 160, 2240000, 2240000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1185, 'SAN.PDH250B', 20, 'Pompa Air Sanyo Sumur Dalem 250 Watt', 16, 90, 160, 2950000, 2950000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1186, 'SAN.PDH255JP', 20, 'Pompa Air Sanyo 255 JP', 16, 90, 160, 5600000, 5225000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1187, 'SAN.PDWH200', 20, 'Pompa Air Sanyo PDWH-200', 16, 90, 160, 2240000, 2756923, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1188, 'SAN.PH137AB', 20, 'Pompa Air Sanyo 125 Watt PH137', 16, 90, 160, 700000, 600000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1189, 'SAN.PH158', 20, 'Pompa Air Sanyo PH158', 16, 90, 160, 3400000, 3500000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1190, 'SAN.PH175C', 20, 'Pompa Air Sanyo PH175C', 16, 90, 160, 2075000, 1950000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1191, 'SAN.PH236AB', 20, 'Pompa Air Sanyo 200 Watt PH236', 16, 90, 160, 925000, 850000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1192, 'SAN.PH258JP', 20, 'Pompa Air Sanyo 250 Watt', 16, 90, 160, 6125000, 4854945, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1193, 'SAN.PH408', 20, 'Pompa Air Sanyo 400 Watt', 16, 90, 160, 7600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1194, 'SHA.SJ236MGGB', 20, 'Kulkas 2 Pintu Sharp SJ 236 MGGB', 16, 4, 7, 2675000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1195, 'SHA.SJ236ND', 20, 'Kulkas 2 Pintu Sharp 236 ND', 16, 4, 7, 2670000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1196, 'SHA.SJ246XGMS', 20, 'Kulkas 2 Pintu Sharp SJ 246 XGMS', 16, 4, 7, 2900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1197, 'SHA.SJ420', 20, 'Kulkas 2 Pintu Sharp 420GP GD', 16, 4, 7, 4190000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1198, 'SHA.SJ420RF', 20, 'Kulkas 2 Pintu Sharp SJ 450 GPGD', 16, 4, 7, 4600000, 4423684, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1199, 'SHA.SJIF90PBSL', 20, 'Kulkas 4 Pintu Sharp', 16, 4, 7, 8695000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1200, 'SHA.SJN182', 20, 'Kulkas 1 Pintu Sharp SJN 182', 16, 4, 7, 1750000, 1700000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1201, 'SHA.SJP326XGMS', 20, 'Kulkas 2 Pintu Sharp 326 XGMS', 16, 4, 7, 3789000, 3700000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1202, 'SHA.SJP762NLVSL', 20, 'Kulkas 2 Pintu Sharp 762', 16, 4, 7, 8350000, 8300000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1203, 'SHA.SJP762PMSL', 20, 'Kulkas 2 Pintu Sharp 762 Silver', 16, 4, 7, 8350000, 8300000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1204, 'SHA.SJP763NLVSL', 20, 'Kulkas 2 Pintu Sharp 763', 16, 4, 7, 8975000, 8300000, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1205, 'SHA.SJP851', 20, 'Kulkas 2 Pintu Sharp 861', 16, 4, 7, 9750000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1206, 'SHA.SJX167', 20, 'Kulkas 1 Pintu Sharp MINI', 16, 4, 7, 1325000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1207, 'SHARP.SJN162', 20, 'Kulkas 1 Pintu Sharp SJN 162', 16, 4, 7, 1490300, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1208, 'Sha.SJN196ND', 20, 'Kulkas 2 Pintu Sharp 195', 16, 4, 7, 2450000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1209, 'JAS.APAAJA', 20, 'AC Split Lokal Uk 2PK', 16, 52, 7, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1210, 'SHA.12SSY', 20, 'Ac Split Sharp 1.5PK', 16, 52, 7, 4580000, 5100000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1211, 'SHA.AHAP12SAY', 20, 'Ac Split Sharp 1.5PK THAILAND', 16, 52, 7, 4250000, 4550000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1212, 'SHA.AHAP12UCY', 20, 'Ac Split Sharp 1.5 PK STANDAR', 16, 52, 7, 4200000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1213, 'SHA.AHAP18SAY', 20, 'AC Split Sharp 2PK Thailand', 16, 52, 7, 5650000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1214, 'SHA.AHAP18UCY', 20, 'Ac Split Sharp 2 PK STANDAR', 16, 52, 7, 5450000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1215, 'SHA.AHAP24SAY', 20, 'AC Split Sharp 2,5PK', 16, 52, 7, 5700000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1216, 'SHA.AHAP5SAY', 20, 'Ac Split Sharp 0,5 PK THAILAND', 16, 52, 7, 2485000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1217, 'SHA.AHAP5SSY', 20, 'Ac Split Sharp 1/2 PK PLASMA Thailand', 16, 52, 7, 3120000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1218, 'SHA.AHAP5UCYTDK PAKAI', 20, 'Ac Split Sharp 1/2 PK STANDAR TDK PAKAI', 16, 52, 7, 2560000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1219, 'SHA.AHAP7SAY', 20, 'Ac Split Sharp 3/4 PK THAILAND', 16, 52, 7, 2710000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1220, 'SHA.AHAP7VEY', 20, 'Ac Split Sharp 3/4 STANDAR', 16, 52, 7, 2725000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1221, 'SHA.AHAP9SAY', 20, 'Ac Split Sharp 1 PK THAILAND', 16, 52, 7, 2850000, 3750000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1222, 'SHA.AHAP9SSY', 20, 'Ac Split Sharp 1PK PLASMA Thailand', 16, 52, 7, 3370000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1223, 'SHA.AHAP9UCY', 20, 'Ac Split Sharp 1 PK STANDAR', 16, 52, 7, 2835000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1224, 'SHA.INV', 20, 'Ac Split Sharp 2PK Inverter', 16, 52, 7, 6150000, 6749990, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1225, 'SHAP.AHAP5UCY', 20, 'Ac Split Sharp 0.5PK STD', 16, 52, 7, 2560000, 2650000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1226, 'SHAP.AHAP7UCY', 20, 'Ac Split Sharp 3/4 PK STD', 16, 52, 7, 2817000, 2650000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1227, 'SHA.PJA55', 20, 'Air Cooler Sharp PJA 55', 16, 54, 7, 1076100, 1076100, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1228, 'SHA.FPF30', 20, 'Air Purifier Sharp FPJ30', 16, 56, 7, 1338200, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1229, 'SHA.FPF40Y', 20, 'Air Purifier Sharp FPF 40Y', 16, 56, 7, 1905000, 2225000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1230, 'SHA.FPF40YT', 20, 'Air Purifier Sharp FPJ 80', 16, 56, 7, 3850000, 2100000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1231, 'SHA.FPYJ80H', 20, 'Air Purifier Sharp FUA-80', 16, 56, 7, 2500000, 3900000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1232, 'SHA.FUZ31', 20, 'Air Purifier Sharp FUZ-31', 16, 56, 7, 1525000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1233, 'SHA.KC-A40Y-W/FM40Y-B', 20, 'Air Purifier Sharp FM40Y-B', 16, 56, 7, 3805000, 3500000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1234, 'SHA.KC-A60Y-W', 20, 'Air Purifier Sharp KCD 60', 16, 56, 7, 6088000, 5500000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1235, 'SHA.KCA50', 20, 'Air Purifier Sharp KCA 50', 16, 56, 7, 4900000, 4600000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1236, 'SHA.SWD-70EHL-SL', 20, 'Dispenser Sharp Galon Bawah SWD 66', 16, 63, 7, 2407400, 2240000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1237, 'SHA.SWD72EHLBK', 20, 'Dispenser Sharp Galon Bawah 72 EHL BK', 16, 63, 7, 2325000, 2500000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1238, 'SHA.SWD72EHWH', 20, 'Dispenser Sharp Galon Bawah 72 EHL WH', 16, 63, 7, 2325000, 2500000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1239, 'SHA.SWD73EHBK', 20, 'Dispenser Sharp Galon Bawah 73EHL BK', 16, 63, 7, 2775000, 2300000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1240, 'SHA.SWD78EHL', 20, 'Dispenser Sharp Galon Bawah 78EHL', 16, 63, 7, 2935000, 3200000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1241, 'SHA.AIRCOOLER', 20, 'Air Cooler Sharp PJA 26', 16, 64, 7, 836000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1242, 'SHA.CVP9', 20, 'Ac Portable Sharp 1 PK', 16, 64, 7, 5850000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1243, 'SHA.RC0.8L', 20, 'Rice Cooker Sharp 1.8L', 16, 67, 7, 263400, 900000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1244, 'SHA.189', 20, 'Freezer Sharp 8RAK', 16, 69, 7, 3475000, 2950000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1245, 'SHA.FRV200L', 20, 'Chest Freezer Sharp 200 L', 16, 69, 7, 3075000, 2938235, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1246, 'SHA.FRV300', 20, 'Chest Freezer Sharp 300L', 16, 69, 7, 3275000, 3275000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1247, 'SHA.SCH210PS', 20, 'Showcase Sharp 200L', 16, 69, 7, 2800000, 3000000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1248, 'SHA.470NLVSL', 20, 'Kulkas 2 Pintu Sharp 470', 16, 78, 7, 5949000, 7532472, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1249, 'SHA.SJ246GCSD', 20, 'Kulkas 2 Pintu Sharp SJ 246 GCSD', 16, 78, 7, 3035000, 3200000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1250, 'SHA.SJP-S71NLV', 20, 'Kulkas 2 Pintu Sharp 571', 16, 78, 7, 7095000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1251, 'SHA.SJP861NLVSL', 20, 'Kulkas 2 Pintu Sharp 861 Silver', 16, 78, 7, 8000000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1252, 'SHA.19\"', 20, 'LED Changhong 19\"', 16, 80, 7, 1100000, 1300000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1253, 'SHA.24\" LC-24LE507I', 20, 'LED Sharp 24\"', 16, 80, 7, 1525000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1254, 'SHA.32LE150', 20, 'LED Sharp 32\"', 16, 80, 7, 1925000, 2500000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1255, 'SHA.32LE347', 20, 'LED Sharp 32 \" ANDROID', 16, 80, 7, 3275000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1256, 'SHA.60LE6300', 20, 'LED Sharp 50\"', 16, 80, 7, 5400000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1257, 'SHA.LED40\"', 20, 'LED Sharp 42\"', 16, 80, 7, 3300000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1258, 'SHA.ES876SB', 20, 'Mesin Cuci 1 Tabung Sharp 7.5 KG', 16, 81, 7, 2115000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1259, 'SHA.ESF865PG', 20, 'Mesin Cuci 1 Tabung Sharp ESM8000', 16, 81, 7, 2750000, 3529667, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1260, 'SHA.ESFL1082', 20, 'Mesin Cuci Front Loading Sharp', 16, 81, 7, 3688000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1261, 'SHA.ESFL862', 20, 'Mesin Cuci Front Loading Sharp 6 KG', 16, 81, 7, 3130000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1262, 'SHA.ESFL872', 20, 'Mesin Cuci Front Loading Sharp 7 KG', 16, 81, 7, 3600000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1263, 'SHA.ESM1000', 20, 'Mesin Cuc 1 Tabung Sharp 10KG', 16, 81, 7, 3095000, 4017301, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1264, 'SHA.ESM1209TSA', 20, 'Mesin Cuci 1 Tabung Sharp 12 KG', 16, 81, 7, 4300000, 4500000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1265, 'SHA.1290', 20, 'Mesin Cuci 2 Tabung Sharp 1290', 16, 82, 7, 2575000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1266, 'SHA.ESM9000', 20, 'Mesin Cuci 1 Tabung Sharp 9 KG', 16, 82, 7, 3325000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1267, 'SHA.EST65MW', 20, 'Mesin Cuci 2 Tabung Sharp 6KG', 16, 82, 7, 1200000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1268, 'SHA.EST86CL', 20, 'Mesin Cuci 2 Tabung Sharp 9 KG', 16, 82, 7, 1650000, 1575000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1269, 'SHA.MC95', 20, 'Mesin Cuci 2 Tabung Sharp 12 KG', 16, 82, 7, 2410000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1270, 'SHA.R21A', 20, 'Microwave Sharp R21A', 16, 83, 7, 703800, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1271, 'SHA.R222', 20, 'Microwave Sharp R-21 DO', 16, 83, 7, 898000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1272, 'SHA.R25C1SIN', 20, 'Microwave Sharp R 25 C1SIN', 16, 83, 7, 1043600, 1200000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1273, 'SHA.R728(S)', 20, 'Microwave Sharp R728', 16, 83, 7, 1233400, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1274, 'SHA.R735', 20, 'Microwave Sharp R 735', 16, 83, 7, 1285000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1275, 'SHA.R88DO', 20, 'Microwave Sharp R88 DO', 16, 83, 7, 2325000, 2700000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1276, 'SHA.EO18LW', 20, 'Oven Toaster Sharp EO-28LPK', 16, 86, 7, 674700, 290000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1277, 'SHA.EO18W', 20, 'Oven Sharp EO-35 SL', 16, 86, 7, 861900, 625000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1278, 'SHA.SCH-170PS', 20, 'Showcase Sharp 4 Rak', 16, 94, 7, 2989848, 2650000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1279, 'SHA.SCH250', 20, 'Showcase Sharp 250', 16, 94, 7, 3850000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1280, 'SHA.KSH777', 20, 'Slow Cooker Sharp', 16, 97, 7, 839800, 839800, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1281, 'SHA.KZS70L', 20, 'Sandwich Toaster Sharp', 16, 100, 7, 162700, 200000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1282, 'SHA.EC-8304AB', 20, 'Vacuum Cleaner SHARP EC-8304AB', 16, 101, 7, 2200000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1283, 'SHA.ECW60', 20, 'Vacuum Cleaner Sharp ECW60', 16, 101, 7, 762100, 850000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1284, 'ARI.30DOVE', 20, 'Water Heater Ariston Dove 30', 16, 102, 7, 1300000, 1600000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1285, 'ARI.SL2-20RS', 20, 'Water Heater Ariston SL2 20', 16, 102, 7, 2935000, 1600000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1286, 'SHI.PS-103BIT', 22, 'Pompa Air Listrik Shimizu Tabung 125W', 16, 88, 162, 925000, 1100000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1287, 'SHI.226', 20, 'Shimizu 226 BIT', 16, 90, 162, 934500, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1288, 'SHI.JET108BIT', 20, 'Pompa Air Shimizu JET 108', 16, 90, 162, 691500, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1289, 'SHI.PC250BIT', 20, 'Pompa Air Shimizu PC250BIT', 16, 90, 162, 2364000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1290, 'SHI.PC260BIT', 20, 'Pompa Air Shimizu Sumur Dalam PC 260 BIT', 16, 90, 162, 1718500, 1850000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1291, 'SHI.PC268BIT', 20, 'Pompa Air Shimizu Sumur Dalam PC268BIT', 16, 90, 162, 1700700, 1750000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1292, 'SHI.PC375BIT', 20, 'Pompa Air Shimizu PC375BIT', 16, 90, 162, 1904855, 1705000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1293, 'SHI.PC503BIT', 20, 'Pompa Air Shimizu PC 503 BIT', 16, 90, 162, 3219700, 3002656, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1294, 'SHI.PS128BIT', 20, 'Pompa Air Shimizu PS128 BIT NON AUTO', 16, 90, 162, 386200, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1295, 'SHI.PS130BIT', 20, 'Pompa Air Shimizu PS130BIT', 16, 90, 162, 625800, 600000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1296, 'SHI.PS135E', 20, 'Pompa Air Shimizu 125W', 16, 90, 162, 535900, 472847, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1297, 'SHI.PS150BIT', 20, 'Pompa Air Shimizu PS 150 BIT', 16, 90, 162, 1113800, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1298, 'SHI.PS230BIT', 20, 'Pompa Air Shimizu PS 230 BIT', 16, 90, 162, 1052700, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1299, 'SHI.PS255BIT', 20, 'Pompa Air Shimizu PS255BIT', 16, 90, 162, 2238600, 2352120, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1300, 'SHI.SEH115', 20, 'Water Heater Shimizu 15L', 16, 102, 162, 1283309, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1301, 'SHI.SEH130', 20, 'Water Heater Shimizu 30L', 16, 102, 162, 1503393, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1302, 'SONY.32\"', 20, 'LED Sony 32\"', 16, 80, 163, 2600000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1303, 'TCL.LCD17\"', 20, 'LCD TCL 17\"', 16, 80, 164, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1304, 'TCL.LCD23\"', 20, 'LCD TCL 32\"', 16, 80, 164, 1400000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1305, 'TOS.RAS05BKS+BAS', 20, 'Ac Split Toshiba 0.5PK', 16, 52, 11, 2561000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1306, 'TOS.RAS07BKS+BAS', 20, 'Ac Split Toshiba 3/4PK', 16, 52, 11, 2784000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1307, 'TOS.RAS10BKS+BAS', 20, 'Ac Split Toshiba 1PK', 16, 52, 11, 2917000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1308, 'TOS.24\"', 20, 'LED Toshiba 24\"', 16, 80, 11, 1300000, 1300000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1309, 'TOSH.LED32', 20, 'LED Toshiba 32\"', 16, 80, 11, 1700000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1310, 'TOS.7KG', 20, 'Mesin Cuci 1 Tabung Toshiba 7KG', 16, 81, 11, 0, 2600000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1311, 'TOS.VHH85MNWW', 20, 'Mesin Cuci 2 Tabung Toshiba 8KG', 16, 82, 11, 1185000, 1350000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1312, 'TOS.VHH95MNWW', 20, 'Mesin Cuci 2 Tabung Polytron 9KG', 16, 82, 11, 1500000, 1600000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1313, 'TURBO.BLENDER', 20, 'Turbo Blender EHM 8000', 16, 57, 166, 257783, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1314, 'TUR.DESKFAN 12', 20, 'Desk Fan Turbo 12\"', 16, 75, 166, 200925, 225000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1315, 'TUR.DESKFAN16', 20, 'Desk Fan Turbo 16\"', 16, 75, 166, 235125, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1316, 'TUR.STANDFAN16\"', 20, 'Stand Fan Turbo 16\"', 16, 75, 166, 305079, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1317, 'TUR.MIXEREHM9595', 20, 'Mixer Turbo EHM 9595', 16, 84, 166, 990176, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1318, 'TUR.EHL1018', 20, 'Pop Up Toaster Turbo EHL 1018', 16, 100, 166, 278388, 278388, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1319, 'UCH.058GY', 20, 'Kulkas 1 Pintu Uchida', 16, 4, 114, 1353000, 1600000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1320, 'UCH.MPS5EC', 20, 'Ac Split Uchida 0.5 PK', 16, 52, 114, 1950000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1321, 'UCH.MPS6CE', 20, 'Ac Split Uchida 1 Pk', 16, 52, 114, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1322, 'UCH.MPW5', 20, 'Ac Window Uchida 1/2 PK', 16, 52, 114, 1670000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1323, 'UCH.MPW7', 20, 'Ac Window Uchida 3/4 PK', 16, 52, 114, 1636313, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1324, 'UCH.USG180/126', 20, 'Showcase Uchida 180 GW', 16, 94, 114, 2427345, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1325, 'UCH.MPW12', 20, 'AC Window Uchida 1.5pk', 16, 103, 114, 3210000, 2990000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1326, 'UCH.MPW9', 20, 'AC Window Uchida 1 pk', 16, 103, 114, 2038130, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1327, 'WAS.FLX40CM', 20, 'Keran Mixer', 16, 64, 167, 0, 350000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1328, 'WAS.PC250EA', 20, 'Pompa Air Wasser PC250EA', 16, 90, 167, 2180500, 2195000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1329, 'WAS.PC280EA', 20, 'Pompa Jet Pump Wasser 381EA', 16, 90, 167, 1100000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1330, 'WAS.PW129EA', 20, 'Pompa Air Wasser PW 129 EA', 16, 90, 167, 420945, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1331, 'WAS.PW250DEA', 20, 'Pompa Air Semi Jet Wasser PW250DEA', 16, 90, 167, 1959300, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1332, 'WAS.PW251EA', 20, 'Pompa Semi Jet Wasser PW251', 16, 90, 167, 1302000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1333, 'SOW.88', 20, 'Shower Wasser Set Lengkap', 16, 95, 167, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1334, 'WAS.JETSHOWER', 20, 'Shower Wasser', 16, 95, 167, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1335, 'WAS.Flexible', 20, 'Flexible Water Heater', 16, 102, 167, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1336, 'MIY.MJG201', 20, 'Rice Cooker Yong Ma', 16, 67, 169, 620000, 874000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1337, 'PAN.FDSO3SI', 20, 'Dsterile Dish Dryers Panasonic', 16, 52, 152, 830100, 820000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1338, 'Antena', 20, 'Antena', 16, 53, 152, 150000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1339, 'STB', 20, 'Set Top Box', 16, 53, 152, 240000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1340, 'PAN.FV24CDUN', 20, 'Exhaust Fan Panasonic FV24CDUN', 16, 54, 152, 0, 625000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1341, 'Denpoo.Air Fryer', 20, 'Air Fryer Mito', 16, 55, 152, 700000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1342, 'BRK.LED', 20, 'Bracket LED', 16, 58, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1343, 'DEN.KETTLE', 20, 'Kettle Air Denpoo DEP-831VT', 16, 64, 152, 341300, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1344, 'MITOCHIBA', 20, 'Mitochiba', 16, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1345, 'PUREIT', 20, 'Pure It Classic', 16, 64, 152, 500000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1346, 'SEIKO', 20, 'Jam Digital Seiko QHL080S', 16, 64, 152, 1091000, 1120000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1347, 'TEFAL', 20, 'Rice Cooker Tefal', 16, 67, 152, 482300, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1348, 'WINN.RR50A', 20, 'Rice Cooker Winn Gas', 16, 67, 152, 2873900, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1349, 'BKR.AC', 21, 'Bongkar AC', 16, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1350, 'BP.Cas', 21, 'Bongkar Pasang Ac Cassete', 16, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1351, 'PSG.AC3', 21, 'Pasang AC 2,5PK', 16, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1352, 'PSG.LED', 21, 'Pasang LED TV', 16, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1353, 'psg.ac10pk', 21, 'Pasang AC 10PK', 16, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1354, 'GAS.KPL1', 20, 'Kepala Gas', 16, 91, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1355, 'GEA.EXPO600', 20, 'Showcase 2 Pintu GEA 1500', 17, 94, 107, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1356, 'DLL.MTRBJ', 20, 'Meteran Baju 150cm', 17, 64, 152, 0, 12000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1357, 'DLL.SEALTAPE', 20, 'Seal Tape', 17, 64, 152, 0, 10000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1358, 'KBL.3*1.5', 20, 'Kabel 3*1.5', 17, 64, 152, 0, 815000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1359, 'KBL.3.*2.5R', 20, 'Kabel NYM 3*2.5', 17, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1360, 'NIT.ISOLASI', 20, 'Isolasi Nito', 17, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1361, 'PPA.FLEXIBLEROLL', 22, 'Pipa Air Flexible', 17, 88, 115, 0, 10000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1362, 'PPF.1/4*1/2R', 22, 'Pipa Freon 1.5-2 PK', 17, 89, 115, 0, 2800000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1363, 'PPF.1/4*3/8R', 22, 'Pipa Freon 0.5-1 pk', 17, 89, 115, 0, 2000000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1364, 'PPF.3/8*5/8', 22, 'Pipa Freon 3 pk', 17, 89, 115, 0, 125000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1365, 'ACC.DT', 20, 'Lakban Aluminium', 17, 53, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1366, 'ACC.DUCT TAPE', 20, 'Duct Tape', 17, 53, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1367, 'ACC.DUCT TAPE LEM', 20, 'Duct Tape Lem', 17, 53, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1368, 'JAS.KBLR', 21, 'Kabel Listrik', 17, 73, 152, 0, 1000000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1369, 'INS.SHOWER', 21, 'Instalasi Shower', 170, 87, 143, 0, 50000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1370, 'KDK.WN30B', 20, 'Wall Fan KDK WN30B', 171, 75, 147, 349200, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1371, 'DLL.ARMA', 20, 'Armaflek 1.1/4', 172, 64, 152, 27500, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1372, 'DLL.DINABOLT', 20, 'Dinabolt', 171, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1373, 'DLL.FISHERS6', 20, 'Fisher S6', 171, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1374, 'DLL.KAWATPERAK', 20, 'Kawat Perak', 172, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1375, 'DLL.KBLTEES', 20, 'Kabel Tees d', 171, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1376, 'DLL.LONGDRAT', 20, 'Long drat', 172, 64, 152, 33000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1377, 'DLL.MUR+BAUT', 20, 'Mur + Baut 8mm 2cm', 171, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1378, 'DLL.PPA1\'', 20, 'Pipa 1\"', 172, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1379, 'DLL.TUSUKGIGIBKS', 20, 'Tusuk Gigi Bungkus', 171, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1380, 'INS.FAN', 20, 'Instalasi Kabel Kipas Angin', 173, 64, 152, 0, 75000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1381, 'FREON.R410', 20, 'Freon R410', 174, 70, 152, 1050000, 900000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1382, 'ONG.KRM', 21, 'Biaya Kirim', 170, 73, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1383, 'INS.PIPA', 21, 'Instalasi Pipa Air', 170, 87, 152, 0, 300000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1384, 'SKN.HWDC520IC', 20, 'Dispenser Sanken 520IC', 171, 63, 159, 1550000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1385, 'ACC.LONGDRAT', 20, 'Longdrat', 172, 53, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1386, 'FREONR11.', 20, 'FREON R11', 174, 53, 152, 975000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1387, 'FREONR22.', 20, 'FREON R22', 174, 53, 152, 975000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1388, 'FREON R32', 20, 'FREON R32', 174, 64, 152, 470000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1389, 'JASA.Tarik Pipa', 20, 'Jasa Penarikan Pipa Ac', 170, 64, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1390, 'ACC.LAS', 21, 'Pengerjaan Las Pipa AC', 173, 73, 152, 0, 75000, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1391, 'FREONR22', 21, 'FREON R22', 174, 73, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1392, 'Jasa Angkut', 21, 'Jasa Angkut', 170, 73, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1393, 'PSG.', 21, 'Pemasangan Kabel', 170, 73, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1394, 'PSG.KIPAS', 21, 'Pasang Kipas Angin', 171, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1395, 'PSG.Kerja', 21, 'Jasa pengecekan', 170, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
-INSERT INTO `ref_produk` VALUES (1396, 'PSG.POMPA', 21, 'Pasang Pompa Air', 170, 87, 152, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1, '003', 20, 'AC SPLIT DAIKIN 2PK', 16, 27, 40, 0, 0, 0, NULL, 0, '2023-02-21 20:32:27', 1, '2023-03-11 11:15:50', NULL);
+INSERT INTO `ref_produk` VALUES (2, '004', 20, 'PIPA FREON 2.5-3PK', 1, 27, 40, 170000, 0, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-06-27 14:48:50', NULL);
+INSERT INTO `ref_produk` VALUES (3, '005', 20, 'UCHIDA 2PK', 16, 28, 40, 0, 0, 0, NULL, 0, '2023-02-21 20:32:27', 1, '2023-03-11 11:13:32', NULL);
+INSERT INTO `ref_produk` VALUES (4, '1001', 22, '1001', 1, 29, 41, 9600, 0, 0, NULL, 0, '2023-02-21 20:32:27', 1, '2023-03-11 11:13:46', NULL);
+INSERT INTO `ref_produk` VALUES (5, '1002', 22, '1002', 1, 29, 41, 9600, 0, 0, NULL, 0, '2023-02-21 20:32:27', 1, '2023-03-11 11:13:57', NULL);
+INSERT INTO `ref_produk` VALUES (6, '1003', 22, '1003', 1, 29, 41, 12000, 0, 1, '', 1, '2023-02-21 20:32:27', 1, '2023-06-27 14:43:39', 1);
+INSERT INTO `ref_produk` VALUES (7, '1004', 22, '1004', 1, 29, 41, 9600, 0, 0, '', 1, '2023-02-21 20:32:27', 1, '2023-06-19 16:54:18', 1);
+INSERT INTO `ref_produk` VALUES (8, '1005', 22, '1005', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (9, '1006', 22, '1006', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (10, '1007', 22, '1007', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (11, '1008', 22, '1008', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (12, '1009', 22, '1009', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (13, '1010', 22, '1010', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:27', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (14, '1011', 22, '1011', 1, 29, 41, 9800, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (15, '1012', 22, '1012', 1, 29, 41, 9800, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (16, '1013', 22, '1013', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (17, '1014', 22, '1014', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (18, '1015', 22, '1015', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (19, '1016', 22, '1016', 1, 29, 41, 9800, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (20, '1017', 22, '1017', 1, 29, 41, 9800, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (21, '1018', 22, '1018', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (22, '1019', 22, '1019', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (23, '1020', 22, '1020', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (24, '1021', 22, '1021', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (25, '1022', 22, '1022', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:02', NULL);
+INSERT INTO `ref_produk` VALUES (26, '1023', 22, '1023', 1, 29, 41, 9800, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (27, '1024', 22, '1024', 1, 29, 41, 9800, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (28, '1025', 22, '1025', 1, 29, 41, 9800, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (29, '1026', 22, '1026', 1, 29, 41, 9800, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (30, '1027', 22, '1027', 1, 29, 41, 9800, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (31, '1028', 22, '1028', 1, 29, 42, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:28', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (32, '1029', 22, '1029', 1, 29, 42, 9800, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (33, '1030', 22, '1030', 1, 29, 42, 9800, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (34, '1031', 22, '1031', 1, 29, 41, 9800, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (35, '1032', 22, '1032', 1, 29, 41, 9800, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (36, '1033', 22, '1033', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (37, '1034', 22, '1034', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (38, '1035', 22, '1035', 1, 29, 41, 9600, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (39, '3001', 22, '3001', 1, 30, 41, 14200, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (40, '3002', 22, '3002', 1, 30, 41, 14200, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (41, '3003', 22, '3003', 1, 30, 41, 14200, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (42, '3004', 22, '3004', 1, 30, 41, 15200, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (43, '3005', 22, '3005', 1, 30, 41, 15200, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (44, '3006', 22, '3006', 1, 30, 41, 15200, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (45, '3007', 22, '3007', 1, 30, 41, 14900, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (46, '3008', 22, '3008', 1, 30, 41, 15200, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (47, '3009', 22, '3009', 1, 30, 41, 15700, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (48, '3010', 22, '3010', 1, 30, 41, 15700, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (49, '3011', 22, '3011', 1, 30, 41, 9900, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (50, '3012', 22, '3012', 1, 30, 41, 15000, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (51, '3013', 22, '3013', 1, 30, 41, 15000, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (52, '3014', 22, '3014', 1, 30, 41, 10540, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (53, '3015', 22, '3015', 1, 30, 41, 8600, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (54, '3016', 22, '3016', 1, 30, 41, 8600, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (55, '3017', 22, '3017', 1, 30, 41, 15000, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (56, '3018', 22, '3018', 1, 30, 41, 10540, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (57, '4001', 22, '4001', 1, 31, 41, 0, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (58, '4002', 22, '4002', 1, 31, 41, 0, 0, 0, NULL, 1, '2023-02-21 20:32:29', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (59, '4003', 22, '4003', 1, 31, 41, 0, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (60, '4004', 22, '4004', 1, 31, 41, 13400, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (61, '6501', 22, '6501', 1, 27, 42, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (62, '6502', 22, '6502', 1, 27, 42, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (63, '6503', 22, '6503', 1, 27, 42, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (64, '6504', 22, '6504', 1, 27, 42, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (65, '6505', 22, '6505', 1, 27, 42, 51667, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (66, '6506', 22, '6506 KEMBLA', 1, 27, 43, 55000, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:03', NULL);
+INSERT INTO `ref_produk` VALUES (67, '6507', 22, '6507', 1, 27, 44, 56666, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (68, '6508', 22, '6508', 1, 27, 44, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (69, '6509', 22, '6509', 1, 27, 44, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (70, '6510', 22, '6510', 1, 27, 44, 56666, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (71, '6511', 22, '6511', 1, 27, 44, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (72, '6512', 22, '6512', 1, 27, 42, 51667, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (73, '6513', 22, '6513', 1, 27, 44, 38334, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (74, '6514', 22, '6514', 1, 27, 44, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (75, '6515', 22, '6515', 1, 27, 44, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (76, '6516', 22, '6516', 1, 27, 42, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (77, '6517', 22, '6517', 1, 27, 44, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (78, '6518', 22, '6518', 1, 27, 44, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (79, '6519', 22, '6519', 1, 27, 44, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (80, '6520', 22, '6520', 1, 27, 44, 56666, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (81, '6521', 22, '6521', 1, 27, 44, 0, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (82, '6522', 22, '6522', 1, 27, 44, 0, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (83, '6523', 22, '6523', 1, 27, 44, 0, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (84, '6524', 22, '6524', 1, 27, 44, 0, 0, 0, NULL, 1, '2023-02-21 20:32:30', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (85, '6527', 22, '6527', 1, 27, 44, 75000, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (86, '6532', 22, '6532', 1, 27, 42, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (87, '6539', 22, '6539', 1, 27, 42, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (88, '6542', 22, '6542', 1, 27, 42, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (89, '6543', 22, '6543', 1, 27, 42, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (90, '6701', 22, '6701', 1, 27, 45, 56666, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (91, '6702', 22, '6702', 1, 27, 45, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (92, '6703', 22, '6703', 1, 27, 45, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (93, '6704', 22, '6704', 1, 27, 44, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (94, '6705', 22, '6705', 1, 27, 45, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (95, '6706', 22, '6706', 1, 27, 44, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (96, '6707', 22, '6707', 1, 27, 44, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (97, '6708', 22, '6708', 1, 27, 44, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (98, '6709', 22, '6709', 1, 27, 45, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (99, '6710', 22, '6710', 1, 27, 45, 55000, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (100, '6711', 22, '6711', 1, 27, 45, 53333, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (101, '6712', 22, '6712', 1, 27, 45, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (102, '6713', 22, '6713', 1, 27, 45, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (103, '6714', 22, '6714', 1, 27, 45, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (104, '6715', 22, '6715', 1, 27, 45, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:04', NULL);
+INSERT INTO `ref_produk` VALUES (105, '6716', 22, '6716', 1, 27, 45, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (106, '6717', 22, '6717', 1, 27, 45, 53334, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (107, '6718', 22, '6718', 1, 27, 45, 40000, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (108, '6801', 22, '6801', 1, 27, 44, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (109, '6802', 22, '6802', 1, 27, 44, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (110, '6803', 22, '6803', 1, 27, 44, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (111, '6804', 22, '6804', 1, 27, 44, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (112, '6805', 22, '6805', 1, 27, 44, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (113, '6806', 22, '6806', 1, 27, 44, 59167, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (114, '6901', 22, '6901', 1, 27, 46, 71666, 0, 0, NULL, 1, '2023-02-21 20:32:31', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (115, '7501', 22, '7501', 1, 28, 44, 0, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (116, '7502', 22, '7502', 1, 28, 42, 65334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (117, '7503', 22, '7503', 1, 28, 42, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (118, '7504', 22, '7504', 1, 28, 44, 74334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (119, '7505', 22, '7505', 1, 28, 42, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (120, '7506', 22, '7506', 1, 28, 44, 57334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (121, '7507', 22, '7507', 1, 28, 42, 65334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (122, '7508', 22, '7508', 1, 28, 42, 65334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (123, '7509', 22, '7509', 1, 28, 42, 63334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (124, '7510', 22, '7510', 1, 28, 44, 63334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (125, '7511', 22, '7511', 1, 28, 43, 74334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (126, '7515', 22, '7515', 1, 28, 45, 68334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (127, '7519', 22, '7519', 1, 28, 42, 68334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (128, '7701', 22, '7701', 1, 28, 45, 65000, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (129, '7702', 22, '7702', 1, 28, 45, 65000, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (130, '7703', 22, '7703', 1, 28, 45, 74334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (131, '7704', 22, '7704', 1, 28, 45, 65334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (132, '7705', 22, '7705', 1, 28, 45, 65334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (133, '7706', 22, '7706', 1, 28, 45, 65000, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (134, '7707', 22, '7707', 1, 28, 45, 65000, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (135, '7708', 22, '7708', 1, 28, 45, 74334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (136, '7709', 22, '7709', 1, 28, 45, 68334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (137, '7710', 22, '7710', 1, 28, 45, 48334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:05', NULL);
+INSERT INTO `ref_produk` VALUES (138, '7711', 22, '7711', 1, 28, 45, 0, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (139, '7712', 22, '7712', 1, 28, 45, 50000, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (140, '7713', 22, '7713', 1, 28, 45, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (141, '7714', 22, '7714', 1, 28, 45, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (142, '7715', 22, '7715', 1, 28, 45, 74334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (143, '7716', 22, '7716', 1, 28, 45, 65333, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (144, '7717', 22, '7717', 1, 28, 45, 74334, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (145, '7718', 22, '7718', 1, 28, 44, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:32', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (146, '7719', 22, '7719', 1, 28, 45, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (147, '7720', 22, '7720', 1, 28, 44, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (148, '7721', 22, '7721', 1, 28, 44, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (149, '7722', 22, '7722', 1, 28, 44, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (150, '7723', 22, '7723', 1, 28, 44, 74334, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (151, '7724', 22, '7724', 1, 28, 44, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (152, '7725', 22, '7725', 1, 28, 44, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (153, '7726', 22, '7726', 1, 28, 44, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (154, '7727', 22, '7727', 1, 28, 45, 65000, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (155, '7728', 22, '7728', 1, 28, 45, 65000, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (156, '7729', 22, '7729', 1, 28, 45, 65000, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (157, '7730', 22, '7730', 1, 28, 45, 0, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (158, '7731', 22, '7731', 1, 28, 45, 71666, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (159, '7732', 22, '7732', 1, 28, 42, 0, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (160, '7801', 22, '7801', 1, 28, 46, 71666, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:06', NULL);
+INSERT INTO `ref_produk` VALUES (161, '7802', 22, '7802', 1, 28, 46, 71666, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (162, '7803', 22, '7803', 1, 28, 46, 71666, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (163, '7804', 22, '7804', 1, 28, 46, 71666, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (164, '7805', 22, '7805', 1, 28, 46, 71666, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (165, '7806', 22, '7806', 1, 28, 46, 71666, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (166, '7807', 22, '7807', 1, 28, 46, 71666, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (167, '7808', 22, '7808', 1, 28, 46, 71666, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (168, '7809', 22, '7809', 1, 28, 46, 71666, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (169, '7810', 22, '7810', 1, 28, 46, 71666, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (170, '7811', 22, '7811', 1, 28, 46, 71666, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (171, '7901', 22, '7901', 1, 28, 44, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (172, '7902', 22, '7902', 1, 28, 44, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (173, '7903', 22, '7903', 1, 28, 44, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (174, '7904', 22, '7904', 1, 28, 44, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (175, '7905', 22, '7905', 1, 28, 44, 66667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (176, '8148', 22, '8148', 1, 32, 42, 96667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (177, '8165', 22, '8165', 1, 32, 42, 0, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (178, '8501', 22, '8501', 1, 32, 42, 96667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (179, '8502', 22, '8502 HODA', 1, 32, 42, 96667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (180, '8503', 22, '8503', 1, 32, 42, 96667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (181, '8504', 22, '8504', 1, 32, 42, 96667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (182, '8505', 22, '8505', 1, 32, 42, 81667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (183, '8506', 22, '8506', 1, 32, 42, 0, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (184, '8507', 22, '8507', 1, 32, 44, 100000, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (185, '8508', 22, '8508', 1, 32, 42, 81667, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (186, '8509', 22, '8509', 1, 32, 47, 0, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (187, '8510', 22, '8510', 1, 32, 42, 60000, 0, 0, NULL, 1, '2023-02-21 20:32:33', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (188, '8511', 22, '8511', 1, 32, 42, 73334, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (189, '8512', 22, '8512', 1, 32, 42, 58334, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (190, '8513', 22, '8513', 1, 32, 42, 0, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (191, '8514', 22, '8514', 1, 32, 42, 58334, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (192, '8515', 22, '8515', 1, 32, 42, 0, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (193, '8516', 22, '8516', 1, 32, 42, 58334, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:07', NULL);
+INSERT INTO `ref_produk` VALUES (194, '8517', 22, '8517', 1, 32, 42, 58334, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (195, '8518', 22, '8518', 1, 32, 45, 58334, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (196, '8519', 22, '8519', 1, 32, 42, 73334, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (197, '8520', 22, '8520', 1, 32, 42, 73334, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (198, '8521', 22, '8521', 1, 32, 42, 73334, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (199, '9501', 22, '9501', 1, 33, 47, 80000, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (200, '9502', 22, '9502', 1, 33, 42, 106667, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (201, '9503', 22, '9503', 1, 33, 47, 0, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (202, '9504', 22, '9504 HODA', 1, 33, 44, 86667, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (203, '9505', 22, '9505', 1, 33, 47, 103334, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (204, '9506', 22, '9506', 1, 33, 42, 115000, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (205, '9507', 22, '9507', 1, 33, 42, 106667, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (206, '9508', 22, '9508', 1, 33, 45, 97667, 0, 0, NULL, 1, '2023-02-21 20:32:34', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (207, '9509', 22, '9509', 1, 33, 45, 73334, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (208, '9601', 22, '9601', 1, 33, 45, 91667, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (209, '9602', 22, '9602', 1, 33, 45, 0, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (210, '9801', 22, '9801', 1, 33, 43, 124734, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (211, '9802', 22, '9802', 1, 33, 43, 124734, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (212, '9803', 22, '9803', 1, 33, 43, 124734, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (213, '9804', 22, '9804', 1, 33, 43, 124734, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (214, 'ACC.KRANMINI', 22, 'KRAN MINI MIXER', 2, 34, 40, 180000, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (215, 'ACC.SELANG', 22, 'Selang Shower', 2, 34, 40, 94000, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (216, 'ACC.Sock', 22, 'Sock WH', 2, 34, 40, 20000, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (217, 'BAUT', 22, 'BAUT', 2, 35, 40, 5500, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (218, 'BRK.PUTIHB', 22, 'BRACKET PUTIH BESAR', 9, 36, 40, 80000, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (219, 'BRK.PUTIHK', 22, 'BRACKET PUTIH KECIL', 9, 36, 40, 32000, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (220, 'BRK.TOYO', 22, 'BRACKET TOYO', 9, 36, 40, 36000, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (221, 'DUCTTAPE', 22, 'DUCTTAPE', 17, 37, 40, 4063, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:08', NULL);
+INSERT INTO `ref_produk` VALUES (222, 'DUCTTAPE LEM', 22, 'Duct Tape Lem', 17, 37, 42, 0, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
+INSERT INTO `ref_produk` VALUES (223, 'FLEXIBLE WH', 22, 'FLEXIBLE WH', 2, 38, 40, 0, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
+INSERT INTO `ref_produk` VALUES (224, 'HAMAFLEX', 22, 'HAMAFLEX', 48, 39, 40, 0, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
+INSERT INTO `ref_produk` VALUES (225, 'KABEL HITAM', 22, 'KABEL HITAM', 17, 30, 41, 0, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
+INSERT INTO `ref_produk` VALUES (226, 'KBL.LG', 22, 'KBL.LG', 1, 29, 41, 0, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
+INSERT INTO `ref_produk` VALUES (227, 'Knee', 22, 'Knee WH', 2, 34, 40, 25000, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
+INSERT INTO `ref_produk` VALUES (228, 'PPA.FLEXIBLE', 22, 'PPA FLEXIBLE', 1, 38, 40, 700, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
+INSERT INTO `ref_produk` VALUES (229, 'dryer', 22, 'Dryer Midea', 2, 29, 40, 0, 0, 0, NULL, 1, '2023-02-21 20:32:35', 1, '2023-02-21 20:40:09', NULL);
+INSERT INTO `ref_produk` VALUES (230, 'KBL.3*1.5mtr', 20, 'Kabel 3*1.5', 1, 64, 152, 0, 23000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (231, 'KBL.3.*2.5', 20, 'Kabel NYM 3*2.5', 1, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (232, 'PPF.1/2*3/4', 20, 'Pipa AC 1/2*3/4', 1, 64, 152, 0, 149500, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (233, 'INS.PIPAMTR', 21, 'Instalasi Pipa Air', 1, 87, 152, 0, 300000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (234, 'PSG.PVC', 21, 'Pasang Pipa Air PVC', 1, 87, 152, 10450, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (235, 'PPA.FLEXIBLE', 22, 'Pipa Air Flexible', 1, 88, 115, 0, 10000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (236, 'PPF.1/4*1/2', 22, 'Pipa Freon 1.5-2 PK', 1, 89, 115, 0, 105000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (237, 'PPF.1/4*3/8', 22, 'Pipa Freon 0.5-1 pk', 1, 89, 115, 0, 95000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (238, 'PPF.3/8*5/8Mtr', 22, 'Pipa Freon 3 pk', 1, 89, 115, 0, 125000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (239, 'ppf.HD1/4*5/8', 22, 'Pipa Freon 2.5 pk', 1, 89, 115, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (240, 'ACC.HAMAFLEX', 20, 'Hamaflex', 1, 53, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (241, 'ACC.TERPAL', 20, 'Terpal', 1, 53, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (242, 'DUCTING', 20, 'Ducting Viu + Jasa + Bahan-bahan', 1, 53, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (243, 'SELANG GAS', 20, 'Selang Gas', 1, 64, 152, 0, 55000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (244, 'JAS.KBL', 21, 'Kabel Listrik', 1, 73, 152, 0, 23000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (245, 'PSG.INSMTR', 21, 'Pasang Instalasi Pipa AC', 1, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (246, 'PPA.PVC', 22, 'Pipa Drain', 1, 88, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (247, 'PPF.1/4+5/8', 22, 'Pipa Freon 2.5PK', 1, 89, 152, 0, 145000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (248, 'PPF.5PK', 22, 'Pipa Freon 5PK', 1, 89, 152, 0, 150000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (249, 'ppf.10PK', 22, 'Pipa Freon 10PK + Insulation', 1, 89, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (250, 'AQUA.343', 20, 'Kulkas Aqua 343', 2, 4, 104, 5475000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (251, 'AQUA.383', 20, 'Kulkas 2 pintu Aqua 383', 2, 4, 104, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (252, 'AQUA.AQR181', 20, 'Kulkas 1 Pintu Aqua AQR 181', 2, 4, 104, 1525000, 1875000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (253, 'AQUA.IN05', 20, 'AC Split AQUA 1/2 pk', 2, 52, 104, 2535000, 2750000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (254, 'AQUA.IN18', 20, 'AC Split AQUA 2pk', 2, 52, 104, 5200000, 2750000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (255, 'AQUA.32\"', 20, 'LED AQUA 32\"', 2, 80, 104, 1600000, 2000000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (256, 'ARI.15RS', 20, 'Water Heater Ariston AN2 15RS', 2, 102, 136, 2104000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (257, 'AUX.IN1/2PK', 20, 'AC Split AUX 1.5 PK', 2, 52, 117, 3800000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (258, 'DLL.Kursi', 21, 'FlyCatcher 2 Lampu', 2, 87, 117, 40267, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (259, 'BEKO.GNO5001', 20, 'Kulkas Side By Side BEKO', 2, 4, 105, 6699000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (260, 'BEKO.RDNO600E50VBS', 20, 'Kulkas Beko', 2, 4, 105, 5486250, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (261, 'BEKO.BTLA7008', 20, 'Mesin Cuci 1 Tabung Beko 7 Kg', 2, 81, 105, 2179596, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (262, 'BEKO.BTLA8008', 20, 'Mesin Cuci 1 Tabung Beko 8 Kg', 2, 81, 105, 2286400, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (263, 'BEKO.WCV7612', 20, 'Front Loading BEKO 7 kg', 2, 81, 105, 3307999, 3308000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (264, 'BEKO.WCV8612', 20, 'Front Loading BEKO 8 kg', 2, 81, 105, 3592999, 3593000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (265, 'CHA.KF71', 20, 'Floor Standing ChangHong 3 pk', 2, 68, 118, 8145000, 8500000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (266, 'CKE.AUTOFAN20\"', 20, 'Auto Fan CKE 20\"', 2, 75, 138, 895815, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (267, 'CKE.WFNS24', 20, 'Wall Fan CKE 24\"', 2, 75, 138, 1850000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (268, 'COCA.32\"', 20, 'Coocaa 32S3', 2, 80, 139, 1689000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (269, 'COS.RICEBOX', 20, 'Rice Box Cosmos 38KG', 2, 64, 140, 350300, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (270, 'COS.16WFCR', 20, 'Wall Fan Cosmos 16\" Remote', 2, 75, 140, 241400, 375000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (271, 'COS.CIC996', 20, 'Kompor Induction Cosmos CIC996', 2, 76, 140, 630800, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (272, 'DAI.SCNQ30', 20, 'AC Cassette Daikin 3.5pk', 2, 51, 6, 25650000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (273, 'DAI.FTKC50NVM4', 20, 'Ac Split Daikin Inverter 2 Pk', 2, 52, 6, 9200000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (274, 'DAI.STC60NV', 20, 'AC Split Daikin 2.5pk STC60NV', 2, 52, 6, 9689000, 8234582, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (275, 'DAI.STP15', 20, 'AC Split Daikin Malaysia 0.5pk', 2, 52, 6, 2684000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (276, 'DAI.STP25', 20, 'AC Split Daikin Malaysia 1pk', 2, 52, 6, 2975000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (277, 'DEN.MSNCUCI', 20, 'Mesin Cuci Mini Denpoo', 2, 81, 6, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (278, 'DEN.DDK1101', 20, 'Dispenser Denpoo DDK1101', 2, 63, 142, 580000, 710000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (279, 'DLL.CREDENZA', 20, 'Tas Ransel Polo USB', 2, 64, 143, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (280, 'DLL.KASUR', 20, 'Botol Spray 500ml', 2, 64, 143, 7297, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (281, 'DLL.KURSIHIDROLIK', 20, 'Kursi Bulat Hidrolik', 2, 64, 143, 200000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (282, 'DLL.MEJA', 20, 'Kemoceng Microfiber', 2, 64, 143, 235000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (283, 'DLL.RANJANG', 20, 'Keranjang plastik sinpo', 2, 64, 143, 101000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (284, 'DLL.STEKER', 20, 'Steker AC', 2, 64, 143, 0, 35000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (285, 'WINN.GASKOMPOR', 20, 'Kompor Winn Gas', 2, 76, 143, 575300, 700000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (286, 'ELE.COOKER', 20, 'Cooker Hood Electrolux', 2, 61, 106, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (287, 'FLIFE.OVEN', 20, 'Oven Flife', 2, 86, 144, 616810, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (288, 'GEA.LP12*2', 20, 'Dispenser Juice GEA LP12*2', 2, 63, 107, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (289, 'GEA.Neptune', 20, 'Dispenser GEA Galon Atas', 2, 63, 107, 1184925, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (290, 'GEA.GC388', 20, 'Upright Chiller GEA GC388', 2, 69, 107, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (291, 'GEA.GF-24DC', 20, 'Freezer GEA GF-24DC', 2, 69, 107, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (292, 'GEA.LSD86', 20, 'Freezer GEA LSD 86', 2, 69, 107, 6900000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (293, 'GEA.B-20', 20, 'Mixer Getra 20 liter', 2, 84, 107, 8025000, 8025000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (294, 'GEA.1050F', 20, 'Showcase GEA 1050F', 2, 94, 107, 20400000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (295, 'GEA.EXPO800AH', 20, 'Showcase GEA Expo 800AH', 2, 94, 107, 11990000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (296, 'GEA.Expo 230', 20, 'Showcase GEA EXPO 26FC', 2, 94, 107, 2904000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (297, 'GREE.DUCT2.5PK', 20, 'AC Split Duct Gree 3pk', 2, 51, 116, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (298, 'GRE.18F1', 20, 'AC Split Inverter Gree 2pk', 2, 52, 116, 8960000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (299, 'HAI.HPU48', 20, 'Floor Standing Haier 5 pk', 2, 68, 119, 13847280, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (300, 'HIT.WTP300GX', 20, 'Pompa Air Hitachi WTP300', 2, 90, 108, 1992000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (301, 'SHI.228BIT', 20, 'Pompa Boaster Shimizu 228 BIT', 2, 90, 108, 780600, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (302, 'DLL.UNO1081', 20, 'Meja UNO UOD 1081', 2, 64, 146, 2352000, 2352000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (303, 'IMP.OD-06BT', 20, 'Meja Importa OD-06BT', 2, 64, 146, 2352000, 2352000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (304, 'IMP.SC-04BT', 20, 'Lemari Importa SC04MS', 2, 64, 146, 1311780, 1583435, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (305, 'KDK.35GSC', 20, 'Industrial KDK 35GSC', 2, 75, 147, 3336900, 3600000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (306, 'KEN.KZ01', 20, 'Bracket LED 19-32\"', 2, 58, 148, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (307, 'KEN.KZ12', 20, 'Bracket LED Kenzo KZ 12', 2, 58, 148, 158110, 158110, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (308, 'KEN.KZ20', 20, 'Bracket LED Kenzo KZ 20', 2, 58, 148, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (309, 'KEN.KZ25', 20, 'Bracket LED Kenzo KZ 25', 2, 58, 148, 116400, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (310, 'KEN.KZ62', 20, 'Bracket LED Gantung', 2, 58, 148, 300000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (311, 'KEN.KZ70', 20, 'Bracket Monitor Kenzo KZ 70', 2, 58, 148, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (312, 'LG.GCB369', 20, 'Kulkas LG GCB 369', 2, 4, 12, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (313, 'LG .DH3140', 20, 'Home Theater LG', 2, 64, 12, 3250000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (314, 'LG .50LB582T', 20, 'LED LG 50\"', 2, 80, 12, 5525000, 7000000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (315, 'LG.49LJ510T', 20, 'LED LG 50\"', 2, 80, 12, 6700000, 9950000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (316, 'LG.65OLED', 20, 'LED TV LG Oled 65\" CX', 2, 80, 12, 26000000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (317, 'LG.86UN8100', 20, 'LED TV LG 86UN7100', 2, 80, 12, 43605000, 43605000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (318, 'LG.FV1285', 20, 'Front Loading LG 1285S5w', 2, 81, 12, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (319, 'LG.T2109VSAL', 20, 'Mesin Cuci 1 Tabung LG 9 KG', 2, 81, 12, 5725000, 3170149, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (320, 'MAS.CEF25', 20, 'Exhaust Fan Maspion CEF25', 2, 67, 150, 218600, 285000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (321, 'MAS.PW455', 20, 'Kipas Angin Maspion PW455', 2, 75, 150, 423000, 445000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (322, 'MAS.SF20\"', 20, 'Stand Fan Maspion 20\"', 2, 75, 150, 582100, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (323, 'MIDEA.CHOPPER', 20, 'Midea 3000 Series', 2, 60, 120, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (324, 'MIY.PFAP501', 20, 'Chopper Miyako PF AP 501', 2, 57, 151, 229300, 325000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (325, 'MIY.WD185', 20, 'Dispenser Portable Miyako WD 185', 2, 63, 151, 115800, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (326, 'MIY.TOASTER', 20, 'Toaster Miyako', 2, 100, 151, 212100, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (327, 'MOD.RX9622', 20, 'Cooker Hood Modena RX9632', 2, 61, 110, 2850000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (328, 'MOD.Frame', 20, 'Frame Modena', 2, 64, 110, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (329, 'MOD.KT0550', 20, 'Kran Modena KT0550', 2, 64, 110, 708000, 771000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (330, 'MOD.ED650', 20, 'Dryer Modena', 2, 65, 110, 5056241, 4290000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (331, 'MOD.CT7960', 20, 'Kompor Modena CT7960', 2, 76, 110, 9180000, 9180000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (332, 'MOD.BI1725', 20, 'Built In Induction Modena BI 1725', 2, 77, 110, 6648000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (333, 'MOD.PI1314', 20, 'Induction Portable Modena PI1314', 2, 77, 110, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (334, 'MOD. BW6435', 20, 'Wine Cellar Modena CW2045', 2, 94, 110, 13380000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (335, 'DOU.NEPEL', 20, 'Double Nepel', 2, 53, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (336, 'NON.BRKLED14-24', 20, 'Braket LED 14-24\"', 2, 58, 152, 51667, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (337, 'ALBA.LC506', 20, 'Locker Alba LC-506', 2, 64, 152, 1891440, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (338, 'CASSIO.KL820', 20, 'Label Printing Cassio KL820', 2, 64, 152, 852700, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (339, 'CHI.MND', 20, 'Kursi Kuliah Chitose MND', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (340, 'COVID.SWAB', 20, 'Swab Covid', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (341, 'CTS.YAMATOAA', 20, 'Kursi Chitose Yamato AA', 2, 64, 152, 310349, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (342, 'DIBN.DS20', 20, 'Brankas Daichiban DS20', 2, 64, 152, 3099250, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (343, 'DLL.ALBASDG206', 20, 'Lemari Arsip Alba SDG206', 2, 64, 152, 3438600, 3558000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (344, 'DLL.B44C', 20, 'Filling Cabinet Elite B4-4C', 2, 64, 152, 2608500, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (345, 'DLL.CHUBB31\"3LACI', 20, 'Fire File Chubb 3 Laci', 2, 64, 152, 21092480, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (346, 'DLL.CHUBB31\"4LACI', 20, 'Fire File Chubb 4 Laci', 2, 64, 152, 25670000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (347, 'DLL.COLOKAN', 20, 'Colokan Kaki Tiga Standard', 2, 64, 152, 0, 25000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (348, 'DLL.CUTTERPIPE', 20, 'Cutter Pipe Tanaka', 2, 64, 152, 0, 155000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (349, 'DLL.ELBOW', 20, 'Elbow 1\"', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (350, 'DLL.ELBOW1/2', 20, 'Elbow 1/2\"', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (351, 'DLL.EMBER', 20, 'Ember Plastik Kecil', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (352, 'DLL.FLARING TOOL', 20, 'Flaring Tool Valu', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (353, 'DLL.FUTURA405', 20, 'Kursi Futura 405', 2, 64, 152, 424650, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (354, 'DLL.GARPU', 20, 'Garpu Stainless Tebal', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (355, 'DLL.HDMI', 20, 'Kabel HDMI', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (356, 'DLL.HICOOK', 20, 'Gas Hi Cook', 2, 64, 152, 0, 35000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (357, 'DLL.INDACHI 54S', 20, 'Kursi Indachi PS-54s', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (358, 'DLL.INDACHI3021', 20, 'Kursi Indachi D-3021', 2, 64, 152, 575646, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (359, 'DLL.INSECTKILLER', 20, 'Insect Killer', 2, 64, 152, 325000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (360, 'DLL.JACK', 20, 'Jack Connector Male', 2, 64, 152, 0, 8000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (361, 'DLL.JOHNSON', 20, 'Sabun Mandi Johnsons Baby', 2, 64, 152, 38000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (362, 'DLL.JOYKOLM02', 20, 'Mesin Laminating Joyko LM-02', 2, 64, 152, 950000, 1050000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (363, 'DLL.KAIN', 20, 'Kain Microfibre', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (364, 'DLL.KANEBO', 20, 'Kanebo Aion', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (365, 'DLL.KAPASITORAC', 20, 'Kapasitor AC', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (366, 'DLL.KIT', 20, 'Sabun Cuci Mobil KIT 800ml', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (367, 'DLL.KITPOLISH', 20, 'KIT Polish Glass', 2, 64, 152, 0, 49000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (368, 'DLL.KITSEMIR', 20, 'Semir Ban KIT 300ml', 2, 64, 152, 0, 49000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (369, 'DLL.KITSHAMPO', 20, 'Shampoo Mobil KIT 300ml', 2, 64, 152, 0, 49000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (370, 'DLL.KLEM', 20, 'KLEM Pipa 1.5\"', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (371, 'DLL.KLEMPVC', 20, 'Klem PVC 1\"', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (372, 'DLL.KOZUREKL9', 20, 'Loker Kozure KL 9W', 2, 64, 152, 2799000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (373, 'DLL.KUAS', 20, 'Kuas 4\"', 2, 64, 152, 0, 49000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (374, 'DLL.KUNCI-L', 20, 'Kunci L Tekiro', 2, 64, 152, 0, 125000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (375, 'DLL.KUNCIINGGRIS', 20, 'Kunci Inggris Tekiro 12\"', 2, 64, 152, 0, 155000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (376, 'DLL.KURSIBULAT', 20, 'Kursi Bulat Lion Star', 2, 64, 152, 48900, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (377, 'DLL.KURSIPOLARIS', 20, 'Kursi Bulat Polaris', 2, 64, 152, 139150, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (378, 'DLL.L-BOW1/2\"', 20, 'L-Bow 1/2', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (379, 'DLL.L-BOW3/4\"', 20, 'L-Bow 3/4', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (380, 'DLL.LBOW3/8', 20, 'L-Bow 3/8', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (381, 'DLL.LBOW5/8', 20, 'L-Bow 5/8', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (382, 'DLL.LORI300KG', 20, 'Lori Lipat 300Kg', 2, 64, 152, 562400, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (383, 'DLL.MANGKOK', 20, 'Mangkok Keramik', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (384, 'DLL.MEJAGOSOKAN', 20, 'Meja Setrika', 2, 64, 152, 0, 385000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (385, 'DLL.OXIMETER', 20, 'Oximeter ChoiceMMed', 2, 64, 152, 342400, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (386, 'DLL.PIRING', 20, 'Piring Keramik', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (387, 'DLL.PLASTIKSERVIS2PK', 20, 'Plastik Service AC 2pk', 2, 64, 152, 33000, 74000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (388, 'DLL.PTC', 20, 'PTC 3pin', 2, 64, 152, 0, 25000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (389, 'DLL.RAKSEPATU', 20, 'Rak Sepatu Plastik', 2, 64, 152, 27000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (390, 'DLL.REMOTE', 20, 'Remote AC', 2, 64, 152, 145000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (391, 'DLL.Reparasi', 20, 'Reparasi + Ganti Busa', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (392, 'DLL.SAPUKCL', 20, 'Sapu Kecil Mobil', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (393, 'DLL.SCOTCH', 20, 'Scotch Brite Basic', 2, 64, 152, 0, 6000, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (394, 'DLL.SENDOK', 20, 'Sendok Stainless Tebal', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (395, 'DLL.SENDOKTEH', 20, 'Sendok Teh Stainless Tebal', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (396, 'DLL.SIKATPLASTIK', 20, 'Sikat plastik', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (397, 'DLL.SOK', 20, 'Sok', 2, 64, 152, 6000, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (398, 'DLL.STB', 20, 'Set Top Box Matrix', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:58', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (399, 'DLL.T', 20, 'Bahan Bangunan', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (400, 'DLL.TEE', 20, 'Tee 1\"', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (401, 'DLL.TEE1/2', 20, 'Tee 1/2\"', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (402, 'DLL.TMBGNMN', 20, 'Timbangan Manual 2kg', 2, 64, 152, 33000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (403, 'DLL.TMPTSMPH', 20, 'Tempat Sampah Mobil', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (404, 'DLL.TUTUPGELAS', 20, 'Tutup Gelas Stainless', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (405, 'JIN.BULAT', 20, 'Heater Portable JinXing', 2, 64, 152, 772250, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (406, 'KMK.FR109', 20, 'Kursi Lab Kamiko 109FR', 2, 64, 152, 567050, 567500, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (407, 'KRB.KW05', 20, 'Trolley Krisbow', 2, 64, 152, 505000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (408, 'KZR.KL3W', 20, 'Kozure KL-3W', 2, 64, 152, 2939000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (409, 'NON.WATERKETTLE', 20, 'Water Kettle Stainless', 2, 64, 152, 450072, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (410, 'OMR.LF1Y', 20, 'Relay Omron 15A 110 VAC', 2, 64, 152, 280250, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (411, 'RDK.RODAKULKAS', 20, 'Roda Kulkas', 2, 64, 152, 103790, 175000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (412, 'RMT.CHANGHONGLED', 20, 'Remote LED  Changhong', 2, 64, 152, 0, 100000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (413, 'SHIN.133-1', 20, 'Kontainer Shinpo 133-1', 2, 64, 152, 32000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (414, 'STLH.RB420', 20, 'Stihl RB420', 2, 64, 152, 5500000, 5890000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (415, 'SUB.SB106', 20, 'Kursi Subaru SB106', 2, 64, 152, 891250, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (416, 'PSG.AC5', 21, 'Pasang Ac 5PK', 2, 87, 152, 0, 1000000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (417, 'BLA.AC', 20, 'Flushing AC', 2, 92, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (418, 'OXO.PANCI8L', 20, 'Panci Presto 8L', 2, 64, 153, 227700, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (419, 'PAN.331QPK', 20, 'Kulkas Panasonic 331Q', 2, 4, 8, 5725000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (420, 'PAN.DUCT4PK', 20, 'AC Split Duct Panasonic 4pk', 2, 51, 8, 23450000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (421, 'PAN.CSYN24PKP', 20, 'AC Split Panasonic 2.5 pk', 2, 52, 8, 8475000, 7800000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (422, 'PAN.PN09', 20, 'AC Split Panasonic PN9', 2, 52, 8, 3925000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (423, 'PAN.PN18', 20, 'AC Split Panasonic PN18', 2, 52, 8, 6250000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (424, 'PAN.ZN05WKP', 20, 'AC Split Panasonic 0.5pk', 2, 52, 8, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (425, 'PAN.ZN07WKP', 20, 'AC Split Panasonic 3/4pk', 2, 52, 8, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (426, 'PAN.49\"', 20, 'LED Panasonic 49\"', 2, 80, 8, 4165000, 2600000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (427, 'PAN.NAW125FCV1', 20, 'Mesin Cuci Panasonic 12.5kg', 2, 82, 8, 2725000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (428, 'PAN.NAW85BBZ1H', 20, 'Mesin Cuci 2 Tabung Panasonic 8 KG', 2, 82, 8, 1675000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (429, 'PHI.HD9306', 20, 'Kettle Philips HD9306', 2, 64, 155, 422600, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (430, 'PHI.HD3132', 20, 'Rice Cooker Philips HD3138', 2, 67, 155, 667900, 525000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (431, 'POL.PWC600', 20, 'Dispenser Polytron PWC600', 2, 63, 111, 1350000, 1350000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (432, 'POL.PTS2K25', 20, 'Speaker Polytron PTS2K25', 2, 64, 111, 2700000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (433, 'POL.STB700', 20, 'STB Polytron', 2, 64, 111, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (434, 'POL.230', 20, 'Showcase Polytron 230', 2, 94, 111, 3225000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (435, 'REGULATOR', 20, 'Regulator Gas', 2, 91, 156, 62500, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (436, 'REG.STANDFAN', 20, 'Stand Fan Regency 16\"', 2, 75, 157, 556000, 611111, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (437, 'REG.ZTST-20', 20, 'Stand Fan Regency 20\"', 2, 75, 157, 540000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (438, 'RH229B', 20, 'Cooker Hood Rinnai 90cm', 2, 61, 158, 1161383, 1300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (439, 'RIN.RB772RO', 20, 'Built In Hob Rinnai RB772 RO', 2, 76, 158, 1703685, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (440, 'RIN.RH90', 20, 'Cooker Hood Rinnai 90 CM', 2, 76, 158, 1161383, 1150000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (441, 'RIN.RI524', 20, 'Kompor Gas Rinnai Grill Tengah', 2, 76, 158, 613008, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (442, 'RSA.CF310', 20, 'Chest Freezer RSA 300L', 2, 69, 112, 2835000, 3202941, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (443, 'RSA.CF460', 20, 'Chest Freezer RSA 460L', 2, 69, 112, 4610000, 5208309, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (444, 'SAM.RR18', 20, 'Kulkas 1 Pintu Samsung', 2, 4, 113, 1975000, 1975000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (445, 'SAM.RT43', 20, 'Kulkas Samsung RT43', 2, 4, 113, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (446, 'SAM.2.5PK', 20, 'AC Split Samsung 2.5 PK', 2, 52, 113, 3400000, 4400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (447, 'SAM.48H5003', 20, 'LED Samsung 49\" SMART', 2, 80, 113, 4850000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (448, 'SAM.MONITOR19\"', 20, 'Monitor Samsung 19\"', 2, 80, 113, 1460000, 1650000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (449, 'SAM.UA98QN90', 20, 'LED TV Samsung 98QN90', 2, 80, 113, 89269210, 90590000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (450, 'SAM.MG23', 20, 'Microwave Samsung MG23', 2, 83, 113, 1354100, 1650000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (451, 'SAM.MG30T', 20, 'Microwave Grill Samsung 30L', 2, 83, 113, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (452, 'SKN.HWD734', 20, 'Dispenser Sanken HWDC 200', 2, 63, 159, 1545000, 1650000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (453, 'SKI.1090', 20, 'Exhaust Fan Sekai 1090', 2, 67, 161, 242800, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (454, 'SKI.EXPLAFON10\"', 20, 'Exhaust Fan Plafon Sekai 10\"', 2, 75, 161, 155000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (455, 'SKI.STDFAN18\"', 20, 'Stand Fan Sekai 18\"', 2, 75, 161, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (456, 'SKI.exhaustplafon', 20, 'Exhaust Fan Ceiling Sekai 12\"', 2, 75, 161, 189554, 205405, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (457, 'SHA.SJF90PMBK', 20, 'Kulkas Side By Side LG 257 CSFS', 2, 4, 7, 18450000, 19000000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (458, 'SHA.SJM180FSS', 20, 'Kulkas 1 Pintu Sharp SJX 185', 2, 4, 7, 1800000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (459, 'SHA.SJN192', 20, 'Kulkas 1 Pintu Sharp SJN192', 2, 4, 7, 1899000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (460, 'SHA.SJX165', 20, 'Kulkas Sharp 1 Pintu SJX165', 2, 4, 7, 1649000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (461, 'ShA.SJ316MGGR', 20, 'Kulkas 2 Pintu Sharp SJ 316 MGGR', 2, 4, 7, 3095000, 2700000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (462, 'SHA.AHAP7SSY', 20, 'AC Split Sharp 3/4pk Plasma', 2, 52, 7, 3270000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (463, 'SHA.XP13UHY', 20, 'AC Split Sharp J-Tech Inverter 1.5pk', 2, 52, 7, 6000000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (464, 'SHA.80MW', 20, 'Mesin Cuci 2 Tabung Sharp 80MW', 2, 82, 7, 1370000, 1650000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (465, 'SHA.90MW', 20, 'Mesin Cuci 2 Tabung Sharp 90MW', 2, 82, 7, 1550000, 1550000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (466, 'SHI.JET108', 20, 'Pompa Air Shimizu Jet Pump 500Watt', 2, 90, 162, 1990500, 3250000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (467, 'SPQ.DRYERGAS', 20, 'Dryer Listrik Whirlpool GAS 15kg', 2, 65, 163, 12750000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (468, 'SPQ.LES17', 20, 'Dryer Listrik Whirlpool Listrik 15kg', 2, 65, 163, 13500000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (469, 'SONY.65X80J', 20, 'LED TV Sony 65X80J', 2, 80, 163, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (470, 'BKS.AC', 20, 'AC BEKAS', 2, 51, 115, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (471, 'TV.10\"', 20, 'TV Portable 10\"', 2, 80, 115, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (472, 'TEF.SETRIKA', 20, 'Setrika Tefal', 2, 93, 165, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (473, 'TOS.DRYER8KG', 20, 'Dryer Toshiba 8kg', 2, 65, 11, 4300000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (474, 'WAS.WD80EF', 20, 'Pompa Air Celup Wasser WD80EF', 2, 90, 167, 381500, 243647, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (475, 'XMI.LED55\"', 20, 'LED TV Xiao Mi 55\"', 2, 80, 168, 7900000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (476, 'ACC.BesiLion', 20, 'Tangga 2M', 2, 53, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (477, 'ACC.Karet Mounting', 20, 'Karet Mounting', 2, 53, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (478, 'ACC.Swab test', 20, 'Swab Test', 2, 53, 152, 0, 1000000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (479, 'ACC.SOKPEMANJANG', 20, 'Sok Pemanjang Water Heater', 2, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (480, 'LION', 20, 'Thermos Lion 12L', 2, 64, 152, 169000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (481, 'DLL.TV12\"', 20, 'Kursi Futura 747', 2, 80, 152, 380000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (482, 'BRK.STANDING', 20, 'Standing Bracket', 9, 58, 148, 1116667, 1785714, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (483, 'DLL.DinaSet', 20, 'Dina Set', 9, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (484, 'BKR.BKRPSG3', 21, 'Bongkar Pasang 5PK', 9, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (485, 'POL.1PK', 20, 'Ac Split Polytron 1 PK', 9, 52, 111, 2760000, 2635000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (486, 'RSA.VISION', 20, 'Showcase RSA AGATE 300', 9, 94, 112, 3694080, 3575000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (487, 'SKN.HWD85', 20, 'Dispenser Sanken HWD Z85', 9, 63, 159, 2320000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (488, 'TOS.10S3KS', 20, 'Ac Split Toshiba 1PK Thailand', 9, 52, 11, 3045000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (489, 'UCH.200CRD', 20, 'Freezer Uchida 200 Liter', 9, 69, 114, 2651000, 2900000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (490, 'UCH.168NOR', 20, 'Kulkas 2 Pintu Uchida 168NOR', 9, 78, 114, 1400000, 1016643, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (491, 'UCH.188GW', 20, 'Showcase Uchida 188 GW', 9, 94, 114, 2406000, 2163694, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (492, 'UCH.218RW', 20, 'Showcase Uchida 218 RW', 9, 94, 114, 2734195, 2825000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (493, 'UCH.MPW16', 20, 'AC Window 2Pk', 9, 103, 114, 3440000, 4000000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (494, 'CUCI.ACCASSETE', 20, 'Cuci Ac Cassete', 9, 62, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (495, 'BRK.AC', 20, 'Bracket AC', 9, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (496, 'FRE.R410', 20, 'Freon R410', 9, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (497, 'ISI.FREON', 21, 'Isi Freon  AC 1/2-1 PK', 9, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (498, 'ISI.FREON2', 21, 'Isi Freon  AC 1.5-2 PK', 9, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (499, 'PSG.AC', 21, 'Pasang AC 0.5-1 PK', 9, 87, 152, 0, 300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (500, 'PSG.AC2', 21, 'Pasang AC 1.5-2 PK', 9, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (501, 'PSG.AC3PK', 21, 'Pasang AC 3PK', 9, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (502, 'PSG.BKRPSG', 21, 'Bongkar Pasang AC 0.5-1PK', 9, 87, 152, 0, 300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (503, 'PSG.BKRPSG2', 21, 'Bongkar Pasang AC1.5-2PK', 9, 87, 152, 0, 300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (504, 'PSG.BRK', 21, 'Pasang Bracket', 9, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (505, 'PSG.CAS', 21, 'Pasang Ac Cassete', 9, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (506, 'PSG.CH', 21, 'Pasang Cooker Hood', 9, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (507, 'PSG.Floor', 21, 'Pasang AC Floor Standing', 9, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (508, 'PSG.IN', 21, 'Pasang Indoor AC', 9, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (509, 'PSG.INS', 21, 'Pasang Instalasi Pipa AC', 9, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (510, 'PSG.OUT', 21, 'Pasang Outdoor AC', 9, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (511, 'PSG.STEKER', 21, 'Pasang Steker', 9, 87, 152, 0, 75000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (512, 'PSG.WH', 21, 'Pasang Water Heater', 9, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (513, 'PPF4+BRK1', 22, 'Pipa Freon 4m + Kabel 4m + Bracket', 9, 89, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (514, 'PPF5', 22, 'Pipa Freon 5m', 9, 89, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (515, 'PSG+PPF4', 22, 'Pasang + Pipa Freon 4m + Kabel 4m + Bracket', 9, 89, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (516, 'AQU.AQRD190', 20, 'Kulkas 1 Pintu Aqua AQR 190', 16, 4, 104, 1660000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (517, 'AQUA.4PINTU', 20, 'Kulkas AQUA 4 Pintu', 16, 4, 104, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (518, 'AQUA.AQB180', 20, 'Showcase Aqua AQB180', 16, 4, 104, 2300000, 2500000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (519, 'AQUA.AQR191', 20, 'Kulkas 1 Pintu AQUA AQR190/1', 16, 4, 104, 1675000, 1875000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (520, 'AQUA.AQR240', 20, 'Kulkas 2 Pintu Aqua AQR 240', 16, 4, 104, 2350000, 2525000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (521, 'AQUA.AQR270', 20, 'Kulkas 2 Pintu Aqua', 16, 4, 104, 2665000, 2810101, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (522, 'AQUA.AQR275', 20, 'Kulkas 2 Pintu AQUA AQR275', 16, 4, 104, 3000000, 3300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (523, 'AQUA.AQR370', 20, 'Kulkas 2 Pintu AQR370 INVERTER', 16, 4, 104, 4375000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (524, 'AQUA.AQRD50', 20, 'Kulkas Portable AQUA AQRD50', 16, 4, 104, 1300000, 1400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (525, 'AQUA.3/4PK', 20, 'Ac Split AQUA 3/4 PK', 16, 52, 104, 2770000, 2375000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (526, 'AQUA.CR9ANS', 20, 'Ac Split AQUA 1PK', 16, 52, 104, 2450000, 2300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (527, 'AQUA.150L', 20, 'Chest Freezer AQUA 150L', 16, 69, 104, 2285000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (528, 'AQUA.AQF420', 20, 'Chest Freezer AQUA 200L', 16, 69, 104, 2675000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (529, 'AQUA.AQF6L', 20, 'Freezer AQUA 6 RAK', 16, 69, 104, 2850000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (530, 'AQUA.AQFS4', 20, 'Freezer AQUA 4 RAK', 16, 69, 104, 2350000, 2300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (531, 'AQUA.AQR251', 20, 'Kulkas 2 pintu AQUA', 16, 78, 104, 2375000, 2513368, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (532, 'AQUA.AQR261', 20, 'Kulkas 2 Pintu Aqua', 16, 78, 104, 2490000, 2400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (533, 'AQUA.AQR88DD', 20, 'Mesin Cuci 1 Tabung AQUA 8 KG', 16, 81, 104, 2150000, 2450000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (534, 'AQUA.FQW700829QD', 20, 'Front Loading AQUA 7 KG', 16, 81, 104, 3515000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (535, 'AQUA.FQW850829CD', 20, 'Front Loading AQUA 8 KG', 16, 81, 104, 3900000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (536, 'SAN.AQW78DD', 20, 'Mesin Cuci 1 Tabung AQUA 7 KG', 16, 81, 104, 1825000, 2300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (537, 'SAN.AQW98', 20, 'Mesin Cuci 1 Tabung AQUA 9 KG', 16, 81, 104, 2325000, 2500000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (538, 'AQUA.12KG', 20, 'Mesin Cuci 2 Tabung Aqua 12 KG', 16, 82, 104, 2025000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (539, 'AQUA.QW1080', 20, 'Mesin Cuci 2 Tabung Aqua 10 KG', 16, 82, 104, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (540, 'AQUA.QW780XT', 20, 'Mesin Cuci 2 Tabung Aqua 7 KG', 16, 82, 104, 1265000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (541, 'AQUA.QW880', 20, 'Mesin Cuci 2 Tabung Aqua 8 KG', 16, 82, 104, 1275000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (542, 'AQUA.QW980', 20, 'Mesin Cuci 2 Tabung Aqua 9 KG', 16, 82, 104, 1525000, 1450000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (543, 'AQUA.AEMS2612S', 20, 'Microwave Aqua', 16, 83, 104, 813600, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (544, 'ARI.AN10', 20, 'Water Heater Ariston 10L', 16, 102, 136, 1402579, 1632000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (545, 'ARI.AN15B', 20, 'Water Heater Ariston AN 15 B', 16, 102, 136, 1688596, 1850000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (546, 'ARI.AN2-30RS', 20, 'Water Heater Ariston AN2 30RS', 16, 102, 136, 2777658, 2750000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (547, 'ARI.AN215LUX', 20, 'Water Heater Ariston 15 LUX', 16, 102, 136, 2734000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (548, 'ARI.AN215R', 20, 'Water Heater Ariston AN 15R', 16, 102, 136, 1974612, 1850000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (549, 'ARI.AN2B15RS', 20, 'Water Heater Ariston AN2B 15L', 16, 102, 136, 1700000, 2307656, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (550, 'ARI.AN30LUX', 20, 'Water Heater Ariston 30 SLIM', 16, 102, 136, 3225000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (551, 'ARI.AN30R(5TAHUN)', 20, 'Water Heater Ariston 30 Liter', 16, 102, 136, 2585147, 2350000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (552, 'ARI.AN30RS', 20, 'Water Heater Ariston AN2 30B', 16, 102, 136, 2073618, 2750000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (553, 'ARI.CLC2422', 20, 'Water Heater Instan Ariston', 16, 102, 136, 1587600, 1909828, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (554, 'ARI.PROECO100', 20, 'Water Heater Ariston Pro Eco 100L', 16, 102, 136, 4620500, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (555, 'ARI.PROECO100H', 20, 'Water Heater Ariston Pro 1 Eco 100L', 16, 102, 136, 4620263, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (556, 'ARI.PROECO50', 20, 'Water Heater Ariston Pro Eco 50 Lt', 16, 102, 136, 3379530, 3000000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (557, 'ARI.PROECO80', 20, 'Water heater Ariston PRO ECO 80', 16, 102, 136, 4340000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (558, 'ARI.PROR100', 20, 'Water Heater Ariston Pro R 100 Lt', 16, 102, 136, 3213000, 3213000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (559, 'ARI.PROR50', 20, 'Water Heater Ariston Pro R 50 Lt', 16, 102, 136, 2900000, 2800000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (560, 'ARI.PROR80', 20, 'Water Heater Ariston Pro R 80 Lt', 16, 102, 136, 2916000, 2600000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (561, 'ART.AD10', 20, 'Dispenser Artugo AD 10', 16, 63, 137, 511875, 675000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (562, 'ART.AD20', 20, 'Dispenser Artugo AD 20 UV', 16, 63, 137, 760500, 925000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (563, 'ART.AD30', 20, 'Dispenser Artugo AD 30 Cabinet', 16, 63, 137, 979875, 1191826, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (564, 'ART.AD40', 20, 'Dispenser Artugo AD 40 Kulkas', 16, 63, 137, 1140750, 1387500, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (565, 'ART.300L', 20, 'Chest Freezer Artugo 300L', 16, 69, 137, 2780505, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (566, 'ART.600L', 20, 'Chest Freezer Artugo 600L', 16, 69, 137, 5844735, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (567, 'ART.CF101', 20, 'Chest Freezer Artugo CF101', 16, 69, 137, 1885000, 1645604, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (568, 'ART.CF151', 20, 'Chest Freezer Artugo CF151', 16, 69, 137, 1651065, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (569, 'ART.CF201', 20, 'Chest Freezer Artugo CF201', 16, 69, 137, 2405000, 1645604, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (570, 'AUX.AM9A4/SR', 20, 'Ac Portable GREE 1 PK', 16, 52, 117, 4000000, 3400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (571, 'AUX.ASW24EA', 20, 'AC Split AUX 2.5 PK', 16, 52, 117, 4400000, 4400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (572, 'AUX.IN1.5PK', 20, 'Ac Split AUX 1/2 PK', 16, 52, 117, 2240000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (573, 'AUX.IN1PK', 20, 'Ac Split AUX 1 PK', 16, 52, 117, 3880000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (574, 'AUX.IN2PK', 20, 'Ac Split AUX 2 PK', 16, 52, 117, 4775000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (575, 'AUX.PORT1.5PK', 20, 'Ac Portable AUX 1.5 PK', 16, 52, 117, 4455000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (576, 'AUX.PORT1PK', 20, 'Ac Portable AUX 1 PK', 16, 52, 117, 3880000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (577, 'AUX.FL3PK', 20, 'Ac Floor Standing AUX 3 PK', 16, 68, 117, 8800000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (578, 'BEKO.RDNT200', 20, 'Kulkas 2 Pintu Beko 200L', 16, 4, 105, 2816000, 2550000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (579, 'BEKO.RDNT231', 20, 'Kulkas 2 Pintu Beko 231L', 16, 4, 105, 3293259, 2950000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (580, 'BEKO.RDNT231BK', 20, 'Kulkas 2 Pintu Beko 231L BLACK', 16, 4, 105, 2920000, 3200000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (581, 'BEKO.RDNT271', 20, 'Kulkas 2 Pintu Beko 271L', 16, 4, 105, 3011985, 3200000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (582, 'BEKO.WTT80', 20, 'Mesin Cuci 2 Tabung Beko 8KG', 16, 82, 105, 1064000, 1064000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (583, 'BEKO.WTT90', 20, 'Mesin Cuci 2 Tabung Beko 9KG', 16, 82, 105, 1278000, 1278000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (584, 'BEKO.Microwave', 20, 'Microwave Beko 25332', 16, 83, 105, 2591000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (585, 'BEKO.Oven', 20, 'Oven Beko BIM22301X', 16, 86, 105, 3781000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (586, 'CHA.09J2', 20, 'Ac Split Changhong 1 PK', 16, 52, 118, 2750000, 2450000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (587, 'CHA.CS05J2', 20, 'Ac Split Changhong 1/2 PK', 16, 52, 118, 2425000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (588, 'CHA.CS07J1', 20, 'AC Split Changhong 3/4 PK', 16, 52, 118, 2475000, 2350000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (589, 'CHA.CS24J1', 20, 'AC Split Changhong 2.5 PK', 16, 52, 118, 5400000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (590, 'CHA.CSC12NVB', 20, 'Ac Split Changhong 1.5 PK', 16, 52, 118, 3985000, 3100000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (591, 'CHA.CSC18J1', 20, 'Ac Split Changhong 2 PK', 16, 52, 118, 4850000, 4149397, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (592, 'CHA.CPC05EM', 20, 'Ac Portable Changhong 1/2PK', 16, 54, 118, 2400000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (593, 'CHA.KF120LW', 20, 'Floor Standing Changhong 5PK', 16, 68, 118, 13750000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (594, 'CHA.24\"', 20, 'LED Changhong 24\"', 16, 80, 118, 1650000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (595, 'CHA.32LED', 20, 'LED Android TV Changhong 32\"', 16, 80, 118, 2280000, 2300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (596, 'MID.STANDFAN', 20, 'Stand Fan Midea', 16, 80, 118, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (597, 'CKE.KTD12', 20, 'Exhaust Fan Plafon Sirocco CKE 8\"', 16, 75, 138, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (598, 'CKE.KTD18', 20, 'Exhaust Fan Plafon Sirocco CKE 10\"', 16, 75, 138, 421400, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (599, 'COO.40', 20, 'LED COOCAA 40\"', 16, 80, 139, 2450000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (600, 'COS.BLENDER', 20, 'Blender Cosmos', 16, 57, 140, 437500, 145530, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (601, 'COS.CHOPPER', 20, 'Chopper Cosmos', 16, 60, 140, 262500, 88299, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (602, 'COS.CWD5603', 20, 'Dispenser Cosmos CWD5603', 16, 63, 140, 482000, 585519, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (603, 'COS.PORTABLEDISPENSER', 20, 'Dispenser Portable Cosmos', 16, 63, 140, 144500, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (604, 'COS.CRJ101TS', 20, 'Rice Cooker Cosmos CRJ101', 16, 67, 140, 177755, 275000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (605, 'COS.CRJ323TS', 20, 'Rice Cooker Cosmos', 16, 67, 140, 227300, 250000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (606, 'COS.CRJ6021', 20, 'Rice Cooker Cosmos Harmond', 16, 67, 140, 308900, 242000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (607, 'COS.JUICER', 20, 'Juicer Cosmos', 16, 74, 140, 272700, 265400, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (608, 'COS.12CWF', 20, 'Wall Fan Cosmos 12\"', 16, 75, 140, 239500, 150000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (609, 'COS.16COCN', 20, 'Stand Fan Cosmos 12\" 2in1', 16, 75, 140, 186000, 400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (610, 'COS.SF16\"', 20, 'Stand Fan Cosmos 16\"', 16, 75, 140, 184900, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (611, 'COS.WF16\"', 20, 'Wall Fan Cosmos 16\"', 16, 75, 140, 228400, 227500, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (612, 'COS.9926CRG', 20, 'Oven Toaster Cosmos', 16, 86, 140, 283689, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (613, 'COS.Setrika', 20, 'Setrika Cosmos', 16, 93, 140, 107000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (614, 'CYP.CHOPPER', 20, 'Chopper Mitochiba CH200', 16, 64, 141, 166600, 234656, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (615, 'CYP.GR0063', 20, 'Grinder Cyprus GR0063', 16, 64, 141, 199500, 199500, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (616, 'CYP.SC0066', 20, 'Slow Cooker Cyprus 1.5L', 16, 64, 141, 229600, 168312, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (617, 'CYP.TL0180', 20, 'Kettle Cyprus 1.2L', 16, 64, 141, 107000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (618, 'CYP.TL0198', 20, 'Kettle Cyprus 1.8L', 16, 64, 141, 180250, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (619, 'DAI.FHC18NUV', 20, 'AC Cassette Daikin 2PK', 16, 51, 6, 9205500, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (620, 'DAI.SCNQ18MV', 20, 'AC Cassete Daikin 2PK', 16, 51, 6, 16200000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (621, 'DAI.FCNQ42MY', 20, 'Ac Cassete Daikin 5PK', 16, 52, 6, 28525000, 26200000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (622, 'DAI.FDMNQ13WL', 20, 'Ac Split Duct Daikin 1.5PK', 16, 52, 6, 9100000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (623, 'DAI.FTKC15', 20, 'Ac Split Daikin Inverter 1/2PK', 16, 52, 6, 4400000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (624, 'DAI.FTKC20NVM4', 20, 'Ac Split Daikin Inverter 3/4PK', 16, 52, 6, 4350000, 4850000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (625, 'DAI.FTKC25NVM4', 20, 'Ac Split Daikin Inverter 1 PK', 16, 52, 6, 5050000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (626, 'DAI.FTKC35NVM4', 20, 'Ac Split Daikin Inverter 1.5PK', 16, 52, 6, 6400000, 6500000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (627, 'DAI.FTKC60', 20, 'AC Split Daikin Inverter 2.5PK', 16, 52, 6, 12975000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (628, 'DAI.FTKV25NVM4', 20, 'Ac Split Daikin High Inverter 1 PK', 16, 52, 6, 5175000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (629, 'DAI.FTKV35', 20, 'Ac Split Daikin High Inverter 1.5PK', 16, 52, 6, 7453600, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (630, 'DAI.FTKV50', 20, 'Ac Split Daikin High Inverter 2PK', 16, 52, 6, 11112640, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (631, 'DAI.STC15NV', 20, 'Ac Split Daikin 1/2PK THAILAND', 16, 52, 6, 3850000, 3400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (632, 'DAI.STC20NV', 20, 'Ac Split Daikin 3/4PK STC20NV', 16, 52, 6, 3925000, 3600000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (633, 'DAI.STC25NV', 20, 'Ac Split Daikin 1 PK STC25NV', 16, 52, 6, 4250000, 3650000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (634, 'DAI.STC35NV', 20, 'Ac Split Daikin 1.5PK STC35NV', 16, 52, 6, 5425000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (635, 'DAI.STC50NV', 20, 'Ac Split Daikin 2 PK STC50NV', 16, 52, 6, 7096000, 5752500, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (636, 'DAI.STKM25', 20, 'Ac Split Daikin Premium Inverter1 PK', 16, 52, 6, 7420000, 4545454, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (637, 'DAI.STKM35', 20, 'Ac Split Daikin Premium Inverter1.5 PK', 16, 52, 6, 9325000, 6500001, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (638, 'DAI.STV15BXV14', 20, 'Ac Split Daikin 1/2PK Malaysia', 16, 52, 6, 3150000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (639, 'DAI.STV20BXV14', 20, 'Ac Split Daikin 3/4PK Malaysia STV20BXV', 16, 52, 6, 3300000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (640, 'DAI.STV25BXV14', 20, 'Ac Split Daikin 1 PK Malaysia', 16, 52, 6, 3925000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (641, 'DAI.STV35BXV14', 20, 'Ac Split Daikin 1.5PK Malaysia STV35BXV', 16, 52, 6, 4900000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (642, 'DAI.STV50BXV14', 20, 'Ac Split Daikin 2PK Malaysia STV50BXV', 16, 52, 6, 6556000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (643, 'DAI.STV60BXV', 20, 'AC Split Daikin 2,5PK', 16, 52, 6, 9250000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (644, 'SAM.AP', 20, 'Air Purifier Daikin MC30', 16, 56, 6, 1875000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (645, 'DAI.CAS4PKDEL', 20, 'Ac Cassete Daikin 4PK', 16, 59, 6, 24500000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (646, 'DAI.FCNQ30MY', 20, 'Ac Cassete Daikin 3,5PK', 16, 59, 6, 25252000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (647, 'DAI.FHC26NUV', 20, 'Ac Cassete Daikin 3PK', 16, 59, 6, 17550000, 16500000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (648, 'DAI.SCNQ13MV14', 20, 'Ac Cassete Daikin 1.5PK', 16, 59, 6, 10550186, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (649, 'DAI.SCNQ21', 20, 'AC Cassete Daikin 2,5 Pk', 16, 59, 6, 17050000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (650, 'DAI.FLOOR3PK', 20, 'AC Floor Standing Daikin 3PK', 16, 68, 6, 16400000, 15025780, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (651, 'DAI.FLOOR5PK', 20, 'AC Floor Standing Daikin 5PK', 16, 68, 6, 23425000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (652, 'DAI.INFLOOR4PK', 20, 'Ac Floor Standing Daikin 4PK', 16, 68, 6, 21129322, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (653, 'DAI.FBQ140DVI14', 20, 'Ac Split Duct Daikin 6 Pk', 16, 98, 6, 25418593, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (654, 'DAI.FDBNQ18MV', 20, 'AC Split Duct Daikin 2 pk', 16, 98, 6, 11350000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (655, 'DAI.FDBNQ21MV14', 20, 'Ac Split Duct Daikin 2.5PK', 16, 98, 6, 13254439, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (656, 'DAI.FDMNQ09MV', 20, 'Ac Split Duct Daikin 1 PK', 16, 98, 6, 7750000, 5831168, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (657, 'DAI.FDMNQ18', 20, 'Ac Split Duct Daikin 2PK', 16, 98, 6, 11400000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (658, 'DAI.FDMNQ26', 20, 'Ac Split Duct Daikin 3PK', 16, 98, 6, 21300000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (659, 'DAI.FDMNQ36MV', 20, 'Ac Split Duct Daikin 4PK', 16, 98, 6, 19250000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (660, 'DAI.FDMNQ42MY14', 20, 'Ac Split Duct Daikin 5 Pk', 16, 98, 6, 27281397, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (661, 'DEN.4KG', 20, 'Mesin Cuci Denpoo 4 KG', 16, 81, 143, 635000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (662, 'ELEC.5107SD', 20, 'Kulkas 3 Pintu Electrolux', 16, 4, 106, 11000000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (663, 'ELE.EDV600', 20, 'Dryer Electrolux 8 KG', 16, 65, 106, 7300000, 5350000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (664, 'ELEC.EJE300', 20, 'Juicer Electrolux', 16, 74, 106, 346600, 1125000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (665, 'ELE.ETB3200PE', 20, 'Kulkas 2 Pintu Electrolux', 16, 79, 106, 14875000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (666, 'ELE.EWF10751', 20, 'Mesin Cuci Front Loading Electrolux 7KG', 16, 81, 106, 5150000, 4900000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (667, 'ELE.EWF7555', 20, 'Mesin Cuci Front Loading Electrolux 8 KG', 16, 81, 106, 5050000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (668, 'ELEC.EWW14012', 20, 'Mesin Cuci Front Loading Electrolux 9024P5WB', 16, 81, 106, 9200000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (669, 'ELEC.3087', 20, 'Microwave Electrolux 3087', 16, 83, 106, 2750000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (670, 'GEA.4PINTU', 20, 'Kulkas 4 Pintu GEA', 16, 4, 107, 6999000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (671, 'GEA.EXPO50', 20, 'Showcase GEA EXPO 50', 16, 4, 107, 1889000, 1795200, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (672, 'GEA.MINIBAR', 20, 'Kulkas 1 Pintu Portable GEA RS 06 DR', 16, 4, 107, 1207680, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (673, 'GEA.XW400E', 20, 'Gea Noodle Maker', 16, 4, 107, 1870000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (674, 'GEA.POLARIS', 20, 'Dispenser GEA Galon Bawah POLARIS', 16, 63, 107, 2106225, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (675, 'GEA.STAR', 20, 'Dispenser GEA Galon Bawah STAR', 16, 63, 107, 2014650, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (676, 'GEA.Venus', 20, 'Dispenser GEA Galon Bawah HALLEY', 16, 63, 107, 1684980, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (677, 'GEA.COFFEETEA', 20, 'Coffee Tea Warmer', 16, 64, 107, 441320, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (678, 'GEA.DZ400', 20, 'Air PurifierPolytron PAP 125', 16, 64, 107, 1122000, 1300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (679, 'GEA.Decanter', 20, 'Decanter GEA', 16, 64, 107, 149000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (680, 'GEA.WB10', 20, 'Water Boiler GEA WB10', 16, 64, 107, 900000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (681, 'GEA.WineCooler', 20, 'Wine Cooler GEA SC100Y', 16, 64, 107, 3179000, 3400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (682, 'POL.PAP160', 20, 'Air PurifierPolytron PAP 160', 16, 64, 107, 3470000, 1300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (683, 'GEA.AB-1200TX', 20, 'Chest Freezer GEA 1200L', 16, 69, 107, 9100000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (684, 'GEA.AB106', 20, 'Chest Freezer GEA 100L', 16, 69, 107, 2100000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (685, 'GEA.AB226', 20, 'Chest Freezer GEA 200L', 16, 69, 107, 2690000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (686, 'GEA.AB336', 20, 'Chest Freezer GEA 300L', 16, 69, 107, 3360000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (687, 'GEA.AB506T', 20, 'Chest Freezer GEA 500L', 16, 69, 107, 5363160, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (688, 'GEA.AB750', 20, 'Chest Freezer GEA 750L', 16, 69, 107, 8114100, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (689, 'GEA.AB900', 20, 'Chest Freezer GEA 900L', 16, 69, 107, 6682500, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (690, 'GEA.ABT375LT', 20, 'Chest Freezer GEA 400L AB396', 16, 69, 107, 4749800, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (691, 'GEA.CF750', 20, 'Chest Freezer GEA 600L', 16, 69, 107, 6793200, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (692, 'GEA.SD132P', 20, 'Chest Freezer Kaca GEA SD360', 16, 69, 107, 6302580, 2943332, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (693, 'GEA.GF73', 20, 'Under Counter Chiller GEA MRW6T2HH', 16, 71, 107, 12716000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (694, 'GEA.EXPO30FC', 20, 'Showcase GEA EXPO 30FC', 16, 94, 107, 3295000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (695, 'GEA.EXPO37FC', 20, 'Showcase GEA EXPO 37FC', 16, 94, 107, 3960000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (696, 'GEA.EXPO416', 20, 'Showcase GEA EXPO 382', 16, 94, 107, 5874000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (697, 'GEA.EXPO90', 20, 'Showcase GEA EXPO 90', 16, 94, 107, 2318800, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (698, 'Water Boiler Gea WB 30', 20, 'Water Boiler Gea WB 30', 16, 94, 107, 1028500, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (699, 'GEA.WB20', 20, 'Water Boiler GEA WB 20', 16, 102, 107, 748000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (700, 'GRE.24MOO', 20, 'Ac Split Gree 2.5 PK', 16, 52, 116, 6400000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (701, 'GRE.GWC12F5', 20, 'AC Split Gree Inverter 1,5 Pk', 16, 52, 116, 5300000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (702, 'GRE.GWC12MA', 20, 'AC Split Gree 1,5 Pk', 16, 52, 116, 4599000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (703, 'GRE.GWC18MOO', 20, 'Ac Split Gree 2 Pk', 16, 52, 116, 6189000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (704, 'GRE.GWC5MOO', 20, 'AC Split Gree 1/2  Pk', 16, 52, 116, 2899000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (705, 'GREE.GWC07MOO', 20, 'Ac Split Gree 3/4PK', 16, 52, 116, 3389000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (706, 'GREE.GWC09', 20, 'Ac Split Gree 1 PK', 16, 52, 116, 3509000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (707, 'GREE.FM1.25-12K', 20, 'Air Curtain Gree 120cm', 16, 54, 116, 2959000, 1900000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (708, 'GREE.GU50T', 20, 'Ac Cassete GREE 2PK', 16, 59, 116, 9926000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (709, 'GREE.GU71T', 20, 'Ac Cassete GREE 3PK', 16, 59, 116, 0, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (710, 'GREE.FLOOR3PK', 20, 'Floor Standing Gree 3PK', 16, 68, 116, 11562000, 10199900, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (711, 'GREE.Floor5PK', 20, 'Ac Floor Standing GREE 5 PK', 16, 68, 116, 19180161, 17500000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (712, 'GREE.FM1.25-9K', 20, 'Air Curtain Gree 90cm', 16, 54, 145, 2599000, 1900000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (713, 'GRN.GV09LW', 20, 'Air Curtain Green Air GV 09 LW', 16, 54, 145, 1688625, 1900000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (714, 'GRN.GV12LW/SS', 20, 'Air Curtain Green Air GV 12 ES', 16, 54, 145, 2137500, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (715, 'GRN.GV150', 20, 'Air Curtain Green Air 150CM', 16, 54, 145, 1945125, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (716, 'HAI.HSU05GTO', 20, 'Ac Split Haier 1/2 PK', 16, 52, 119, 2300000, 2100000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (717, 'HAI.HSU07GTO', 20, 'Ac Split Haier 3/4PK', 16, 52, 119, 2350000, 2200000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (718, 'HAI.HSU09GTO', 20, 'Ac Split Haier 1 PK', 16, 52, 119, 2500000, 2600000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (719, 'HAI.HSU12LEK', 20, 'AC Split Haier 1,5PK', 16, 52, 119, 3400000, 3828148, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (720, 'HAI.HSU18GTO', 20, 'AC Split Haier 2PK', 16, 52, 119, 4500000, 4217142, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (721, 'HAI.HSU24GTR', 20, 'Ac Split Haier 2.5PK', 16, 52, 119, 5950000, 6496250, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (722, 'HAI.CAS3PK', 20, 'Ac Cassete Haier 5PK', 16, 59, 119, 15547760, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (723, 'HAI.HPU18C03', 20, 'Floor Standing Haier 2PK', 16, 68, 119, 5391760, 6000000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (724, 'HAI.INFL3PK', 20, 'Ac Floor Standing Mitsubishi 3PK', 16, 68, 119, 16750000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (725, 'HIT.RB41', 20, 'Kulkas 2 Pintu Hitach RB 41', 16, 4, 108, 28000000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (726, 'HIT.RS80PGD2-GBK', 20, 'Kulkas Side By Side Hitachi RS80GPGD', 16, 4, 108, 14500000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (727, 'HIT.RVG40PGD3-GBK', 20, 'Kulkas 2 Pintu Hitachi RV 40', 16, 4, 108, 6500000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (728, 'HIT.RVG45', 20, 'Kulkas 2 Pintu Hitachi RVG 45', 16, 4, 108, 6800000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (729, 'HIT.RZ40EGD9', 20, 'Kulkas 2 Pintu Hitachi RV 47', 16, 4, 108, 5950000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (730, 'HIT.RZ57EGD9', 20, 'Kulkas 2 Pintu Hitachi RVG 47', 16, 4, 108, 7150000, 7500000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (731, 'HIT.RZG40EGD1', 20, 'Kulkas 2 Pintu Hitachi RVG 70', 16, 4, 108, 11000000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (732, 'HIT.RZG45EGD1', 20, 'Kulkas 2 Pintu Hitachi RV 45', 16, 4, 108, 16600000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (733, 'HIT.RC', 20, 'Rice Cooker Hitachi', 16, 67, 108, 1500000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (734, 'HIT.WGP250', 20, 'Pompa Hitachi 250 Watt WTP250', 16, 90, 108, 2800000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (735, 'HIT.WTP150', 20, 'Pompa Boaster Shimizu 133 BIT', 16, 90, 108, 712300, 2000000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (736, 'KDK.15TGQ', 20, 'EXHAUST FAN PLAFON KDK 6\"', 16, 75, 147, 214032, 223479, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (737, 'KDK.20TGQ', 20, 'Exhaust Fan Plafon KDK 8\"', 16, 75, 147, 285670, 230000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (738, 'KDK.24CDQN', 20, 'Exhaust Fan KDK 24 CDQN', 16, 75, 147, 600100, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (739, 'KDK.25RQN5', 20, 'Exhaust Fan Dinding KDK 10\"', 16, 75, 147, 401996, 301640, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (740, 'KDK.25TGQ', 20, 'Exhaust Fan Plafon KDK 10\"', 16, 75, 147, 287316, 350000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (741, 'KDK.30RQN', 20, 'Exhaust Fan Dinding KDK 12\"', 16, 75, 147, 435400, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (742, 'KDK.45GTC', 20, 'Exhaust Fan KDK 40AAS', 16, 75, 147, 597000, 6600000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (743, 'KDK.WA30V', 20, 'Desk Fan KDK WA30V', 16, 75, 147, 252300, 252300, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (744, 'KDK.WB40L', 20, 'Wall Fan KDK WB40L', 16, 75, 147, 615800, 675000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (745, 'KDK.WG30X', 20, 'Kipas Angin Box Fan KDK', 16, 75, 147, 255100, 315000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (746, 'KDK.WM40X', 20, 'Stand Fan KDK WM40X', 16, 75, 147, 468100, 370900, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (747, 'KDK.WN40B', 20, 'Wall Fan KDK WN40', 16, 75, 147, 456100, 400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (748, 'KDK.WR40U', 20, 'Auto Fan KDK WR40U', 16, 75, 147, 502800, 475000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (749, 'KDK.WZ56P', 20, 'Ceiling Fan KDK WZ56P', 16, 75, 147, 665000, 675000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (750, 'KEN.KZ05', 20, 'Bracket LED 40-55\"', 16, 58, 148, 111550, 485000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (751, 'KEN.KZ52', 20, 'Standing Bracket Kenzo', 16, 58, 148, 1150000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (752, 'KEN.KZBESAR', 20, 'Bracket LED 65-70\"', 16, 58, 148, 158110, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (753, 'KIR.WF16\"', 20, 'Exhaust Fan Maspion 16\"', 16, 75, 149, 458600, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (754, 'KIR.KBO190RA', 20, 'Oven Toaster Kirin 190RA', 16, 86, 149, 624600, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (755, 'KIR.KBO250', 20, 'Oven Toaster Kirin KBO250', 16, 86, 149, 662000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (756, 'KIR.KBO600RA/350', 20, 'Oven Kirin KBO 350 RA/KBO600', 16, 86, 149, 1350000, 1000000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (757, 'KIR.KBO90', 20, 'Oven Toaster Kirin KBO100', 16, 86, 149, 342000, 465000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (758, 'GN-M200SQBB', 20, 'Kulkas 2 Pintu LG 215SQMT', 16, 4, 12, 3290000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (759, 'LG .GNV185SQBB', 20, 'Kulkas 2 Pintu LG 195', 16, 4, 12, 3450000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (760, 'LG. GN-INV201SL', 20, 'Kulkas 1 Pintu LG GN-201SL', 16, 4, 12, 2650000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (761, 'LG.422SGCN', 20, 'Kulkas 2 Pintu LG 422SQCL', 16, 4, 12, 6450000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (762, 'LG.602SGCN', 20, 'Kulkas 2 Pintu LG 602HXHL', 16, 4, 12, 8140000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (763, 'LG.GCQ247CSBV', 20, 'Kulkas Side By Side Sharp SJIS-60MSL', 16, 4, 12, 8425000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (764, 'LG.GNB372SLCL', 20, 'Kulkas 2 Pintu  LG 392', 16, 4, 12, 6650000, 6900000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (765, 'LG.IN 12NLA', 20, 'AC Split LG 1.5 PK', 16, 52, 12, 4070000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (766, 'LG.IN09NLA', 20, 'Ac Split LG 1 PK', 16, 52, 12, 2785000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (767, 'LG.S05NLA', 20, 'AC Split LG 1/2 PK', 16, 52, 12, 2400000, 2712765, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (768, 'LG.S07NLA', 20, 'AC Split LG 3/4 PK', 16, 52, 12, 2630000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (769, 'LG.S18LFG', 20, 'AC Split LG 2 PK', 16, 52, 12, 5700000, 5485714, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (770, 'LG.DVD', 20, 'DVD LG', 16, 66, 12, 370000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (771, 'LG.304RL', 20, 'Freezer LG 6 RAK', 16, 69, 12, 2820000, 1775000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (772, 'LG. LED22\"', 20, 'LED LG 22\'\'', 16, 80, 12, 1375000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (773, 'LG.19LS3300', 20, 'LED LG 19\"', 16, 80, 12, 1300000, 1400000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (774, 'LG.20\" 20MT45A', 20, 'LED LG 20\"', 16, 80, 12, 1200000, 1300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (775, 'LG.24\"', 20, 'LED LG 24\"', 16, 80, 12, 1550000, 1600000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (776, 'LG.32LN5100', 20, 'LED LG 32\"', 16, 80, 12, 1950000, 2700000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (777, 'LG.43\"', 20, 'LED Toshiba 43\"', 16, 80, 12, 4125000, 4300000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (778, 'LG.47LN5400', 20, 'LED LG 55\"', 16, 80, 12, 7300000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (779, 'LG.60-75\"', 20, 'LED LG 60\"', 16, 80, 12, 10450000, 19000000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (780, 'LG.75', 20, 'LED LG 75\"', 16, 80, 12, 20400000, 23000000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (781, 'LG.LED21\" 21MT47A', 20, 'LED LG 28\"', 16, 80, 12, 3054000, 1800000, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (782, 'LG.LED43', 20, 'LED LG 43\"', 16, 80, 12, 3550000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (783, 'LG.LED65', 20, 'LED LG 65\"', 16, 80, 12, 10750000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (784, 'LG.LED70\"', 20, 'LED LG 70\"', 16, 80, 12, 15300000, 0, 0, NULL, 1, '2023-03-24 14:09:59', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (785, 'LG.12HD', 20, 'Mesin Cuci 2 Tabung LG 14 KG', 16, 81, 12, 2800000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (786, 'LG.12KG', 20, 'Mesin Cuci 2 Tabung LG 12 KG', 16, 81, 12, 2975000, 4100000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (787, 'LG.13KG', 20, 'Mesin Cuci 1 Tabung LG 13 KG', 16, 81, 12, 4225000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (788, 'LG.1409H3E', 20, 'Mesin Cuci Front Loading LG', 16, 81, 12, 5450000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (789, 'LG.1T2311VS2M', 20, 'Mesin Cuci 1 Tabung LG 11 KG', 16, 81, 12, 4000000, 4600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (790, 'LG.2318', 20, 'Mesin Cuci 1 Tabung LG 18KG', 16, 81, 12, 5900000, 5900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (791, 'LG.WDP1208', 20, 'Mesin Cuci Front Loading LG 1450', 16, 81, 12, 4800000, 8800000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (792, 'LG.WFL2108', 20, 'Mesin Cuci 1 Tabung LG 8 KG', 16, 81, 12, 3150000, 2900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (793, 'LG.WFL705TC', 20, 'Mesin Cuci 1 Tabung LG 7 KG', 16, 81, 12, 2400000, 2600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (794, 'LG.P800N', 20, 'Mesin Cuci 2 tabung LG 9KG', 16, 82, 12, 2225000, 2000000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (795, 'LG.WP1460', 20, 'Mesin Cuci 2 Tabung LG 16 kg', 16, 82, 12, 3075000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (796, 'LG.WP850R', 20, 'Mesin Cuci 2 Tabung LG', 16, 82, 12, 2150000, 1725000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (797, 'LG .MS2042MD', 20, 'Microwave LG', 16, 83, 12, 1425000, 900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (798, 'LG.MS2342D', 20, 'Microwave LG MS2342D 450W', 16, 83, 12, 1200000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (799, 'UCH.EX18PAS', 20, 'Dispenser Electrolux Galon Bawah', 16, 63, 150, 3250000, 111983, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (800, 'MAS.RC', 20, 'Rice Cooker Maspion', 16, 67, 150, 963300, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (801, 'MAS.167', 20, 'Stand Fan Maspion 18\"', 16, 75, 150, 435000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (802, 'MAS.MV250NEX', 20, 'Exhaust Fan Maspion MV 250', 16, 75, 150, 332681, 332681, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (803, 'MAS.MV300NEX', 20, 'Exhaust Fan Maspion MV 300', 16, 75, 150, 356877, 356877, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (804, 'MAS.WF16', 20, 'Wall Fan Maspion 16\"', 16, 75, 150, 261700, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (805, 'MAS.WF18', 20, 'Wall Fan Maspion 20\"', 16, 75, 150, 550706, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (806, 'MAS.S300', 20, 'Kompor Maspion', 16, 76, 150, 123500, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (807, 'MAS.HA110', 20, 'Setrika Maspion HA110', 16, 93, 150, 108000, 71173, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (808, 'MID.MSBC05CRI', 20, 'Indoor AC Split Midea 1/2pk', 16, 52, 120, 2576000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (809, 'MID.MSBC07CRNI', 20, 'Indoor Ac Split Midea 3/4PK', 16, 52, 120, 2750000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (810, 'MID.MSBC12CRNI', 20, 'Indoor Ac Split Midea 1.5PK', 16, 52, 120, 3700000, 3732550, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (811, 'MID.MSBC18CRNI', 20, 'Indoor Ac Split Midea 2PK', 16, 52, 120, 5460000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (812, 'MID.MSR09CRI', 20, 'Indoor Ac Split Midea 1 PK', 16, 52, 120, 3180000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (813, 'MID.POR1.5PK', 20, 'Ac Portable Midea 1.5 PK', 16, 52, 120, 3975000, 4300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (814, 'MID.MPF09', 20, 'Ac Portable Midea 1PK', 16, 64, 120, 3770000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (815, 'MID.MSBC05CRO', 20, 'Outdoor Ac Split Midea 1/2 PK', 16, 85, 120, 0, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (816, 'MID.MSBC07CRO', 20, 'Outdoor Ac Split Midea 3/4PK', 16, 85, 120, 0, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (817, 'MID.MSBC09CRO', 20, 'Outdoor AC Split Midea 1 PK', 16, 85, 120, 0, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (818, 'MID.MSBC12CRNO', 20, 'Outdoor Ac Split Midea 1.5PK', 16, 85, 120, 0, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (819, 'MID.MSBC18CRO', 20, 'Outdoor Ac Split Midea 2PK', 16, 85, 120, 0, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (820, 'MID.', 20, 'Water Heater Instan Midea', 16, 102, 120, 920000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (821, 'MIT.MRF47EH-SLW/BRW', 20, 'Kulkas 2 Pintu Mitsubishi MRF47', 16, 4, 109, 6800000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (822, 'MIT.MRF55EH-SLW/BRW', 20, 'Kulkas 2 Pintu Mitsubishi MRF55', 16, 4, 109, 5005000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (823, 'MIT.MRFV32J-OB-N', 20, 'Kulkas 2 Pintu Mitsubishi MRFV32', 16, 4, 109, 3500000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (824, 'MHI.SRK12', 20, 'Ac Split Mitsubishi Thailand 1.5PK', 16, 52, 109, 4900000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (825, 'MHI.SRK5', 20, 'Ac Split Mitsubishi 0.5PK', 16, 52, 109, 3150000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (826, 'MHI.SRK9', 20, 'Ac Split Mitsubishi 1 PK', 16, 52, 109, 3900000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (827, 'MIT.2PK', 20, 'Ac Split Mitsubishi 2 PK', 16, 52, 109, 6850000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (828, 'MIT.MSYJP13PF', 20, 'Ac Split Mitsubishi Elektrik 1.5PK INVERTER', 16, 52, 109, 6100000, 6100000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (829, 'Mitshubisi', 20, 'Mitshubisi 2 PK', 16, 52, 109, 0, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (830, 'MIT.D12GUCY', 20, 'Desk Fan Mitsubishi 12\"', 16, 75, 109, 345000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (831, 'MIT.EX20RHKC5T', 20, 'Exhaust Fan Dinding Mitsubishi 8\"', 16, 75, 109, 316000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (832, 'MIT.EX20SC5T', 20, 'Exhaust Fan Plafon Mitsubishi 8\"', 16, 75, 109, 238300, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (833, 'MIT.EX25RHKC5T', 20, 'Exhaust Fan Dinding Mitsubishi 10\"', 16, 75, 109, 343000, 400000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (834, 'MIT.EX25SC5T', 20, 'Exhaust Fan Plafon Mitsubishi 10\"', 16, 75, 109, 263100, 278390, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (835, 'MIT.EX30RHKC5T', 20, 'Exhaust Fan Dinding Mitsubishi 12\"', 16, 75, 109, 380000, 450000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (836, 'MIT.R16GSRD', 20, 'Stand Fan Mitsubishi 2in1 16\" R16GS RD/GY', 16, 75, 109, 489500, 374300, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (837, 'MIT.R16GUCY', 20, 'Stand Fan Mitsubishi 16\"', 16, 75, 109, 660000, 558661, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (838, 'MIT.W16GSWH', 20, 'Wall Fan Mitsubishi 16\"', 16, 75, 109, 362800, 450000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (839, 'MIT.MRF42H-HS/SB', 20, 'Kulkas 2 Pintu Mitsubishi MRFV32', 16, 78, 109, 4250000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (840, 'MIT.MRF51H-HS/SB', 20, 'Kulkas 2 Pintu Mitsubishi MRF51', 16, 78, 109, 6837336, 6500000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (841, 'MIT.MRF62E', 20, 'Kulkas 2 Pintu Mitsubishi MRF62', 16, 78, 109, 8143344, 8814960, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (842, 'MIT.MRV50H-HS/SB', 20, 'Kulkas 3 Pintu Mitsubishi MRV50', 16, 79, 109, 8035470, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (843, 'SAN.PDH405', 20, 'Pompa Air Sanyo PDH 405', 16, 90, 109, 8472500, 7700000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (844, 'MIY.102GS', 20, 'Blender Miyako 102PL', 16, 57, 151, 218202, 250000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (845, 'MIY.BL101PL', 20, 'Blender Miyako 101PL', 16, 57, 151, 193800, 250000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (846, 'MIY.BL152GS', 20, 'Blender Miyako Bl 152 Gelas', 16, 57, 151, 290900, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (847, 'MIY.BL152PF/AP', 20, 'Blender Miyako BL 152 PF Plastik', 16, 57, 151, 237100, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (848, 'MIY.WD189', 20, 'Dispenser Portable Miyako WD 189 H', 16, 63, 151, 142500, 175000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (849, 'MIY.WD29EXC', 20, 'Dispenser Miyako Portable', 16, 63, 151, 505100, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (850, 'MIY.WDP300', 20, 'Dispenser Galon bawah Miyako WDP 300', 16, 63, 151, 905400, 758500, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (851, 'MIY.MCM528', 20, 'Rice Cooker Miyako 1.8L', 16, 67, 151, 211700, 275000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (852, 'MIY.RC0.6L', 20, 'Rice Cooker Miyako 0.6Liter', 16, 67, 151, 182200, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (853, 'MIY.RC5L', 20, 'Rice Cooker Miyako 171 6L', 16, 67, 151, 1169555, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (854, 'MIY.JUICER', 20, 'Juicer Miyako', 16, 74, 151, 285500, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (855, 'MIY.KAS1618B', 20, 'Stand Fan Miyako 16\"', 16, 75, 151, 245400, 250000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (856, 'MIY.KAS1689', 20, 'Wall Fan Miyako 16\"', 16, 75, 151, 227200, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (857, 'MIY.KG-11C', 20, 'Kompor Gas Miyako 1 Tungku', 16, 76, 151, 274100, 350000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (858, 'MIY.HM620', 20, 'Hand Mixer Miyako', 16, 84, 151, 144700, 144700, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (859, 'MIY.SM625', 20, 'Mixer Com Miyako SM-625', 16, 84, 151, 238000, 194900, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (860, 'MIY.EI1008M', 20, 'Setrika Miyako EI 1008', 16, 93, 151, 84500, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (861, 'MIY.MSC1850', 20, 'Slow Cooker Miyako MSC1850', 16, 97, 151, 220000, 450000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (862, 'MOD.RF2255', 20, 'Kulkas Modena RF 2255 S', 16, 4, 110, 9612000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (863, 'MOD.RF2551', 20, 'Kulkas Modena RF 2551 S', 16, 4, 110, 10662822, 11000000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (864, 'MOD.RF4540', 20, 'Kulkas Modena RF 4540 S', 16, 4, 110, 11520000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (865, 'MOD.SC1202', 20, 'Showcase Modena SC 1202', 16, 4, 110, 3800000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (866, 'MOD.BH9502', 20, 'Cooker Hood Modena 9502 V', 16, 61, 110, 1418140, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (867, 'MOD.BX6000', 20, 'Built In Cooker Hood BX6000', 16, 61, 110, 1496000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (868, 'MOD.CX6150', 20, 'Cooker Hood Modena CX6150', 16, 61, 110, 2775000, 1850000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (869, 'MOD.CX6300', 20, 'Cooker Hood Modena CX6300', 16, 61, 110, 2755500, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (870, 'MOD.CX9106', 20, 'Cooker Hood Modena CX9107', 16, 61, 110, 3495880, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (871, 'MOD.CX9150', 20, 'Cooker Hood Modena CX9150', 16, 61, 110, 2704360, 4700000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (872, 'MOD.CX9330', 20, 'Cooker Hood Modena CX9330', 16, 61, 110, 3096000, 3050000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (873, 'MOD.IX9150', 20, 'Cooker Hood Modena Island IX 9150', 16, 61, 110, 4422000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (874, 'MOD.IX9300', 20, 'Cooker Hood Modena IX9300', 16, 61, 110, 4290000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (875, 'MOD.PX6001', 20, 'Cooker Hood Modena 60cm', 16, 61, 110, 797317, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (876, 'MOD.PX7001', 20, 'Cooker Hood Modena PX7001', 16, 61, 110, 1085076, 2321215, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (877, 'MOD.PX9002', 20, 'Cooker Hood Modena PX 9002', 16, 61, 110, 1382940, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (878, 'MOD.RX7632', 20, 'Cooker Hood Modena RX7632', 16, 61, 110, 1944000, 1944000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (879, 'MOD.SX6001S', 20, 'Cooker Hood Modena SX6001S', 16, 61, 110, 916300, 800000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (880, 'MOD.SX6001SS', 20, 'Cooker Hood Modena SX6001SS', 16, 61, 110, 693000, 900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (881, 'MOD.SX6501V', 20, 'Cooker Hood Modena SX6501V', 16, 61, 110, 906950, 1000000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (882, 'MOD.SX9001SL', 20, 'Cooker Hood Modena SX9001SL', 16, 61, 110, 1154300, 1225000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (883, 'MOD.SX9002S', 20, 'Cooker Hood Modena SX9002S', 16, 61, 110, 1188000, 1200000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (884, 'MOD.SX9502S', 20, 'Cooker Hood Modena SX 9502 S', 16, 61, 110, 2106000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (885, 'MOD.DD0310', 20, 'Dispenser Modena Galon Atas', 16, 63, 110, 1203867, 1466286, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (886, 'MOD.DD23', 20, 'Dispenser Modena DD 0370', 16, 63, 110, 1789000, 3153153, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (887, 'MOD.DD65L', 20, 'Dispenser Modena Galon Bawah DD 65L', 16, 63, 110, 2325000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (888, 'MOD.DD66L', 20, 'Dispenser Modena Galon Bawah DD 66 L', 16, 63, 110, 2061250, 2500000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (889, 'MOD.DD67S', 20, 'Dispenser Modena Galon Bawah DD 67 S', 16, 63, 110, 2448000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (890, 'MOD.DD75', 20, 'Dispenser Modena Galon Bawah DD 7302 L', 16, 63, 110, 2250000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (891, 'MOD.KS', 20, 'Kitchen Sink Modena', 16, 64, 110, 733040, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (892, 'MOD.WP600', 20, 'Dish Dryer Modena WP600', 16, 64, 110, 7900000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (893, 'MOD.MD0207', 20, 'Chest Freezer Modena 200liter', 16, 69, 110, 2699000, 2386236, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (894, 'MOD.MD0303', 20, 'Chest Freezer Modena MD 0316', 16, 69, 110, 4200000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (895, 'MOD.MD10', 20, 'Chest Freezer Modena 100L', 16, 69, 110, 2261000, 2018448, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (896, 'MOD.MD37W', 20, 'Chest Freezer Modena MD 37W', 16, 69, 110, 5270000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (897, 'MOD.BH0325', 20, 'Built in Modena BH0325', 16, 76, 110, 1560240, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (898, 'MOD.BH0725', 20, 'Built In Modena BH0725', 16, 76, 110, 1386000, 1450000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (899, 'MOD.BH1325', 20, 'Built In Modena BH 1325', 16, 76, 110, 2030000, 883928, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (900, 'MOD.BH1326', 20, 'Built In Modena BH 1326', 16, 76, 110, 1485000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (901, 'MOD.BH1645', 20, 'Built In Modena BH1645', 16, 76, 110, 3232040, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (902, 'MOD.BH1725', 20, 'Built in Hob Modena 70Cm', 16, 76, 110, 2407734, 1900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (903, 'MOD.BH1725LA', 20, 'Built In Modena BH 1725 LA', 16, 76, 110, 2749000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (904, 'MOD.BH1735', 20, 'Built In Modena BH 1735', 16, 76, 110, 2046000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (905, 'MOD.BH1948', 20, 'Built In Modena BH 1945', 16, 76, 110, 3816000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (906, 'MOD.BH2644', 20, 'Built in Hob BH2644', 16, 76, 110, 2244000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (907, 'MOD.FC8643', 20, 'Freestanding Cooker Modena', 16, 76, 110, 13276933, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (908, 'MOD.PC2721', 20, 'Kompor Gas Portable Modena PC2721', 16, 76, 110, 746000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (909, 'MOD.PI1310', 20, 'Built In Modena BH1315', 16, 76, 110, 1400000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (910, 'MOD.BO2733', 20, 'Built In Oven Modena BO 2733', 16, 77, 110, 6191316, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (911, 'MOD.WD1157', 20, 'Front Loading Modena WD1157', 16, 81, 110, 9000000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (912, 'MOD.WF1156', 20, 'Front Loading Modena WF1156', 16, 81, 110, 5047802, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (913, 'MOD.WF730', 20, 'Front Loading Modena WF730', 16, 81, 110, 5112000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (914, 'MOD.WF830', 20, 'Front Loading Modena WF830', 16, 81, 110, 5940000, 5940000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (915, 'MOD.MG2502', 20, 'Microwave Modena 2305', 16, 83, 110, 1199000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (916, 'MOD.BO2433', 20, 'Built In Oven Modena BO2663', 16, 86, 110, 7884000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (917, 'MOD.SC1130', 20, 'Showcase Modena SC1130', 16, 94, 110, 2296800, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (918, 'MOD.SC2920', 20, 'Showcase Modena SC2920', 16, 94, 110, 10230000, 9900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (919, 'MOD.VM1410', 20, 'Showcase Modena VM1410', 16, 94, 110, 5181000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (920, 'MOD.KS5140', 20, 'Kitchen Sink KS 5140', 16, 96, 110, 2016000, 2016000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (921, 'MOD.VC1350', 20, 'Vacuum Cleaner Modena VC1350', 16, 101, 110, 829181, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (922, 'MOD.VC2050', 20, 'Vacuum Cleaner Modena VC3143', 16, 101, 110, 1169470, 1350000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (923, 'MOD.VC3213', 20, 'Vacuum Cleaner Modena VC 3213', 16, 101, 110, 786250, 807500, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (924, 'MOD.WH15B', 20, 'Water Heater Modena 15L', 16, 102, 110, 1600000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (925, 'CUCI.AC', 20, 'Cuci AC', 16, 62, 152, 0, 75000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (926, 'DLL.BONGKAR', 20, 'Bongkar Barang', 16, 64, 152, 0, 50000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (927, 'LMBR.JASA', 20, 'Jasa Lembur', 16, 64, 152, 0, 500000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (928, 'PSG.BKRIN', 21, 'Bongkar Pasang Indoor AC', 16, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (929, 'PSG.BKROUT', 21, 'Bongkar Pasang Outdoor AC', 16, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (930, 'OXO.OX151', 20, 'Chopper Oxone OX 151', 16, 60, 153, 275300, 1514390, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (931, 'OXO.555', 20, 'Kompor Listrik Oxone OX-645', 16, 64, 153, 675000, 1600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (932, 'OXO.MIXER', 20, 'Mixer Com Oxone X855', 16, 64, 153, 1844100, 2000000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (933, 'OXO.PRESTO', 20, 'Panci Presto Oxone 4L', 16, 64, 153, 250470, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (934, 'OXO.OX8830', 20, 'Oven Toaster Oxone OX 8830', 16, 86, 153, 1322100, 1038495, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (935, 'PAL.PH5RX', 20, 'Water Heater Gas Paloma', 16, 102, 154, 2672000, 2400000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (936, 'PAN.NR211Q', 20, 'Kulkas 2 Pintu Panasonic NRB 211Q Silver', 16, 4, 8, 3150000, 3000000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (937, 'PAN.NRA199', 20, 'Kulkas 1 Pintu Panasonic', 16, 4, 8, 1643360, 1700000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (938, 'PAN.NRAF179', 20, 'Kulkas 1 Pintu Panasonic NR AF 179', 16, 4, 8, 1850000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (939, 'PAN.NRB201Q', 20, 'Kulkas 2 Pintu Panasonic NRB 201Q', 16, 4, 8, 3455000, 2350000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (940, 'SHA.PORTBALEKULKAS', 20, 'Kulkas Portable Sharp', 16, 4, 8, 1375000, 1722222, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (941, 'PAN.CSLN05UKJ', 20, 'AC Split Panasonic 1/2 PK LN05UKJ', 16, 52, 8, 3200000, 3612903, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (942, 'PAN.CSLN07UKJ', 20, 'AC Split Panasonic 3/4 Pk LN07WKJ', 16, 52, 8, 3600000, 3793059, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (943, 'PAN.CSLN09UKJ', 20, 'AC Split Panasonic 1 PK LN09WKJ', 16, 52, 8, 3650000, 3700000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (944, 'PAN.CSLN12WKJ', 20, 'Ac Split Panasonic 1.5PK LN12WKJ', 16, 52, 8, 4668000, 4382257, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (945, 'PAN.CSS10PKP', 20, 'AC Split Panasonic Inveter 1 PK', 16, 52, 8, 3675000, 3750000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (946, 'PAN.CSS13PKP', 20, 'AC Split Panasonic Inverter 2,5Pk', 16, 52, 8, 5975000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (947, 'PAN.CSS18PKP', 20, 'AC Split Panasonic Inveter 2PK S18', 16, 52, 8, 8500000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (948, 'PAN.CSYN05TKJ', 20, 'AC Split Panasonic 1/2PK YN05', 16, 52, 8, 3000000, 3650000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (949, 'PAN.CSYN07TKJ', 20, 'AC Split Panasonic 3/4PK YN07', 16, 52, 8, 3175000, 3000000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (950, 'PAN.CSYN09TKJ', 20, 'AC Split Panasonic 1 PK YN09', 16, 52, 8, 3400000, 3525000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (951, 'PAN.CSYN18PKP', 20, 'AC Split Panasonic 2PK YN18', 16, 52, 8, 5825000, 6700000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (952, 'PAN.CUYN12PKP', 20, 'AC Split Panasonic 1,5 PK YN12', 16, 52, 8, 4350000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (953, 'PAN.KN05', 20, 'Ac Split Panasonic Low Watt 1/2 PK', 16, 52, 8, 3650000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (954, 'PAN.KN07', 20, 'Ac Split Panasonic Low Watt 3/4 PK', 16, 52, 8, 3200000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (955, 'PAN.KN09', 20, 'Ac Split Panasonic Low Watt 1 PK', 16, 52, 8, 3225000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (956, 'PAN.PN12', 20, 'AC Split Panasonic 1.5 PK PN12', 16, 52, 8, 4675000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (957, 'PAN.PU07', 20, 'AC Split Panasonic Inverter 3/4PK PU 7', 16, 52, 8, 5000000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (958, 'PAN.PU09', 20, 'Ac Split Inverter Panasonic1 PK  PU9', 16, 52, 8, 4800000, 5150000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (959, 'PAN.PU24XKJ', 20, 'AC Split Panasonic Inverter 2,5Pk', 16, 52, 8, 12975000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (960, 'PAN.XN09', 20, 'Ac Split Panasonic Low Watt + Ion 1PK XN09', 16, 52, 8, 4370000, 4370000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (961, 'PAN.FY10ESN', 20, 'Air Curtain Panasonic FY3509UI', 16, 54, 8, 7300000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (962, 'PAN.FY3012', 20, 'Air Curtain Panasonic FY 3012', 16, 54, 8, 8000000, 11600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (963, 'PAN.MX2062G', 20, 'Blender Panasonic MXXS1BSR', 16, 57, 8, 621790, 400000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (964, 'PAN.MXGX1462', 20, 'Blender Panasonic Gelas MX1462', 16, 57, 8, 375000, 400000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (965, 'PAN.MXSS40', 20, 'Blender Panasonic MXE 310 WSR', 16, 57, 8, 434200, 450000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (966, 'PAN.CAS2.5PK', 20, 'Ac Cassete Panasonic 2.5PK', 16, 59, 8, 14175000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (967, 'PAN.CSD28DBH5', 20, 'Ac Cassete Panasonic 3PK', 16, 59, 8, 17850000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (968, 'PAN.CSD34DB4H5', 20, 'Ac Cassete Panasonic 4PK', 16, 59, 8, 21100000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (969, 'PAN.CUCS-45FF', 20, 'AC Cassete Panasonic 5 Pk', 16, 59, 8, 22000000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (970, 'PAN.PV18DB', 20, 'Ac Cassete Panasonic 2PK', 16, 59, 8, 12850000, 13951219, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (971, 'PAN.MJL500', 20, 'Slow Juicer Panasonic', 16, 64, 8, 2492700, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (972, 'PAN.SRCEZ18', 20, 'Rice Cooker Panasonic CEZ18', 16, 67, 8, 481800, 700000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (973, 'PAN.SRDF181WSR', 20, 'Rice Cooker Panasonic DIGITAL SRDF181WSR', 16, 67, 8, 732000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (974, 'PAN.C18FF8', 20, 'Ac Floor Standing Panasonic 2PK', 16, 68, 8, 10400000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (975, 'PAN.CS45FFP8', 20, 'Ac Floor Standing Panasonic 5PK', 16, 68, 8, 23250000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (976, 'PAN.EHND11', 20, 'Hair Dryer Panasonic 600W', 16, 72, 8, 200000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (977, 'PAN.EQ405', 20, 'Auto Fan Panasonic EQ405', 16, 75, 8, 600039, 525000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (978, 'PAN.F-EY1511', 20, 'Ceiling Fan Panasonic EY1511', 16, 75, 8, 690000, 750000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (979, 'PAN.FEK306', 20, 'Desk Fan Panasonic 12\"', 16, 75, 8, 400400, 400000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (980, 'PAN.FEP404', 20, 'Stand Fan Panasonic 16\" FEP 404', 16, 75, 8, 610470, 550000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (981, 'PAN.FEP405', 20, 'Stand Fan Panasonic 16\" FEP 405', 16, 75, 8, 600039, 459093, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (982, 'PAN.FER303', 20, 'Box Fan Panasonic FER 303', 16, 75, 8, 367770, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (983, 'PAN.FES404', 20, 'Stand Fan Panasonic 16\" FES 404', 16, 75, 8, 599500, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (984, 'PAN.FEU309', 20, 'Wall Fan Panasonic 12\" FEU 309', 16, 75, 8, 374500, 425000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (985, 'PAN.FEU409', 20, 'Wall Fan Panasonic 16\" FEU 409', 16, 75, 8, 473642, 477804, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (986, 'PAN.FV15TGU', 20, 'Exhaust Fan Plafon Panasonic 6\" 15TGU', 16, 75, 8, 231000, 3600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (987, 'PAN.FV20TGU3', 20, 'Exhaust Fan Plafon Panasonic 8\" 20TGU', 16, 75, 8, 286000, 280000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (988, 'PAN.FV25RUN5', 20, 'Exhaust Fan Dinding Panasonic 10\"', 16, 75, 8, 443919, 385000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (989, 'PAN.FV25TGU3', 20, 'Exhaust Fan Plafon Panasonic 10\" 25TGU', 16, 75, 8, 329966, 327464, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (990, 'PAN.FV30RUN5', 20, 'Exhaust Fan Dinding Panasonic 12\"', 16, 75, 8, 460674, 425000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (991, 'PAN.FV40AFU', 20, 'Exhaust Fan Dinding Panasonic 16\"', 16, 75, 8, 585600, 610000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (992, 'PAN.NRB228/208', 20, 'Kulkas 2 Pintu Panasonic NRBB 231', 16, 78, 8, 4300000, 4254229, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (993, 'PAN.NRB268', 20, 'Kulkas 2 Pintu Panasonic NRB 26 AN', 16, 78, 8, 2770000, 3400000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (994, 'PAN.24F305G', 20, 'LED Panasonic 22\"', 16, 80, 8, 1330000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (995, 'PAN.32F306G', 20, 'LED Panasonic 32\"', 16, 80, 8, 1900000, 2450000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (996, 'PAN.40F305G', 20, 'LED Panasonic 40\"', 16, 80, 8, 3305000, 3800000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (997, 'PAN.43F306G', 20, 'LED Panasonic 43\"', 16, 80, 8, 6280000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (998, 'PAN.LED55', 20, 'LED Panasonic 55\"', 16, 80, 8, 0, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (999, 'PAN.1003', 20, 'Mesin Cuci 1 Tabung Panasonic 10 KG', 16, 81, 8, 4150000, 3050000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1000, 'PAN.128XB1WNE', 20, 'Mesin Cuci Front Loading Panasonic 8KG', 16, 81, 8, 4655000, 7300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1001, 'PAN.NA127xb1wne', 20, 'Mesin Cuci Front Loading Panasonic 7KG', 16, 81, 8, 4150000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1002, 'PAN.NAF13KG', 20, 'Mesin Cuci 1 Tabung Panasonic 13 KG', 16, 81, 8, 4785000, 4785000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1003, 'PAN.NAF70B5', 20, 'Mesin Cuci 1 Tabung Panasonic 7KG NAF70B5', 16, 81, 8, 1400000, 2221025, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1004, 'PAN.NAF80B5WSG', 20, 'Mesin Cuci 1 Tabung Panasonic 8 Kg', 16, 81, 8, 2528900, 3053403, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1005, 'PAN.NAF95MB1WSG', 20, 'Mesin Cuci 1 Tabung Panasonic 9KG', 16, 81, 8, 2663111, 2200000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1006, 'PAN.NAW140FC1A', 20, 'Mesin Cuci 2 Tabung Panasonic 14 KG', 16, 82, 8, 2300000, 2600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1007, 'PAN.NAW69BBZ1H', 20, 'Mesin Cuci 2 Tabung Panasonic 6 KG', 16, 82, 8, 1332155, 1800000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1008, 'PAN.NAW77FCW1A', 20, 'Mesin Cuci 2 Tabung Panasonic 7 KG', 16, 82, 8, 1345000, 1900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1009, 'PAN.NAW95BBZ1H', 20, 'Mesin Cuci 2 Tabung Panasonic 9 KG', 16, 82, 8, 1800000, 1725000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1010, 'PAN.NN383BTTE', 20, 'Microwave Panasonic NNDF 383BTTE', 16, 83, 8, 4093080, 4555555, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1011, 'PAN.NNGD37', 20, 'Microwave Panasonic NN GD37', 16, 83, 8, 2338000, 1902002, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1012, 'PAN.NNGT35', 20, 'Microwave Panasonic NNGT35', 16, 83, 8, 1692000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1013, 'PAN.NNSM32', 20, 'Microwave Panasonic NN-SM32', 16, 83, 8, 1264300, 825000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1014, 'PAN.NNSM324', 20, 'Microwave Panasonic NN-ST34', 16, 83, 8, 1535350, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1015, 'PAN.NNST32HM', 20, 'Microwave Panasonic NN-ST32 DIGITAL', 16, 83, 8, 1581750, 1800000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1016, 'PAN.130JACK', 20, 'Pompa Air Panasonic 130JACK', 16, 90, 8, 580000, 675000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1017, 'PAN.GA130JAK', 20, 'Pompa Air Panasonic 130JAK', 16, 90, 8, 570900, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1018, 'PAN.GA200JAK', 20, 'Pompa Air Panasonic 200 Watt', 16, 90, 8, 813900, 788909, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1019, 'PAN.GF205HCX', 20, 'Pompa Air Tutup Tabung Panasonic 200W', 16, 90, 8, 2014155, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1020, 'PAN.GF255HCX', 20, 'Pompa Air Tutup Tabung Panasonic 250W', 16, 90, 8, 2633895, 2900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1021, 'PAN.NI22AWT', 20, 'Setrika Panasonic NI 22 AWT', 16, 93, 8, 307000, 350000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1022, 'PAN.NI317T', 20, 'Setrika Panasonic 317T', 16, 93, 8, 205100, 241199, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1023, 'PAN.KXT505', 20, 'Telp Panasonic KXTS 885', 16, 99, 8, 205000, 300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1024, 'PAN.TG110', 20, 'Telp Wireless Panasonic TGB 210', 16, 99, 8, 522000, 425000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1025, 'PAN.TG1611', 20, 'Telp Wireless Panasonic 1611', 16, 99, 8, 420000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1026, 'PAN.MCCG240', 20, 'Vacuum Cleaner Panasonic MCCG240', 16, 101, 8, 872600, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1027, 'PAN.MCCG300', 20, 'Vacuum Cleaner Panasonic MCCG300', 16, 101, 8, 822900, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1028, 'PAN.MCCG331', 20, 'Vacuum Cleaner Panasonic MCCG331', 16, 101, 8, 967700, 1100000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1029, 'PHI.HD9220', 20, 'Air Fryer Philips', 16, 55, 155, 1510700, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1030, 'PHI.HD2157', 20, 'Blender Philips HR2042', 16, 57, 155, 650000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1031, 'PHI.HR2001', 20, 'Blender Plastik HR2221', 16, 57, 155, 418800, 425000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1032, 'PHI.HR2056/57', 20, 'Blender Philips HR2056/57', 16, 57, 155, 296700, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1033, 'PHI.HR2061', 20, 'Blender Plastik HR 2061', 16, 57, 155, 311743, 311743, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1034, 'PHI.HR2071', 20, 'Blender Gelas HR 2071', 16, 57, 155, 425000, 100000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1035, 'PHI.HR2102', 20, 'Blender Philips HR2102', 16, 57, 155, 436050, 550000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1036, 'PHI.HR2108plastik', 20, 'Blender Philips HR2108', 16, 57, 155, 277965, 400000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1037, 'PHI.HR2115', 20, 'Blender Plastik Philips HR 2115', 16, 57, 155, 647834, 600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1038, 'PHI.HR2116', 20, 'Blender Glass Tango HR2116', 16, 57, 155, 718884, 650000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1039, 'PHI.HR2553', 20, 'Hand Blender Philips', 16, 57, 155, 491100, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1040, 'PHI.HR2738', 20, 'Citrus Press HR2738', 16, 57, 155, 269325, 176486, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1041, 'PHI.HR2938', 20, 'Fruit Filter 2938', 16, 57, 155, 55574, 35386, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1042, 'PHI.HR2947', 20, 'Citrus Press HR2947', 16, 57, 155, 150053, 79157, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1043, 'PHI.HR2939', 20, 'Chopper Phillip HR2939', 16, 60, 155, 176129, 250000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1044, 'PHI.HD9140', 20, 'Steamer Philips GC 518', 16, 64, 155, 1108800, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1045, 'PHI.HR7627', 20, 'Food Processor Philips HD7310', 16, 64, 155, 800000, 1100000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1046, 'PHI.HD3119', 20, 'Rice Cooker Philips 2L HD3119', 16, 67, 155, 450000, 500000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1047, 'PHI.HD3126', 20, 'Rice Cooker Philips HD4515', 16, 67, 155, 694400, 484785, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1048, 'PHI.HD3129', 20, 'Rice Cooker Philip 1.8L HD3129', 16, 67, 155, 431400, 575000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1049, 'PHIL.HD3116', 20, 'Rice Cooker Philips 1L Basic Purple', 16, 67, 155, 426645, 410000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1050, 'PHI.HP4940', 20, 'Hair Dryer Philips BHD006', 16, 72, 155, 334700, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1051, 'PHI.HR1811', 20, 'Juicer Philps HR1811', 16, 74, 155, 712000, 381335, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1052, 'PHI.HR1823', 20, 'Juicer Philp 1855', 16, 74, 155, 1367000, 761077, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1053, 'PHI.32PHA4100', 20, 'LED Philips 32\"', 16, 80, 155, 1848750, 2100000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1054, 'PHI.HR1530', 20, 'Mixer Hand HR 1530', 16, 84, 155, 324077, 276911, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1055, 'PHI.HR1538', 20, 'Mixer Com Philip HR 1538', 16, 84, 155, 484369, 550000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1056, 'PHI.HR1559', 20, 'Mixer Com HR1559', 16, 84, 155, 564600, 480000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1057, 'PHI.HR1559/52', 20, 'Hand Mixer Philips HR1559/1552', 16, 84, 155, 359100, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1058, 'PHI.GC122', 20, 'Setrika Philips GC122', 16, 93, 155, 164615, 200000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1059, 'PHI.GC160', 20, 'Setrika Philips GC160', 16, 93, 155, 238545, 700000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1060, 'PHI.GC1905', 20, 'Steam Iron Philip GC1905', 16, 93, 155, 250000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1061, 'PHI.HD1172', 20, 'Setrika Philip HD 1172', 16, 93, 155, 248375, 250000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1062, 'PHI.HI115', 20, 'Setrika Philips GC1418', 16, 93, 155, 253936, 300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1063, 'PHI.HI1173', 20, 'Setrika Philips HD1173', 16, 93, 155, 226398, 296400, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1064, 'PHI.HD2393', 20, 'Sandwich Toaster Philips HD2393', 16, 100, 155, 329175, 316563, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1065, 'PHI.HD4825', 20, 'Pop Up Toaster Philips HD4825', 16, 100, 155, 346300, 251957, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1066, 'POL.1 Pintu', 20, 'Kulkas 1 Pintu Polytron', 16, 4, 111, 1880000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1067, 'POL.16AM', 20, 'Kulkas 1 Pintu Poyitron 1 Pintu', 16, 4, 111, 1850000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1068, 'POL.0.5PK', 20, 'Ac Split Polytron 0.5 PK', 16, 52, 111, 2541000, 2325000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1069, 'POL.1.5PK', 20, 'Ac Split Polytron 1.5PK', 16, 52, 111, 3550000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1070, 'POL.PAC18VG', 20, 'Ac Split Polytron 2PK', 16, 52, 111, 5075000, 5400000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1071, 'POL.PWC776', 20, 'Dispenser Galon Bawah Polytron PWC776', 16, 63, 111, 1970000, 2500000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1072, 'POL.PWC778', 20, 'Dispenser Galon Bawah Polytron PWC778', 16, 63, 111, 2549000, 2300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1073, 'POL.PR21LT', 20, 'Kulkas 2 Pintu Polytron', 16, 78, 111, 3275000, 2400000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1074, 'POL.LED32', 20, 'LED Polytron 32\" + Antena', 16, 80, 111, 64600, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1075, 'QUA.1TUNGKU', 20, 'Kompor Gas Quantum 1 Tungku', 16, 76, 156, 96300, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1076, 'QUA.QGC201DMPB', 20, 'Kompor Gas Quantum 2 Tungku', 16, 76, 156, 219700, 185500, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1077, 'REG.DLX10', 20, 'Floor Fan Regency 10\"', 16, 75, 157, 173750, 200000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1078, 'REG.DLX12', 20, 'Floor Fan Regency 12\"', 16, 75, 157, 250000, 275000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1079, 'REG.DLX14', 20, 'Floor Fan Regency 14\"', 16, 75, 157, 320000, 325000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1080, 'REG.DLX16', 20, 'Floor Fan Regency 16\"', 16, 75, 157, 345000, 350000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1081, 'REG.DLX18', 20, 'Floor Fan Regency 18\"', 16, 75, 157, 420000, 350000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1082, 'REG.DLX20\"', 20, 'Floor Fan Regency 20\"', 16, 75, 157, 450000, 500000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1083, 'REG.NSD16', 20, 'Desk Fan Regency 16\"', 16, 75, 157, 400000, 450000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1084, 'REG.TW16', 20, 'Wall Fan Regency 16\"', 16, 75, 157, 468000, 525000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1085, 'REG.TW20', 20, 'Wall Fan Regency 20\"', 16, 75, 157, 590000, 600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1086, 'REG.TW51', 20, 'Stand Fan Regency 18\"', 16, 75, 157, 588000, 600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1087, 'REG.ZTW18', 20, 'Wall Fan Regency 18\"', 16, 75, 157, 520000, 500000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1088, 'RIN.522CE', 20, 'Kompor Gas Rinnai 522 CE', 16, 75, 158, 341200, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1089, 'RIN.522E', 20, 'Kompor Gas Rinnai 522 E', 16, 75, 158, 341200, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1090, 'RIN.2RSP', 20, 'Kompor Gas Rinnai 2 Tungku RI-2RSP', 16, 76, 158, 1232300, 1300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1091, 'RIN.301S', 20, 'Kompor Gas Rinnai 301S 1 tungku', 16, 76, 158, 152100, 175000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1092, 'RIN.302S', 20, 'Kompor Gas Rinnai 2 Tungku 302S', 16, 76, 158, 279600, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1093, 'RIN.511A', 20, 'Kompor Gas Rinnai 1 Tungku 511A', 16, 76, 158, 212211, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1094, 'RIN.511E', 20, 'Kompor Gas 1 Tungku Rinnai 511T', 16, 76, 158, 202208, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1095, 'RIN.522A', 20, 'Kompor Gas Rinnai 522A', 16, 76, 158, 329500, 300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1096, 'RIN.522C', 20, 'Kompor Gas Rinnai 522C', 16, 76, 158, 302700, 300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1097, 'RIN.522S', 20, 'Kompor Gas Rinnai 522 S', 16, 76, 158, 255900, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1098, 'RIN.602A', 20, 'Kompor Gas Rinnai 602A', 16, 76, 158, 423567, 1350000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1099, 'RIN.602AG', 20, 'Kompor Gas Rinnai 602AG', 16, 76, 158, 385400, 431949, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1100, 'RIN.602BGX', 20, 'Kompor Gas Rinnai 602BGX', 16, 76, 158, 435500, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1101, 'RIN.602E', 20, 'Kompor Gas Rinnai 602E', 16, 76, 158, 381300, 325000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1102, 'RIN.712A', 20, 'Kompor Gas Rinnai 712A', 16, 76, 158, 496000, 450000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1103, 'RIN.712BGX', 20, 'Kompor Gas Rinnai 712BGX', 16, 76, 158, 540900, 550000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1104, 'RIN.RB-712N{S}', 20, 'Kompor Gas Rinnai Dua Tungku 712 GA KACA', 16, 76, 158, 736500, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1105, 'RIN.RB-73SV{GB}', 20, 'Kompor Gas Rinnai 3 Tungku 73SV', 16, 76, 158, 2579752, 650000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1106, 'RIN.RB2EH-11F', 20, 'Built In Rinnai RB2EH', 16, 76, 158, 1623075, 1800000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1107, 'RIN.RB2GHC', 20, 'Built In Rinnai 2 Tungku Schott Glass', 16, 76, 158, 2579752, 2050000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1108, 'RIN.RB312NGB', 20, 'Built In Rinnai 1 Tungku RB 312', 16, 76, 158, 1508973, 1469277, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1109, 'RIN.RB3AG-BK', 20, 'Built In Rinnai RB 3SS-GB', 16, 76, 158, 3109374, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1110, 'RIN.RB712N-GB', 20, 'Built In Rinnai 712N-GB', 16, 76, 158, 1641585, 1900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1111, 'RIN.RB713N-GB', 20, 'Built In Rinnai RB 713N-GB', 16, 76, 158, 2140378, 1900000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1112, 'RIN.RB72SV-GB', 20, 'Built In Rinnai 72SV-GB', 16, 76, 158, 1698173, 1600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1113, 'RIN.RH60', 20, 'Cooker Hood Rinnai 60 CM', 16, 76, 158, 759428, 1000000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1114, 'RIN.RHC109GC', 20, 'Built In Rinnai RHC 109 GC', 16, 76, 158, 2969178, 3000000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1115, 'RIN.RHT319SSV', 20, 'Built In Rinnai RHT 319 SSV', 16, 76, 158, 1752275, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1116, 'RIN.RI202S', 20, 'Kompor Gas Rinnai 2 tungku RI 202 S', 16, 76, 158, 264500, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1117, 'RIN.RI300', 20, 'Kompor Gas Rinnai RI 300 High Pressure', 16, 76, 158, 564088, 650000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1118, 'RIN.RI4RSP', 20, 'Kompor Rinnai 4 tungku RI4RSP', 16, 76, 158, 1583200, 1027187, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1119, 'RIN.RI511C', 20, 'Kompor Gas Rinnai 1 Tungku RI511C', 16, 76, 158, 172283, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1120, 'RIN.RI603E', 20, 'Kompor Gas Rinnai RI 603E', 16, 76, 158, 482800, 400000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1121, 'RIN.RI712T', 20, 'Kompor Gas Rinnai 712T', 16, 76, 158, 559200, 550000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1122, 'RIN.REH30H', 20, 'Water Heater Listrik Rinnai 30L', 16, 102, 158, 1934132, 1308000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1123, 'RIN.REH50H', 20, 'Water Heater Rinnai REH 450 W', 16, 102, 158, 2587360, 2100000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1124, 'RIN.REH80', 20, 'Water Heater Rinnai 80L', 16, 102, 158, 2961000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1125, 'RIN.RES-EB015', 20, 'Water Heater Listrik Rinnai 15 L', 16, 102, 158, 1592352, 1700000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1126, 'RIN.RES-EC010', 20, 'Water Heater Listrik Rinnai 10L', 16, 102, 158, 1312118, 1300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1127, 'RIN.REU5CFC', 20, 'Water heater Gas Rinnai REU 5 CFC', 16, 102, 158, 1316000, 1139757, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1128, 'RSA.AGATE200', 20, 'Showcase RSA AGATE 200', 16, 4, 112, 3072480, 2940000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1129, 'RSA.750L', 20, 'Chest Freezer RSA 600L', 16, 69, 112, 5884560, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1130, 'RSA.CF100', 20, 'Chest Freezer RSA 100L', 16, 69, 112, 1760000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1131, 'RSA.CF150', 20, 'Chest Freezer RSA 150L', 16, 69, 112, 2045000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1132, 'RSA.CF220', 20, 'Chest Freezer RSA 200L', 16, 69, 112, 2325000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1133, 'RSA.AGATE240', 20, 'Showcase RSA AGATE 240', 16, 94, 112, 3374400, 3275000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1134, 'RSA.OPAL', 20, 'Showcase RSA Opal', 16, 94, 112, 11246520, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1135, 'SAM.RS554NRUA1J', 20, 'Kulkas Side By Side Samsung', 16, 4, 113, 10250000, 14800000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1136, 'SAM.RT29FAR', 20, 'Kulkas 2 Pintu Samsung RT 29', 16, 4, 113, 5600000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1137, 'SAM.RT32K', 20, 'Kulkas 2 Pintu Samsung RT 32K5032S8', 16, 4, 113, 5600000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1138, 'SAM.RT35FAACDSA', 20, 'Kulkas 2 Pintu Samsung RT 38', 16, 4, 113, 5950000, 5096000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1139, 'SAM.RT38K', 20, 'Kulkas 2 Pintu Samsung RS62', 16, 4, 113, 5950000, 6000000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1140, 'SAM.RT38K5030B1', 20, 'Kulkas 2 Pintu Samsung RS38', 16, 4, 113, 5950000, 6000000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1141, 'SAM.AR12HCFS', 20, 'AC Split Samsung 1,5 PK', 16, 52, 113, 3900000, 3500000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1142, 'SAM.AR18HCFST', 20, 'AC Split Samsung 2 PK', 16, 52, 113, 4750000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1143, 'SAM.AS05TULN', 20, 'Indoor AC Split Samsung 1/2 PK', 16, 52, 113, 2350000, 1871000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1144, 'SAM.AS07TULN', 20, 'Indoor AC Split Samsung 3/4 PK', 16, 52, 113, 2300000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1145, 'SAM.AS09HCFSTLAW', 20, 'AC Split Samsung 1 PK', 16, 52, 113, 2900000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1146, 'SAM.UX60', 20, 'Air Purifier Samsung AX60', 16, 56, 113, 3275000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1147, 'SAM.SCD16709', 20, 'Dryer Samsung', 16, 72, 113, 4700000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1148, 'SAM.RT20FARW', 20, 'Kulkas 2 Pintu Samsung RT19', 16, 78, 113, 3595000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1149, 'SAM.RT22FAR', 20, 'Kulkas 2 pintu Samsung RT 22', 16, 78, 113, 4225000, 3300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1150, 'SAM.RT25FARB', 20, 'Kulkas 2 Pintu Samsung RT25', 16, 78, 113, 4250000, 4600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1151, 'SAM.RT2ASR', 20, 'Kulkas 2 Pintu Samsung', 16, 78, 113, 2400000, 2391916, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1152, 'SAM.24H4003', 20, 'LED Samsung 24\"', 16, 80, 113, 1625000, 1800000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1153, 'SAM.32FH4003', 20, 'LED Samsung 32\"', 16, 80, 113, 0, 2700000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1154, 'SAM.32N4300', 20, 'LED Samsung 32\"', 16, 80, 113, 2700000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1155, 'SAM.40H5003', 20, 'LED Samsung 40\"', 16, 80, 113, 2925000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1156, 'SAM.40J5250', 20, 'LED Samsung 43\" SMART TV', 16, 80, 113, 4300000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1157, 'SAM.43K5002AK', 20, 'LED Samsung 43\"', 16, 80, 113, 3650000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1158, 'SAM.50\"', 20, 'LED Samsung 50\" Smart TV', 16, 80, 113, 6565000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1159, 'SAM.55\"', 20, 'LED Samsung 55\"', 16, 80, 113, 9099000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1160, 'SAM.55HU9000', 20, 'LED Samsung 75\"', 16, 80, 113, 17150000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1161, 'SAM.58\"', 20, 'LED Samsung 58\"', 16, 80, 113, 8600000, 2050000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1162, 'SAM.60\"', 20, 'LED Samsung 65\"', 16, 80, 113, 10600000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1163, 'SAM.LED70', 20, 'LED Samsung 85\"', 16, 80, 113, 33500000, 10575000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1164, 'SAM.PS43E400', 20, 'LED Samsung 43\" SMART', 16, 80, 113, 4100000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1165, 'SAM.70H4000', 20, 'Mesin Cuci 1 Tabung Samsung 7KG', 16, 81, 113, 2399000, 2515895, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1166, 'SAM.WA11J5710', 20, 'Mesin Cuci 1 Tabung Samsung 10 KG', 16, 81, 113, 3625000, 5747126, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1167, 'SAM.WA12PA', 20, 'Mesin Cuci 1 Tabung Samsung 12 KG', 16, 81, 113, 2425000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1168, 'SAM.WA16F7', 20, 'Mesin Cuci 1 Tabung Samsung 14 KG', 16, 81, 113, 6000000, 9000000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1169, 'SAM.WA80H4000', 20, 'Mesin Cuci 1 Tabung Samsung 8 KG', 16, 81, 113, 2825000, 2731729, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1170, 'SAM.WA85H4000', 20, 'Mesin Cuci 1 Tabung Samsung 8.5 KG', 16, 81, 113, 3149000, 2731729, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1171, 'SAM.WD0854', 20, 'Mesin Cuci Front Loading Samsung', 16, 81, 113, 4550000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1172, 'SAM.WF956U4', 20, 'Mesin Cuci 1 Tabung Samsung 9 KG', 16, 81, 113, 6664000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1173, 'SAM.WW95H7410', 20, 'Mesin Cuci Front Loading Samsung', 16, 81, 113, 4300000, 9100000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1174, 'SKN.HWD530', 20, 'Dispenser Sanken HWD C523IC', 16, 63, 159, 1535000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1175, 'SKN.HWD6769', 20, 'Dispenser Sanken HWD 533', 16, 63, 159, 1374000, 1400000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1176, 'SKN.HWDC200', 20, 'Dispenser Sanken HWE67', 16, 63, 159, 2550000, 2450000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1177, 'SKN.HWDC520', 20, 'Dispenser Sanken HWD760', 16, 63, 159, 1530000, 1605000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1178, 'SKN.SJ120', 20, 'Rice Cooker Sanken 1L', 16, 67, 159, 386000, 350000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1179, 'SKN.SJ1999SP', 20, 'Rice Cooker Sanken 1.8L', 16, 67, 159, 466000, 475000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1180, 'SKN.FS800BK', 20, 'Stand Fan Sanken 16\"', 16, 75, 159, 315000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1181, 'SKN.SHOWCASE', 20, 'Showcase Sanken 279', 16, 94, 159, 3350000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1182, 'SAN.PDWH-130B', 22, 'Pompa Air Sanyo PDWH-130B', 16, 88, 160, 1110000, 1200000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1183, 'SAN.PH130B', 22, 'Pompa Air Sanyo 125Watt PH130', 16, 88, 160, 1400000, 1300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1184, 'SAN.PDH200B', 20, 'Pompa Air Sanyo Sumur Dalem 200 Watt', 16, 90, 160, 2240000, 2240000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1185, 'SAN.PDH250B', 20, 'Pompa Air Sanyo Sumur Dalem 250 Watt', 16, 90, 160, 2950000, 2950000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1186, 'SAN.PDH255JP', 20, 'Pompa Air Sanyo 255 JP', 16, 90, 160, 5600000, 5225000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1187, 'SAN.PDWH200', 20, 'Pompa Air Sanyo PDWH-200', 16, 90, 160, 2240000, 2756923, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1188, 'SAN.PH137AB', 20, 'Pompa Air Sanyo 125 Watt PH137', 16, 90, 160, 700000, 600000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1189, 'SAN.PH158', 20, 'Pompa Air Sanyo PH158', 16, 90, 160, 3400000, 3500000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1190, 'SAN.PH175C', 20, 'Pompa Air Sanyo PH175C', 16, 90, 160, 2075000, 1950000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1191, 'SAN.PH236AB', 20, 'Pompa Air Sanyo 200 Watt PH236', 16, 90, 160, 925000, 850000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1192, 'SAN.PH258JP', 20, 'Pompa Air Sanyo 250 Watt', 16, 90, 160, 6125000, 4854945, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1193, 'SAN.PH408', 20, 'Pompa Air Sanyo 400 Watt', 16, 90, 160, 7600000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1194, 'SHA.SJ236MGGB', 20, 'Kulkas 2 Pintu Sharp SJ 236 MGGB', 16, 4, 7, 2675000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1195, 'SHA.SJ236ND', 20, 'Kulkas 2 Pintu Sharp 236 ND', 16, 4, 7, 2670000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1196, 'SHA.SJ246XGMS', 20, 'Kulkas 2 Pintu Sharp SJ 246 XGMS', 16, 4, 7, 2900000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1197, 'SHA.SJ420', 20, 'Kulkas 2 Pintu Sharp 420GP GD', 16, 4, 7, 4190000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1198, 'SHA.SJ420RF', 20, 'Kulkas 2 Pintu Sharp SJ 450 GPGD', 16, 4, 7, 4600000, 4423684, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1199, 'SHA.SJIF90PBSL', 20, 'Kulkas 4 Pintu Sharp', 16, 4, 7, 8695000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1200, 'SHA.SJN182', 20, 'Kulkas 1 Pintu Sharp SJN 182', 16, 4, 7, 1750000, 1700000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1201, 'SHA.SJP326XGMS', 20, 'Kulkas 2 Pintu Sharp 326 XGMS', 16, 4, 7, 3789000, 3700000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1202, 'SHA.SJP762NLVSL', 20, 'Kulkas 2 Pintu Sharp 762', 16, 4, 7, 8350000, 8300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1203, 'SHA.SJP762PMSL', 20, 'Kulkas 2 Pintu Sharp 762 Silver', 16, 4, 7, 8350000, 8300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1204, 'SHA.SJP763NLVSL', 20, 'Kulkas 2 Pintu Sharp 763', 16, 4, 7, 8975000, 8300000, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1205, 'SHA.SJP851', 20, 'Kulkas 2 Pintu Sharp 861', 16, 4, 7, 9750000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1206, 'SHA.SJX167', 20, 'Kulkas 1 Pintu Sharp MINI', 16, 4, 7, 1325000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1207, 'SHARP.SJN162', 20, 'Kulkas 1 Pintu Sharp SJN 162', 16, 4, 7, 1490300, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1208, 'Sha.SJN196ND', 20, 'Kulkas 2 Pintu Sharp 195', 16, 4, 7, 2450000, 0, 0, NULL, 1, '2023-03-24 14:10:00', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1209, 'JAS.APAAJA', 20, 'AC Split Lokal Uk 2PK', 16, 52, 7, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1210, 'SHA.12SSY', 20, 'Ac Split Sharp 1.5PK', 16, 52, 7, 4580000, 5100000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1211, 'SHA.AHAP12SAY', 20, 'Ac Split Sharp 1.5PK THAILAND', 16, 52, 7, 4250000, 4550000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1212, 'SHA.AHAP12UCY', 20, 'Ac Split Sharp 1.5 PK STANDAR', 16, 52, 7, 4200000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1213, 'SHA.AHAP18SAY', 20, 'AC Split Sharp 2PK Thailand', 16, 52, 7, 5650000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1214, 'SHA.AHAP18UCY', 20, 'Ac Split Sharp 2 PK STANDAR', 16, 52, 7, 5450000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1215, 'SHA.AHAP24SAY', 20, 'AC Split Sharp 2,5PK', 16, 52, 7, 5700000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1216, 'SHA.AHAP5SAY', 20, 'Ac Split Sharp 0,5 PK THAILAND', 16, 52, 7, 2485000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1217, 'SHA.AHAP5SSY', 20, 'Ac Split Sharp 1/2 PK PLASMA Thailand', 16, 52, 7, 3120000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1218, 'SHA.AHAP5UCYTDK PAKAI', 20, 'Ac Split Sharp 1/2 PK STANDAR TDK PAKAI', 16, 52, 7, 2560000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1219, 'SHA.AHAP7SAY', 20, 'Ac Split Sharp 3/4 PK THAILAND', 16, 52, 7, 2710000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1220, 'SHA.AHAP7VEY', 20, 'Ac Split Sharp 3/4 STANDAR', 16, 52, 7, 2725000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1221, 'SHA.AHAP9SAY', 20, 'Ac Split Sharp 1 PK THAILAND', 16, 52, 7, 2850000, 3750000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1222, 'SHA.AHAP9SSY', 20, 'Ac Split Sharp 1PK PLASMA Thailand', 16, 52, 7, 3370000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1223, 'SHA.AHAP9UCY', 20, 'Ac Split Sharp 1 PK STANDAR', 16, 52, 7, 2835000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1224, 'SHA.INV', 20, 'Ac Split Sharp 2PK Inverter', 16, 52, 7, 6150000, 6749990, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1225, 'SHAP.AHAP5UCY', 20, 'Ac Split Sharp 0.5PK STD', 16, 52, 7, 2560000, 2650000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1226, 'SHAP.AHAP7UCY', 20, 'Ac Split Sharp 3/4 PK STD', 16, 52, 7, 2817000, 2650000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1227, 'SHA.PJA55', 20, 'Air Cooler Sharp PJA 55', 16, 54, 7, 1076100, 1076100, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1228, 'SHA.FPF30', 20, 'Air Purifier Sharp FPJ30', 16, 56, 7, 1338200, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1229, 'SHA.FPF40Y', 20, 'Air Purifier Sharp FPF 40Y', 16, 56, 7, 1905000, 2225000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1230, 'SHA.FPF40YT', 20, 'Air Purifier Sharp FPJ 80', 16, 56, 7, 3850000, 2100000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1231, 'SHA.FPYJ80H', 20, 'Air Purifier Sharp FUA-80', 16, 56, 7, 2500000, 3900000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1232, 'SHA.FUZ31', 20, 'Air Purifier Sharp FUZ-31', 16, 56, 7, 1525000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1233, 'SHA.KC-A40Y-W/FM40Y-B', 20, 'Air Purifier Sharp FM40Y-B', 16, 56, 7, 3805000, 3500000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1234, 'SHA.KC-A60Y-W', 20, 'Air Purifier Sharp KCD 60', 16, 56, 7, 6088000, 5500000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1235, 'SHA.KCA50', 20, 'Air Purifier Sharp KCA 50', 16, 56, 7, 4900000, 4600000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1236, 'SHA.SWD-70EHL-SL', 20, 'Dispenser Sharp Galon Bawah SWD 66', 16, 63, 7, 2407400, 2240000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1237, 'SHA.SWD72EHLBK', 20, 'Dispenser Sharp Galon Bawah 72 EHL BK', 16, 63, 7, 2325000, 2500000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1238, 'SHA.SWD72EHWH', 20, 'Dispenser Sharp Galon Bawah 72 EHL WH', 16, 63, 7, 2325000, 2500000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1239, 'SHA.SWD73EHBK', 20, 'Dispenser Sharp Galon Bawah 73EHL BK', 16, 63, 7, 2775000, 2300000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1240, 'SHA.SWD78EHL', 20, 'Dispenser Sharp Galon Bawah 78EHL', 16, 63, 7, 2935000, 3200000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1241, 'SHA.AIRCOOLER', 20, 'Air Cooler Sharp PJA 26', 16, 64, 7, 836000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1242, 'SHA.CVP9', 20, 'Ac Portable Sharp 1 PK', 16, 64, 7, 5850000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1243, 'SHA.RC0.8L', 20, 'Rice Cooker Sharp 1.8L', 16, 67, 7, 263400, 900000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1244, 'SHA.189', 20, 'Freezer Sharp 8RAK', 16, 69, 7, 3475000, 2950000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1245, 'SHA.FRV200L', 20, 'Chest Freezer Sharp 200 L', 16, 69, 7, 3075000, 2938235, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1246, 'SHA.FRV300', 20, 'Chest Freezer Sharp 300L', 16, 69, 7, 3275000, 3275000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1247, 'SHA.SCH210PS', 20, 'Showcase Sharp 200L', 16, 69, 7, 2800000, 3000000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1248, 'SHA.470NLVSL', 20, 'Kulkas 2 Pintu Sharp 470', 16, 78, 7, 5949000, 7532472, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1249, 'SHA.SJ246GCSD', 20, 'Kulkas 2 Pintu Sharp SJ 246 GCSD', 16, 78, 7, 3035000, 3200000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1250, 'SHA.SJP-S71NLV', 20, 'Kulkas 2 Pintu Sharp 571', 16, 78, 7, 7095000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1251, 'SHA.SJP861NLVSL', 20, 'Kulkas 2 Pintu Sharp 861 Silver', 16, 78, 7, 8000000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1252, 'SHA.19\"', 20, 'LED Changhong 19\"', 16, 80, 7, 1100000, 1300000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1253, 'SHA.24\" LC-24LE507I', 20, 'LED Sharp 24\"', 16, 80, 7, 1525000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1254, 'SHA.32LE150', 20, 'LED Sharp 32\"', 16, 80, 7, 1925000, 2500000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1255, 'SHA.32LE347', 20, 'LED Sharp 32 \" ANDROID', 16, 80, 7, 3275000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1256, 'SHA.60LE6300', 20, 'LED Sharp 50\"', 16, 80, 7, 5400000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1257, 'SHA.LED40\"', 20, 'LED Sharp 42\"', 16, 80, 7, 3300000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1258, 'SHA.ES876SB', 20, 'Mesin Cuci 1 Tabung Sharp 7.5 KG', 16, 81, 7, 2115000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1259, 'SHA.ESF865PG', 20, 'Mesin Cuci 1 Tabung Sharp ESM8000', 16, 81, 7, 2750000, 3529667, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1260, 'SHA.ESFL1082', 20, 'Mesin Cuci Front Loading Sharp', 16, 81, 7, 3688000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1261, 'SHA.ESFL862', 20, 'Mesin Cuci Front Loading Sharp 6 KG', 16, 81, 7, 3130000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1262, 'SHA.ESFL872', 20, 'Mesin Cuci Front Loading Sharp 7 KG', 16, 81, 7, 3600000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1263, 'SHA.ESM1000', 20, 'Mesin Cuc 1 Tabung Sharp 10KG', 16, 81, 7, 3095000, 4017301, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1264, 'SHA.ESM1209TSA', 20, 'Mesin Cuci 1 Tabung Sharp 12 KG', 16, 81, 7, 4300000, 4500000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1265, 'SHA.1290', 20, 'Mesin Cuci 2 Tabung Sharp 1290', 16, 82, 7, 2575000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1266, 'SHA.ESM9000', 20, 'Mesin Cuci 1 Tabung Sharp 9 KG', 16, 82, 7, 3325000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1267, 'SHA.EST65MW', 20, 'Mesin Cuci 2 Tabung Sharp 6KG', 16, 82, 7, 1200000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1268, 'SHA.EST86CL', 20, 'Mesin Cuci 2 Tabung Sharp 9 KG', 16, 82, 7, 1650000, 1575000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1269, 'SHA.MC95', 20, 'Mesin Cuci 2 Tabung Sharp 12 KG', 16, 82, 7, 2410000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1270, 'SHA.R21A', 20, 'Microwave Sharp R21A', 16, 83, 7, 703800, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1271, 'SHA.R222', 20, 'Microwave Sharp R-21 DO', 16, 83, 7, 898000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1272, 'SHA.R25C1SIN', 20, 'Microwave Sharp R 25 C1SIN', 16, 83, 7, 1043600, 1200000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1273, 'SHA.R728(S)', 20, 'Microwave Sharp R728', 16, 83, 7, 1233400, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1274, 'SHA.R735', 20, 'Microwave Sharp R 735', 16, 83, 7, 1285000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1275, 'SHA.R88DO', 20, 'Microwave Sharp R88 DO', 16, 83, 7, 2325000, 2700000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1276, 'SHA.EO18LW', 20, 'Oven Toaster Sharp EO-28LPK', 16, 86, 7, 674700, 290000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1277, 'SHA.EO18W', 20, 'Oven Sharp EO-35 SL', 16, 86, 7, 861900, 625000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1278, 'SHA.SCH-170PS', 20, 'Showcase Sharp 4 Rak', 16, 94, 7, 2989848, 2650000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1279, 'SHA.SCH250', 20, 'Showcase Sharp 250', 16, 94, 7, 3850000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1280, 'SHA.KSH777', 20, 'Slow Cooker Sharp', 16, 97, 7, 839800, 839800, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1281, 'SHA.KZS70L', 20, 'Sandwich Toaster Sharp', 16, 100, 7, 162700, 200000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1282, 'SHA.EC-8304AB', 20, 'Vacuum Cleaner SHARP EC-8304AB', 16, 101, 7, 2200000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1283, 'SHA.ECW60', 20, 'Vacuum Cleaner Sharp ECW60', 16, 101, 7, 762100, 850000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1284, 'ARI.30DOVE', 20, 'Water Heater Ariston Dove 30', 16, 102, 7, 1300000, 1600000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1285, 'ARI.SL2-20RS', 20, 'Water Heater Ariston SL2 20', 16, 102, 7, 2935000, 1600000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1286, 'SHI.PS-103BIT', 22, 'Pompa Air Listrik Shimizu Tabung 125W', 16, 88, 162, 925000, 1100000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1287, 'SHI.226', 20, 'Shimizu 226 BIT', 16, 90, 162, 934500, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1288, 'SHI.JET108BIT', 20, 'Pompa Air Shimizu JET 108', 16, 90, 162, 691500, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1289, 'SHI.PC250BIT', 20, 'Pompa Air Shimizu PC250BIT', 16, 90, 162, 2364000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1290, 'SHI.PC260BIT', 20, 'Pompa Air Shimizu Sumur Dalam PC 260 BIT', 16, 90, 162, 1718500, 1850000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1291, 'SHI.PC268BIT', 20, 'Pompa Air Shimizu Sumur Dalam PC268BIT', 16, 90, 162, 1700700, 1750000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1292, 'SHI.PC375BIT', 20, 'Pompa Air Shimizu PC375BIT', 16, 90, 162, 1904855, 1705000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1293, 'SHI.PC503BIT', 20, 'Pompa Air Shimizu PC 503 BIT', 16, 90, 162, 3219700, 3002656, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1294, 'SHI.PS128BIT', 20, 'Pompa Air Shimizu PS128 BIT NON AUTO', 16, 90, 162, 386200, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1295, 'SHI.PS130BIT', 20, 'Pompa Air Shimizu PS130BIT', 16, 90, 162, 625800, 600000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1296, 'SHI.PS135E', 20, 'Pompa Air Shimizu 125W', 16, 90, 162, 535900, 472847, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1297, 'SHI.PS150BIT', 20, 'Pompa Air Shimizu PS 150 BIT', 16, 90, 162, 1113800, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1298, 'SHI.PS230BIT', 20, 'Pompa Air Shimizu PS 230 BIT', 16, 90, 162, 1052700, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1299, 'SHI.PS255BIT', 20, 'Pompa Air Shimizu PS255BIT', 16, 90, 162, 2238600, 2352120, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1300, 'SHI.SEH115', 20, 'Water Heater Shimizu 15L', 16, 102, 162, 1283309, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1301, 'SHI.SEH130', 20, 'Water Heater Shimizu 30L', 16, 102, 162, 1503393, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1302, 'SONY.32\"', 20, 'LED Sony 32\"', 16, 80, 163, 2600000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1303, 'TCL.LCD17\"', 20, 'LCD TCL 17\"', 16, 80, 164, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1304, 'TCL.LCD23\"', 20, 'LCD TCL 32\"', 16, 80, 164, 1400000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1305, 'TOS.RAS05BKS+BAS', 20, 'Ac Split Toshiba 0.5PK', 16, 52, 11, 2561000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1306, 'TOS.RAS07BKS+BAS', 20, 'Ac Split Toshiba 3/4PK', 16, 52, 11, 2784000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1307, 'TOS.RAS10BKS+BAS', 20, 'Ac Split Toshiba 1PK', 16, 52, 11, 2917000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1308, 'TOS.24\"', 20, 'LED Toshiba 24\"', 16, 80, 11, 1300000, 1300000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1309, 'TOSH.LED32', 20, 'LED Toshiba 32\"', 16, 80, 11, 1700000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1310, 'TOS.7KG', 20, 'Mesin Cuci 1 Tabung Toshiba 7KG', 16, 81, 11, 0, 2600000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1311, 'TOS.VHH85MNWW', 20, 'Mesin Cuci 2 Tabung Toshiba 8KG', 16, 82, 11, 1185000, 1350000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1312, 'TOS.VHH95MNWW', 20, 'Mesin Cuci 2 Tabung Polytron 9KG', 16, 82, 11, 1500000, 1600000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1313, 'TURBO.BLENDER', 20, 'Turbo Blender EHM 8000', 16, 57, 166, 257783, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1314, 'TUR.DESKFAN 12', 20, 'Desk Fan Turbo 12\"', 16, 75, 166, 200925, 225000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1315, 'TUR.DESKFAN16', 20, 'Desk Fan Turbo 16\"', 16, 75, 166, 235125, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1316, 'TUR.STANDFAN16\"', 20, 'Stand Fan Turbo 16\"', 16, 75, 166, 305079, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1317, 'TUR.MIXEREHM9595', 20, 'Mixer Turbo EHM 9595', 16, 84, 166, 990176, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1318, 'TUR.EHL1018', 20, 'Pop Up Toaster Turbo EHL 1018', 16, 100, 166, 278388, 278388, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1319, 'UCH.058GY', 20, 'Kulkas 1 Pintu Uchida', 16, 4, 114, 1353000, 1600000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1320, 'UCH.MPS5EC', 20, 'Ac Split Uchida 0.5 PK', 16, 52, 114, 1950000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1321, 'UCH.MPS6CE', 20, 'Ac Split Uchida 1 Pk', 16, 52, 114, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1322, 'UCH.MPW5', 20, 'Ac Window Uchida 1/2 PK', 16, 52, 114, 1670000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1323, 'UCH.MPW7', 20, 'Ac Window Uchida 3/4 PK', 16, 52, 114, 1636313, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1324, 'UCH.USG180/126', 20, 'Showcase Uchida 180 GW', 16, 94, 114, 2427345, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1325, 'UCH.MPW12', 20, 'AC Window Uchida 1.5pk', 16, 103, 114, 3210000, 2990000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1326, 'UCH.MPW9', 20, 'AC Window Uchida 1 pk', 16, 103, 114, 2038130, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1327, 'WAS.FLX40CM', 20, 'Keran Mixer', 16, 64, 167, 0, 350000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1328, 'WAS.PC250EA', 20, 'Pompa Air Wasser PC250EA', 16, 90, 167, 2180500, 2195000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1329, 'WAS.PC280EA', 20, 'Pompa Jet Pump Wasser 381EA', 16, 90, 167, 1100000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1330, 'WAS.PW129EA', 20, 'Pompa Air Wasser PW 129 EA', 16, 90, 167, 420945, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1331, 'WAS.PW250DEA', 20, 'Pompa Air Semi Jet Wasser PW250DEA', 16, 90, 167, 1959300, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1332, 'WAS.PW251EA', 20, 'Pompa Semi Jet Wasser PW251', 16, 90, 167, 1302000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1333, 'SOW.88', 20, 'Shower Wasser Set Lengkap', 16, 95, 167, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1334, 'WAS.JETSHOWER', 20, 'Shower Wasser', 16, 95, 167, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1335, 'WAS.Flexible', 20, 'Flexible Water Heater', 16, 102, 167, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1336, 'MIY.MJG201', 20, 'Rice Cooker Yong Ma', 16, 67, 169, 620000, 874000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1337, 'PAN.FDSO3SI', 20, 'Dsterile Dish Dryers Panasonic', 16, 52, 152, 830100, 820000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1338, 'Antena', 20, 'Antena', 16, 53, 152, 160000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, '2023-06-27 14:43:39', NULL);
+INSERT INTO `ref_produk` VALUES (1339, 'STB', 20, 'Set Top Box', 16, 53, 152, 240000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1340, 'PAN.FV24CDUN', 20, 'Exhaust Fan Panasonic FV24CDUN', 16, 54, 152, 0, 625000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1341, 'Denpoo.Air Fryer', 20, 'Air Fryer Mito', 16, 55, 152, 700000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1342, 'BRK.LED', 20, 'Bracket LED', 16, 58, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1343, 'DEN.KETTLE', 20, 'Kettle Air Denpoo DEP-831VT', 16, 64, 152, 341300, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1344, 'MITOCHIBA', 20, 'Mitochiba', 16, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1345, 'PUREIT', 20, 'Pure It Classic', 16, 64, 152, 500000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1346, 'SEIKO', 20, 'Jam Digital Seiko QHL080S', 16, 64, 152, 1091000, 1120000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1347, 'TEFAL', 20, 'Rice Cooker Tefal', 16, 67, 152, 482300, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1348, 'WINN.RR50A', 20, 'Rice Cooker Winn Gas', 16, 67, 152, 2873900, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1349, 'BKR.AC', 21, 'Bongkar AC', 16, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1350, 'BP.Cas', 21, 'Bongkar Pasang Ac Cassete', 16, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1351, 'PSG.AC3', 21, 'Pasang AC 2,5PK', 16, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1352, 'PSG.LED', 21, 'Pasang LED TV', 16, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1353, 'psg.ac10pk', 21, 'Pasang AC 10PK', 16, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1354, 'GAS.KPL1', 20, 'Kepala Gas', 16, 91, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1355, 'GEA.EXPO600', 20, 'Showcase 2 Pintu GEA 1500', 17, 94, 107, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1356, 'DLL.MTRBJ', 20, 'Meteran Baju 150cm', 17, 64, 152, 0, 12000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1357, 'DLL.SEALTAPE', 20, 'Seal Tape', 17, 64, 152, 0, 10000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1358, 'KBL.3*1.5', 20, 'Kabel 3*1.5', 17, 64, 152, 0, 815000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1359, 'KBL.3.*2.5R', 20, 'Kabel NYM 3*2.5', 17, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1360, 'NIT.ISOLASI', 20, 'Isolasi Nito', 17, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1361, 'PPA.FLEXIBLEROLL', 22, 'Pipa Air Flexible', 17, 88, 115, 0, 10000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1362, 'PPF.1/4*1/2R', 22, 'Pipa Freon 1.5-2 PK', 17, 89, 115, 0, 2800000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1363, 'PPF.1/4*3/8R', 22, 'Pipa Freon 0.5-1 pk', 17, 89, 115, 0, 2000000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1364, 'PPF.3/8*5/8', 22, 'Pipa Freon 3 pk', 17, 89, 115, 0, 125000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1365, 'ACC.DT', 20, 'Lakban Aluminium', 17, 53, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1366, 'ACC.DUCT TAPE', 20, 'Duct Tape', 17, 53, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1367, 'ACC.DUCT TAPE LEM', 20, 'Duct Tape Lem', 17, 53, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1368, 'JAS.KBLR', 21, 'Kabel Listrik', 17, 73, 152, 0, 1000000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1369, 'INS.SHOWER', 21, 'Instalasi Shower', 170, 87, 143, 0, 50000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1370, 'KDK.WN30B', 20, 'Wall Fan KDK WN30B', 171, 75, 147, 349200, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1371, 'DLL.ARMA', 20, 'Armaflek 1.1/4', 172, 64, 152, 27500, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1372, 'DLL.DINABOLT', 20, 'Dinabolt', 171, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1373, 'DLL.FISHERS6', 20, 'Fisher S6', 171, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1374, 'DLL.KAWATPERAK', 20, 'Kawat Perak', 172, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1375, 'DLL.KBLTEES', 20, 'Kabel Tees d', 171, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1376, 'DLL.LONGDRAT', 20, 'Long drat', 172, 64, 152, 33000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1377, 'DLL.MUR+BAUT', 20, 'Mur + Baut 8mm 2cm', 171, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1378, 'DLL.PPA1\'', 20, 'Pipa 1\"', 172, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1379, 'DLL.TUSUKGIGIBKS', 20, 'Tusuk Gigi Bungkus', 171, 64, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1380, 'INS.FAN', 20, 'Instalasi Kabel Kipas Angin', 173, 64, 152, 0, 75000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1381, 'FREON.R410', 20, 'Freon R410', 174, 70, 152, 1050000, 900000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1382, 'ONG.KRM', 21, 'Biaya Kirim', 170, 73, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1383, 'INS.PIPA', 21, 'Instalasi Pipa Air', 170, 87, 152, 0, 300000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1384, 'SKN.HWDC520IC', 20, 'Dispenser Sanken 520IC', 171, 63, 159, 1550000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1385, 'ACC.LONGDRAT', 20, 'Longdrat', 172, 53, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1386, 'FREONR11.', 20, 'FREON R11', 174, 53, 152, 975000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1387, 'FREONR22.', 20, 'FREON R22', 174, 53, 152, 975000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1388, 'FREON R32', 20, 'FREON R32', 174, 64, 152, 470000, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1389, 'JASA.Tarik Pipa', 21, 'Jasa Penarikan Pipa Ac', 170, 64, 152, 0, 0, 0, '', 1, '2023-03-24 14:10:01', NULL, '2023-05-08 10:21:26', 1);
+INSERT INTO `ref_produk` VALUES (1390, 'ACC.LAS', 21, 'Pengerjaan Las Pipa AC', 173, 73, 152, 0, 75000, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1391, 'FREONR22', 21, 'FREON R22', 174, 73, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1392, 'Jasa Angkut', 21, 'Jasa Angkut', 170, 73, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1393, 'PSG.', 21, 'Pemasangan Kabel', 170, 73, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1394, 'PSG.KIPAS', 21, 'Pasang Kipas Angin', 171, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1395, 'PSG.Kerja', 21, 'Jasa pengecekan', 170, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1396, 'PSG.POMPA', 21, 'Pasang Pompa Air', 170, 87, 152, 0, 0, 0, NULL, 1, '2023-03-24 14:10:01', NULL, NULL, NULL);
+INSERT INTO `ref_produk` VALUES (1397, 'test', 20, 'test', 172, 68, 136, 10000, 20000, 0, 'testing', 0, '2023-03-28 13:16:11', 1, '2023-03-28 13:17:48', NULL);
 
 -- ----------------------------
 -- Table structure for rekening
@@ -10224,6 +10666,7 @@ INSERT INTO `ref_produk` VALUES (1396, 'PSG.POMPA', 21, 'Pasang Pompa Air', 170,
 DROP TABLE IF EXISTS `rekening`;
 CREATE TABLE `rekening`  (
   `id` int NOT NULL AUTO_INCREMENT,
+  `kode` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `no_rekening` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `bank` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
@@ -10234,11 +10677,14 @@ CREATE TABLE `rekening`  (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_by` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of rekening
 -- ----------------------------
+INSERT INTO `rekening` VALUES (1, 'Cash', 'cash', 'Cash', 'Cash', 0, 1, '2023-03-16 20:50:54', NULL, '2023-06-15 09:42:16', NULL);
+INSERT INTO `rekening` VALUES (2, 'TRF390', '120030390', 'BNI', NULL, 0, 1, '2023-03-16 20:50:54', NULL, '2023-06-15 09:42:22', NULL);
+INSERT INTO `rekening` VALUES (3, 'TRF081', '6320.27.8081', 'BCA', 'Lenny Kawanda', 1, 1, '2023-03-16 21:22:05', 1, '2023-06-15 09:41:55', 1);
 
 -- ----------------------------
 -- Table structure for supplier
@@ -10486,5 +10932,94 @@ INSERT INTO `supplier` VALUES (211, 'UL', 'UL-', 'ELANG LAUT TAHAP 3 BLOK A NO. 
 INSERT INTO `supplier` VALUES (212, 'UT', 'Utama Teknik', 'blok PF10 No. 3', '', '', '', '451.6754 / 4584.5057', '451.6754 / 4584.5057', '', '', 'BCA', '871.0050.644', 'Christine Ng', '', 'R32 650R22 900 MERY', 1, '2023-03-24 13:22:28', NULL, NULL, NULL);
 INSERT INTO `supplier` VALUES (213, 'YB', 'Yong Brother', 'Glodok F/50 - Ruko Permata Ancol Blok I No. 17', '', '', '', '649.1136 + 612.0585', '649.1136 + 612.0585', '', '', 'BCA', '082-369-0000', 'CATUR SUKSES INTERNASIONAL', '', 'PERMATA 645.6950', 1, '2023-03-24 13:22:28', NULL, NULL, NULL);
 INSERT INTO `supplier` VALUES (214, 'YM', 'Yong Ma', '', '', '', '', '', '', '', '', '', '', '', '', '', 1, '2023-03-24 13:22:28', NULL, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for tanggal
+-- ----------------------------
+DROP TABLE IF EXISTS `tanggal`;
+CREATE TABLE `tanggal`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tgl` date NULL DEFAULT NULL,
+  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tanggal
+-- ----------------------------
+INSERT INTO `tanggal` VALUES (15, '2023-06-22', 'hari libur');
+INSERT INTO `tanggal` VALUES (16, '2023-06-13', 'hari libur');
+INSERT INTO `tanggal` VALUES (19, '2023-07-15', 'hari libur');
+INSERT INTO `tanggal` VALUES (20, '2023-07-19', 'hari libur');
+INSERT INTO `tanggal` VALUES (22, '2023-07-21', 'hari libur');
+INSERT INTO `tanggal` VALUES (23, '2023-07-07', 'hari libur');
+
+-- ----------------------------
+-- View structure for v_pembayaran_beli
+-- ----------------------------
+DROP VIEW IF EXISTS `v_pembayaran_beli`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_pembayaran_beli` AS SELECT x.id_pembelian, 
+	CONCAT(IF(SUM(x.nominal) >= MAX(x.nilai_beli), 'OK/LN ', 'DP '), GROUP_CONCAT(x.keterangan ORDER BY x.tgl DESC, x.id DESC SEPARATOR ' + ')) AS keterangan 
+FROM (
+		SELECT p.id, p.id_pembelian, p.tgl, 
+			CONCAT(
+				IF(p.keterangan IS NOT NULL AND p.keterangan != '',CONCAT(p.keterangan, ' '),''), 
+				r.kode, ' #', 
+				FORMAT(p.nominal, 0, 'de_DE'), '# ', 
+				DATE_FORMAT(p.tgl, '%d/%m/%y')
+			) AS keterangan, 
+			p.nominal, 
+			IFNULL(f.grand_total,0) AS nilai_beli
+		FROM pembayaran_beli p 
+		JOIN rekening r ON r.id = p.rek_pembayaran 
+		LEFT JOIN penerimaan f ON f.id = p.id_pembelian AND f.row_status = 1
+		WHERE p.row_status = 1 
+) x
+GROUP BY x.id_pembelian ;
+
+-- ----------------------------
+-- View structure for v_pembayaran_faktur
+-- ----------------------------
+DROP VIEW IF EXISTS `v_pembayaran_faktur`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_pembayaran_faktur` AS SELECT x.id_faktur, 
+	CONCAT(IF(SUM(x.nominal) >= MAX(x.nilai_faktur), 'OK/LN ', 'DP '), GROUP_CONCAT(x.keterangan ORDER BY x.tgl DESC, x.id DESC SEPARATOR ' + ')) AS keterangan 
+FROM (
+	SELECT p.id, p.id_faktur, p.tgl, 
+		CONCAT(
+			IF(p.keterangan IS NOT NULL AND p.keterangan != '',CONCAT(p.keterangan, ' '),''), 
+			r.kode, ' #', 
+			FORMAT(p.nominal, 0, 'de_DE'), '# ', 
+			DATE_FORMAT(p.tgl, '%d/%m/%y')
+		) AS keterangan,
+		p.nominal, 
+		IFNULL(f.grand_total,0) AS nilai_faktur
+	FROM pembayaran_faktur p 
+	JOIN rekening r ON r.id = p.rek_pembayaran 
+	LEFT JOIN faktur f ON f.id = p.id_faktur AND f.row_status = 1
+	WHERE p.row_status = 1 
+	ORDER BY p.tgl DESC, p.id DESC 
+) x 
+GROUP BY x.id_faktur ;
+
+-- ----------------------------
+-- View structure for v_produk
+-- ----------------------------
+DROP VIEW IF EXISTS `v_produk`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `v_produk` AS SELECT p.id, CONCAT(p.kode, ' - ', p.nama) AS nama, p.id_satuan, l.nama AS satuan, p.id_tipe,
+CAST(CASE 
+		WHEN x.qty IS NULL THEN 0 
+		WHEN x.qty < 0 THEN 0 
+		ELSE x.qty 
+END AS UNSIGNED INTEGER) AS qty, 
+p.is_qty_editable
+FROM ref_produk p 
+JOIN ref_lookup l ON l.id = p.id_satuan 
+LEFT JOIN (
+		SELECT id_produk, SUM(qty) AS qty 
+		FROM jstok 
+		WHERE row_status = 1 
+		GROUP BY id_produk
+) x on x.id_produk = p.id
+WHERE p.row_status = 1 ;
 
 SET FOREIGN_KEY_CHECKS = 1;
